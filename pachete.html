@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pachete Funerare – Casa Funerară Lupică</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Stiluri comune cu index.html */
+        :root {
+            --primary-color: #8b7355;
+            --primary-dark: #6d5c46;
+            --primary-light: #a89070;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f8f8;
+            --gray-color: #666;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold-gradient: linear-gradient(135deg, #8b7355 0%, #c5a880 50%, #8b7355 100%);
+            --header-bg: rgba(26, 26, 26, 0.95);
+            --bg-color: #0f0f0f;
+            --text-color: #ccc;
+            --text-light: #aaa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-color);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+        
+        p, li, span, a, button, label {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Fundal principal - asemănător header-ului */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
+            z-index: -3;
+        }
+        
+        /* Container pentru efectul de fade */
+        .content-fade {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to bottom, 
+                rgba(30, 30, 30, 0.7) 0%, 
+                rgba(40, 40, 40, 0.9) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Container pentru cruciulițe aurii */
+        .crosses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cross {
+            position: absolute;
+            color: rgba(139, 115, 85, 0.15);
+            font-size: 18px;
+            opacity: 0;
+            animation: crossFloat 20s infinite linear;
+            font-weight: 300;
+            font-family: 'Cinzel', serif;
+        }
+        
+        @keyframes crossFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        /* Animație porumbel în header */
+        .dove-header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            animation: doveFlyHeader 8s ease-in-out infinite;
+            z-index: 101;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        @keyframes doveFlyHeader {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(-10px) translateY(-5px) rotate(-5deg);
+            }
+            50% {
+                transform: translateX(-20px) translateY(3px) rotate(0deg);
+            }
+            75% {
+                transform: translateX(-10px) translateY(-3px) rotate(5deg);
+            }
+        }
+        
+        /* Efecte decorative aurii */
+        .gold-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .gold-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: goldTwinkle 4s infinite ease-in-out;
+        }
+        
+        @keyframes goldTwinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+        
+        .gold-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.1;
+        }
+        
+        /* Header - exact ca în index.html */
+        header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .header-top {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .header-top {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
+        /* LOGO LINK - MODIFICAT */
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        
+        .logo-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-link:active {
+            transform: translateY(0);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        @media (min-width: 768px) {
+            .logo {
+                justify-content: flex-start;
+            }
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: gentlePulse 4s infinite ease-in-out;
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .logo-text {
+            margin-left: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+            color: white;
+        }
+        
+        @media (min-width: 768px) {
+            .logo-text h1 {
+                text-align: left;
+                font-size: 1.8rem;
+            }
+        }
+        
+        .logo-text span {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+            font-size: 0.9rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .contact-header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-header {
+                flex-direction: row;
+                gap: 20px;
+                align-items: flex-end;
+            }
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        @media (min-width: 768px) {
+            .contact-item {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-item i {
+                font-size: 1rem;
+            }
+        }
+        
+        .phone-emergency {
+            background-color: rgba(139, 115, 85, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid rgba(139, 115, 85, 0.5);
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .header-bottom {
+            padding-top: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        @media (min-width: 768px) {
+            nav ul {
+                gap: 15px;
+            }
+        }
+        
+        nav ul li {
+            margin: 2px;
+        }
+        
+        @media (min-width: 768px) {
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            display: block;
+            border-radius: 4px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        @media (min-width: 768px) {
+            nav ul li a {
+                padding: 5px 0;
+                font-size: 1rem;
+                background: none;
+            }
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(139, 115, 85, 0.1);
+        }
+        
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            animation: lineGrow 0.5s ease-out;
+        }
+        
+        /* Butoane */
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Titlul paginii */
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin: 40px 0 50px;
+            font-weight: 300;
+            font-size: 2.2rem;
+            animation: fadeIn 1s ease-out;
+            padding: 0 15px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* GRID SICRIE */
+        .coffins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            perspective: 1000px;
+            margin-bottom: 80px;
+        }
+        
+        .coffin-item {
+            position: relative;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+            margin-bottom: 20px;
+        }
+        
+        .coffin-image {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .coffin-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: all 0.5s ease;
+        }
+        
+        /* Animații pentru fiecare sicriu */
+        .coffin-item:nth-child(1) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite;
+        }
+        
+        .coffin-item:nth-child(2) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 0.5s;
+        }
+        
+        .coffin-item:nth-child(3) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 1s;
+        }
+        
+        .coffin-item:nth-child(4) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 1.5s;
+        }
+        
+        .coffin-item:nth-child(5) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 2s;
+        }
+        
+        .coffin-item:nth-child(6) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 2.5s;
+        }
+        
+        .coffin-item:nth-child(7) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 3s;
+        }
+        
+        .coffin-item:nth-child(8) .coffin-image {
+            animation: floatCoffin 6s ease-in-out infinite 3.5s;
+        }
+        
+        .coffin-info {
+            text-align: center;
+            padding: 20px 15px;
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 10px;
+            margin-top: 25px;
+            width: 100%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(139,115,85,0.2);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Efectul principal - când cursorul este pe card, cardul devine transparent și sicriul devine vizibil */
+        .coffin-item:hover .coffin-info {
+            background: rgba(26, 26, 26, 0.3);
+            transform: translateY(-10px);
+            border-color: rgba(139,115,85,0.5);
+        }
+        
+        .coffin-item:hover .coffin-image {
+            transform: translateY(-30px) scale(1.1);
+            filter: drop-shadow(0 20px 30px rgba(139,115,85,0.6));
+            z-index: 3;
+        }
+        
+        .coffin-item:hover .coffin-image img {
+            filter: brightness(1.3);
+        }
+        
+        .coffin-info h3 {
+            color: var(--primary-color);
+            margin: 0 0 10px;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+            line-height: 1.3;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .coffin-item:hover .coffin-info h3 {
+            color: #d2b48c;
+        }
+        
+        .coffin-info p {
+            color: var(--text-light);
+            margin: 0 0 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        .price {
+            color: #d2b48c;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .detail-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .detail-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* STILURI PENTRU PAGINA DE DETALII */
+        .package-detail {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .package-detail.active {
+            display: block;
+        }
+        
+        .detail-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .detail-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .detail-image img {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            animation: floatCoffin 6s ease-in-out infinite;
+        }
+        
+        .detail-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(139,115,85,0.3);
+            backdrop-filter: blur(8px);
+        }
+        
+        .detail-info h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 2rem;
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+            padding-bottom: 15px;
+        }
+        
+        .detail-price {
+            color: #d2b48c;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin: 20px 0;
+        }
+        
+        .detail-features {
+            margin-bottom: 30px;
+        }
+        
+        .detail-features h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .detail-features ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        
+        .detail-features li {
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .contact-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* ANIMAȚII */
+        @keyframes floatCoffin {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 50px 0 15px;
+            position: relative;
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+            color: white;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col p {
+            color: #ccc;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.8rem;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 30px;
+            }
+            
+            .coffin-item {
+                height: 420px;
+            }
+            
+            .coffin-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 35px;
+            }
+            
+            .coffin-item {
+                height: 400px;
+            }
+            
+            .coffin-image {
+                height: 230px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            
+            /* Schimbăm hover-ul pentru dispozitivele cu touch */
+            .coffin-item:active .coffin-image {
+                transform: translateY(-15px) scale(1.05);
+            }
+            
+            .coffin-item:active .coffin-info {
+                background: rgba(26, 26, 26, 0.4);
+                transform: translateY(-5px);
+            }
+            
+            .detail-container {
+                flex-direction: column;
+            }
+            
+            .detail-image, .detail-info {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .coffins-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .coffin-item {
+                height: 380px;
+                max-width: 320px;
+                margin: 0 auto 20px;
+            }
+            
+            .coffin-image {
+                height: 220px;
+            }
+            
+            .coffin-info {
+                padding: 15px 10px;
+                min-height: 160px;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+                margin-bottom: 25px;
+            }
+            
+            /* Înlocuim hover-ul cu un efect vizual pentru touch */
+            .coffin-item.active .coffin-image {
+                transform: translateY(-15px) scale(1.05);
+                filter: drop-shadow(0 15px 25px rgba(139,115,85,0.4));
+            }
+            
+            .coffin-item.active .coffin-info {
+                background: rgba(26, 26, 26, 0.4);
+                transform: translateY(-5px);
+            }
+            
+            .detail-info {
+                padding: 20px;
+            }
+            
+            .detail-info h2 {
+                font-size: 1.6rem;
+            }
+            
+            .detail-price {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .coffin-item {
+                height: 360px;
+            }
+            
+            .coffin-image {
+                height: 200px;
+            }
+            
+            .coffin-info h3 {
+                font-size: 1.2rem;
+            }
+            
+            .price {
+                font-size: 1.1rem;
+            }
+            
+            .detail-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fundal principal asemănător header-ului -->
+    <div class="page-background"></div>
+    
+    <!-- Porumbel animat în header -->
+    <div class="dove-header">🕊️</div>
+
+    <!-- Container pentru cruciulițe aurii -->
+    <div class="crosses-container" id="crossesContainer"></div>
+    
+    <!-- Container pentru particule aurii -->
+    <div class="gold-decoration" id="goldDecoration"></div>
+    
+    <!-- Container pentru efectul de fade -->
+    <div class="content-fade" id="contentFade">
+        
+        <!-- Header - exact ca în index.html -->
+        <header>
+            <div class="container">
+                <div class="header-top">
+                    <!-- LOGO MODIFICAT: Acum este un link către pagina principală -->
+                    <a href="index.html" class="logo-link">
+                        <div class="logo">
+                            <div class="logo-icon">✝</div>
+                            <div class="logo-text">
+                                <h1>Casa <span>Funerară Lupică</span></h1>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="contact-header">
+                        <div class="contact-item phone-emergency">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>0752 538 888</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Non-stop 24/7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-bottom">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="pachete.html" class="active">Pachete funerare</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Titlul paginii -->
+        <h1 class="page-title">Pachete funerare</h1>
+
+        <div class="container">
+            <!-- SECȚIUNEA PRINCIPALĂ CU TOATE PACHETELE -->
+            <div class="coffins-grid" id="packages-grid">
+
+                <!-- PACHET 1 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/4-Lat.png" alt="Pachet 4-Lat">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet 4-Lat</h3>
+                        <div class="price">980 RON</div>
+                        <button class="detail-btn" data-package="4lat">Detalii</button>
+                    </div>
+                </div>
+                
+
+                <!-- PACHET 2 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/plop tri.png" alt="Pachet Plop Tri">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Plop Tri</h3>
+                        <div class="price">1.280 RON</div>
+                        <button class="detail-btn" data-package="ploptri">Detalii</button>
+                    </div>
+                </div>
+
+                <!-- PACHET 3 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/Brad tri 180cm.png" alt="Pachet Brad Tri 180cm">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Brad Tri 180cm</h3>
+                        <div class="price">1.580 RON</div>
+                        <button class="detail-btn" data-package="bradtri180">Detalii</button>
+                    </div>
+                </div>
+
+                <!-- PACHET 4 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/stejar rustic.png" alt="Pachet Stejar Rustic">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Stejar Rustic</h3>
+                        <div class="price">1.890 RON</div>
+                        <button class="detail-btn" data-package="stejarrustic">Detalii</button>
+                    </div>
+                </div>
+
+                <!-- PACHET 5 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/fag imprimat.png" alt="Pachet Fag Imprimat">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Fag Imprimat</h3>
+                        <div class="price">2.180 RON</div>
+                        <button class="detail-btn" data-package="fagimprimat">Detalii</button>
+                    </div>
+                </div>
+
+                <!-- PACHET 6 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/brad tri.png" alt="Pachet Brad Tri">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Brad Tri</h3>
+                        <div class="price">2.180 RON</div>
+                        <button class="detail-btn" data-package="bradtri">Detalii</button>
+                    </div>
+                </div>
+
+                <!-- PACHET 7 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/prezident imitatie.png" alt="Pachet Prezident Imitație">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Prezident Imitație</h3>
+                        <div class="price">4.980 RON</div>
+                        <button class="detail-btn" data-package="prezidentimitatie">Detalii</button>
+                    </div>
+                </div>
+
+                <!-- PACHET 8 -->
+                <div class="coffin-item">
+                    <div class="coffin-image">
+                        <img src="images/prezident alb.png" alt="Pachet Prezident Alb">
+                    </div>
+                    <div class="coffin-info">
+                        <h3>Pachet Prezident Alb</h3>
+                        <div class="price">5.780 RON</div>
+                        <button class="detail-btn" data-package="prezidentalb">Detalii</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SECȚIUNEA DE DETALII PACHET (inițial ascunsă) -->
+            <div class="package-detail" id="package-detail">
+                <!-- Conținutul va fi populat dinamic prin JavaScript -->
+            </div>
+        </div>
+
+        <!-- Footer - exact ca în index.html -->
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>Casa Funerară Lupică</h3>
+                        <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a href="index.html">Acasă</a></li>
+                            <li><a href="pachete.html">Pachete</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Servicii</h3>
+                        <ul>
+                            <li><a href="#">Organizare înmormântare</a></li>
+                            <li><a href="#">Transport funerar</a></li>
+                            <li><a href="#">Sicrie și accesorii</a></li>
+                            <li><a href="#">Consultanță funerară</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+    <script>
+        // Efect de fade pentru conținut la scroll
+        const contentFade = document.getElementById('contentFade');
+        
+        function updateContentFade() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
+            const opacity = 0.7 + (scrollProgress * 0.2);
+            contentFade.style.background = `linear-gradient(to bottom, 
+                rgba(30, 30, 30, ${opacity}) 0%, 
+                rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
+        }
+        
+        updateContentFade();
+        window.addEventListener('scroll', updateContentFade);
+        window.addEventListener('resize', updateContentFade);
+        
+        // Creare cruciulițe aurii (mai puține pe mobile)
+        function createCrosses() {
+            const crossesContainer = document.getElementById('crossesContainer');
+            const isMobile = window.innerWidth < 768;
+            const crossCount = isMobile ? 15 : 25;
+            
+            for (let i = 0; i < crossCount; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '✝';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
+                crossesContainer.appendChild(cross);
+            }
+        }
+        
+        // Creare particule aurii decorative (mai puține pe mobile)
+        function createGoldParticles() {
+            const goldContainer = document.getElementById('goldDecoration');
+            const isMobile = window.innerWidth < 768;
+            const particleCount = isMobile ? 15 : 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                goldContainer.appendChild(particle);
+            }
+            
+            for (let i = 0; i < (isMobile ? 6 : 12); i++) {
+                const line = document.createElement('div');
+                line.className = 'gold-line';
+                line.style.top = (i * (isMobile ? 15 : 8)) + '%';
+                line.style.width = Math.random() * (isMobile ? 40 : 50) + (isMobile ? 20 : 30) + '%';
+                line.style.left = Math.random() * (isMobile ? 60 : 50) + '%';
+                line.style.opacity = Math.random() * 0.1 + 0.05;
+                goldContainer.appendChild(line);
+            }
+        }
+        
+        // Datele pentru fiecare pachet
+        const packageDetails = {
+            "4lat": {
+                title: "Pachet 4-Lat",
+                price: "980 RON",
+                image: "images/4-Lat.png",
+                features: [
+                    "Sicriu simplu din lemn masiv",
+                    "Capitonajul capacului",
+                    "Garnitura pentru interiorul sicriului",
+                    "Orarul mare",
+                    "Perna pentru decedat",
+                    "Voal față"
+                ]
+            },
+            "ploptri": {
+                title: "Pachet Plop Tri",
+                price: "1.280 RON",
+                image: "images/plop tri.png",
+                features: [
+                    "Sicriu din plop triplu stratificat",
+                    "Capitonaj interior premium",
+                    "Garnitură completă pentru interior",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin",
+                    "Voal față transparent"
+                ]
+            },
+            "bradtri180": {
+                title: "Pachet Brad Tri 180cm",
+                price: "1.580 RON",
+                image: "images/Brad tri 180cm.png",
+                features: [
+                    "Sicriu din brad triplu 180cm",
+                    "Capitonaj capac și interior",
+                    "Garnitură completă premium",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin",
+                    "Voal față transparent"
+                ]
+            },
+            "stejarrustic": {
+                title: "Pachet Stejar Rustic",
+                price: "1.890 RON",
+                image: "images/stejar rustic.png",
+                features: [
+                    "Sicriu din stejar rustic",
+                    "Capitonaj interior premium",
+                    "Garnitură completă pentru interior",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin",
+                    "Voal față transparent"
+                ]
+            },
+            "fagimprimat": {
+                title: "Pachet Fag Imprimat",
+                price: "2.180 RON",
+                image: "images/fag imprimat.png",
+                features: [
+                    "Sicriu din fag imprimat",
+                    "Capitonaj interior premium",
+                    "Garnitură completă pentru interior",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin",
+                    "Voal față transparent"
+                ]
+            },
+            "bradtri": {
+                title: "Pachet Brad Tri",
+                price: "2.180 RON",
+                image: "images/brad tri.png",
+                features: [
+                    "Sicriu din brad triplu",
+                    "Capitonaj interior premium",
+                    "Garnitură completă pentru interior",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin",
+                    "Voal față transparent"
+                ]
+            },
+            "prezidentimitatie": {
+                title: "Pachet Prezident Imitație",
+                price: "4.980 RON",
+                image: "images/prezident imitatie.png",
+                features: [
+                    "Sicriu Prezident imitație premium",
+                    "Capitonaj interior de lux",
+                    "Garnitură completă premium",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin premium",
+                    "Voal față transparent de calitate"
+                ]
+            },
+            "prezidentalb": {
+                title: "Pachet Prezident Alb",
+                price: "5.780 RON",
+                image: "images/prezident alb.png",
+                features: [
+                    "Sicriu Prezident alb premium",
+                    "Capitonaj interior de lux",
+                    "Garnitură completă premium",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin premium",
+                    "Voal față transparent de calitate"
+                ]
+            }
+        };
+
+        // Funcția pentru afișarea detaliilor pachetului
+        function showPackageDetails(packageId) {
+            const package = packageDetails[packageId];
+            if (!package) return;
+            
+            const detailSection = document.getElementById('package-detail');
+            const gridSection = document.getElementById('packages-grid');
+            
+            // Ascundem grila și afișăm detaliile
+            gridSection.style.display = 'none';
+            detailSection.classList.add('active');
+            
+            // Populăm conținutul detaliilor
+            detailSection.innerHTML = `
+                <button class="back-btn" id="back-btn">
+                    <i class="fas fa-arrow-left"></i> Înapoi la toate pachetele
+                </button>
+                <div class="detail-container">
+                    <div class="detail-image">
+                        <img src="${package.image}" alt="${package.title}">
+                    </div>
+                    <div class="detail-info">
+                        <h2>${package.title}</h2>
+                        <div class="detail-price">${package.price}</div>
+                        
+                        <div class="detail-features">
+                            <h3>Servicii incluse:</h3>
+                            <ul>
+                                ${package.features.map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <a href="tel:0752538888" class="contact-btn">
+                            <i class="fas fa-phone"></i> Sună pentru ofertă: 0752 538 888
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            // Adăugăm event listener pentru butonul de înapoi
+            document.getElementById('back-btn').addEventListener('click', function() {
+                detailSection.classList.remove('active');
+                gridSection.style.display = 'grid';
+            });
+            
+            // Scrollăm în sus pentru a vedea detaliile
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Inițializare efecte
+        document.addEventListener('DOMContentLoaded', function() {
+            createCrosses();
+            createGoldParticles();
+            
+            // Adăugăm event listeners pentru butoanele de detalii
+            const detailButtons = document.querySelectorAll('.detail-btn');
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const packageId = this.getAttribute('data-package');
+                    showPackageDetails(packageId);
+                });
+            });
+            
+            // Adăugăm un efect de umflare pentru butoane
+            const buttons = document.querySelectorAll('.detail-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.animation = 'pulse 0.5s ease';
+                });
+                
+                button.addEventListener('animationend', function() {
+                    this.style.animation = '';
+                });
+            });
+            
+            // Efect de umbră colorată la hover pe sicrie
+            const coffinItems = document.querySelectorAll('.coffin-item');
+            coffinItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // Optimizare pentru dispozitive mobile - dezactivăm animațiile dacă utilizatorul alege să le reducă
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (mediaQuery.matches) {
+                coffinItems.forEach(item => {
+                    const image = item.querySelector('.coffin-image');
+                    image.style.animation = 'none';
+                });
+            }
+            
+            // Adăugăm suport pentru touch pe dispozitive mobile
+            if ('ontouchstart' in window) {
+                coffinItems.forEach(item => {
+                    item.addEventListener('touchstart', function() {
+                        // Eliminăm clasa active de la toate elementele
+                        coffinItems.forEach(i => i.classList.remove('active'));
+                        // Adăugăm clasa active la elementul curent
+                        this.classList.add('active');
+                    });
+                    
+                    // Ascundem efectul când utilizatorul atinge altă parte a ecranului
+                    document.addEventListener('touchstart', function(e) {
+                        if (!e.target.closest('.coffin-item')) {
+                            coffinItems.forEach(i => i.classList.remove('active'));
+                        }
+                    });
+                });
+            }
+            
+            // Observator pentru animații la scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.coffin-item').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Re-creare efecte la redimensionare
+        window.addEventListener('resize', function() {
+            document.getElementById('crossesContainer').innerHTML = '';
+            document.getElementById('goldDecoration').innerHTML = '';
+            createCrosses();
+            createGoldParticles();
+        });
+    </script>
+
+</body>
+</html>
