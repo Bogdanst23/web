@@ -514,10 +514,10 @@
             background: linear-gradient(145deg, rgba(40, 40, 40, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%);
         }
         
-        /* ===== ICONIȚE FOARTE MARI ȘI OPTIMIZATE ===== */
+        /* ===== ICONIȚE DIMENSIONATE CORECT ===== */
         .serviciu-icon {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 20px;
             background: var(--gold-gradient);
             border-radius: 50%;
@@ -525,7 +525,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             position: relative;
             transition: var(--transition);
             box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
@@ -536,18 +536,18 @@
         .serviciu-icon i:first-child {
             position: relative;
             z-index: 2;
-            font-size: 4.5rem;
+            font-size: 3.5rem;
         }
         
         .serviciu-icon i:last-child {
             position: absolute;
-            bottom: 25px;
-            right: 25px;
-            font-size: 2.8rem;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.8rem;
             color: rgba(255, 255, 255, 0.9);
             background: rgba(139, 115, 85, 0.8);
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -558,9 +558,9 @@
         }
         
         .serviciu-card:hover .serviciu-icon i:last-child {
-            transform: scale(1.2) rotate(15deg);
+            transform: scale(1.15) rotate(15deg);
             background: var(--primary-color);
-            box-shadow: 0 0 15px rgba(139, 115, 85, 0.6);
+            box-shadow: 0 0 12px rgba(139, 115, 85, 0.6);
         }
         
         .serviciu-card:hover .serviciu-icon {
@@ -1161,8 +1161,8 @@
         
         /* Iconițele mai mici pentru produse */
         .product-icon {
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 15px;
             background: var(--gold-gradient);
             border-radius: 50%;
@@ -1170,7 +1170,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
         
         .product-card h3 {
@@ -1799,29 +1799,30 @@
                 max-width: 350px;
             }
             
-            /* Iconițe mai mari pe desktop */
+            /* Iconițe dimensionate pentru desktop */
             .serviciu-icon {
-                width: 170px;
-                height: 170px;
-                font-size: 5.5rem;
+                width: 130px;
+                height: 130px;
+                font-size: 4rem;
             }
             
             .serviciu-icon i:first-child {
-                font-size: 5.5rem;
+                font-size: 4rem;
             }
             
             .serviciu-icon i:last-child {
-                width: 80px;
-                height: 80px;
-                font-size: 3.2rem;
-                bottom: 30px;
-                right: 30px;
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+                bottom: 25px;
+                right: 25px;
             }
             
+            /* Iconițe pentru produse dimensionate pentru desktop */
             .product-icon {
-                width: 100px;
-                height: 100px;
-                font-size: 2.8rem;
+                width: 80px;
+                height: 80px;
+                font-size: 2.2rem;
             }
         }
         
@@ -1864,23 +1865,23 @@
                 padding: 25px 20px;
             }
             
-            /* Iconițe pentru mobil - DIMENSIUNI FOARTE MARI */
+            /* Iconițe pentru mobil - DIMENSIUNI CORECTE */
             .serviciu-icon {
-                width: 130px;
-                height: 130px;
-                font-size: 4rem;
+                width: 100px;
+                height: 100px;
+                font-size: 3rem;
             }
             
             .serviciu-icon i:first-child {
-                font-size: 4rem;
+                font-size: 3rem;
             }
             
             .serviciu-icon i:last-child {
-                width: 60px;
-                height: 60px;
-                font-size: 2.2rem;
-                bottom: 20px;
-                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                bottom: 15px;
+                right: 15px;
             }
             
             /* Asigură centrarea perfectă pe mobil pentru secțiunile specificate */
@@ -1904,9 +1905,9 @@
             }
             
             .product-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2.2rem;
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
             }
             
             .despre-img {
@@ -1982,23 +1983,23 @@
                 font-size: 1.1rem;
             }
             
-            /* Iconițe și mai mari pe telefoane mici */
+            /* Iconițe pentru telefoane mici */
             .serviciu-icon {
-                width: 120px;
-                height: 120px;
-                font-size: 3.5rem;
+                width: 90px;
+                height: 90px;
+                font-size: 2.5rem;
             }
             
             .serviciu-icon i:first-child {
-                font-size: 3.5rem;
+                font-size: 2.5rem;
             }
             
             .serviciu-icon i:last-child {
-                width: 55px;
-                height: 55px;
-                font-size: 2rem;
-                bottom: 18px;
-                right: 18px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+                bottom: 12px;
+                right: 12px;
             }
         }
         
@@ -2018,6 +2019,34 @@
             
             /* Iconițe pentru tabletă */
             .serviciu-icon {
+                width: 110px;
+                height: 110px;
+                font-size: 3.2rem;
+            }
+            
+            .serviciu-icon i:first-child {
+                font-size: 3.2rem;
+            }
+            
+            .serviciu-icon i:last-child {
+                width: 45px;
+                height: 45px;
+                font-size: 1.6rem;
+                bottom: 18px;
+                right: 18px;
+            }
+            
+            /* Centrare pentru tabletă */
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 calc(50% - 25px);
+                max-width: 320px;
+            }
+        }
+        
+        /* Media query pentru desktop mare */
+        @media (min-width: 1200px) {
+            .serviciu-icon {
                 width: 140px;
                 height: 140px;
                 font-size: 4.5rem;
@@ -2028,18 +2057,11 @@
             }
             
             .serviciu-icon i:last-child {
-                width: 65px;
-                height: 65px;
-                font-size: 2.5rem;
-                bottom: 22px;
-                right: 22px;
-            }
-            
-            /* Centrare pentru tabletă */
-            .asistenta-formalitati .serviciu-card,
-            .servicii-suplimentare .serviciu-card {
-                flex: 0 1 calc(50% - 25px);
-                max-width: 320px;
+                width: 60px;
+                height: 60px;
+                font-size: 2.2rem;
+                bottom: 30px;
+                right: 30px;
             }
         }
     </style>
