@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ADĂUGAT: Meta tag-uri pentru a preveni formatarea automată a numerelor de telefon -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="date=no">
+    
     <title>Contact – Casa Funerară Lupică</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
@@ -37,6 +44,18 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+        }
+        
+        /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
+        a[href^="tel"] {
+            color: inherit;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
         }
         
         h1, h2, h3, h4 {
@@ -241,6 +260,7 @@
             }
         }
         
+        /* LOGO MODIFICAT: Logo cu cruce stilizată */
         .logo-icon {
             width: 50px;
             height: 50px;
@@ -250,9 +270,19 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             animation: gentlePulse 4s infinite ease-in-out;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        /* Logo-ul cu cruce stilizată - soluție sigură pentru toate dispozitivele */
+        .logo-icon::before {
+            content: '†';
+            font-weight: bold;
+            font-size: 2rem;
+            line-height: 1;
         }
         
         @keyframes gentlePulse {
@@ -331,6 +361,7 @@
             }
         }
         
+        /* MODIFICAT: Stil pentru numere de telefon fără highlight albastru */
         .phone-emergency {
             background-color: rgba(139, 115, 85, 0.2);
             padding: 5px 15px;
@@ -338,6 +369,13 @@
             font-weight: 500;
             border: 1px solid rgba(139, 115, 85, 0.5);
             font-family: 'Raleway', sans-serif;
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        .phone-emergency span {
+            color: inherit;
+            text-decoration: none;
         }
         
         .header-bottom {
@@ -542,6 +580,13 @@
             resize: vertical;
         }
 
+        /* ===== BUTOANE TELEFON ===== */
+        .btn[href^="tel"] {
+            color: white !important;
+            text-decoration: none !important;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+        }
+        
         /* Butoane */
         .btn {
             display: inline-block;
@@ -778,6 +823,17 @@
                 margin: 20px auto;
                 max-width: 100%;
             }
+            
+            /* Optimizări pentru logo pe mobil */
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.6rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 1.8rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -837,16 +893,19 @@
                     <!-- LOGO MODIFICAT: Acum este un link către pagina principală -->
                     <a href="index.html" class="logo-link">
                         <div class="logo">
-                            <div class="logo-icon">✝</div>
+                            <div class="logo-icon">
+                                <!-- Logo-ul cu cruce stilizată -->
+                            </div>
                             <div class="logo-text">
                                 <h1>Casa <span>Funerară Lupică</span></h1>
                             </div>
                         </div>
                     </a>
                     <div class="contact-header">
+                        <!-- MODIFICAT: Numărul de telefon fără formatare automata -->
                         <div class="contact-item phone-emergency">
                             <i class="fas fa-phone-alt"></i>
-                            <span>0752 538 888</span>
+                            <span class="phone-number">0752 538 888</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
@@ -890,7 +949,7 @@
                             </div>
                             <div class="contact-text">
                                 <h3>Telefon</h3>
-                                <p>0752 538 888</p>
+                                <p class="phone-number">0752 538 888</p>
                             </div>
                         </div>
                         
@@ -961,7 +1020,7 @@
                 <div class="map-overlay">
                     <h3><i class="fas fa-map-marker-alt"></i> Casa Funerară Lupică</h3>
                     <p><i class="fas fa-map-pin"></i> Strada Principală, Oituz</p>
-                    <p><i class="fas fa-phone"></i> 0752 538 888</p>
+                    <p><i class="fas fa-phone"></i> <span class="phone-number">0752 538 888</span></p>
                     <p><i class="fas fa-clock"></i> Non-stop 24/7</p>
                 </div>
             </div>
@@ -1032,7 +1091,7 @@
             for (let i = 0; i < crossCount; i++) {
                 const cross = document.createElement('div');
                 cross.className = 'cross';
-                cross.innerHTML = '✝';
+                cross.innerHTML = '†';
                 cross.style.left = Math.random() * 100 + '%';
                 cross.style.animationDelay = Math.random() * 20 + 's';
                 cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
@@ -1066,11 +1125,21 @@
             }
         }
         
+        // Funcție pentru a preveni formatarea automata a numerelor
+        function preventPhoneNumberStyling() {
+            // Adaugă atribut x-ms-format-detection="none" pentru Internet Explorer/Edge
+            const phoneElements = document.querySelectorAll('[href^="tel"], .phone-number');
+            phoneElements.forEach(el => {
+                el.setAttribute('x-ms-format-detection', 'none');
+            });
+        }
+        
         // Funcționalitatea formularului
         document.addEventListener('DOMContentLoaded', function() {
             // Inițializare efecte decorative
             createCrosses();
             createGoldParticles();
+            preventPhoneNumberStyling();
             
             const form = document.getElementById('messageForm');
             const successMessage = document.getElementById('successMessage');
