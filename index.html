@@ -514,10 +514,10 @@
             background: linear-gradient(145deg, rgba(40, 40, 40, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%);
         }
         
-        /* ===== REPARARE ICONIȚE - MĂRIRE OPTIMĂ ȘI ALINIERE ===== */
+        /* ===== ICONIȚE MARI ȘI OPTIMIZATE ===== */
         .serviciu-icon {
-            width: 90px;
-            height: 90px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 20px;
             background: var(--gold-gradient);
             border-radius: 50%;
@@ -525,35 +525,36 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2.2rem;
+            font-size: 3.5rem;
             position: relative;
             transition: var(--transition);
             box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
+            overflow: visible;
         }
         
         /* CSS pentru iconițele combinate */
         .serviciu-icon i:first-child {
             position: relative;
             z-index: 2;
-            font-size: 2.2rem;
+            font-size: 3.5rem;
         }
         
         .serviciu-icon i:last-child {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
-            font-size: 1.2rem;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
             color: rgba(255, 255, 255, 0.9);
             background: rgba(139, 115, 85, 0.8);
-            width: 32px;
-            height: 32px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 3;
             transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
         }
         
         .serviciu-card:hover .serviciu-icon i:last-child {
@@ -640,7 +641,7 @@
             font-size: 1.2rem;
         }
         
-        /* ===== SECȚIUNEA ASISTENȚĂ ȘI FORMALITĂȚI ===== */
+        /* ===== SECȚIUNEA ASISTENȚĂ ȘI FORMALITĂȚI - CARDURI CENTRATE ===== */
         .asistenta-formalitati {
             padding: 60px 0;
             background-color: rgba(35, 35, 35, 0.9);
@@ -656,7 +657,23 @@
             background: var(--gold-gradient);
         }
         
-        /* ===== SECȚIUNEA SERVICII SUPLIMENTARE ===== */
+        .asistenta-formalitati .servicii-grid {
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .asistenta-formalitati .serviciu-card {
+            flex: 0 1 320px;
+            max-width: 320px;
+            margin: 0;
+        }
+        
+        /* ===== SECȚIUNEA SERVICII SUPLIMENTARE - CARDURI CENTRATE ===== */
         .servicii-suplimentare {
             padding: 60px 0;
             background-color: rgba(30, 30, 30, 0.9);
@@ -672,45 +689,20 @@
             background: var(--gold-gradient);
         }
         
-        /* ===== CENTRARE CARDURI PENTRU ASISTENȚĂ ȘI SERVICII SUPLIMENTARE ===== */
-        /* Container special pentru centrează cardurilor */
-        .centered-services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
-            width: 100%;
-        }
-        
-        /* Reguli pentru secțiunile cu carduri centrate */
-        .asistenta-formalitati .servicii-grid,
         .servicii-suplimentare .servicii-grid {
-            display: flex;
+            display: flex !important;
             flex-wrap: wrap;
             justify-content: center;
             gap: 25px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        /* Dimensiuni carduri pentru centrează */
-        .asistenta-formalitati .serviciu-card,
         .servicii-suplimentare .serviciu-card {
-            flex: 0 1 300px;
-            max-width: 300px;
-        }
-        
-        /* Asigură ca grid-ul să fie centrat pe mobil */
-        @media (max-width: 767px) {
-            .asistenta-formalitati .servicii-grid,
-            .servicii-suplimentare .servicii-grid {
-                justify-content: center;
-            }
-            
-            .asistenta-formalitati .serviciu-card,
-            .servicii-suplimentare .serviciu-card {
-                flex: 0 1 100%;
-                max-width: 300px;
-            }
+            flex: 0 1 320px;
+            max-width: 320px;
+            margin: 0;
         }
         
         /* ===== LUMÂNARE ANIMATA ===== */
@@ -1169,8 +1161,8 @@
         
         /* Iconițele mai mici pentru produse */
         .product-icon {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             margin: 0 auto 15px;
             background: var(--gold-gradient);
             border-radius: 50%;
@@ -1178,7 +1170,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
         
         .product-card h3 {
@@ -1795,28 +1787,41 @@
                 gap: 40px;
             }
             
-            /* Ajustări pentru diferite dimensiuni de ecran */
+            /* Servicii principale - 4 pe rând */
+            .servicii-principale .servicii-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            /* Ajustări pentru secțiunile centrate */
             .asistenta-formalitati .serviciu-card,
             .servicii-suplimentare .serviciu-card {
                 flex: 0 1 calc(33.333% - 25px);
-                max-width: 320px;
+                max-width: 350px;
             }
             
+            /* Iconițe mai mari pe desktop */
             .serviciu-icon {
-                width: 100px;
-                height: 100px;
+                width: 140px;
+                height: 140px;
+                font-size: 4rem;
             }
             
             .serviciu-icon i:first-child {
-                font-size: 2.5rem;
+                font-size: 4rem;
             }
             
             .serviciu-icon i:last-child {
-                width: 36px;
-                height: 36px;
-                font-size: 1.3rem;
-                bottom: 17px;
-                right: 17px;
+                width: 55px;
+                height: 55px;
+                font-size: 2.2rem;
+                bottom: 25px;
+                right: 25px;
+            }
+            
+            .product-icon {
+                width: 90px;
+                height: 90px;
+                font-size: 2.3rem;
             }
         }
         
@@ -1829,10 +1834,11 @@
                 font-size: 3rem;
             }
             
+            /* Ajustări pentru secțiunile centrate pe desktop mare */
             .asistenta-formalitati .serviciu-card,
             .servicii-suplimentare .serviciu-card {
                 flex: 0 1 calc(33.333% - 30px);
-                max-width: 350px;
+                max-width: 380px;
             }
         }
         
@@ -1858,30 +1864,29 @@
                 padding: 25px 20px;
             }
             
-            /* Ajustare iconițe pentru mobil */
+            /* Iconițe pentru mobil - DIMENSIUNI MARI */
             .serviciu-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2rem;
+                width: 100px;
+                height: 100px;
+                font-size: 3rem;
             }
             
-            /* Ajustare pentru iconițele combinate pe mobil */
             .serviciu-icon i:first-child {
-                font-size: 2rem;
+                font-size: 3rem;
             }
             
             .serviciu-icon i:last-child {
-                width: 28px;
-                height: 28px;
-                font-size: 1rem;
-                bottom: 12px;
-                right: 12px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                bottom: 15px;
+                right: 15px;
             }
             
-            /* Asigură centrarea perfectă pe mobil */
+            /* Asigură centrarea perfectă pe mobil pentru secțiunile specificate */
             .asistenta-formalitati .servicii-grid,
             .servicii-suplimentare .servicii-grid {
-                display: flex;
+                display: flex !important;
                 flex-direction: column;
                 align-items: center;
                 gap: 25px;
@@ -1889,12 +1894,19 @@
             
             .asistenta-formalitati .serviciu-card,
             .servicii-suplimentare .serviciu-card {
-                flex: 0 1 100%;
-                max-width: 300px;
+                flex: 0 1 100% !important;
+                max-width: 320px !important;
+                margin: 0 auto !important;
             }
             
             .product-card {
                 padding: 15px;
+            }
+            
+            .product-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
             }
             
             .despre-img {
@@ -1969,6 +1981,25 @@
             .serviciu-card h3 {
                 font-size: 1.1rem;
             }
+            
+            /* Iconițe și mai mari pe telefoane mici */
+            .serviciu-icon {
+                width: 90px;
+                height: 90px;
+                font-size: 2.5rem;
+            }
+            
+            .serviciu-icon i:first-child {
+                font-size: 2.5rem;
+            }
+            
+            .serviciu-icon i:last-child {
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
+                bottom: 12px;
+                right: 12px;
+            }
         }
         
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -1983,6 +2014,32 @@
             .btn-more {
                 padding: 14px 30px;
                 font-size: 1rem;
+            }
+            
+            /* Iconițe pentru tabletă */
+            .serviciu-icon {
+                width: 110px;
+                height: 110px;
+                font-size: 3.2rem;
+            }
+            
+            .serviciu-icon i:first-child {
+                font-size: 3.2rem;
+            }
+            
+            .serviciu-icon i:last-child {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8rem;
+                bottom: 18px;
+                right: 18px;
+            }
+            
+            /* Centrare pentru tabletă */
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 calc(50% - 25px);
+                max-width: 320px;
             }
         }
     </style>
@@ -2248,7 +2305,7 @@
             </div>
         </section>
 
-        <!-- SECȚIUNEA ASISTENȚĂ ȘI FORMALITĂȚI -->
+        <!-- SECȚIUNEA ASISTENȚĂ ȘI FORMALITĂȚI - CARDURI CENTRATE -->
         <section class="asistenta-formalitati" id="asistenta-formalitati">
             <div class="container">
                 <div class="section-title">
@@ -2286,7 +2343,7 @@
             </div>
         </section>
 
-        <!-- SECȚIUNEA SERVICII SUPLIMENTARE -->
+        <!-- SECȚIUNEA SERVICII SUPLIMENTARE - CARDURI CENTRATE -->
         <section class="servicii-suplimentare" id="servicii-suplimentare">
             <div class="container">
                 <div class="section-title">
