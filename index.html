@@ -514,9 +514,10 @@
             background: linear-gradient(145deg, rgba(40, 40, 40, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%);
         }
         
+        /* ===== REPARARE ICONIȚE - MĂRIRE OPTIMĂ ȘI ALINIERE ===== */
         .serviciu-icon {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             margin: 0 auto 20px;
             background: var(--gold-gradient);
             border-radius: 50%;
@@ -524,7 +525,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 2.2rem;
             position: relative;
             transition: var(--transition);
             box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
@@ -534,17 +535,18 @@
         .serviciu-icon i:first-child {
             position: relative;
             z-index: 2;
+            font-size: 2.2rem;
         }
         
         .serviciu-icon i:last-child {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 1rem;
+            bottom: 15px;
+            right: 15px;
+            font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.9);
             background: rgba(139, 115, 85, 0.8);
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -668,6 +670,47 @@
         
         .servicii-suplimentare .section-title h2::after {
             background: var(--gold-gradient);
+        }
+        
+        /* ===== CENTRARE CARDURI PENTRU ASISTENȚĂ ȘI SERVICII SUPLIMENTARE ===== */
+        /* Container special pentru centrează cardurilor */
+        .centered-services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            width: 100%;
+        }
+        
+        /* Reguli pentru secțiunile cu carduri centrate */
+        .asistenta-formalitati .servicii-grid,
+        .servicii-suplimentare .servicii-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        /* Dimensiuni carduri pentru centrează */
+        .asistenta-formalitati .serviciu-card,
+        .servicii-suplimentare .serviciu-card {
+            flex: 0 1 300px;
+            max-width: 300px;
+        }
+        
+        /* Asigură ca grid-ul să fie centrat pe mobil */
+        @media (max-width: 767px) {
+            .asistenta-formalitati .servicii-grid,
+            .servicii-suplimentare .servicii-grid {
+                justify-content: center;
+            }
+            
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 100%;
+                max-width: 300px;
+            }
         }
         
         /* ===== LUMÂNARE ANIMATA ===== */
@@ -1124,9 +1167,10 @@
             border-color: rgba(139, 115, 85, 0.5);
         }
         
+        /* Iconițele mai mici pentru produse */
         .product-icon {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 15px;
             background: var(--gold-gradient);
             border-radius: 50%;
@@ -1134,7 +1178,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
         
         .product-card h3 {
@@ -1750,6 +1794,30 @@
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 40px;
             }
+            
+            /* Ajustări pentru diferite dimensiuni de ecran */
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 calc(33.333% - 25px);
+                max-width: 320px;
+            }
+            
+            .serviciu-icon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .serviciu-icon i:first-child {
+                font-size: 2.5rem;
+            }
+            
+            .serviciu-icon i:last-child {
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+                bottom: 17px;
+                right: 17px;
+            }
         }
         
         @media (min-width: 992px) {
@@ -1759,6 +1827,12 @@
             
             .hero h2 {
                 font-size: 3rem;
+            }
+            
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 calc(33.333% - 30px);
+                max-width: 350px;
             }
         }
         
@@ -1784,19 +1858,39 @@
                 padding: 25px 20px;
             }
             
+            /* Ajustare iconițe pentru mobil */
             .serviciu-icon {
-                width: 70px;
-                height: 70px;
-                font-size: 1.8rem;
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
             }
             
             /* Ajustare pentru iconițele combinate pe mobil */
+            .serviciu-icon i:first-child {
+                font-size: 2rem;
+            }
+            
             .serviciu-icon i:last-child {
-                width: 24px;
-                height: 24px;
-                font-size: 0.9rem;
-                bottom: 8px;
-                right: 8px;
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+                bottom: 12px;
+                right: 12px;
+            }
+            
+            /* Asigură centrarea perfectă pe mobil */
+            .asistenta-formalitati .servicii-grid,
+            .servicii-suplimentare .servicii-grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
+            
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 100%;
+                max-width: 300px;
             }
             
             .product-card {
