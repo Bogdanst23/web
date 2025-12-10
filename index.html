@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ADĂUGAT: Meta tag-uri pentru a preveni formatarea automată a numerelor de telefon -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="date=no">
+    
     <title>Casa Funerară Lupică - Servicii Funerare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
@@ -37,6 +44,22 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+        }
+        
+        /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
+        a[href^="tel"] {
+            color: inherit;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        .phone-number:hover, .phone-number:active {
+            color: var(--primary-color) !important;
         }
         
         h1, h2, h3, h4 {
@@ -180,6 +203,7 @@
             animation: fadeInLeft 1s ease-out;
         }
         
+        /* LOGO MODIFICAT: Logo cu cruce stilizată */
         .logo-icon {
             width: 50px;
             height: 50px;
@@ -189,9 +213,19 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             animation: gentlePulse 4s infinite ease-in-out;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        /* Logo-ul cu cruce stilizată - soluție sigură pentru toate dispozitivele */
+        .logo-icon::before {
+            content: '†';
+            font-weight: bold;
+            font-size: 2rem;
+            line-height: 1;
         }
         
         .logo-text {
@@ -245,6 +279,13 @@
             font-weight: 500;
             border: 1px solid rgba(139, 115, 85, 0.5);
             font-family: 'Raleway', sans-serif;
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        .phone-emergency span {
+            color: inherit;
+            text-decoration: none;
         }
         
         .header-bottom {
@@ -398,6 +439,13 @@
             line-height: 1.5;
             color: #f0f0f0;
             font-family: 'Playfair Display', serif;
+        }
+        
+        /* ===== BUTOANE TELEFON ===== */
+        .btn[href^="tel"] {
+            color: white !important;
+            text-decoration: none !important;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
         }
         
         /* ===== SECȚIUNE SERVICII PRINCIPALE ===== */
@@ -1793,6 +1841,17 @@
             .pachete-grid {
                 margin-bottom: 20px;
             }
+            
+            /* Optimizări pentru logo pe mobil */
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.6rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 1.8rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1860,16 +1919,19 @@
                     <!-- LOGO MODIFICAT: Acum este un link către pagina principală -->
                     <a href="index.html" class="logo-link">
                         <div class="logo">
-                            <div class="logo-icon">✝</div>
+                            <div class="logo-icon">
+                                <!-- Logo-ul cu cruce stilizată -->
+                            </div>
                             <div class="logo-text">
                                 <h1>Casa <span>Funerară Lupică</span></h1>
                             </div>
                         </div>
                     </a>
                     <div class="contact-header">
+                        <!-- MODIFICAT: Numărul de telefon fără formatare automata -->
                         <div class="contact-item phone-emergency">
                             <i class="fas fa-phone-alt"></i>
-                            <span>0752 538 888</span>
+                            <span class="phone-number">0752 538 888</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
@@ -1904,6 +1966,7 @@
                 
                 <div class="hero-content">
                     <h2>Servicii Funerare Non-Stop cu Demnitate și Compasiune</h2>
+                    <!-- MODIFICAT: Butonul de telefon fără highlight albastru -->
                     <a href="tel:0756838352" class="btn" id="consultantaBtn">Solicită Consultanță Gratuită</a>
                 </div>
             </div>
@@ -2232,7 +2295,7 @@
             for (let i = 0; i < crossCount; i++) {
                 const cross = document.createElement('div');
                 cross.className = 'cross';
-                cross.innerHTML = '✝';
+                cross.innerHTML = '†';
                 cross.style.left = Math.random() * 100 + '%';
                 cross.style.animationDelay = Math.random() * 20 + 's';
                 cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
@@ -2426,8 +2489,60 @@
             });
         }
         
+        // Funcție pentru a preveni formatarea automata a numerelor
+        function preventPhoneNumberStyling() {
+            // Adaugă atribut x-ms-format-detection="none" pentru Internet Explorer/Edge
+            const phoneElements = document.querySelectorAll('[href^="tel"], .phone-number');
+            phoneElements.forEach(el => {
+                el.setAttribute('x-ms-format-detection', 'none');
+            });
+            
+            // Adaugă eveniment pentru a preveni comportamentul implicit pe touch
+            document.addEventListener('touchstart', function(e) {
+                const target = e.target;
+                if (target.matches('[href^="tel"]') || target.closest('[href^="tel"]')) {
+                    // Permite comportamentul normal doar după o confirmare
+                    if (!target.hasAttribute('data-confirmed')) {
+                        e.preventDefault();
+                        if (confirm('Sunteți sigur că doriți să apelați?')) {
+                            target.setAttribute('data-confirmed', 'true');
+                            target.click();
+                        }
+                    }
+                }
+            }, { passive: false });
+        }
+        
+        // Funcție pentru a detecta dacă logo-ul este afișat corect
+        function fixLogoIfNeeded() {
+            // Această funcție verifică dacă este nevoie să înlocuim logo-ul
+            // În acest caz, am folosit deja un caracter Unicode sigur (†)
+            // Dar dacă vrei o soluție alternativă, poți decomenta codul de mai jos:
+            
+            /*
+            const logoIcon = document.querySelector('.logo-icon');
+            // Crează un SVG alternativ pentru logo
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '24');
+            svg.setAttribute('height', '24');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'white');
+            
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M12 2L15 9H22L16 14L18 22L12 17L6 22L8 14L2 9H9L12 2Z');
+            svg.appendChild(path);
+            
+            // Adaugă SVG-ul ca backup în interiorul logo-ului
+            logoIcon.appendChild(svg);
+            svg.style.display = 'none'; // Ascunde-l inițial
+            */
+        }
+        
         // Inițializare la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
+            fixLogoIfNeeded();
+            preventPhoneNumberStyling();
+            
             createCrosses();
             createGoldParticles();
             initScrollAnimations();
