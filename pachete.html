@@ -893,41 +893,64 @@
             font-family: 'Raleway', sans-serif;
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .coffins-grid {
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                gap: 40px;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .coffins-grid {
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 30px;
+        /* ===== OPTIMIZĂRI PENTRU MOBIL - MODIFICAT PENTRU HEADER MĂRIT ===== */
+        @media (max-width: 767px) {
+            /* HEADER MAI MARE PE MOBIL */
+            header {
+                padding: 15px 0;
             }
             
-            .coffin-item {
-                height: 420px;
+            .header-top {
+                gap: 20px;
+                padding-bottom: 15px;
             }
             
-            .coffin-image {
-                height: 250px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .coffins-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 35px;
+            /* LOGO MAI MARE PE MOBIL */
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2.2rem;
             }
             
-            .coffin-item {
-                height: 400px;
+            .logo-icon::before {
+                font-size: 2.4rem;
             }
             
-            .coffin-image {
-                height: 230px;
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            /* CONTACT MAI MARE PE MOBIL */
+            .contact-header {
+                gap: 12px;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+                gap: 8px;
+            }
+            
+            .contact-item i {
+                font-size: 1.2rem;
+            }
+            
+            .phone-emergency {
+                padding: 8px 20px;
+                font-size: 1.1rem;
+            }
+            
+            /* NAV MAI MARE PE MOBIL */
+            .header-bottom {
+                padding-top: 15px;
+            }
+            
+            nav ul li a {
+                padding: 10px 16px;
+                font-size: 1rem;
             }
             
             .page-title {
@@ -953,19 +976,62 @@
                 min-width: 100%;
             }
             
-            /* Optimizări pentru logo pe mobil */
-            .logo-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.6rem;
+            /* ADĂUGAT: Porumbel mai mare în header pentru mobil */
+            .dove-header {
+                font-size: 2.5rem;
+                top: 15px;
+                right: 15px;
             }
             
-            .logo-icon::before {
-                font-size: 1.8rem;
+            /* Ajustări pentru grid pe mobil */
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 35px;
+            }
+            
+            .coffin-item {
+                height: 400px;
+            }
+            
+            .coffin-image {
+                height: 230px;
             }
         }
         
+        /* OPTIMIZĂRI PENTRU TELEFOANE MARI */
         @media (max-width: 576px) {
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-text span {
+                font-size: 1rem;
+            }
+            
+            .contact-item {
+                font-size: 0.95rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1rem;
+                padding: 7px 18px;
+            }
+            
+            .detail-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
             .coffins-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -1013,9 +1079,62 @@
             .detail-price {
                 font-size: 1.5rem;
             }
+            
+            /* NAV MAI MIC PENTRU TELEFOANE FOARTE MICI */
+            nav ul {
+                gap: 3px;
+            }
+            
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
         }
         
+        /* ADĂUGAT: Media query special pentru dispozitive mici (sub 400px) */
         @media (max-width: 400px) {
+            .logo {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .logo-text {
+                margin-left: 0;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.5rem;
+                line-height: 1.2;
+            }
+            
+            .logo-text span {
+                font-size: 0.95rem;
+            }
+            
+            .contact-header {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+            }
+            
+            .phone-emergency {
+                padding: 6px 15px;
+                font-size: 0.95rem;
+            }
+            
+            /* Butonul de apel mai vizibil */
+            .contact-btn[href^="tel"] {
+                padding: 14px 25px;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+            
             .coffin-item {
                 height: 360px;
             }
@@ -1035,6 +1154,107 @@
             .detail-btn {
                 padding: 8px 16px;
                 font-size: 0.9rem;
+            }
+        }
+        
+        /* MEDIA QUERIES PENTRU TABLETĂ */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* HEADER OPTIMIZAT PENTRU TABLETĂ */
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.7rem;
+            }
+            
+            .contact-item {
+                font-size: 0.95rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1rem;
+                padding: 7px 18px;
+            }
+            
+            /* Ajustări pentru tabletă */
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 30px;
+            }
+            
+            .coffin-item {
+                height: 420px;
+            }
+            
+            .coffin-image {
+                height: 250px;
+            }
+            
+            /* Centrare pentru tabletă */
+            .asistenta-formalitati .serviciu-card,
+            .servicii-suplimentare .serviciu-card {
+                flex: 0 1 calc(50% - 25px);
+                max-width: 320px;
+            }
+        }
+        
+        /* MEDIA QUERY PENTRU DESKTOP MARE */
+        @media (min-width: 1200px) {
+            /* HEADER OPTIMIZAT PENTRU DESKTOP MARE */
+            header {
+                padding: 15px 0;
+            }
+            
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.5rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .coffins-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 30px;
+            }
+            
+            .coffin-item {
+                height: 420px;
+            }
+            
+            .coffin-image {
+                height: 250px;
             }
         }
     </style>
