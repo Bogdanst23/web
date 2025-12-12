@@ -514,7 +514,7 @@
             background: linear-gradient(145deg, rgba(40, 40, 40, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%);
         }
         
-        /* ===== ICONIȚE DIMENSIONATE CORECT ===== */
+        /* ===== ICONIȚE DIMENSIONATE CORECT - MODIFICAT PENTRU MĂRIMEA NORMALĂ ===== */
         .serviciu-icon {
             width: 120px;
             height: 120px;
@@ -532,22 +532,30 @@
             overflow: visible;
         }
         
-        /* CSS pentru iconițele combinate */
-        .serviciu-icon i:first-child {
+        /* CSS pentru iconițele combinate - MODIFICAT PENTRU DIMENSIUNI NORMALE */
+        .serviciu-icon i {
+            position: relative;
+            z-index: 2;
+            font-size: 3.5rem;
+            transition: var(--transition);
+        }
+        
+        /* Pentru cardul cu două iconițe (așezare în sicriu) */
+        .serviciu-icon .main-icon {
             position: relative;
             z-index: 2;
             font-size: 3.5rem;
         }
         
-        .serviciu-icon i:last-child {
+        .serviciu-icon .secondary-icon {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             font-size: 1.8rem;
             color: rgba(255, 255, 255, 0.9);
             background: rgba(139, 115, 85, 0.8);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -557,7 +565,7 @@
             border: 3px solid rgba(255, 255, 255, 0.3);
         }
         
-        .serviciu-card:hover .serviciu-icon i:last-child {
+        .serviciu-card:hover .serviciu-icon .secondary-icon {
             transform: scale(1.15) rotate(15deg);
             background: var(--primary-color);
             box-shadow: 0 0 12px rgba(139, 115, 85, 0.6);
@@ -1799,23 +1807,27 @@
                 max-width: 350px;
             }
             
-            /* Iconițe dimensionate pentru desktop */
+            /* Iconițe dimensionate pentru desktop - MODIFICAT PENTRU MĂRIMEA NORMALĂ */
             .serviciu-icon {
-                width: 130px;
-                height: 130px;
+                width: 140px;
+                height: 140px;
                 font-size: 4rem;
             }
             
-            .serviciu-icon i:first-child {
+            .serviciu-icon i {
                 font-size: 4rem;
             }
             
-            .serviciu-icon i:last-child {
+            .serviciu-icon .main-icon {
+                font-size: 4rem;
+            }
+            
+            .serviciu-icon .secondary-icon {
                 width: 55px;
                 height: 55px;
                 font-size: 2rem;
-                bottom: 25px;
-                right: 25px;
+                bottom: 20px;
+                right: 20px;
             }
             
             /* Iconițe pentru produse dimensionate pentru desktop */
@@ -1843,66 +1855,8 @@
             }
         }
         
-        /* ===== OPTIMIZĂRI PENTRU MOBIL - MODIFICAT PENTRU HEADER MĂRIT ===== */
+        /* ===== OPTIMIZĂRI PENTRU MOBIL ===== */
         @media (max-width: 767px) {
-            /* HEADER MAI MARE PE MOBIL */
-            header {
-                padding: 15px 0;
-            }
-            
-            .header-top {
-                gap: 20px;
-                padding-bottom: 15px;
-            }
-            
-            /* LOGO MAI MARE PE MOBIL */
-            .logo-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 2.2rem;
-            }
-            
-            .logo-icon::before {
-                font-size: 2.4rem;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.8rem;
-            }
-            
-            .logo-text span {
-                font-size: 1.1rem;
-            }
-            
-            /* CONTACT MAI MARE PE MOBIL */
-            .contact-header {
-                gap: 12px;
-            }
-            
-            .contact-item {
-                font-size: 1rem;
-                gap: 8px;
-            }
-            
-            .contact-item i {
-                font-size: 1.2rem;
-            }
-            
-            .phone-emergency {
-                padding: 8px 20px;
-                font-size: 1.1rem;
-            }
-            
-            /* NAV MAI MARE PE MOBIL */
-            .header-bottom {
-                padding-top: 15px;
-            }
-            
-            nav ul li a {
-                padding: 10px 16px;
-                font-size: 1rem;
-            }
-            
             .hero h2 {
                 font-size: 1.5rem;
             }
@@ -1923,23 +1877,27 @@
                 padding: 25px 20px;
             }
             
-            /* Iconițe pentru mobil - DIMENSIUNI CORECTE */
+            /* Iconițe pentru mobil - DIMENSIUNI CORECTE ȘI NORMALE */
             .serviciu-icon {
-                width: 100px;
-                height: 100px;
-                font-size: 3rem;
+                width: 110px;
+                height: 110px;
+                font-size: 3.2rem;
             }
             
-            .serviciu-icon i:first-child {
-                font-size: 3rem;
+            .serviciu-icon i {
+                font-size: 3.2rem;
             }
             
-            .serviciu-icon i:last-child {
+            .serviciu-icon .main-icon {
+                font-size: 3.2rem;
+            }
+            
+            .serviciu-icon .secondary-icon {
                 width: 40px;
                 height: 40px;
                 font-size: 1.5rem;
-                bottom: 15px;
-                right: 15px;
+                bottom: 12px;
+                right: 12px;
             }
             
             /* Asigură centrarea perfectă pe mobil pentru secțiunile specificate */
@@ -2007,43 +1965,19 @@
                 margin-bottom: 20px;
             }
             
-            /* ADĂUGAT: Porumbel mai mare în header pentru mobil */
-            .dove-header {
-                font-size: 2.5rem;
-                top: 15px;
-                right: 15px;
+            /* Optimizări pentru logo pe mobil */
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.6rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 1.8rem;
             }
         }
         
         @media (max-width: 480px) {
-            /* OPTIMIZĂRI PENTRU TELEFOANE MARI */
-            .logo-icon {
-                width: 55px;
-                height: 55px;
-                font-size: 2rem;
-            }
-            
-            .logo-icon::before {
-                font-size: 2.2rem;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.6rem;
-            }
-            
-            .logo-text span {
-                font-size: 1rem;
-            }
-            
-            .contact-item {
-                font-size: 0.95rem;
-            }
-            
-            .phone-emergency {
-                font-size: 1rem;
-                padding: 7px 18px;
-            }
-            
             .btn-more {
                 padding: 12px 25px;
                 font-size: 0.95rem;
@@ -2065,33 +1999,27 @@
                 font-size: 1.1rem;
             }
             
-            /* Iconițe pentru telefoane mici */
+            /* Iconițe pentru telefoane mici - DIMENSIUNI NORMALE */
             .serviciu-icon {
-                width: 90px;
-                height: 90px;
-                font-size: 2.5rem;
+                width: 100px;
+                height: 100px;
+                font-size: 2.8rem;
             }
             
-            .serviciu-icon i:first-child {
-                font-size: 2.5rem;
+            .serviciu-icon i {
+                font-size: 2.8rem;
             }
             
-            .serviciu-icon i:last-child {
+            .serviciu-icon .main-icon {
+                font-size: 2.8rem;
+            }
+            
+            .serviciu-icon .secondary-icon {
                 width: 35px;
                 height: 35px;
                 font-size: 1.2rem;
-                bottom: 12px;
-                right: 12px;
-            }
-            
-            /* NAV MAI MIC PENTRU TELEFOANE FOARTE MICI */
-            nav ul {
-                gap: 3px;
-            }
-            
-            nav ul li a {
-                padding: 8px 12px;
-                font-size: 0.9rem;
+                bottom: 10px;
+                right: 10px;
             }
         }
         
@@ -2109,23 +2037,27 @@
                 font-size: 1rem;
             }
             
-            /* Iconițe pentru tabletă */
+            /* Iconițe pentru tabletă - DIMENSIUNI NORMALE */
             .serviciu-icon {
-                width: 110px;
-                height: 110px;
-                font-size: 3.2rem;
+                width: 120px;
+                height: 120px;
+                font-size: 3.5rem;
             }
             
-            .serviciu-icon i:first-child {
-                font-size: 3.2rem;
+            .serviciu-icon i {
+                font-size: 3.5rem;
             }
             
-            .serviciu-icon i:last-child {
+            .serviciu-icon .main-icon {
+                font-size: 3.5rem;
+            }
+            
+            .serviciu-icon .secondary-icon {
                 width: 45px;
                 height: 45px;
                 font-size: 1.6rem;
-                bottom: 18px;
-                right: 18px;
+                bottom: 15px;
+                right: 15px;
             }
             
             /* Centrare pentru tabletă */
@@ -2134,117 +2066,31 @@
                 flex: 0 1 calc(50% - 25px);
                 max-width: 320px;
             }
-            
-            /* HEADER OPTIMIZAT PENTRU TABLETĂ */
-            .logo-icon {
-                width: 55px;
-                height: 55px;
-                font-size: 2rem;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.7rem;
-            }
-            
-            .contact-item {
-                font-size: 0.95rem;
-            }
         }
         
         /* Media query pentru desktop mare */
         @media (min-width: 1200px) {
+            /* Iconițe mai mari pentru desktop mare */
             .serviciu-icon {
-                width: 140px;
-                height: 140px;
+                width: 150px;
+                height: 150px;
                 font-size: 4.5rem;
             }
             
-            .serviciu-icon i:first-child {
+            .serviciu-icon i {
                 font-size: 4.5rem;
             }
             
-            .serviciu-icon i:last-child {
+            .serviciu-icon .main-icon {
+                font-size: 4.5rem;
+            }
+            
+            .serviciu-icon .secondary-icon {
                 width: 60px;
                 height: 60px;
                 font-size: 2.2rem;
-                bottom: 30px;
-                right: 30px;
-            }
-            
-            /* HEADER OPTIMIZAT PENTRU DESKTOP MARE */
-            header {
-                padding: 15px 0;
-            }
-            
-            .logo-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 2.2rem;
-            }
-            
-            .logo-icon::before {
-                font-size: 2.5rem;
-            }
-            
-            .logo-text h1 {
-                font-size: 2rem;
-            }
-            
-            .logo-text span {
-                font-size: 1.1rem;
-            }
-            
-            .contact-item {
-                font-size: 1rem;
-            }
-            
-            .phone-emergency {
-                font-size: 1.1rem;
-            }
-        }
-        
-        /* ADĂUGAT: Media query special pentru dispozitive mici (sub 400px) */
-        @media (max-width: 400px) {
-            .logo {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .logo-text {
-                margin-left: 0;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-            }
-            
-            .logo-text span {
-                font-size: 0.95rem;
-            }
-            
-            .contact-header {
-                flex-direction: column;
-                gap: 8px;
-                align-items: center;
-            }
-            
-            .contact-item {
-                justify-content: center;
-            }
-            
-            .phone-emergency {
-                padding: 6px 15px;
-                font-size: 0.95rem;
-            }
-            
-            /* Butonul de apel mai vizibil */
-            .btn[href^="tel"] {
-                padding: 14px 25px;
-                font-size: 1.1rem;
-                font-weight: 600;
+                bottom: 25px;
+                right: 25px;
             }
         }
     </style>
@@ -2363,8 +2209,8 @@
                     <!-- Serviciu 2 - Așezare în Sicriu (cu două iconițe) -->
                     <div class="serviciu-card">
                         <div class="serviciu-icon">
-                            <i class="fas fa-bed"></i>
-                            <i class="fas fa-hands"></i>
+                            <i class="fas fa-bed main-icon"></i>
+                            <i class="fas fa-hands secondary-icon"></i>
                         </div>
                         <h3>Așezare în Sicriu și Pregătire pentru Depunere</h3>
                         <p>Asistență completă pentru așezarea corectă și demnă în sicriu, pregătirea pentru depunerea în capelă, cu atenție la detalii și respect față de ritualurile tradiționale.</p>
@@ -2694,17 +2540,17 @@
                 consultantaBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     // Confirmați înainte de apel
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0752538888 pentru consultanță gratuită?')) {
-                        window.location.href = 'tel:0752538888';
+                    if (confirm('Sunteți sigur că doriți să apelați numărul 0756838352 pentru consultanță gratuită?')) {
+                        window.location.href = 'tel:0756838352';
                     }
                 });
             }
             
-            if (contactBtn && contactBtn.getAttribute('href') === 'tel:0752538888') {
+            if (contactBtn && contactBtn.getAttribute('href') === 'tel:0756838352') {
                 contactBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0752538888?')) {
-                        window.location.href = 'tel:0752538888';
+                    if (confirm('Sunteți sigur că doriți să apelați numărul 0756838352?')) {
+                        window.location.href = 'tel:0756838352';
                     }
                 });
             }
