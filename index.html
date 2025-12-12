@@ -1843,8 +1843,66 @@
             }
         }
         
-        /* ===== OPTIMIZĂRI PENTRU MOBIL ===== */
+        /* ===== OPTIMIZĂRI PENTRU MOBIL - MODIFICAT PENTRU HEADER MĂRIT ===== */
         @media (max-width: 767px) {
+            /* HEADER MAI MARE PE MOBIL */
+            header {
+                padding: 15px 0;
+            }
+            
+            .header-top {
+                gap: 20px;
+                padding-bottom: 15px;
+            }
+            
+            /* LOGO MAI MARE PE MOBIL */
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.4rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            /* CONTACT MAI MARE PE MOBIL */
+            .contact-header {
+                gap: 12px;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+                gap: 8px;
+            }
+            
+            .contact-item i {
+                font-size: 1.2rem;
+            }
+            
+            .phone-emergency {
+                padding: 8px 20px;
+                font-size: 1.1rem;
+            }
+            
+            /* NAV MAI MARE PE MOBIL */
+            .header-bottom {
+                padding-top: 15px;
+            }
+            
+            nav ul li a {
+                padding: 10px 16px;
+                font-size: 1rem;
+            }
+            
             .hero h2 {
                 font-size: 1.5rem;
             }
@@ -1949,19 +2007,43 @@
                 margin-bottom: 20px;
             }
             
-            /* Optimizări pentru logo pe mobil */
-            .logo-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.6rem;
-            }
-            
-            .logo-icon::before {
-                font-size: 1.8rem;
+            /* ADĂUGAT: Porumbel mai mare în header pentru mobil */
+            .dove-header {
+                font-size: 2.5rem;
+                top: 15px;
+                right: 15px;
             }
         }
         
         @media (max-width: 480px) {
+            /* OPTIMIZĂRI PENTRU TELEFOANE MARI */
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-text span {
+                font-size: 1rem;
+            }
+            
+            .contact-item {
+                font-size: 0.95rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1rem;
+                padding: 7px 18px;
+            }
+            
             .btn-more {
                 padding: 12px 25px;
                 font-size: 0.95rem;
@@ -2000,6 +2082,16 @@
                 font-size: 1.2rem;
                 bottom: 12px;
                 right: 12px;
+            }
+            
+            /* NAV MAI MIC PENTRU TELEFOANE FOARTE MICI */
+            nav ul {
+                gap: 3px;
+            }
+            
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
             }
         }
         
@@ -2042,6 +2134,21 @@
                 flex: 0 1 calc(50% - 25px);
                 max-width: 320px;
             }
+            
+            /* HEADER OPTIMIZAT PENTRU TABLETĂ */
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.7rem;
+            }
+            
+            .contact-item {
+                font-size: 0.95rem;
+            }
         }
         
         /* Media query pentru desktop mare */
@@ -2062,6 +2169,82 @@
                 font-size: 2.2rem;
                 bottom: 30px;
                 right: 30px;
+            }
+            
+            /* HEADER OPTIMIZAT PENTRU DESKTOP MARE */
+            header {
+                padding: 15px 0;
+            }
+            
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.5rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* ADĂUGAT: Media query special pentru dispozitive mici (sub 400px) */
+        @media (max-width: 400px) {
+            .logo {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .logo-text {
+                margin-left: 0;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.5rem;
+                line-height: 1.2;
+            }
+            
+            .logo-text span {
+                font-size: 0.95rem;
+            }
+            
+            .contact-header {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+            }
+            
+            .phone-emergency {
+                padding: 6px 15px;
+                font-size: 0.95rem;
+            }
+            
+            /* Butonul de apel mai vizibil */
+            .btn[href^="tel"] {
+                padding: 14px 25px;
+                font-size: 1.1rem;
+                font-weight: 600;
             }
         }
     </style>
@@ -2140,7 +2323,7 @@
                 <div class="hero-content">
                     <h2>Servicii Funerare Non-Stop cu Demnitate și Compasiune</h2>
                     <!-- MODIFICAT: Butonul de telefon fără highlight albastru -->
-                    <a href="tel:0756838352" class="btn" id="consultantaBtn">Solicită Consultanță Gratuită</a>
+                    <a href="tel:0752538888" class="btn" id="consultantaBtn">Solicită Consultanță Gratuită</a>
                 </div>
             </div>
             
@@ -2511,17 +2694,17 @@
                 consultantaBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     // Confirmați înainte de apel
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0756838352 pentru consultanță gratuită?')) {
-                        window.location.href = 'tel:0756838352';
+                    if (confirm('Sunteți sigur că doriți să apelați numărul 0752538888 pentru consultanță gratuită?')) {
+                        window.location.href = 'tel:0752538888';
                     }
                 });
             }
             
-            if (contactBtn && contactBtn.getAttribute('href') === 'tel:0756838352') {
+            if (contactBtn && contactBtn.getAttribute('href') === 'tel:0752538888') {
                 contactBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0756838352?')) {
-                        window.location.href = 'tel:0756838352';
+                    if (confirm('Sunteți sigur că doriți să apelați numărul 0752538888?')) {
+                        window.location.href = 'tel:0752538888';
                     }
                 });
             }
