@@ -180,11 +180,11 @@
             opacity: 0.1;
         }
         
-        /* ===== HEADER MODIFICAT - TEXTE MAI MARI SI CHENAR MAI MARE ===== */
+        /* ===== HEADER MODIFICAT - MAI MIC PE DESKTOP, MENIU ÎN LINIE ===== */
         header {
             background-color: var(--header-bg);
             color: white;
-            padding: 15px 0; /* MĂRIT de la 10px */
+            padding: 10px 0; /* REDUS pentru desktop */
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             position: relative;
             z-index: 100;
@@ -195,8 +195,8 @@
         .header-top {
             display: flex;
             flex-direction: column;
-            gap: 30px; /* MĂRIT de la 25px */
-            padding: 20px 0; /* MĂRIT padding */
+            gap: 20px; /* REDUS pentru desktop */
+            padding: 15px 0; /* REDUS pentru desktop */
             border-bottom: 1px solid rgba(255,255,255,0.1);
             position: relative;
         }
@@ -206,6 +206,8 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                gap: 0; /* Fără gap pe desktop */
+                padding: 10px 0; /* MAI MIC pe desktop */
             }
         }
         
@@ -238,17 +240,17 @@
             }
         }
         
-        /* LOGO MODIFICAT: Logo cu cruce stilizată MAI MARE */
+        /* LOGO MODIFICAT: MAI MIC PE DESKTOP */
         .logo-icon {
-            width: 65px; /* MĂRIT de la 50px */
-            height: 65px; /* MĂRIT de la 50px */
+            width: 60px; /* MAI MIC pe mobil */
+            height: 60px;
             background: var(--gold-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2.3rem; /* MĂRIT de la 1.8rem */
+            font-size: 2rem; /* MAI MIC pe mobil */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             animation: gentlePulse 4s infinite ease-in-out;
             position: relative;
@@ -259,7 +261,7 @@
         .logo-icon::before {
             content: '†';
             font-weight: bold;
-            font-size: 2.5rem; /* MĂRIT de la 2rem */
+            font-size: 2.2rem; /* MAI MIC pe mobil */
             line-height: 1;
         }
         
@@ -269,12 +271,12 @@
         }
         
         .logo-text {
-            margin-left: 12px; /* MĂRIT de la 10px */
+            margin-left: 10px;
         }
         
         .logo-text h1 {
-            font-size: 1.8rem; /* MĂRIT de la 1.5rem */
-            font-weight: 400; /* MĂRIT de la 300 */
+            font-size: 1.6rem; /* MAI MIC pe mobil */
+            font-weight: 400;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             text-align: center;
             color: white;
@@ -284,7 +286,17 @@
         @media (min-width: 768px) {
             .logo-text h1 {
                 text-align: left;
-                font-size: 2.2rem; /* MĂRIT de la 1.8rem */
+                font-size: 1.5rem; /* MAI MIC pe desktop */
+            }
+            
+            .logo-icon {
+                width: 50px; /* MAI MIC pe desktop */
+                height: 50px;
+                font-size: 1.8rem; /* MAI MIC pe desktop */
+            }
+            
+            .logo-icon::before {
+                font-size: 2rem; /* MAI MIC pe desktop */
             }
         }
         
@@ -292,37 +304,43 @@
             font-weight: 600;
             color: var(--primary-color);
             display: block;
-            font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+            font-size: 1rem; /* MAI MIC pe mobil */
             font-family: 'Cinzel', serif;
             margin-top: 2px;
+        }
+        
+        @media (min-width: 768px) {
+            .logo-text span {
+                font-size: 0.9rem; /* MAI MIC pe desktop */
+            }
         }
         
         .contact-header {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* MĂRIT de la 8px */
+            gap: 8px;
             align-items: center;
         }
         
         @media (min-width: 768px) {
             .contact-header {
                 flex-direction: row;
-                gap: 25px; /* MĂRIT de la 20px */
-                align-items: flex-end;
+                gap: 15px; /* MAI MIC pe desktop */
+                align-items: center; /* Centrat vertical pe desktop */
             }
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px; /* MĂRIT de la 6px */
-            font-size: 1rem; /* MĂRIT de la 0.85rem */
+            gap: 6px;
+            font-size: 0.9rem; /* MAI MIC pe mobil */
             transition: var(--transition);
         }
         
         @media (min-width: 768px) {
             .contact-item {
-                font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+                font-size: 0.85rem; /* MAI MIC pe desktop */
             }
         }
         
@@ -332,26 +350,33 @@
         
         .contact-item i {
             color: var(--primary-color);
-            font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+            font-size: 1rem; /* MAI MIC pe mobil */
         }
         
         @media (min-width: 768px) {
             .contact-item i {
-                font-size: 1.2rem; /* MĂRIT de la 1rem */
+                font-size: 0.9rem; /* MAI MIC pe desktop */
             }
         }
         
-        /* MODIFICAT: Stil pentru numere de telefon fără highlight albastru - MAI MARE */
+        /* NUMERE DE TELEFON - MAI MICE PE DESKTOP */
         .phone-emergency {
             background-color: rgba(139, 115, 85, 0.2);
-            padding: 12px 25px; /* MĂRIT padding */
-            border-radius: 25px; /* MĂRIT de la 20px */
+            padding: 8px 18px; /* MAI MIC pe mobil */
+            border-radius: 20px;
             font-weight: 500;
             border: 1px solid rgba(139, 115, 85, 0.5);
             font-family: 'Raleway', sans-serif;
             color: inherit !important;
             text-decoration: none !important;
-            font-size: 1.3rem; /* MĂRIT de la 1.2rem */
+            font-size: 1.1rem; /* MAI MIC pe mobil */
+        }
+        
+        @media (min-width: 768px) {
+            .phone-emergency {
+                font-size: 0.95rem; /* MAI MIC pe desktop */
+                padding: 6px 15px; /* MAI MIC pe desktop */
+            }
         }
         
         .phone-emergency span {
@@ -360,30 +385,39 @@
         }
         
         .header-bottom {
-            padding: 15px 0 5px; /* MĂRIT padding sus */
+            padding: 10px 0 5px; /* MAI MIC */
         }
         
+        @media (min-width: 768px) {
+            .header-bottom {
+                padding: 8px 0 3px; /* MAI MIC pe desktop */
+            }
+        }
+        
+        /* MENIU ÎN LINIE PE DESKTOP - MODIFICAT */
         nav ul {
             display: flex;
             flex-wrap: wrap;
             list-style: none;
             justify-content: center;
-            gap: 8px; /* MĂRIT de la 5px */
+            gap: 5px;
         }
         
         @media (min-width: 768px) {
             nav ul {
-                gap: 20px; /* MĂRIT de la 15px */
+                gap: 8px; /* MAI MIC pe desktop */
+                justify-content: flex-start; /* Aliniere la stânga */
+                margin-left: 10px; /* Spațiu de la logo */
             }
         }
         
         nav ul li {
-            margin: 3px; /* MĂRIT de la 2px */
+            margin: 2px;
         }
         
         @media (min-width: 768px) {
             nav ul li {
-                margin: 0 12px; /* MĂRIT de la 10px */
+                margin: 0 5px; /* MAI MIC pe desktop */
             }
         }
         
@@ -393,17 +427,17 @@
             font-weight: 500;
             transition: var(--transition);
             position: relative;
-            padding: 12px 16px; /* MĂRIT de la 8px 12px */
-            font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+            padding: 8px 12px; /* MAI MIC pe mobil */
+            font-size: 0.9rem; /* MAI MIC pe mobil */
             display: block;
-            border-radius: 5px;
+            border-radius: 4px;
             font-family: 'Raleway', sans-serif;
         }
         
         @media (min-width: 768px) {
             nav ul li a {
-                padding: 8px 0; /* MĂRIT de la 5px 0 */
-                font-size: 1.2rem; /* MĂRIT de la 1rem */
+                padding: 5px 10px; /* MAI MIC pe desktop */
+                font-size: 0.85rem; /* MAI MIC pe desktop */
                 background: none;
             }
         }
@@ -1704,59 +1738,29 @@
                 justify-content: flex-start;
             }
             
-            /* LOGO MAI MARE PE DESKTOP */
-            .logo-text h1 {
-                text-align: left;
-                font-size: 2.2rem; /* MĂRIT de la 1.8rem */
-            }
-            
-            .logo-text span {
-                font-size: 1.2rem; /* MĂRIT */
-            }
-            
-            /* LOGO ICON MAI MARE PE DESKTOP */
-            .logo-icon {
-                width: 75px; /* MAI MARE PE DESKTOP */
-                height: 75px;
-                font-size: 2.8rem; /* MĂRIT */
-            }
-            
-            .logo-icon::before {
-                font-size: 3rem; /* MĂRIT */
-            }
-            
-            .contact-header {
-                flex-direction: row;
-                gap: 25px; /* MĂRIT de la 20px */
-                align-items: flex-end;
-            }
-            
-            .contact-item {
-                font-size: 1.1rem; /* MĂRIT de la 0.9rem */
-            }
-            
-            .contact-item i {
-                font-size: 1.2rem; /* MĂRIT de la 1rem */
+            /* MENIU ÎN LINIE PE DESKTOP */
+            .header-bottom {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start; /* Aliniat la stânga */
+                padding: 5px 0; /* MAI MIC */
             }
             
             nav ul {
-                gap: 20px; /* MĂRIT de la 15px */
+                justify-content: flex-start; /* Aliniat la stânga */
+                gap: 10px; /* Spațiu mai mic între butoane */
+                margin-left: 0; /* Fără margine stânga */
+                flex-wrap: nowrap; /* Asigură că rămân pe aceeași linie */
             }
             
             nav ul li {
-                margin: 0 12px; /* MĂRIT de la 10px */
+                margin: 0;
             }
             
             nav ul li a {
-                padding: 8px 0; /* MĂRIT de la 5px 0 */
-                font-size: 1.2rem; /* MĂRIT de la 1rem */
-                background: none;
-            }
-            
-            /* NUMERE MAI MARI PE DESKTOP */
-            .phone-emergency {
-                font-size: 1.4rem; /* MĂRIT */
-                padding: 14px 30px; /* MĂRIT */
+                padding: 6px 12px; /* Padding mai mic */
+                font-size: 0.85rem; /* Font mai mic */
+                white-space: nowrap; /* Previne împărțirea textului */
             }
             
             .hero {
@@ -1966,28 +1970,32 @@
         
         /* ===== OPTIMIZĂRI PENTRU MOBIL ===== */
         @media (max-width: 767px) {
-            /* HEADER MAI MARE PE MOBILE */
+            /* HEADER MAI MARE PE MOBILE (ca în imagine) */
+            header {
+                padding: 15px 0; /* MAI MARE pe mobile */
+            }
+            
             .header-top {
-                padding: 15px 0;
+                padding: 20px 0; /* MAI MARE pe mobile */
                 gap: 25px;
             }
             
             .logo-icon {
-                width: 60px; /* MĂRIT de la 45px */
-                height: 60px;
-                font-size: 2.2rem; /* MĂRIT de la 1.6rem */
+                width: 70px; /* MAI MARE pe mobile */
+                height: 70px;
+                font-size: 2.5rem; /* MAI MARE pe mobile */
             }
             
             .logo-icon::before {
-                font-size: 2.4rem; /* MĂRIT de la 1.8rem */
+                font-size: 2.8rem; /* MAI MARE pe mobile */
             }
             
             .logo-text h1 {
-                font-size: 1.8rem; /* MĂRIT de la 1.5rem */
+                font-size: 2rem; /* MAI MARE pe mobile */
             }
             
             .logo-text span {
-                font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+                font-size: 1.2rem; /* MAI MARE pe mobile */
             }
             
             /* NUMERE MAI MARI PE MOBILE */
@@ -1997,17 +2005,25 @@
             }
             
             .contact-item {
-                font-size: 1rem;
+                font-size: 1.1rem; /* MAI MARE pe mobile */
             }
             
             .contact-item i {
-                font-size: 1.1rem;
+                font-size: 1.2rem; /* MAI MARE pe mobile */
             }
             
-            /* MENIU MAI MARE PE MOBILE */
+            /* MENIU PE MOBILE - CENTRAT */
+            .header-bottom {
+                padding: 15px 0 5px;
+            }
+            
+            nav ul {
+                gap: 8px;
+            }
+            
             nav ul li a {
-                font-size: 1.1rem;
-                padding: 10px 14px;
+                font-size: 1rem;
+                padding: 10px 15px;
             }
             
             .hero h2 {
@@ -2122,21 +2138,21 @@
         @media (max-width: 480px) {
             /* MAI MARE PE TELEFOANE MICI */
             .logo-icon {
-                width: 55px;
-                height: 55px;
-                font-size: 2rem;
-            }
-            
-            .logo-icon::before {
+                width: 65px;
+                height: 65px;
                 font-size: 2.2rem;
             }
             
+            .logo-icon::before {
+                font-size: 2.4rem;
+            }
+            
             .logo-text h1 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             
             .logo-text span {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .phone-emergency {
