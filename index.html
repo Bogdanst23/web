@@ -180,11 +180,11 @@
             opacity: 0.1;
         }
         
-        /* ===== HEADER ===== */
+        /* ===== HEADER MODIFICAT - TEXTE MAI MARI SI CHENAR MAI MARE ===== */
         header {
             background-color: var(--header-bg);
             color: white;
-            padding: 10px 0;
+            padding: 15px 0; /* MĂRIT de la 10px */
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             position: relative;
             z-index: 100;
@@ -195,10 +195,18 @@
         .header-top {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            padding-bottom: 10px;
+            gap: 30px; /* MĂRIT de la 25px */
+            padding: 20px 0; /* MĂRIT padding */
             border-bottom: 1px solid rgba(255,255,255,0.1);
             position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .header-top {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
         
         /* LOGO LINK - MODIFICAT */
@@ -224,17 +232,23 @@
             animation: fadeInLeft 1s ease-out;
         }
         
-        /* LOGO MODIFICAT: Logo cu cruce stilizată */
+        @media (min-width: 768px) {
+            .logo {
+                justify-content: flex-start;
+            }
+        }
+        
+        /* LOGO MODIFICAT: Logo cu cruce stilizată MAI MARE */
         .logo-icon {
-            width: 50px;
-            height: 50px;
+            width: 65px; /* MĂRIT de la 50px */
+            height: 65px; /* MĂRIT de la 50px */
             background: var(--gold-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.8rem;
+            font-size: 2.3rem; /* MĂRIT de la 1.8rem */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             animation: gentlePulse 4s infinite ease-in-out;
             position: relative;
@@ -245,43 +259,71 @@
         .logo-icon::before {
             content: '†';
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 2.5rem; /* MĂRIT de la 2rem */
             line-height: 1;
         }
         
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
         .logo-text {
-            margin-left: 10px;
+            margin-left: 12px; /* MĂRIT de la 10px */
         }
         
         .logo-text h1 {
-            font-size: 1.5rem;
-            font-weight: 300;
+            font-size: 1.8rem; /* MĂRIT de la 1.5rem */
+            font-weight: 400; /* MĂRIT de la 300 */
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             text-align: center;
             color: white;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .logo-text h1 {
+                text-align: left;
+                font-size: 2.2rem; /* MĂRIT de la 1.8rem */
+            }
         }
         
         .logo-text span {
             font-weight: 600;
             color: var(--primary-color);
             display: block;
-            font-size: 0.9rem;
+            font-size: 1.1rem; /* MĂRIT de la 0.9rem */
             font-family: 'Cinzel', serif;
+            margin-top: 2px;
         }
         
         .contact-header {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px; /* MĂRIT de la 8px */
             align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-header {
+                flex-direction: row;
+                gap: 25px; /* MĂRIT de la 20px */
+                align-items: flex-end;
+            }
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            gap: 8px; /* MĂRIT de la 6px */
+            font-size: 1rem; /* MĂRIT de la 0.85rem */
             transition: var(--transition);
+        }
+        
+        @media (min-width: 768px) {
+            .contact-item {
+                font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+            }
         }
         
         .contact-item:hover {
@@ -290,18 +332,26 @@
         
         .contact-item i {
             color: var(--primary-color);
-            font-size: 0.9rem;
+            font-size: 1.1rem; /* MĂRIT de la 0.9rem */
         }
         
+        @media (min-width: 768px) {
+            .contact-item i {
+                font-size: 1.2rem; /* MĂRIT de la 1rem */
+            }
+        }
+        
+        /* MODIFICAT: Stil pentru numere de telefon fără highlight albastru - MAI MARE */
         .phone-emergency {
             background-color: rgba(139, 115, 85, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 12px 25px; /* MĂRIT padding */
+            border-radius: 25px; /* MĂRIT de la 20px */
             font-weight: 500;
             border: 1px solid rgba(139, 115, 85, 0.5);
             font-family: 'Raleway', sans-serif;
             color: inherit !important;
             text-decoration: none !important;
+            font-size: 1.3rem; /* MĂRIT de la 1.2rem */
         }
         
         .phone-emergency span {
@@ -310,7 +360,7 @@
         }
         
         .header-bottom {
-            padding-top: 10px;
+            padding: 15px 0 5px; /* MĂRIT padding sus */
         }
         
         nav ul {
@@ -318,11 +368,23 @@
             flex-wrap: wrap;
             list-style: none;
             justify-content: center;
-            gap: 5px;
+            gap: 8px; /* MĂRIT de la 5px */
+        }
+        
+        @media (min-width: 768px) {
+            nav ul {
+                gap: 20px; /* MĂRIT de la 15px */
+            }
         }
         
         nav ul li {
-            margin: 2px;
+            margin: 3px; /* MĂRIT de la 2px */
+        }
+        
+        @media (min-width: 768px) {
+            nav ul li {
+                margin: 0 12px; /* MĂRIT de la 10px */
+            }
         }
         
         nav ul li a {
@@ -331,11 +393,19 @@
             font-weight: 500;
             transition: var(--transition);
             position: relative;
-            padding: 8px 12px;
-            font-size: 0.9rem;
+            padding: 12px 16px; /* MĂRIT de la 8px 12px */
+            font-size: 1.1rem; /* MĂRIT de la 0.9rem */
             display: block;
-            border-radius: 4px;
+            border-radius: 5px;
             font-family: 'Raleway', sans-serif;
+        }
+        
+        @media (min-width: 768px) {
+            nav ul li a {
+                padding: 8px 0; /* MĂRIT de la 5px 0 */
+                font-size: 1.2rem; /* MĂRIT de la 1rem */
+                background: none;
+            }
         }
         
         nav ul li a:hover {
@@ -359,6 +429,17 @@
             animation: lineGrow 0.5s ease-out;
         }
         
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        /* ===== Sfârșit HEADER modificat ===== */
+
         /* ===== HERO SECTION ===== */
         .hero {
             position: relative;
@@ -1538,16 +1619,6 @@
             50% { opacity: 0.6; transform: scale(1.2); }
         }
         
-        @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        @keyframes lineGrow {
-            from { width: 0; }
-            to { width: 50px; }
-        }
-        
         @keyframes doveFloat {
             0%, 100% { transform: translateY(0px) translateX(0px); }
             25% { transform: translateY(-10px) translateX(5px); }
@@ -1617,11 +1688,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
         /* ===== MEDIA QUERIES ===== */
         @media (min-width: 768px) {
             .header-top {
@@ -1638,37 +1704,59 @@
                 justify-content: flex-start;
             }
             
+            /* LOGO MAI MARE PE DESKTOP */
             .logo-text h1 {
                 text-align: left;
-                font-size: 1.8rem;
+                font-size: 2.2rem; /* MĂRIT de la 1.8rem */
+            }
+            
+            .logo-text span {
+                font-size: 1.2rem; /* MĂRIT */
+            }
+            
+            /* LOGO ICON MAI MARE PE DESKTOP */
+            .logo-icon {
+                width: 75px; /* MAI MARE PE DESKTOP */
+                height: 75px;
+                font-size: 2.8rem; /* MĂRIT */
+            }
+            
+            .logo-icon::before {
+                font-size: 3rem; /* MĂRIT */
             }
             
             .contact-header {
                 flex-direction: row;
-                gap: 20px;
+                gap: 25px; /* MĂRIT de la 20px */
                 align-items: flex-end;
             }
             
             .contact-item {
-                font-size: 0.9rem;
+                font-size: 1.1rem; /* MĂRIT de la 0.9rem */
             }
             
             .contact-item i {
-                font-size: 1rem;
+                font-size: 1.2rem; /* MĂRIT de la 1rem */
             }
             
             nav ul {
-                gap: 15px;
+                gap: 20px; /* MĂRIT de la 15px */
             }
             
             nav ul li {
-                margin: 0 10px;
+                margin: 0 12px; /* MĂRIT de la 10px */
             }
             
             nav ul li a {
-                padding: 5px 0;
-                font-size: 1rem;
+                padding: 8px 0; /* MĂRIT de la 5px 0 */
+                font-size: 1.2rem; /* MĂRIT de la 1rem */
                 background: none;
+            }
+            
+            /* NUMERE MAI MARI PE DESKTOP */
+            .phone-emergency {
+                font-size: 1.4rem; /* MĂRIT */
+                padding: 14px 30px; /* MĂRIT */
             }
             
             .hero {
@@ -1878,6 +1966,50 @@
         
         /* ===== OPTIMIZĂRI PENTRU MOBIL ===== */
         @media (max-width: 767px) {
+            /* HEADER MAI MARE PE MOBILE */
+            .header-top {
+                padding: 15px 0;
+                gap: 25px;
+            }
+            
+            .logo-icon {
+                width: 60px; /* MĂRIT de la 45px */
+                height: 60px;
+                font-size: 2.2rem; /* MĂRIT de la 1.6rem */
+            }
+            
+            .logo-icon::before {
+                font-size: 2.4rem; /* MĂRIT de la 1.8rem */
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem; /* MĂRIT de la 1.5rem */
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem; /* MĂRIT de la 0.9rem */
+            }
+            
+            /* NUMERE MAI MARI PE MOBILE */
+            .phone-emergency {
+                font-size: 1.3rem;
+                padding: 12px 25px;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+            }
+            
+            .contact-item i {
+                font-size: 1.1rem;
+            }
+            
+            /* MENIU MAI MARE PE MOBILE */
+            nav ul li a {
+                font-size: 1.1rem;
+                padding: 10px 14px;
+            }
+            
             .hero h2 {
                 font-size: 1.5rem;
             }
@@ -1985,20 +2117,33 @@
             .pachete-grid {
                 margin-bottom: 20px;
             }
-            
-            /* Optimizări pentru logo pe mobil */
-            .logo-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.6rem;
-            }
-            
-            .logo-icon::before {
-                font-size: 1.8rem;
-            }
         }
         
         @media (max-width: 480px) {
+            /* MAI MARE PE TELEFOANE MICI */
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-text span {
+                font-size: 1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+            
             .btn-more {
                 padding: 12px 25px;
                 font-size: 0.95rem;
@@ -2135,7 +2280,7 @@
     <!-- Container pentru efectul de fade -->
     <div class="content-fade" id="contentFade">
         
-        <!-- Header -->
+        <!-- Header (importat din primul cod) -->
         <header>
             <div class="container">
                 <div class="header-top">
@@ -2452,20 +2597,21 @@
         <!-- Footer -->
         <footer>
             <div class="container">
-                <div class="footer-container">
-                    <div class="footer-col">
-                        <h3>Casa Funerară Lupică</h3>
-                        <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>Casa Funerară Lupică</h3>
+            <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
                     <div class="footer-col">
                         <h3>Link-uri Rapide</h3>
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li><a href="pachete.html">Pachete</a></li>
+                            <li><a href="pachete.html">Pachete funerare</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
