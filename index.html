@@ -78,6 +78,27 @@
             padding: 0 15px;
         }
         
+        /* ===== STILURI PENTRU LINK-URI TELEFON ===== */
+        .phone-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none !important;
+            color: inherit !important;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+        
+        .phone-link:hover, .phone-link:active {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .phone-link .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
         /* ===== FUNDALURI SI ELEMENTE DECORATIVE ===== */
         .page-background {
             position: fixed;
@@ -2130,11 +2151,11 @@
                         </div>
                     </a>
                     <div class="contact-header">
-                        <!-- MODIFICAT: Numărul de telefon fără formatare automata -->
-                        <div class="contact-item phone-emergency">
+                        <!-- MODIFICAT: Numărul de telefon este acum un link funcțional -->
+                        <a href="tel:0752538888" class="contact-item phone-emergency phone-link">
                             <i class="fas fa-phone-alt"></i>
                             <span class="phone-number">0752 538 888</span>
-                        </div>
+                        </a>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
                             <span>Non-stop 24/7</span>
@@ -2531,29 +2552,41 @@
             }
         }
         
-        // Funcție pentru apelare telefon
+        // Funcție pentru apelare telefon - versiune îmbunătățită
         function initPhoneCalls() {
+            // Pentru butonul din hero
             const consultantaBtn = document.getElementById('consultantaBtn');
-            const contactBtn = document.querySelector('.despre-text .btn');
             
             if (consultantaBtn) {
                 consultantaBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     // Confirmați înainte de apel
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0756838352 pentru consultanță gratuită?')) {
-                        window.location.href = 'tel:0756838352';
+                    if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888 pentru consultanță gratuită?')) {
+                        window.location.href = 'tel:0752538888';
                     }
                 });
             }
             
-            if (contactBtn && contactBtn.getAttribute('href') === 'tel:0756838352') {
-                contactBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0756838352?')) {
-                        window.location.href = 'tel:0756838352';
+            // Pentru link-urile telefon din header și footer
+            const phoneLinks = document.querySelectorAll('a[href^="tel"], .phone-link');
+            
+            phoneLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Nu mai este nevoie de confirmare pentru header/footer, doar pentru butoane mari
+                    if (!this.classList.contains('btn') && !this.id.includes('consultanta')) {
+                        // Permite apelul direct pentru link-urile mici
+                        return true;
                     }
                 });
-            }
+            });
+            
+            // Dezactivează formatarea automată pe iOS
+            document.addEventListener('DOMContentLoaded', function() {
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    viewport.content = viewport.content + ', telephone=no';
+                }
+            });
         }
         
         // Dezactivează click-ul pe butoanele "Vezi detalii complete"
