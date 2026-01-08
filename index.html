@@ -180,301 +180,523 @@
             opacity: 0.1;
         }
         
-        /* ===== HEADER MODIFICAT - CU MENIU HAMBURGER PENTRU MOBIL ===== */
-        header {
-            background-color: var(--header-bg);
-            color: white;
-            padding: 10px 0; /* REDUS pentru desktop */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 100;
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
-        }
-        
-        .header-top {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-        }
-        
-        /* Buton hamburger pentru mobil - ascuns pe desktop */
-        .hamburger-btn {
-            display: none;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px 10px;
-            transition: var(--transition);
-            z-index: 102;
-        }
-        
-        .hamburger-btn:hover {
-            color: var(--primary-color);
-        }
-        
-        /* LOGO LINK - MODIFICAT */
+       /* ===== HEADER MODIFICAT PENTRU A EVITA SUPRAFAPAREA ===== */
+header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 12px 0; /* Redus pentru a economisi spațiu vertical */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 100;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+    overflow: hidden; /* Previne ieșirea elementelor în afara header-ului */
+}
+
+.header-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px; /* Redus pentru a economisi spațiu orizontal */
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    width: 100%;
+    flex-wrap: nowrap; /* FORȚEAZĂ elementele să rămână pe aceeași linie */
+}
+
+/* Buton hamburger pentru mobil - ascuns pe desktop */
+.hamburger-btn {
+    display: none; /* Va fi afișat doar pe mobil prin media query */
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: var(--transition);
+    z-index: 102;
+    flex-shrink: 0; /* Nu se micșorează */
+}
+
+.hamburger-btn:hover {
+    color: var(--primary-color);
+}
+
+/* LOGO LINK - MODIFICAT PENTRU DIMENSIUNI OPTIMIZATE */
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    transition: var(--transition);
+    flex-shrink: 1; /* Permite micșorarea controlată */
+    min-width: 0; /* Permite micșorarea dar nu prea multă */
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-link:active {
+    transform: translateY(0);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    animation: fadeInLeft 1s ease-out;
+    min-width: 0; /* Permite logo-ului să se micșoreze */
+}
+
+/* LOGO MODIFICAT: DIMENSIUNI OPTIMIZATE PENTRU TOATE DISPOZITIVELE */
+.logo-icon {
+    width: 50px; /* MICȘORAT pentru a economisi spațiu */
+    height: 50px;
+    background: var(--gold-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem; /* MICȘORAT */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: gentlePulse 4s infinite ease-in-out;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    flex-shrink: 0; /* Logo-ul nu se micșorează */
+}
+
+/* Logo-ul cu cruce stilizată - soluție sigură pentru toate dispozitivele */
+.logo-icon::before {
+    content: '†';
+    font-weight: bold;
+    font-size: 2rem; /* MICȘORAT */
+    line-height: 1;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.logo-text {
+    margin-left: 8px;
+    min-width: 0; /* Permite textului să se micșoreze */
+    overflow: hidden; /* Ascunde textul care depășește */
+}
+
+.logo-text h1 {
+    font-size: 1.3rem; /* MICȘORAT semnificativ */
+    font-weight: 400;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-align: left;
+    color: white;
+    line-height: 1.2;
+    white-space: nowrap; /* PREVINE împărțirea textului pe mai multe linii */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adaugă "..." dacă textul este prea lung */
+}
+
+.logo-text span {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    font-size: 0.85rem; /* MICȘORAT */
+    font-family: 'Cinzel', serif;
+    margin-top: 2px;
+    white-space: nowrap; /* PREVINE împărțirea */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-header {
+    display: flex;
+    flex-direction: column; /* Pe mobil, elementele sunt una sub alta */
+    gap: 5px; /* Spațiu mic între elemente */
+    align-items: flex-end;
+    flex-shrink: 0; /* Previne micșorarea */
+    text-align: right;
+    min-width: 0; /* Permite micșorarea controlată */
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem; /* MICȘORAT */
+    transition: var(--transition);
+    white-space: nowrap; /* PREVINE împărțirea textului */
+}
+
+.contact-item:hover {
+    transform: translateY(-2px);
+}
+
+.contact-item i {
+    color: var(--primary-color);
+    font-size: 0.9rem; /* MICȘORAT */
+}
+
+/* NUMERE DE TELEFON - DIMENSIUNI OPTIMIZATE */
+.phone-emergency {
+    background-color: rgba(139, 115, 85, 0.2);
+    padding: 5px 10px; /* MICȘORAT */
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid rgba(139, 115, 85, 0.5);
+    font-family: 'Raleway', sans-serif;
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: 0.9rem; /* MICȘORAT */
+    white-space: nowrap; /* PREVINE împărțirea numărului */
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.phone-emergency span {
+    color: inherit;
+    text-decoration: none;
+}
+
+.header-bottom {
+    padding: 10px 0 5px;
+    transition: var(--transition);
+}
+
+/* MENIU ÎN LINIE PE DESKTOP - MODIFICAT */
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: center;
+    gap: 5px;
+}
+
+nav ul li {
+    margin: 2px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    display: block;
+    border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+    background: rgba(255,255,255,0.1);
+}
+
+nav ul li a.active {
+    color: var(--primary-color);
+    background: rgba(139, 115, 85, 0.1);
+}
+
+nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    animation: lineGrow 0.5s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lineGrow {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* ===== MEDIA QUERIES PENTRU HEADER OPTIMIZAT ===== */
+
+/* Pe mobil - ajustări pentru ecrane mici */
+@media (max-width: 767px) {
+    .hamburger-btn {
+        display: flex; /* Arată butonul hamburger pe mobil */
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .header-top {
+        padding: 10px 0;
+        gap: 6px; /* Spațiu și mai mic pe mobil */
+    }
+    
+    /* FORȚEAZĂ elementele să rămână pe aceeași linie */
+    .logo-link {
+        flex: 1; /* Ocupă spațiul disponibil */
+        min-width: 0;
+        max-width: 200px; /* Limită maximă pentru logo */
+    }
+    
+    .logo-text h1 {
+        font-size: 1.2rem; /* Mai mic pe mobil */
+    }
+    
+    .logo-text span {
+        font-size: 0.8rem; /* Mai mic pe mobil */
+    }
+    
+    .logo-icon {
+        width: 45px; /* Mai mic pe mobil */
+        height: 45px;
+        font-size: 1.6rem;
+    }
+    
+    .logo-icon::before {
+        font-size: 1.8rem;
+    }
+    
+    .contact-header {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-end;
+        flex-shrink: 0;
+        min-width: 120px; /* Lățime minimă garantată */
+    }
+    
+    .phone-emergency {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+    }
+    
+    .contact-item {
+        font-size: 0.8rem;
+    }
+    
+    .contact-item i {
+        font-size: 0.85rem;
+    }
+    
+    /* HEADER BOTTOM (meniu) pentru mobil */
+    .header-bottom {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--header-bg);
+        z-index: 1000;
+        padding: 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        border-top: 1px solid rgba(139, 115, 85, 0.3);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, padding 0.5s ease;
+    }
+    
+    .header-bottom.active {
+        display: block;
+        max-height: 300px;
+        padding: 15px 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+    
+    nav ul li {
+        margin: 0;
+        width: 100%;
+    }
+    
+    nav ul li a {
+        padding: 15px 20px;
+        display: block;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        font-size: 1rem;
+        text-align: center;
+        border-radius: 0;
+    }
+    
+    nav ul li:last-child a {
+        border-bottom: none;
+    }
+    
+    nav ul li a:hover,
+    nav ul li a.active {
+        background: rgba(139, 115, 85, 0.2);
+        color: var(--primary-color);
+    }
+    
+    /* Pentru telefoane foarte mici */
+    @media (max-width: 480px) {
         .logo-link {
-            text-decoration: none;
-            color: inherit;
-            display: inline-block;
-            transition: var(--transition);
-        }
-        
-        .logo-link:hover {
-            transform: translateY(-2px);
-        }
-        
-        .logo-link:active {
-            transform: translateY(0);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeInLeft 1s ease-out;
-        }
-        
-        @media (min-width: 768px) {
-            .logo {
-                justify-content: flex-start;
-            }
-        }
-        
-        /* LOGO MODIFICAT: MAI MIC PE DESKTOP */
-        .logo-icon {
-            width: 60px; /* MAI MIC pe mobil */
-            height: 60px;
-            background: var(--gold-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem; /* MAI MIC pe mobil */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            animation: gentlePulse 4s infinite ease-in-out;
-            position: relative;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        /* Logo-ul cu cruce stilizată - soluție sigură pentru toate dispozitivele */
-        .logo-icon::before {
-            content: '†';
-            font-weight: bold;
-            font-size: 2.2rem; /* MAI MIC pe mobil */
-            line-height: 1;
-        }
-        
-        @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .logo-text {
-            margin-left: 10px;
+            max-width: 180px;
         }
         
         .logo-text h1 {
-            font-size: 1.6rem; /* MAI MIC pe mobil */
-            font-weight: 400;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            text-align: center;
-            color: white;
-            line-height: 1.2;
-        }
-        
-        @media (min-width: 768px) {
-            .logo-text h1 {
-                text-align: left;
-                font-size: 1.5rem; /* MAI MIC pe desktop */
-            }
-            
-            .logo-icon {
-                width: 50px; /* MAI MIC pe desktop */
-                height: 50px;
-                font-size: 1.8rem; /* MAI MIC pe desktop */
-            }
-            
-            .logo-icon::before {
-                font-size: 2rem; /* MAI MIC pe desktop */
-            }
+            font-size: 1.1rem;
         }
         
         .logo-text span {
-            font-weight: 600;
-            color: var(--primary-color);
-            display: block;
-            font-size: 1rem; /* MAI MIC pe mobil */
-            font-family: 'Cinzel', serif;
-            margin-top: 2px;
+            font-size: 0.75rem;
         }
         
-        @media (min-width: 768px) {
-            .logo-text span {
-                font-size: 0.9rem; /* MAI MIC pe desktop */
-            }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.4rem;
+        }
+        
+        .logo-icon::before {
+            font-size: 1.6rem;
         }
         
         .contact-header {
-            display: flex;
-            flex-direction: row;
-            gap: 15px;
-            align-items: center;
+            min-width: 110px;
+        }
+        
+        .phone-emergency {
+            font-size: 0.8rem;
+            padding: 3px 6px;
         }
         
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem; /* MAI MIC pe mobil */
-            transition: var(--transition);
+            font-size: 0.75rem;
+        }
+    }
+    
+    /* Pentru telefoane extrem de mici */
+    @media (max-width: 380px) {
+        .logo-link {
+            max-width: 160px;
         }
         
-        @media (min-width: 768px) {
-            .contact-item {
-                font-size: 0.85rem; /* MAI MIC pe desktop */
-            }
+        .logo-text h1 {
+            font-size: 1rem;
         }
         
-        .contact-item:hover {
-            transform: translateY(-2px);
+        .logo-text span {
+            font-size: 0.7rem;
         }
         
-        .contact-item i {
-            color: var(--primary-color);
-            font-size: 1rem; /* MAI MIC pe mobil */
+        .contact-header {
+            min-width: 100px;
         }
         
-        @media (min-width: 768px) {
-            .contact-item i {
-                font-size: 0.9rem; /* MAI MIC pe desktop */
-            }
-        }
-        
-        /* NUMERE DE TELEFON - MAI MICE PE DESKTOP */
         .phone-emergency {
-            background-color: rgba(139, 115, 85, 0.2);
-            padding: 8px 18px; /* MAI MIC pe mobil */
-            border-radius: 20px;
-            font-weight: 500;
-            border: 1px solid rgba(139, 115, 85, 0.5);
-            font-family: 'Raleway', sans-serif;
-            color: inherit !important;
-            text-decoration: none !important;
-            font-size: 1.1rem; /* MAI MIC pe mobil */
+            font-size: 0.75rem;
         }
-        
-        @media (min-width: 768px) {
-            .phone-emergency {
-                font-size: 0.95rem; /* MAI MIC pe desktop */
-                padding: 6px 15px; /* MAI MIC pe desktop */
-            }
-        }
-        
-        .phone-emergency span {
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        .header-bottom {
-            padding: 10px 0 5px; /* MAI MIC */
-            transition: var(--transition);
-        }
-        
-        @media (min-width: 768px) {
-            .header-bottom {
-                padding: 8px 0 3px; /* MAI MIC pe desktop */
-            }
-        }
-        
-        /* MENIU ÎN LINIE PE DESKTOP - MODIFICAT */
-        nav ul {
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        @media (min-width: 768px) {
-            nav ul {
-                gap: 8px; /* MAI MIC pe desktop */
-                justify-content: flex-start; /* Aliniere la stânga */
-                margin-left: 10px; /* Spațiu de la logo */
-            }
-        }
-        
-        nav ul li {
-            margin: 2px;
-        }
-        
-        @media (min-width: 768px) {
-            nav ul li {
-                margin: 0 5px; /* MAI MIC pe desktop */
-            }
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-            padding: 8px 12px; /* MAI MIC pe mobil */
-            font-size: 0.9rem; /* MAI MIC pe mobil */
-            display: block;
-            border-radius: 4px;
-            font-family: 'Raleway', sans-serif;
-        }
-        
-        @media (min-width: 768px) {
-            nav ul li a {
-                padding: 5px 10px; /* MAI MIC pe desktop */
-                font-size: 0.85rem; /* MAI MIC pe desktop */
-                background: none;
-            }
-        }
-        
-        nav ul li a:hover {
-            color: var(--primary-color);
-            background: rgba(255,255,255,0.1);
-        }
-        
-        nav ul li a.active {
-            color: var(--primary-color);
-            background: rgba(139, 115, 85, 0.1);
-        }
-        
-        nav ul li a.active::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            animation: lineGrow 0.5s ease-out;
-        }
-        
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes lineGrow {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        /* ===== Sfârșit HEADER modificat ===== */
+    }
+}
+
+/* Pe desktop - aranjament normal */
+@media (min-width: 768px) {
+    .hamburger-btn {
+        display: none;
+    }
+    
+    .header-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 15px 0;
+    }
+    
+    .logo-link {
+        justify-content: flex-start;
+    }
+    
+    .logo {
+        justify-content: flex-start;
+    }
+    
+    .logo-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 2rem;
+    }
+    
+    .logo-icon::before {
+        font-size: 2.2rem;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .logo-text span {
+        font-size: 0.95rem;
+    }
+    
+    /* MENIU ÎN LINIE PE DESKTOP */
+    .header-bottom {
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 8px 0 3px !important;
+        position: static !important;
+        max-height: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border-top: none !important;
+    }
+    
+    nav ul {
+        justify-content: flex-start;
+        gap: 10px;
+        margin-left: 0;
+        flex-wrap: nowrap;
+        flex-direction: row !important;
+    }
+    
+    nav ul li {
+        margin: 0;
+        width: auto !important;
+    }
+    
+    nav ul li a {
+        padding: 6px 12px !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap;
+        border-bottom: none !important;
+        text-align: left !important;
+        border-radius: 4px !important;
+    }
+    
+    nav ul li a:hover,
+    nav ul li a.active {
+        background: rgba(139, 115, 85, 0.1) !important;
+        color: var(--primary-color) !important;
+    }
+    
+    .contact-header {
+        flex-direction: row !important;
+        gap: 15px !important;
+        align-items: center !important;
+        min-width: auto;
+    }
+    
+    .phone-emergency {
+        font-size: 0.95rem;
+        padding: 6px 12px;
+    }
+    
+    .contact-item {
+        font-size: 0.85rem;
+    }
+}
+/* ===== Sfârșit HEADER modificat ===== */
 
         /* ===== STILURI PENTRU MENIUL MOBIL ===== */
         /* Pe mobil - ascunde meniul inițial și arată butonul hamburger */
