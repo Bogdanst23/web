@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
     <!-- ADĂUGAT: Meta tag-uri pentru a preveni formatarea automată a numerelor de telefon -->
     <meta name="format-detection" content="telephone=no">
@@ -44,6 +44,10 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
         }
         
         /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
@@ -585,7 +589,7 @@
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1598894597310-b2e5d1b3e3b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            /* ADĂUGAT: Am eliminat background-attachment: fixed pentru mobil - cauza problemelor */
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
             margin-bottom: 40px;
             overflow: hidden;
@@ -697,6 +701,9 @@
             font-family: 'Playfair Display', serif;
             box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
             animation: fadeInUp 1s ease-out 0.6s both;
+            /* ADĂUGAT: Optimizare pentru butoane pe mobil */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         
         .btn::before {
@@ -767,6 +774,8 @@
             transform: translateY(20px);
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
+            /* ADĂUGAT: Optimizare pentru performanță pe mobil */
+            will-change: transform, opacity;
         }
         
         .serviciu-card.visible {
@@ -801,6 +810,8 @@
             transition: var(--transition);
             box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
             overflow: visible;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
+            will-change: transform;
         }
         
         .serviciu-icon i {
@@ -833,6 +844,8 @@
             z-index: 3;
             transition: var(--transition);
             border: 3px solid rgba(255, 255, 255, 0.3);
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
+            will-change: transform;
         }
         
         .serviciu-card:hover .serviciu-icon .secondary-icon {
@@ -1102,6 +1115,9 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             position: relative;
             overflow: hidden;
+            /* ADĂUGAT: Optimizare pentru butoane pe mobil */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         
         .btn-more::before {
@@ -1186,6 +1202,8 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
+            will-change: transform, opacity;
         }
         
         .pachet-card.visible {
@@ -1816,6 +1834,8 @@
             .hero {
                 padding: 120px 0;
                 min-height: 90vh;
+                /* ADĂUGAT: Reactivăm background-attachment pentru desktop */
+                background-attachment: fixed;
             }
             
             .dove-message-container {
@@ -2245,6 +2265,17 @@
                 right: 25px;
             }
         }
+        
+        /* ADĂUGAT: Media query pentru a dezactiva animații pe dispozitive cu preferințe de reducere a mișcării */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
     <!-- END CSS -->
 </head>
@@ -2322,7 +2353,9 @@
                 
                 <div class="hero-content">
                     <h2>Servicii Funerare Non-Stop cu Demnitate și Compasiune</h2>
-                    <a href="tel:0752538888" class="btn" id="consultantaBtn">Solicită Consultanță Gratuită</a>
+                    <a href="tel:0752538888" class="btn" id="consultantaBtn">
+                    <i class="fas fa-phone-alt"></i> 0752 538 888
+                    </a>
                 </div>
             </div>
             
@@ -2624,6 +2657,17 @@
 
     <!-- START JAVASCRIPT -->
     <script>
+        // ADĂUGAT: Detectare dispozitiv mobil
+        const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isTabletDevice = /iPad|Android.*Tablet|Tablet/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+        
+        // ADĂUGAT: Funcție pentru a verifica dacă browser-ul suportă animații CSS
+        function supportsCSSAnimations() {
+            return 'animation' in document.documentElement.style || 
+                   'WebkitAnimation' in document.documentElement.style || 
+                   'MozAnimation' in document.documentElement.style;
+        }
+        
         // Efect de fade pentru conținut la scroll
         const contentFade = document.getElementById('contentFade');
         
@@ -2642,11 +2686,17 @@
         window.addEventListener('scroll', updateContentFade);
         window.addEventListener('resize', updateContentFade);
         
-        // Creare cruciulițe aurii
+        // Creare cruciulițe aurii - versiune optimizată pentru mobil
         function createCrosses() {
             const crossesContainer = document.getElementById('crossesContainer');
-            const isMobile = window.innerWidth < 768;
-            const crossCount = isMobile ? 15 : 25;
+            
+            // Numărul redus de cruci pentru mobil pentru performanță
+            const crossCount = isMobileDevice ? 12 : (isTabletDevice ? 18 : 25);
+            
+            // Dacă browser-ul nu suportă animații CSS, nu creăm cruci
+            if (!supportsCSSAnimations()) {
+                return;
+            }
             
             for (let i = 0; i < crossCount; i++) {
                 const cross = document.createElement('div');
@@ -2654,16 +2704,28 @@
                 cross.innerHTML = '†';
                 cross.style.left = Math.random() * 100 + '%';
                 cross.style.animationDelay = Math.random() * 20 + 's';
-                cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
+                cross.style.fontSize = (Math.random() * (isMobileDevice ? 12 : 20) + (isMobileDevice ? 8 : 12)) + 'px';
+                
+                // ADĂUGAT: Reduce viteza animației pentru mobil
+                if (isMobileDevice) {
+                    cross.style.animationDuration = (Math.random() * 10 + 25) + 's';
+                }
+                
                 crossesContainer.appendChild(cross);
             }
         }
         
-        // Creare particule aurii decorative
+        // Creare particule aurii decorative - versiune optimizată pentru mobil
         function createGoldParticles() {
             const goldContainer = document.getElementById('goldDecoration');
-            const isMobile = window.innerWidth < 768;
-            const particleCount = isMobile ? 15 : 30;
+            
+            // Numărul redus de particule pentru mobil pentru performanță
+            const particleCount = isMobileDevice ? 10 : (isTabletDevice ? 20 : 30);
+            
+            // Dacă browser-ul nu suportă animații CSS, nu creăm particule
+            if (!supportsCSSAnimations()) {
+                return;
+            }
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -2671,15 +2733,22 @@
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
                 particle.style.animationDelay = Math.random() * 4 + 's';
+                
+                // ADĂUGAT: Reduce viteza animației pentru mobil
+                if (isMobileDevice) {
+                    particle.style.animationDuration = (Math.random() * 2 + 6) + 's';
+                }
+                
                 goldContainer.appendChild(particle);
             }
             
-            for (let i = 0; i < (isMobile ? 6 : 12); i++) {
+            const lineCount = isMobileDevice ? 4 : (isTabletDevice ? 8 : 12);
+            for (let i = 0; i < lineCount; i++) {
                 const line = document.createElement('div');
                 line.className = 'gold-line';
-                line.style.top = (i * (isMobile ? 15 : 8)) + '%';
-                line.style.width = Math.random() * (isMobile ? 40 : 50) + (isMobile ? 20 : 30) + '%';
-                line.style.left = Math.random() * (isMobile ? 60 : 50) + '%';
+                line.style.top = (i * (isMobileDevice ? 20 : 8)) + '%';
+                line.style.width = Math.random() * (isMobileDevice ? 30 : 50) + (isMobileDevice ? 20 : 30) + '%';
+                line.style.left = Math.random() * (isMobileDevice ? 70 : 50) + '%';
                 line.style.opacity = Math.random() * 0.1 + 0.05;
                 goldContainer.appendChild(line);
             }
@@ -2691,34 +2760,37 @@
             const consultantaBtn = document.getElementById('consultantaBtn');
             
             if (consultantaBtn) {
-                consultantaBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // Confirmați înainte de apel
-                    if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888 pentru consultanță gratuită?')) {
+                // ADĂUGAT: Event listener optimizat pentru mobil
+                consultantaBtn.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
+                    if (isMobileDevice) {
+                        e.preventDefault();
+                        // Pe mobil, permite apelul direct fără confirmare pentru o experiență mai bună
                         window.location.href = 'tel:0752538888';
+                    } else {
+                        // Pe desktop, arată confirmare
+                        e.preventDefault();
+                        if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888 pentru consultanță gratuită?')) {
+                            window.location.href = 'tel:0752538888';
+                        }
                     }
-                });
+                }, { passive: false });
             }
             
             // Pentru link-urile telefon din header și footer
             const phoneLinks = document.querySelectorAll('a[href^="tel"], .phone-link');
             
             phoneLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Nu mai este nevoie de confirmare pentru header/footer, doar pentru butoane mari
+                // ADĂUGAT: Event listener optimizat pentru mobil
+                link.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
+                    // Pe mobil, permite apelul direct
+                    if (isMobileDevice) {
+                        return true;
+                    }
+                    // Pe desktop, pentru link-urile mici din header/footer, permite apelul direct
                     if (!this.classList.contains('btn') && !this.id.includes('consultanta')) {
-                        // Permite apelul direct pentru link-urile mici
                         return true;
                     }
                 });
-            });
-            
-            // Dezactivează formatarea automată pe iOS
-            document.addEventListener('DOMContentLoaded', function() {
-                const viewport = document.querySelector('meta[name="viewport"]');
-                if (viewport) {
-                    viewport.content = viewport.content + ', telephone=no';
-                }
             });
         }
         
@@ -2743,8 +2815,17 @@
             this.reset();
         });
         
-        // Animări la scroll
+        // Animări la scroll - versiune optimizată pentru mobil
         function initScrollAnimations() {
+            // ADĂUGAT: Verifică dacă browser-ul suportă Intersection Observer
+            if (!('IntersectionObserver' in window)) {
+                // Fallback pentru browsere vechi - arată toate elementele imediat
+                document.querySelectorAll('.serviciu-card, .pachet-card, .despre-text, .despre-img, .contact-item, .contact-form').forEach(el => {
+                    el.classList.add('visible');
+                });
+                return;
+            }
+            
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -2754,6 +2835,8 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        // ADĂUGAT: Opțional, oprește observarea după ce elementul a devenit vizibil
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
@@ -2783,7 +2866,7 @@
             });
         }
         
-        // Navigare smooth pentru link-uri interne
+        // Navigare smooth pentru link-uri interne - versiune optimizată pentru mobil
         function initSmoothScrolling() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -2793,49 +2876,67 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+                        // ADĂUGAT: Pentru mobil, folosește scroll instant sau smooth în funcție de suport
+                        if ('scrollBehavior' in document.documentElement.style) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: isMobileDevice ? 'auto' : 'smooth'
+                            });
+                        } else {
+                            // Fallback pentru browsere vechi
+                            window.scrollTo(0, targetElement.offsetTop - 80);
+                        }
                     }
                 });
             });
         }
         
-        // Re-creare efecte la redimensionare
-        function handleResize() {
-            document.getElementById('crossesContainer').innerHTML = '';
-            document.getElementById('goldDecoration').innerHTML = '';
-            createCrosses();
-            createGoldParticles();
-        }
-        
-        // Adaugă efecte interactive pentru butoane
+        // Adaugă efecte interactive pentru butoane - versiune optimizată pentru mobil
         function enhanceButtons() {
-            const allButtons = document.querySelectorAll('.btn-more');
+            const allButtons = document.querySelectorAll('.btn-more, .btn');
             
             allButtons.forEach(button => {
-                // Efect de hover cu animație
-                button.addEventListener('mouseenter', function() {
+                // Efect de hover/active optimizat pentru ambele dispozitive
+                const addHoverEffect = function() {
                     this.style.transform = 'translateY(-3px)';
                     this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
-                });
+                };
                 
-                button.addEventListener('mouseleave', function() {
+                const removeHoverEffect = function() {
                     this.style.transform = 'translateY(0)';
                     this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
-                });
+                };
                 
-                // Efect de click
-                button.addEventListener('mousedown', function() {
+                const addActiveEffect = function() {
                     this.style.transform = 'translateY(-1px)';
                     this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.4)';
-                });
+                };
                 
-                button.addEventListener('mouseup', function() {
-                    this.style.transform = 'translateY(-3px)';
-                    this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
-                });
+                // Pentru desktop
+                if (!isMobileDevice) {
+                    button.addEventListener('mouseenter', addHoverEffect);
+                    button.addEventListener('mouseleave', removeHoverEffect);
+                    button.addEventListener('mousedown', addActiveEffect);
+                    button.addEventListener('mouseup', addHoverEffect);
+                }
+                
+                // Pentru mobil (touch events)
+                if (isMobileDevice) {
+                    button.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        addActiveEffect.call(this);
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        removeHoverEffect.call(this);
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchcancel', function(e) {
+                        e.preventDefault();
+                        removeHoverEffect.call(this);
+                    }, { passive: false });
+                }
             });
         }
         
@@ -2848,8 +2949,62 @@
             });
         }
         
+        // ADĂUGAT: Optimizare pentru animația porumbelului din header pe mobil
+        function optimizeHeaderDove() {
+            const doveHeader = document.querySelector('.dove-header');
+            if (doveHeader && isMobileDevice) {
+                // Reduce viteza animației pentru mobil
+                doveHeader.style.animationDuration = '12s';
+            }
+        }
+        
+        // ADĂUGAT: Optimizare pentru animația lumânării pe mobil
+        function optimizeCandleAnimation() {
+            const candleContainer = document.querySelector('.candle-container');
+            if (candleContainer && isMobileDevice) {
+                // Reduce numărul de scântei pentru mobil
+                const sparks = candleContainer.querySelectorAll('.flame-spark');
+                if (sparks.length > 1) {
+                    // Păstrează doar prima scânteie pentru mobil
+                    for (let i = 1; i < sparks.length; i++) {
+                        sparks[i].style.display = 'none';
+                    }
+                }
+                
+                // Reduce numărul de picături de ceară pentru mobil
+                const waxDrips = candleContainer.querySelectorAll('.candle-wax');
+                if (waxDrips.length > 1) {
+                    // Păstrează doar prima picătură pentru mobil
+                    for (let i = 1; i < waxDrips.length; i++) {
+                        waxDrips[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+        
+        // ADĂUGAT: Dezactivează animațiile pentru dispozitive cu preferințe de reducere a mișcării
+        function checkReducedMotionPreference() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            
+            if (prefersReducedMotion.matches) {
+                // Dezactivează toate animațiile CSS
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.animationPlayState = 'paused';
+                });
+                
+                // Dezactivează animațiile create cu JS
+                const animatedElements = document.querySelectorAll('.cross, .gold-particle, .dove-header, .candle, .flame, .flame-spark, .candle-wax');
+                animatedElements.forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+        }
+        
         // Inițializare la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
+            // Verifică preferințele de reducere a mișcării
+            checkReducedMotionPreference();
+            
             preventPhoneNumberStyling();
             
             createCrosses();
@@ -2859,9 +3014,20 @@
             initSmoothScrolling();
             initPhoneCalls();
             enhanceButtons();
+            optimizeHeaderDove();
+            optimizeCandleAnimation();
             
             // Adaugă event listener pentru redimensionare
-            window.addEventListener('resize', handleResize);
+            window.addEventListener('resize', function() {
+                // Debounce pentru a preveni execuții multiple
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(function() {
+                    document.getElementById('crossesContainer').innerHTML = '';
+                    document.getElementById('goldDecoration').innerHTML = '';
+                    createCrosses();
+                    createGoldParticles();
+                }, 250);
+            });
             
             // Adaugă tracking pentru butoanele "Vezi toate pachetele"
             const allPackagesBtns = document.querySelectorAll('#allPackagesBtn, #mobileAllPackagesBtn');
@@ -2871,6 +3037,15 @@
                     // Aici poți adăuga tracking analytics dacă e necesar
                 });
             });
+            
+            // ADĂUGAT: Opțional - Log pentru debugging pe dispozitive mobile
+            if (isMobileDevice) {
+                console.log('Dispozitiv mobil detectat. Animațiile au fost optimizate.');
+            }
+            
+            if (isTabletDevice) {
+                console.log('Tabletă detectată. Animațiile au fost optimizate.');
+            }
         });
     </script>
     <!-- END JAVASCRIPT -->
