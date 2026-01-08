@@ -180,11 +180,11 @@
             opacity: 0.1;
         }
         
-        /* ===== HEADER RE-DESIGNAT - COMPLET SIMPLIFICAT ȘI ALINIAT ===== */
+        /* ===== HEADER NOU - MAI MARE PE TELEFON, CENTRAT ===== */
         header {
             background-color: var(--header-bg);
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             position: relative;
             z-index: 100;
@@ -192,63 +192,61 @@
             border-bottom: 1px solid rgba(139, 115, 85, 0.3);
         }
         
-        .header-content {
+        .header-container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            flex-wrap: nowrap;
-            gap: 20px;
-            position: relative;
+            text-align: center;
+            gap: 15px;
         }
         
-        /* LOGO LINK */
+        /* LOGO MAI MARE PE MOBILE */
         .logo-link {
             text-decoration: none;
             color: inherit;
             display: flex;
             align-items: center;
             transition: var(--transition);
-            flex-shrink: 0;
+            flex-direction: column;
+            width: 100%;
         }
         
         .logo-link:hover {
             transform: translateY(-2px);
         }
         
-        .logo-link:active {
-            transform: translateY(0);
-        }
-        
         .logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            animation: fadeInLeft 1s ease-out;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+            width: 100%;
         }
         
-        /* LOGO MODIFICAT: DIMENSIUNI OPTIMIZATE */
+        /* LOGO MAI MARE PE MOBILE */
         .logo-icon {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             background: var(--gold-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.8rem;
+            font-size: 3rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             animation: gentlePulse 4s infinite ease-in-out;
             position: relative;
             font-family: 'Arial', sans-serif;
-            flex-shrink: 0;
+            margin-bottom: 10px;
         }
         
         /* Logo-ul cu cruce stilizată */
         .logo-icon::before {
             content: '†';
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 3.5rem;
             line-height: 1;
         }
         
@@ -258,45 +256,39 @@
         }
         
         .logo-text {
-            margin-left: 10px;
-            flex-shrink: 0;
+            text-align: center;
+            width: 100%;
         }
         
         .logo-text h1 {
-            font-size: 1.4rem;
+            font-size: 2rem;
             font-weight: 400;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            text-align: left;
             color: white;
             line-height: 1.2;
-            white-space: nowrap;
+            margin-bottom: 5px;
         }
         
         .logo-text span {
             font-weight: 600;
             color: var(--primary-color);
             display: block;
-            font-size: 0.9rem;
+            font-size: 1.3rem;
             font-family: 'Cinzel', serif;
-            margin-top: 2px;
-            white-space: nowrap;
         }
         
-        /* NAVIGAȚIE PRINCIPALĂ */
+        /* NAVIGAȚIE CENTRATĂ PE MOBILE */
         .main-nav {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: center;
-            margin: 0 20px;
+            width: 100%;
+            margin: 10px 0;
         }
         
         .main-nav ul {
             display: flex;
             list-style: none;
-            gap: 5px;
-            flex-wrap: wrap;
             justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
             margin: 0;
             padding: 0;
         }
@@ -311,12 +303,11 @@
             font-weight: 500;
             transition: var(--transition);
             position: relative;
-            padding: 6px 12px;
-            font-size: 0.85rem;
+            padding: 8px 15px;
+            font-size: 1rem;
             display: block;
             border-radius: 4px;
             font-family: 'Raleway', sans-serif;
-            white-space: nowrap;
         }
         
         .main-nav ul li a:hover {
@@ -340,29 +331,31 @@
             animation: lineGrow 0.5s ease-out;
         }
         
-        /* CONTACT HEADER */
+        /* CONTACT HEADER MAI MARE ȘI CENTRAT */
         .contact-header {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            gap: 5px;
-            flex-shrink: 0;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 5px;
         }
         
+        /* NUMĂR DE TELEFON MAI MARE PE MOBILE */
         .phone-emergency {
             background-color: rgba(139, 115, 85, 0.2);
-            padding: 6px 15px;
+            padding: 12px 25px;
             border-radius: 20px;
-            font-weight: 500;
+            font-weight: 600;
             border: 1px solid rgba(139, 115, 85, 0.5);
             font-family: 'Raleway', sans-serif;
             color: inherit !important;
             text-decoration: none !important;
-            font-size: 0.95rem;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 6px;
-            white-space: nowrap;
+            gap: 10px;
+            transition: var(--transition);
         }
         
         .phone-emergency:hover {
@@ -373,20 +366,20 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 1.1rem;
             transition: var(--transition);
-            white-space: nowrap;
+            font-weight: 500;
         }
         
         .contact-item i {
             color: var(--primary-color);
-            font-size: 0.9rem;
+            font-size: 1.2rem;
         }
         
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         @keyframes lineGrow {
@@ -394,68 +387,165 @@
             to { width: 100%; }
         }
         
-        /* ===== STILURI PENTRU MOBIL ===== */
-        /* Ascunde butonul hamburger complet - nu mai avem hamburger */
-        .hamburger-btn {
-            display: none !important;
-        }
-        
-        @media (max-width: 992px) {
-            .header-content {
-                flex-wrap: wrap;
-                justify-content: space-between;
-                gap: 15px;
+        /* ===== STILURI PENTRU DESKTOP ===== */
+        @media (min-width: 768px) {
+            header {
+                padding: 10px 0;
             }
             
-            .logo {
-                flex: 1;
-            }
-            
-            .main-nav {
-                order: 3;
-                width: 100%;
-                margin: 10px 0 0 0;
-                justify-content: flex-start;
-            }
-            
-            .main-nav ul {
-                justify-content: flex-start;
-                gap: 10px;
-                flex-wrap: wrap;
-            }
-            
-            .contact-header {
+            .header-container {
                 flex-direction: row;
+                justify-content: space-between;
                 align-items: center;
-                gap: 15px;
+                text-align: left;
+                gap: 20px;
             }
-        }
-        
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
+            
+            .logo-link {
+                flex-direction: row;
+                justify-content: flex-start;
+                width: auto;
             }
             
             .logo {
-                width: 100%;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            .logo-text h1 {
-                text-align: center;
-                font-size: 1.6rem;
-            }
-            
-            .logo-text span {
-                font-size: 1rem;
+                flex-direction: row;
+                justify-content: flex-start;
+                width: auto;
             }
             
             .logo-icon {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            
+            .logo-icon::before {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                text-align: left;
+                width: auto;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0;
+            }
+            
+            .logo-text span {
+                font-size: 0.9rem;
+            }
+            
+            .main-nav {
+                width: auto;
+                margin: 0;
+                order: 2;
+            }
+            
+            .main-nav ul {
+                gap: 5px;
+            }
+            
+            .main-nav ul li a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .contact-header {
+                flex-direction: column;
+                align-items: flex-end;
+                width: auto;
+                margin-top: 0;
+                order: 3;
+                gap: 5px;
+            }
+            
+            .phone-emergency {
+                font-size: 0.95rem;
+                padding: 6px 15px;
+            }
+            
+            .contact-item {
+                font-size: 0.85rem;
+            }
+            
+            .contact-item i {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TABLETĂ ===== */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo-link {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .logo-text {
+                text-align: center;
+            }
+            
+            .main-nav {
+                width: 100%;
+                order: 3;
+                margin-top: 15px;
+            }
+            
+            .contact-header {
+                width: auto;
+                order: 2;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TELEFOANE MARI ===== */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .logo-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 3rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.3rem;
+                padding: 10px 20px;
+            }
+            
+            .main-nav ul li a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TELEFOANE MICI ===== */
+        @media (max-width: 480px) {
+            .logo-icon {
+                width: 65px;
+                height: 65px;
                 font-size: 2.2rem;
             }
             
@@ -463,62 +553,26 @@
                 font-size: 2.4rem;
             }
             
-            .main-nav {
-                order: 2;
-                width: 100%;
-                margin: 15px 0 0 0;
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-text span {
+                font-size: 1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.2rem;
+                padding: 10px 18px;
             }
             
             .main-nav ul {
-                justify-content: center;
                 gap: 5px;
             }
             
             .main-nav ul li a {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-            
-            .contact-header {
-                order: 3;
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-                width: 100%;
-                margin-top: 15px;
-            }
-            
-            .phone-emergency {
-                font-size: 1.1rem;
-                padding: 8px 20px;
-            }
-            
-            .contact-item {
-                font-size: 0.9rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo-text h1 {
-                font-size: 1.4rem;
-            }
-            
-            .logo-text span {
-                font-size: 0.9rem;
-            }
-            
-            .main-nav ul {
-                gap: 3px;
-            }
-            
-            .main-nav ul li a {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
-            
-            .phone-emergency {
-                font-size: 1rem;
-                padding: 6px 15px;
+                font-size: 0.85rem;
+                padding: 5px 10px;
             }
         }
         
@@ -1752,17 +1806,12 @@
             50% { height: 30px; opacity: 0.8; }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* ===== MEDIA QUERIES ===== */
+        /* ===== MEDIA QUERIES PENTRU RESTUL PAGINII ===== */
         @media (min-width: 768px) {
             .hero {
                 padding: 120px 0;
@@ -2217,10 +2266,10 @@
     <!-- Container pentru efectul de fade -->
     <div class="content-fade" id="contentFade">
         
-        <!-- Header simplificat și aliniat -->
+        <!-- Header NOU - mai mare pe telefon, centrat -->
         <header>
             <div class="container">
-                <div class="header-content">
+                <div class="header-container">
                     <!-- LOGO -->
                     <a href="index.html" class="logo-link">
                         <div class="logo">
@@ -2228,12 +2277,13 @@
                                 <!-- Logo-ul cu cruce stilizată -->
                             </div>
                             <div class="logo-text">
-                                <h1>Casa <span>Funerară Lupică</span></h1>
+                                <h1>CASA</h1>
+                                <span>FUNERARĂ LUPICĂ</span>
                             </div>
                         </div>
                     </a>
                     
-                    <!-- NAVIGAȚIE PRINCIPALĂ -->
+                    <!-- NAVIGAȚIE CENTRATĂ -->
                     <nav class="main-nav">
                         <ul>
                             <li><a href="index.html" class="active">Home</a></li>
@@ -2242,7 +2292,7 @@
                         </ul>
                     </nav>
                     
-                    <!-- CONTACT HEADER -->
+                    <!-- CONTACT HEADER MAI MARE ȘI CENTRAT -->
                     <div class="contact-header">
                         <a href="tel:0752538888" class="phone-emergency phone-link">
                             <i class="fas fa-phone-alt"></i>
