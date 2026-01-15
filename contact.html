@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ADĂUGAT: Meta tag-uri pentru a preveni formatarea automată a numerelor de telefon -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="date=no">
+    
+    <title>Contact – Casa Funerară Lupică</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Stiluri comune cu index.html */
+        :root {
+            --primary-color: #8b7355;
+            --primary-dark: #6d5c46;
+            --primary-light: #a89070;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f8f8;
+            --gray-color: #666;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold-gradient: linear-gradient(135deg, #8b7355 0%, #c5a880 50%, #8b7355 100%);
+            --header-bg: rgba(26, 26, 26, 0.95);
+            --bg-color: #0f0f0f;
+            --text-color: #ccc;
+            --text-light: #aaa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-color);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
+        a[href^="tel"] {
+            color: inherit;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        /* ===== STILURI PENTRU LINK-URI TELEFON ===== */
+        .phone-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none !important;
+            color: inherit !important;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+        
+        .phone-link:hover, .phone-link:active {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .phone-link .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+        
+        p, li, span, a, button, label {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Fundal principal - asemănător header-ului */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
+            z-index: -3;
+        }
+        
+        /* Container pentru efectul de fade */
+        .content-fade {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to bottom, 
+                rgba(30, 30, 30, 0.7) 0%, 
+                rgba(40, 40, 40, 0.9) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Container pentru cruciulițe aurii */
+        .crosses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cross {
+            position: absolute;
+            color: rgba(139, 115, 85, 0.15);
+            font-size: 18px;
+            opacity: 0;
+            animation: crossFloat 20s infinite linear;
+            font-weight: 300;
+            font-family: 'Cinzel', serif;
+        }
+        
+        @keyframes crossFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        /* Animație porumbel în header */
+        .dove-header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            animation: doveFlyHeader 8s ease-in-out infinite;
+            z-index: 101;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        @keyframes doveFlyHeader {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(-10px) translateY(-5px) rotate(-5deg);
+            }
+            50% {
+                transform: translateX(-20px) translateY(3px) rotate(0deg);
+            }
+            75% {
+                transform: translateX(-10px) translateY(-3px) rotate(5deg);
+            }
+        }
+        
+        /* Efecte decorative aurii */
+        .gold-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .gold-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: goldTwinkle 4s infinite ease-in-out;
+        }
+        
+        @keyframes goldTwinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+        
+        .gold-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.1;
+        }
+        
+        /* ===== HEADER NOU - EXACT CA ÎN INDEX.HTML ȘI PACHETE.HTML ===== */
+        header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+        
+        /* LOGO MAI MARE PE MOBILE */
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .logo-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+            width: 100%;
+        }
+        
+        /* LOGO MAI MARE PE MOBILE */
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: gentlePulse 4s infinite ease-in-out;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 10px;
+        }
+        
+        /* Logo-ul cu cruce stilizată */
+        .logo-icon::before {
+            content: '†';
+            font-weight: bold;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .logo-text {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text span {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+            font-size: 1.3rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        /* NAVIGAȚIE CENTRATĂ PE MOBILE */
+        .main-nav {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-nav ul li {
+            margin: 0;
+        }
+        
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 15px;
+            font-size: 1rem;
+            display: block;
+            border-radius: 4px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .main-nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(139, 115, 85, 0.1);
+        }
+        
+        .main-nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            animation: lineGrow 0.5s ease-out;
+        }
+        
+        /* CONTACT HEADER MAI MARE ȘI CENTRAT */
+        .contact-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        /* NUMĂR DE TELEFON MAI MARE PE MOBILE */
+        .phone-emergency {
+            background-color: rgba(139, 115, 85, 0.2);
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid rgba(139, 115, 85, 0.5);
+            font-family: 'Raleway', sans-serif;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        
+        .phone-emergency:hover {
+            background-color: rgba(139, 115, 85, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        /* ===== STILURI PENTRU DESKTOP ===== */
+        @media (min-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+            
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+                gap: 20px;
+            }
+            
+            .logo-link {
+                flex-direction: row;
+                justify-content: flex-start;
+                width: auto;
+            }
+            
+            .logo {
+                flex-direction: row;
+                justify-content: flex-start;
+                width: auto;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            
+            .logo-icon::before {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                text-align: left;
+                width: auto;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0;
+            }
+            
+            .logo-text span {
+                font-size: 0.9rem;
+            }
+            
+            .main-nav {
+                width: auto;
+                margin: 0;
+                order: 2;
+            }
+            
+            .main-nav ul {
+                gap: 5px;
+            }
+            
+            .main-nav ul li a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .contact-header {
+                flex-direction: column;
+                align-items: flex-end;
+                width: auto;
+                margin-top: 0;
+                order: 3;
+                gap: 5px;
+            }
+            
+            .phone-emergency {
+                font-size: 0.95rem;
+                padding: 6px 15px;
+            }
+            
+            .contact-item {
+                font-size: 0.85rem;
+            }
+            
+            .contact-item i {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TABLETĂ ===== */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo-link {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .logo-text {
+                text-align: center;
+            }
+            
+            .main-nav {
+                width: 100%;
+                order: 3;
+                margin-top: 15px;
+            }
+            
+            .contact-header {
+                width: auto;
+                order: 2;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TELEFOANE MARI ===== */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .logo-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 3rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.3rem;
+                padding: 10px 20px;
+            }
+            
+            .main-nav ul li a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TELEFOANE MICI ===== */
+        @media (max-width: 480px) {
+            .logo-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.4rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-text span {
+                font-size: 1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.2rem;
+                padding: 10px 18px;
+            }
+            
+            .main-nav ul {
+                gap: 5px;
+            }
+            
+            .main-nav ul li a {
+                font-size: 0.85rem;
+                padding: 5px 10px;
+            }
+        }
+        
+        /* Titlul paginii */
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin: 40px 0 50px;
+            font-weight: 300;
+            font-size: 2.2rem;
+            animation: fadeIn 1s ease-out;
+            padding: 0 15px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Secțiunea de contact */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(139,115,85,0.3);
+            backdrop-filter: blur(8px);
+            height: fit-content;
+        }
+
+        .contact-info h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+            padding-bottom: 15px;
+        }
+
+        .contact-details {
+            margin: 25px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 3px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-text h3 {
+            margin: 0 0 5px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .contact-text p {
+            margin: 0;
+            color: var(--text-light);
+            line-height: 1.5;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(139,115,85,0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        .contact-form h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+            padding-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(40, 40, 40, 0.8);
+            border: 1px solid rgba(139,115,85,0.3);
+            border-radius: 4px;
+            color: var(--text-color);
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(139,115,85,0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ===== BUTOANE TELEFON ===== */
+        .btn[href^="tel"] {
+            color: white !important;
+            text-decoration: none !important;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+        }
+        
+        /* Butoane */
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .map-container {
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(139,115,85,0.3);
+            height: 500px;
+            position: relative;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(30%) sepia(10%);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(139,115,85,0.3);
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .map-overlay h3 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .map-overlay p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .map-overlay i {
+            color: var(--primary-color);
+            margin-right: 8px;
+            width: 16px;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            color: #28a745;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* Footer - exact ca în index.html */
+        footer {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 50px 0 15px;
+            position: relative;
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(139, 115, 85, 0.3);
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+            color: white;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col p {
+            color: #ccc;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.8rem;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* ===== OPTIMIZĂRI PENTRU MOBIL ===== */
+        @media (max-width: 767px) {
+            .page-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+
+            .map-overlay {
+                position: relative;
+                top: 0;
+                right: 0;
+                left: 0;
+                margin: 20px auto;
+                max-width: 100%;
+            }
+            
+            /* ADĂUGAT: Porumbel mai mare în header pentru mobil */
+            .dove-header {
+                font-size: 2.5rem;
+                top: 15px;
+                right: 15px;
+            }
+            
+            /* Ajustări pentru secțiunea de contact pe mobil */
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 1.6rem;
+                margin-bottom: 25px;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 20px;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* ADĂUGAT: Media query special pentru dispozitive mici (sub 400px) */
+        @media (max-width: 400px) {
+            /* Butonul de apel mai vizibil */
+            .btn[href^="tel"] {
+                padding: 14px 25px;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+        
+        /* MEDIA QUERIES PENTRU TABLETĂ */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* Ajustări pentru tabletă */
+            .contact-container {
+                gap: 30px;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 25px;
+            }
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 50px; }
+        }
+        
+        /* Animații generale */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fundal principal asemănător header-ului -->
+    <div class="page-background"></div>
+    
+    <!-- Porumbel animat în header -->
+    <div class="dove-header">🕊️</div>
+
+    <!-- Container pentru cruciulițe aurii -->
+    <div class="crosses-container" id="crossesContainer"></div>
+    
+    <!-- Container pentru particule aurii -->
+    <div class="gold-decoration" id="goldDecoration"></div>
+    
+    <!-- Container pentru efectul de fade -->
+    <div class="content-fade" id="contentFade">
+        
+        <!-- Header NOU - exact ca în index.html și pachete.html -->
+        <header>
+            <div class="container">
+                <div class="header-container">
+                    <!-- LOGO -->
+                    <a href="/" class="logo-link">
+                        <div class="logo">
+                            <div class="logo-icon">
+                                <!-- Logo-ul cu cruce stilizată -->
+                            </div>
+                            <div class="logo-text">
+                                <h1>CASA</h1>
+                                <span>FUNERARĂ LUPICĂ</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- NAVIGAȚIE CENTRATĂ -->
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/pachete/">Pachete funerare</a></li>
+                            <li><a href="/contact/" class="active">Contact</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <!-- CONTACT HEADER MAI MARE ȘI CENTRAT -->
+                    <div class="contact-header">
+                        <a href="tel:0752538888" class="phone-emergency phone-link">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="phone-number">0752 538 888</span>
+                        </a>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Non-stop 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Titlul paginii -->
+        <h1 class="page-title">Contact</h1>
+
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Informații de contact</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Adresă</h3>
+                                <p>Strada Principală<br>Oituz</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Telefon</h3>
+                                <p class="phone-number">0752 538 888</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <p>contact@casafuneraralupica.ro</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Program</h3>
+                                <p>Non-stop 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="color: var(--text-light); line-height: 1.6;">
+                        Suntem aici pentru a vă oferi sprijin și consiliere în momentele dificile. 
+                        Nu ezitați să ne contactați pentru orice informații suplimentare.
+                    </p>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Trimiteți un mesaj</h2>
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label for="name">Nume și prenume</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mesaj</label>
+                            <textarea id="message" class="form-control" placeholder="Scrieți mesajul dvs. aici..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-block">
+                            <i class="fas fa-paper-plane"></i> Trimite mesaj
+                        </button>
+                        
+                        <div id="successMessage" class="success-message">
+                            <i class="fas fa-check-circle"></i> Mesajul a fost trimis cu succes!
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4779.870349674047!2d26.613562954381955!3d46.20611680040304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b5030657bcebe7%3A0x2fe1a961c9cc6c17!2sCasa%20Funerar%C4%83%20Lupic%C4%83!5e0!3m2!1sen!2sro!4v1764947435250!5m2!1sen!2sro" 
+                    class="map-frame"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="map-overlay">
+                    <h3><i class="fas fa-map-marker-alt"></i> Casa Funerară Lupică</h3>
+                    <p><i class="fas fa-map-pin"></i> Strada Principală, Oituz</p>
+                    <p><i class="fas fa-phone"></i> <span class="phone-number">0752 538 888</span></p>
+                    <p><i class="fas fa-clock"></i> Non-stop 24/7</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+           <div class="container">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>Casa Funerară Lupică</h3>
+            <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/pachete/">Pachete funerare</a></li>
+                            <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Servicii</h3>
+                        <ul>
+                            <li><a href="#">Organizare înmormântare</a></li>
+                            <li><a href="#">Transport funerar</a></li>
+                            <li><a href="#">Sicrie și accesorii</a></li>
+                            <li><a href="#">Consultanță funerară</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+    <script>
+        // Efect de fade pentru conținut la scroll
+        const contentFade = document.getElementById('contentFade');
+        
+        function updateContentFade() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
+            const opacity = 0.7 + (scrollProgress * 0.2);
+            contentFade.style.background = `linear-gradient(to bottom, 
+                rgba(30, 30, 30, ${opacity}) 0%, 
+                rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
+        }
+        
+        updateContentFade();
+        window.addEventListener('scroll', updateContentFade);
+        window.addEventListener('resize', updateContentFade);
+        
+        // Creare cruciulițe aurii (mai puține pe mobile)
+        function createCrosses() {
+            const crossesContainer = document.getElementById('crossesContainer');
+            const isMobile = window.innerWidth < 768;
+            const crossCount = isMobile ? 15 : 25;
+            
+            for (let i = 0; i < crossCount; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '†';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
+                crossesContainer.appendChild(cross);
+            }
+        }
+        
+        // Creare particule aurii decorative (mai puține pe mobile)
+        function createGoldParticles() {
+            const goldContainer = document.getElementById('goldDecoration');
+            const isMobile = window.innerWidth < 768;
+            const particleCount = isMobile ? 15 : 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                goldContainer.appendChild(particle);
+            }
+            
+            for (let i = 0; i < (isMobile ? 6 : 12); i++) {
+                const line = document.createElement('div');
+                line.className = 'gold-line';
+                line.style.top = (i * (isMobile ? 15 : 8)) + '%';
+                line.style.width = Math.random() * (isMobile ? 40 : 50) + (isMobile ? 20 : 30) + '%';
+                line.style.left = Math.random() * (isMobile ? 60 : 50) + '%';
+                line.style.opacity = Math.random() * 0.1 + 0.05;
+                goldContainer.appendChild(line);
+            }
+        }
+        
+        // Funcție pentru a preveni formatarea automata a numerelor
+        function preventPhoneNumberStyling() {
+            // Adaugă atribut x-ms-format-detection="none" pentru Internet Explorer/Edge
+            const phoneElements = document.querySelectorAll('[href^="tel"], .phone-number');
+            phoneElements.forEach(el => {
+                el.setAttribute('x-ms-format-detection', 'none');
+            });
+        }
+        
+        // Funcție pentru apelare telefon - versiune îmbunătățită
+        function initPhoneCalls() {
+            // Pentru link-urile telefon din header și footer
+            const phoneLinks = document.querySelectorAll('a[href^="tel"], .phone-link');
+            
+            phoneLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Nu este nevoie de confirmare pentru link-urile mici din header
+                    return true;
+                });
+            });
+            
+            // Dezactivează formatarea automată pe iOS
+            document.addEventListener('DOMContentLoaded', function() {
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    viewport.content = viewport.content + ', telephone=no';
+                }
+            });
+        }
+        
+        // Funcționalitatea formularului
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inițializare efecte decorative
+            createCrosses();
+            createGoldParticles();
+            preventPhoneNumberStyling();
+            initPhoneCalls();
+            
+            const form = document.getElementById('messageForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Colectăm datele din formular
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
+                
+                // Creăm mesajul pentru SMS
+                const smsMessage = `Mesaj de pe site:%0A%0ANume: ${name}%0ATelefon: ${phone}%0A%0AMesaj:%0A${message}`;
+                
+                // Numărul de telefon unde va fi trimis mesajul
+                const phoneNumber = "0752538888";
+                
+                // Creăm link-ul pentru SMS
+                const smsLink = `sms:${phoneNumber}?body=${smsMessage}`;
+                
+                // Deschidem aplicația de mesagerie
+                window.location.href = smsLink;
+                
+                // Afișăm mesajul de succes
+                successMessage.style.display = 'block';
+                
+                // Resetăm formularul
+                form.reset();
+                
+                // Ascundem mesajul de succes după 5 secunde
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            });
+            
+            // Observator pentru animații la scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out both';
+                    }
+                });
+            }, observerOptions);
+            
+            // Animații pentru elementele de contact
+            document.querySelectorAll('.contact-info, .contact-form, .map-container').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Re-creare efecte la redimensionare
+        window.addEventListener('resize', function() {
+            document.getElementById('crossesContainer').innerHTML = '';
+            document.getElementById('goldDecoration').innerHTML = '';
+            createCrosses();
+            createGoldParticles();
+        });
+    </script>
+
+</body>
+</html>
