@@ -2858,7 +2858,7 @@
                 
                 <!-- Descriere secțiune -->
                 <div class="coroane-description">
-                    <p>Oferim o gamă variată de coroane și aranjamente florale pentru înmormântări, realizate cu flori proaspete și de calitate.</p>
+                    <p>Oferim o gamă variată de coroane și aranjamente funerare, realizate cu grijă și atenție la detalii.</p>
                 </div>
             </div>
         </section>
@@ -2867,7 +2867,7 @@
         <section class="pachete-index">
             <div class="container">
                 <div class="section-title">
-                    <h2>Pachete Funerare Recomandate</h2>
+                    <h2>Pachete Funerare</h2>
                 </div>
                 
                 <div class="pachete-grid">
@@ -3452,9 +3452,9 @@ function initCoroaneCylinder() {
     
     // LISTA DE IMAGINI - MODIFICA AICI CU NUMELE FIȘIERELOR TALE!
     const imageList = [];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 40; i++) {
         // Schimbă în funcție de cum se numesc fișierele tale
-        imageList.push(`images/c${i}.jpeg`);    // Dacă sunt c1.jpg, c2.jpg, etc.
+        imageList.push(`images/Coroana ${i}.jpeg`);    // Dacă sunt c1.jpg, c2.jpg, etc.
         // imageList.push(`images/c${i}.jpeg`);   // Dacă sunt .jpeg
         // imageList.push(`images/coroana${i}.jpg`); // Dacă sunt coroana1.jpg, etc.
     }
@@ -3463,7 +3463,7 @@ function initCoroaneCylinder() {
     
     let currentIndex = 0;
     let isAnimating = false;
-    const totalImages = 5; // Ai 5 imagini
+    const totalImages = 40;
     
     // Încarcă imaginile
     function loadImages() {
