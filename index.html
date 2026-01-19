@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -1164,6 +1165,375 @@
             left: 100%;
         }
         
+                    /* ===== SECȚIUNEA COROANELE - ANIMAȚIE CILINDRU 3D ===== */
+        .coroane-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #ccc;
+            font-size: 1rem;
+            margin-top: 10px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .coroane-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 40px auto;
+            perspective: 2000px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Container pentru cilindru */
+        .coroane-cylinder {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Card pentru fiecare imagine */
+        .coroane-card {
+            position: absolute;
+            width: 250px;
+            height: 350px;
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(139, 115, 85, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform-origin: center center -400px;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            will-change: transform, opacity, filter;
+            /* Optimizare pentru animații mobile */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Efect de iluminare pentru cardul activ */
+        .coroane-card.active {
+            border-color: var(--primary-color);
+            box-shadow: 
+                0 0 30px rgba(139, 115, 85, 0.6),
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+        
+        /* Imaginea din interiorul cardului */
+        .coroane-image {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: brightness(0.95);
+        }
+        
+        .coroane-card:hover .coroane-image {
+            transform: scale(1.05);
+            filter: brightness(1.05);
+        }
+        
+        /* Săgeți de navigare - direct pe fundal */
+        .cylinder-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(139, 115, 85, 0.2);
+            border: 2px solid rgba(139, 115, 85, 0.5);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0.7;
+            /* Optimizare pentru mobil */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        .cylinder-nav:hover {
+            background: rgba(139, 115, 85, 0.4);
+            border-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+            box-shadow: 0 0 20px rgba(139, 115, 85, 0.5);
+        }
+        
+        .cylinder-prev {
+            left: 20px;
+        }
+        
+        .cylinder-next {
+            right: 20px;
+        }
+        
+        /* Pentru mobil - butoane mai mari */
+        @media (max-width: 768px) {
+            .cylinder-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .cylinder-prev {
+                left: 10px;
+            }
+            
+            .cylinder-next {
+                right: 10px;
+            }
+        }
+        
+        /* Indicatori pentru poziția curentă */
+        .cylinder-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .cylinder-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .cylinder-indicator.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(139, 115, 85, 0.8);
+        }
+        
+        /* Informații despre imaginea curentă */
+        .cylinder-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Descriere secțiune */
+        .coroane-description {
+            text-align: center;
+            margin-top: 40px;
+            padding: 0 20px;
+        }
+        
+        .coroane-description p {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Animație pentru schimbarea imaginilor */
+        @keyframes cardFocus {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Efect de reflexie pentru card */
+        .coroane-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+            border-radius: 12px 12px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .coroane-card.active::after {
+            opacity: 1;
+        }
+        
+        /* Efect de umbră pentru card */
+        .coroane-card::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            right: 10%;
+            height: 20px;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(5px);
+            z-index: -1;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        
+        .coroane-card.active::before {
+            opacity: 0.8;
+            bottom: -15px;
+        }
+        
+        /* Responsive design pentru cilindru */
+        @media (max-width: 768px) {
+            .coroane-container {
+                height: 400px;
+                perspective: 1500px;
+            }
+            
+            .coroane-cylinder {
+                width: 250px;
+                height: 320px;
+            }
+            
+            .coroane-card {
+                width: 200px;
+                height: 280px;
+                transform-origin: center center -300px;
+            }
+            
+            .cylinder-info {
+                top: 10px;
+                right: 10px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+            
+            .cylinder-indicators {
+                bottom: 10px;
+            }
+            
+            .cylinder-indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .coroane-container {
+                height: 350px;
+                perspective: 1200px;
+            }
+            
+            .coroane-cylinder {
+                width: 200px;
+                height: 280px;
+            }
+            
+            .coroane-card {
+                width: 170px;
+                height: 240px;
+                transform-origin: center center -250px;
+            }
+            
+            .coroane-section {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Animație pentru încărcare */
+        @keyframes cylinderLoad {
+            0% { opacity: 0; transform: scale(0.8) rotateX(10deg); }
+            100% { opacity: 1; transform: scale(1) rotateX(0); }
+        }
+        
+        .coroane-cylinder {
+            animation: cylinderLoad 1s ease-out;
+        }
+        
+        /* Efect de particule aurii pentru secțiune */
+        .coroane-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(139, 115, 85, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Adaugă o linie decorativă sub titlu */
+        .coroane-section .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            border-radius: 2px;
+        }
+
+            /* ===== FIX-URI PENTRU GALERIA DE COROANE ===== */
+
+.coroane-container {
+    overflow: visible !important;
+}
+
+.coroane-cylinder {
+    transition: transform 0.6s ease-in-out !important;
+}
+
+.coroane-card {
+    transition: opacity 0.3s ease, filter 0.3s ease !important;
+    transform-origin: center center !important;
+}
+
+.coroane-card.active {
+    border-color: #8b7355 !important;
+    box-shadow: 0 0 20px rgba(139, 115, 85, 0.4) !important;
+}
+
+
         /* ===== SECȚIUNEA PACHETE FUNERARE ===== */
         .pachete-index {
             padding: 60px 0;
@@ -2452,6 +2822,47 @@
             </div>
         </section>
 
+
+                        <!-- ===== NOUA SECȚIUNE COROANE - ANIMAȚIE CILINDRU 3D ===== -->
+        <section class="coroane-section" id="coroane">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Coroane Funerare</h2>
+                    <p class="section-subtitle">Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere</p>
+                </div>
+                
+                <div class="coroane-container">
+                    <!-- Container pentru cilindrul de imagini -->
+                    <div class="coroane-cylinder" id="coroaneCylinder">
+                        <!-- Imaginile vor fi adăugate dinamic prin JS -->
+                    </div>
+                    
+                    <!-- Butoane de navigare - săgeți direct pe fundal -->
+                    <button class="cylinder-nav cylinder-prev" id="cylinderPrev" aria-label="Imaginea anterioară">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="cylinder-nav cylinder-next" id="cylinderNext" aria-label="Imaginea următoare">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Indicatori pentru poziția curentă -->
+                    <div class="cylinder-indicators" id="cylinderIndicators">
+                        <!-- Indicatori vor fi adăugati dinamic -->
+                    </div>
+                    
+                    <!-- Informații despre imaginea curentă -->
+                    <div class="cylinder-info">
+                        <span class="current-index" id="currentIndex">1 / 40</span>
+                    </div>
+                </div>
+                
+                <!-- Descriere secțiune -->
+                <div class="coroane-description">
+                    <p>Oferim o gamă variată de coroane și aranjamente florale pentru înmormântări, realizate cu flori proaspete și de calitate.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Secțiune Pachete Funerare -->
         <section class="pachete-index">
             <div class="container">
@@ -3024,6 +3435,233 @@
             }
         }
         
+                // ADĂUGAT: Funcționalitatea pentru secțiunea Coroane - VERSIUNE SIMPLĂ CARE FUNCȚIONEAZĂ
+function initCoroaneCylinder() {
+    console.log('Initializare galerie coroane...');
+    
+    const cylinder = document.getElementById('coroaneCylinder');
+    const prevBtn = document.getElementById('cylinderPrev');
+    const nextBtn = document.getElementById('cylinderNext');
+    const indicatorsContainer = document.getElementById('cylinderIndicators');
+    const currentIndexSpan = document.getElementById('currentIndex');
+    
+    if (!cylinder) {
+        console.error('Elementul cylinder nu a fost găsit!');
+        return;
+    }
+    
+    // LISTA DE IMAGINI - MODIFICA AICI CU NUMELE FIȘIERELOR TALE!
+    const imageList = [];
+    for (let i = 1; i <= 5; i++) {
+        // Schimbă în funcție de cum se numesc fișierele tale
+        imageList.push(`images/c${i}.jpeg`);    // Dacă sunt c1.jpg, c2.jpg, etc.
+        // imageList.push(`images/c${i}.jpeg`);   // Dacă sunt .jpeg
+        // imageList.push(`images/coroana${i}.jpg`); // Dacă sunt coroana1.jpg, etc.
+    }
+    
+    console.log('Imagini de încărcat:', imageList);
+    
+    let currentIndex = 0;
+    let isAnimating = false;
+    const totalImages = 5; // Ai 5 imagini
+    
+    // Încarcă imaginile
+    function loadImages() {
+        console.log('Încărcare imagini...');
+        cylinder.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+        
+        // Creează cardurile pentru fiecare imagine
+        for (let i = 0; i < totalImages; i++) {
+            // Creează cardul
+            const card = document.createElement('div');
+            card.className = 'coroane-card';
+            card.dataset.index = i;
+            
+            // Calculează poziția
+            const angle = (i * 72); // 360/5 = 72 grade
+            const translateZ = 350;
+            
+            // Aplică transformarea
+            card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
+            
+            // Adaugă imaginea
+            const img = document.createElement('img');
+            img.className = 'coroane-image';
+            img.src = imageList[i] || `https://via.placeholder.com/250x350/333/8b7355?text=Corona+${i+1}`;
+            img.alt = `Corona funerară ${i + 1}`;
+            img.loading = 'lazy';
+            
+            img.onerror = function() {
+                console.warn(`Imaginea nu s-a încărcat, folosesc placeholder`);
+                this.src = `https://via.placeholder.com/250x350/333/8b7355?text=Corona+${i+1}`;
+            };
+            
+            card.appendChild(img);
+            cylinder.appendChild(card);
+            
+            // Adaugă indicator
+            const indicator = document.createElement('div');
+            indicator.className = 'cylinder-indicator';
+            indicator.dataset.index = i;
+            if (i === currentIndex) {
+                indicator.classList.add('active');
+            }
+            
+            indicator.addEventListener('click', () => {
+                if (!isAnimating) goToImage(i);
+            });
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Aplică starea inițială
+        updateDisplay();
+    }
+    
+    // Actualizează afișarea
+    function updateDisplay() {
+        // Calculează rotația
+        const targetRotation = -currentIndex * 72;
+        cylinder.style.transform = `rotateY(${targetRotation}deg)`;
+        
+        // Actualizează cardurile
+        updateCards();
+        
+        // Actualizează indicatorii
+        updateIndicators();
+        
+        // Actualizează counter
+        updateCurrentIndex();
+    }
+    
+    // Actualizează cardurile
+    function updateCards() {
+        const cards = document.querySelectorAll('.coroane-card');
+        if (cards.length === 0) return;
+        
+        cards.forEach((card, i) => {
+            const cardIndex = parseInt(card.dataset.index);
+            
+            // Calculează diferența
+            let diff = (cardIndex - currentIndex + totalImages) % totalImages;
+            if (diff > totalImages/2) diff -= totalImages;
+            
+            // Aplică efecte
+            card.classList.toggle('active', diff === 0);
+            
+            if (diff === 0) {
+                card.style.opacity = '1';
+                card.style.filter = 'none';
+                card.style.zIndex = '10';
+            } else if (Math.abs(diff) === 1) {
+                card.style.opacity = '0.8';
+                card.style.filter = 'blur(1px)';
+                card.style.zIndex = '5';
+            } else if (Math.abs(diff) === 2) {
+                card.style.opacity = '0.5';
+                card.style.filter = 'blur(2px)';
+                card.style.zIndex = '2';
+            } else {
+                card.style.opacity = '0.3';
+                card.style.filter = 'blur(3px)';
+                card.style.zIndex = '1';
+            }
+        });
+    }
+    
+    // Actualizează indicatorii
+    function updateIndicators() {
+        const indicators = document.querySelectorAll('.cylinder-indicator');
+        indicators.forEach((indicator) => {
+            const indicatorIndex = parseInt(indicator.dataset.index);
+            indicator.classList.toggle('active', indicatorIndex === currentIndex);
+        });
+    }
+    
+    // Actualizează indicatorul text
+    function updateCurrentIndex() {
+        if (currentIndexSpan) {
+            currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
+        }
+    }
+    
+    // Navighează la o imagine
+    function goToImage(index) {
+        if (isAnimating || index === currentIndex) return;
+        
+        isAnimating = true;
+        currentIndex = (index + totalImages) % totalImages;
+        
+        // Aplică animația
+        cylinder.style.transition = 'transform 0.6s ease-in-out';
+        updateDisplay();
+        
+        // După animație
+        setTimeout(() => {
+            cylinder.style.transition = '';
+            isAnimating = false;
+        }, 600);
+    }
+    
+    // Imaginea următoare
+    function nextImage() {
+        goToImage(currentIndex + 1);
+    }
+    
+    // Imaginea anterioară
+    function prevImage() {
+        goToImage(currentIndex - 1);
+    }
+    
+    // Evenimente pentru butoane
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevImage();
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextImage();
+    });
+    
+    // Navigare cu tastatura
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+    
+    // Swipe pentru mobil
+    let touchStartX = 0;
+    
+    cylinder.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    cylinder.addEventListener('touchend', (e) => {
+        if (!touchStartX) return;
+        
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextImage();
+            } else {
+                prevImage();
+            }
+        }
+        
+        touchStartX = 0;
+    }, { passive: true });
+    
+    // IMPORTANT: NU porni animația automată - am eliminat-o
+    
+    // Inițializează
+    loadImages();
+}
+        
+
         // Inițializare la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
             // Verifică preferințele de reducere a mișcării
@@ -3040,6 +3678,7 @@
             enhanceButtons();
             optimizeHeaderDove();
             optimizeCandleAnimation();
+            initCoroaneCylinder(); // ADĂUGAT: Inițializează cilindrul de coroane
             
             // Adaugă event listener pentru redimensionare
             window.addEventListener('resize', function() {
@@ -3075,14 +3714,3 @@
     <!-- END JAVASCRIPT -->
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
