@@ -3436,6 +3436,8 @@
         }
         
                 // ADĂUGAT: Funcționalitatea pentru secțiunea Coroane - VERSIUNE SIMPLĂ CARE FUNCȚIONEAZĂ
+
+                // ADĂUGAT: Funcționalitatea pentru secțiunea Coroane - VERSIUNE SIMPLĂ CARE FUNCȚIONEAZĂ PE MOBIL
 function initCoroaneCylinder() {
     console.log('Initializare galerie coroane...');
     
@@ -3450,19 +3452,25 @@ function initCoroaneCylinder() {
         return;
     }
     
-    // LISTA DE IMAGINI - MODIFICA AICI CU NUMELE FIȘIERELOR TALE!
+    // Verifică dacă suntem pe un dispozitiv mobil
+    const isMobile = window.innerWidth <= 768;
+    
+    // LISTA DE IMAGINI - CU PATH-URI CORECTE
     const imageList = [];
     for (let i = 1; i <= 40; i++) {
-        // Schimbă în funcție de cum se numesc fișierele tale
+        // Folosește path-ul relativ corect
         imageList.push(`images/Coroana ${i}.png`);
-    
     }
     
-    console.log('Imagini de încărcat:', imageList);
+    console.log('Număr de imagini de încărcat:', imageList.length);
     
     let currentIndex = 0;
     let isAnimating = false;
-    const totalImages = 40;
+    const totalImages = imageList.length;
+    
+    // Optimizări pentru mobil
+    const cardsToShow = isMobile ? 3 : 5; // Mai puține carduri vizibile pe mobil
+    const baseAngle = 360 / cardsToShow;
     
     // Încarcă imaginile
     function loadImages() {
@@ -3477,9 +3485,9 @@ function initCoroaneCylinder() {
             card.className = 'coroane-card';
             card.dataset.index = i;
             
-            // Calculează poziția
-            const angle = (i * 72); // 360/5 = 72 grade
-            const translateZ = 350;
+            // Calculează poziția - adaptiv pentru mobil
+            const angle = (i * baseAngle);
+            const translateZ = isMobile ? 250 : 350;
             
             // Aplică transformarea
             card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
@@ -3487,14 +3495,27 @@ function initCoroaneCylinder() {
             // Adaugă imaginea
             const img = document.createElement('img');
             img.className = 'coroane-image';
-            img.src = imageList[i] || `https://via.placeholder.com/250x350/333/8b7355?text=Corona+${i+1}`;
+            
+            // Încearcă mai multe formate pentru a evita erorile de încărcare
+            const imgSrc = imageList[i] || `https://via.placeholder.com/250x350/333/8b7355?text=Corona+${i+1}`;
+            img.src = imgSrc;
             img.alt = `Corona funerară ${i + 1}`;
             img.loading = 'lazy';
             
+            // Fallback pentru imagini care nu se încarcă
             img.onerror = function() {
-                console.warn(`Imaginea nu s-a încărcat, folosesc placeholder`);
-                this.src = `https://via.placeholder.com/250x350/333/8b7355?text=Corona+${i+1}`;
+                console.warn(`Imaginea ${imgSrc} nu s-a încărcat, folosesc placeholder`);
+                this.src = `https://via.placeholder.com/${isMobile ? '170x240' : '250x350'}/333/8b7355?text=Corona+${i+1}`;
+                this.onerror = null; // Previne bucle infinite
             };
+            
+            // Optimizări pentru mobil
+            if (isMobile) {
+                card.style.width = '170px';
+                card.style.height = '240px';
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '90%';
+            }
             
             card.appendChild(img);
             cylinder.appendChild(card);
@@ -3521,7 +3542,7 @@ function initCoroaneCylinder() {
     // Actualizează afișarea
     function updateDisplay() {
         // Calculează rotația
-        const targetRotation = -currentIndex * 72;
+        const targetRotation = -currentIndex * baseAngle;
         cylinder.style.transform = `rotateY(${targetRotation}deg)`;
         
         // Actualizează cardurile
@@ -3624,27 +3645,27 @@ function initCoroaneCylinder() {
         nextImage();
     });
     
-    // Navigare cu tastatura
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') prevImage();
-        if (e.key === 'ArrowRight') nextImage();
-    });
-    
     // Swipe pentru mobil
     let touchStartX = 0;
+    let touchStartY = 0;
     
     cylinder.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
     }, { passive: true });
     
     cylinder.addEventListener('touchend', (e) => {
         if (!touchStartX) return;
         
         const touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
+        const touchEndY = e.changedTouches[0].clientY;
         
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) {
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
+        
+        // Doar dacă swipe-ul orizontal este mai mare decât cel vertical
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
                 nextImage();
             } else {
                 prevImage();
@@ -3652,12 +3673,22 @@ function initCoroaneCylinder() {
         }
         
         touchStartX = 0;
+        touchStartY = 0;
     }, { passive: true });
-    
-    // IMPORTANT: NU porni animația automată - am eliminat-o
     
     // Inițializează
     loadImages();
+    
+    // Reîncarcă galeria la redimensionare
+    window.addEventListener('resize', function() {
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile !== isMobile) {
+            // Reîncarcă galeria cu setările adaptate
+            setTimeout(() => {
+                loadImages();
+            }, 100);
+        }
+    });
 }
         
 
@@ -3713,4 +3744,3 @@ function initCoroaneCylinder() {
     <!-- END JAVASCRIPT -->
 </body>
 </html>
-
