@@ -1317,32 +1317,98 @@
             }
         }
         
-        /* Indicatori pentru poziția curentă */
-        .cylinder-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 100;
-        }
-        
-        .cylinder-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(139, 115, 85, 0.3);
-        }
-        
-        .cylinder-indicator.active {
-            background: var(--primary-color);
-            transform: scale(1.2);
-            box-shadow: 0 0 10px rgba(139, 115, 85, 0.8);
-        }
+                /* ===== OPTIMIZĂRI PENTRU INDICATORI PE MOBIL ===== */
+
+/* Indicator de paginare pentru mobil */
+.cylinder-pagination {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-family: 'Raleway', sans-serif;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(139, 115, 85, 0.3);
+    display: none; /* Ascuns implicit */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .cylinder-pagination {
+        display: block;
+        bottom: 10px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .cylinder-indicators {
+        display: none; /* Ascunde indicatorii punctuali pe mobil */
+    }
+}
+
+/* Pentru desktop, ascunde paginarea */
+@media (min-width: 769px) {
+    .cylinder-pagination {
+        display: none;
+    }
+    
+    .cylinder-indicators {
+        display: flex;
+    }
+}
+
+/* Indicatorii pentru desktop rămân vizibili doar pe desktop */
+.cylinder-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.cylinder-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(139, 115, 85, 0.3);
+}
+
+.cylinder-indicator.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(139, 115, 85, 0.8);
+}
+
+/* Pentru telefoane mici */
+@media (max-width: 480px) {
+    .cylinder-pagination {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+        bottom: 8px;
+    }
+}
+
+/* Pentru tabletă */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cylinder-indicators {
+        bottom: 15px;
+    }
+    
+    .cylinder-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
         
         /* Informații despre imaginea curentă */
         .cylinder-info {
@@ -2845,10 +2911,15 @@
                         <i class="fas fa-chevron-right"></i>
                     </button>
                     
-                    <!-- Indicatori pentru poziția curentă -->
-                    <div class="cylinder-indicators" id="cylinderIndicators">
-                        <!-- Indicatori vor fi adăugati dinamic -->
-                    </div>
+                    <!-- Indicator de paginare pentru mobil -->
+                        <div class="cylinder-pagination" id="cylinderPagination">
+                            <span id="currentPage">1</span> / <span id="totalPages">40</span>
+                        </div>
+
+                    <!-- Indicatori pentru desktop -->
+                        <div class="cylinder-indicators" id="cylinderIndicators">
+                    <!-- Indicatori vor fi adăugati dinamic -->
+                        </div>
                     
                     <!-- Informații despre imaginea curentă -->
                     <div class="cylinder-info">
