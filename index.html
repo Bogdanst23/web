@@ -1420,40 +1420,45 @@
             bottom: -15px;
         }
         
-        /* Responsive design pentru cilindru */
-        @media (max-width: 768px) {
-            .coroane-container {
-                height: 400px;
-                perspective: 1500px;
-            }
-            
-            .coroane-cylinder {
-                width: 250px;
-                height: 320px;
-            }
-            
-            .coroane-card {
-                width: 200px;
-                height: 280px;
-                transform-origin: center center -300px;
-            }
-            
-            .cylinder-info {
-                top: 10px;
-                right: 10px;
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-            
-            .cylinder-indicators {
-                bottom: 10px;
-            }
-            
-            .cylinder-indicator {
-                width: 10px;
-                height: 10px;
-            }
-        }
+                /* Responsive design pentru cilindru */
+@media (max-width: 768px) {
+    .coroane-container {
+        height: 400px;
+        perspective: 1500px;
+    }
+    
+    .coroane-cylinder {
+        width: 250px;
+        height: 320px;
+    }
+    
+    .coroane-card {
+        width: 200px;
+        height: 280px;
+        transform-origin: center center -300px;
+    }
+    
+    .cylinder-info {
+        top: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        /* ADĂUGAT: Ascunde pe mobil */
+        display: none !important;
+    }
+    
+    .cylinder-indicators {
+        bottom: 10px;
+        /* ADĂUGAT: Ascunde pe mobil */
+        display: none !important;
+    }
+    
+    .cylinder-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+        
         
         @media (max-width: 480px) {
             .coroane-container {
