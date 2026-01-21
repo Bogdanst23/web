@@ -3441,271 +3441,46 @@
         }
         
              // ADĂUGAT: Funcție simplificată pentru galeria de coroane
+// VERSIUNE SIMPLĂ PENTRU DEBUG
 function initCoroaneCylinder() {
-    console.log('Initializare galerie coroane...');
+    console.log('DEBUG: Încep încărcarea galeriei...');
     
     const cylinder = document.getElementById('coroaneCylinder');
-    const prevBtn = document.getElementById('cylinderPrev');
-    const nextBtn = document.getElementById('cylinderNext');
-    const indicatorsContainer = document.getElementById('cylinderIndicators');
-    const currentIndexSpan = document.getElementById('currentIndex');
-    
-    if (!cylinder) {
-        console.error('Elementul cylinder nu a fost găsit!');
-        return;
-    }
+    if (!cylinder) return;
     
     const isMobile = window.innerWidth <= 768;
     
-    // Redu numărul de imagini pentru test
-    const TOTAL_IMAGES = 15; // Începe cu mai puține imagini
-    
-    let currentIndex = 0;
-    let isAnimating = false;
-    const totalImages = TOTAL_IMAGES;
-    const cardsToShow = isMobile ? 3 : 5;
-    const baseAngle = 360 / cardsToShow;
-    
-    // Array pentru a urmări imaginile încărcate
-    const loadedImages = new Array(TOTAL_IMAGES).fill(false);
-    let currentlyLoading = 0;
-    const MAX_CONCURRENT_LOADS = isMobile ? 4 : 2; // MAI PUȚINE pe desktop
-    
-    // Funcție pentru încărcarea unei imagini
-    function loadImage(index) {
-        if (loadedImages[index] || currentlyLoading >= MAX_CONCURRENT_LOADS) {
-            return;
-        }
+    // Creează doar 5 carduri pentru test
+    for (let i = 1; i <= 5; i++) {
+        const card = document.createElement('div');
+        card.className = 'coroane-card';
+        card.style.transform = `rotateY(${(i-1) * 72}deg) translateZ(${isMobile ? 250 : 350}px)`;
         
-        currentlyLoading++;
-        loadedImages[index] = true;
+        const img = document.createElement('img');
+        img.className = 'coroane-image';
+        img.alt = `Corona ${i}`;
+        img.style.width = isMobile ? '160px' : '240px';
+        img.style.height = isMobile ? '220px' : '330px';
         
-        const img = new Image();
-        img.onload = function() {
-            console.log(`✅ Imaginea ${index + 1} încărcată`);
-            
-            // Actualizează imaginea în galerie
-            const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
-            if (card) {
-                const cardImg = card.querySelector('img');
-                if (cardImg) {
-                    cardImg.src = img.src;
-                    cardImg.style.opacity = '1';
-                    cardImg.classList.add('loaded');
-                }
-            }
-            
-            currentlyLoading--;
-            
-            // Încarcă următoarea imagine
-            loadNextImage();
+        // Încearcă imaginea reală
+        const testImage = new Image();
+        testImage.onload = function() {
+            console.log(`✅ Imaginea ${i} se încarcă pe desktop`);
+            img.src = testImage.src;
         };
         
-        img.onerror = function() {
-            console.log(`❌ Imaginea ${index + 1} nu există, folosesc placeholder`);
-            loadedImages[index] = true; // Marchează ca încercată
-            currentlyLoading--;
-            
-            // Încarcă următoarea imagine
-            loadNextImage();
+        testImage.onerror = function() {
+            console.log(`❌ Imaginea ${i} NU se încarcă pe desktop`);
+            img.src = `https://via.placeholder.com/${isMobile ? '160x220' : '240x330'}/333/8b7355?text=Test+${i}`;
         };
         
-        img.src = `images/Coroana ${index + 1}.png`;
-    }
-    
-    // Funcție pentru încărcarea următoarei imagini
-    function loadNextImage() {
-        // Începe cu imaginile din jurul celei curente
-        const priorityIndices = [
-            currentIndex,
-            (currentIndex + 1) % totalImages,
-            (currentIndex - 1 + totalImages) % totalImages,
-            (currentIndex + 2) % totalImages,
-            (currentIndex - 2 + totalImages) % totalImages
-        ];
+        testImage.src = `images/Coroana ${i}.png?desktop_test=${Date.now()}`;
         
-        // Caută prima imagine neîncărcată din prioritate
-        for (const index of priorityIndices) {
-            if (!loadedImages[index]) {
-                loadImage(index);
-                return;
-            }
-        }
-        
-        // Dacă toate prioritarele sunt încărcate, caută oricare altă
-        for (let i = 0; i < totalImages; i++) {
-            if (!loadedImages[i]) {
-                loadImage(i);
-                return;
-            }
-        }
+        card.appendChild(img);
+        cylinder.appendChild(card);
     }
     
-    // Crează structura inițială cu placeholder
-    function createInitialStructure() {
-        cylinder.innerHTML = '';
-        indicatorsContainer.innerHTML = '';
-        
-        for (let i = 0; i < totalImages; i++) {
-            const card = document.createElement('div');
-            card.className = 'coroane-card';
-            card.dataset.index = i;
-            
-            const angle = (i * baseAngle);
-            const translateZ = isMobile ? 250 : 350;
-            card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
-            
-            const img = document.createElement('img');
-            img.className = 'coroane-image';
-            img.alt = `Corona funerară ${i + 1}`;
-            
-            // Folosește placeholder inițial
-            const placeholderSrc = `https://via.placeholder.com/${isMobile ? '170x240' : '250x350'}/2a2a2a/8b7355?text=Coroana+${i+1}`;
-            img.src = placeholderSrc;
-            img.style.opacity = '0.7';
-            
-            card.appendChild(img);
-            cylinder.appendChild(card);
-            
-            // Indicator
-            const indicator = document.createElement('div');
-            indicator.className = 'cylinder-indicator';
-            indicator.dataset.index = i;
-            if (i === currentIndex) indicator.classList.add('active');
-            
-            indicator.addEventListener('click', () => {
-                if (!isAnimating) goToImage(i);
-            });
-            
-            indicatorsContainer.appendChild(indicator);
-        }
-        
-        updateDisplay();
-    }
-    
-    // Restul funcțiilor rămân la fel
-    function updateDisplay() {
-        const targetRotation = -currentIndex * baseAngle;
-        cylinder.style.transform = `rotateY(${targetRotation}deg)`;
-        updateCards();
-        updateIndicators();
-        updateCurrentIndex();
-    }
-    
-    function updateCards() {
-        const cards = document.querySelectorAll('.coroane-card');
-        cards.forEach((card, i) => {
-            const cardIndex = parseInt(card.dataset.index);
-            let diff = (cardIndex - currentIndex + totalImages) % totalImages;
-            if (diff > totalImages/2) diff -= totalImages;
-            
-            card.classList.toggle('active', diff === 0);
-            
-            if (diff === 0) {
-                card.style.opacity = '1';
-                card.style.filter = 'none';
-                card.style.zIndex = '10';
-            } else if (Math.abs(diff) === 1) {
-                card.style.opacity = '0.8';
-                card.style.filter = 'blur(1px)';
-                card.style.zIndex = '5';
-            } else {
-                card.style.opacity = '0.5';
-                card.style.filter = 'blur(2px)';
-                card.style.zIndex = '2';
-            }
-        });
-    }
-    
-    function updateIndicators() {
-        const indicators = document.querySelectorAll('.cylinder-indicator');
-        indicators.forEach((indicator) => {
-            const indicatorIndex = parseInt(indicator.dataset.index);
-            indicator.classList.toggle('active', indicatorIndex === currentIndex);
-        });
-    }
-    
-    function updateCurrentIndex() {
-        if (currentIndexSpan) {
-            currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
-        }
-    }
-    
-    function goToImage(index) {
-        if (isAnimating || index === currentIndex) return;
-        
-        isAnimating = true;
-        currentIndex = (index + totalImages) % totalImages;
-        
-        cylinder.style.transition = 'transform 0.6s ease-in-out';
-        updateDisplay();
-        
-        // Încarcă imaginile din jurul noii poziții
-        setTimeout(() => {
-            loadNextImage();
-        }, 100);
-        
-        setTimeout(() => {
-            cylinder.style.transition = '';
-            isAnimating = false;
-        }, 600);
-    }
-    
-    function nextImage() {
-        goToImage(currentIndex + 1);
-    }
-    
-    function prevImage() {
-        goToImage(currentIndex - 1);
-    }
-    
-    // Inițializează
-    createInitialStructure();
-    
-    // Începe încărcarea imaginilor
-    setTimeout(() => {
-        // Încarcă primele imagini
-        for (let i = 0; i < Math.min(3, totalImages); i++) {
-            loadImage(i);
-        }
-    }, 500);
-    
-    // Evenimente butoane
-    prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        prevImage();
-    });
-    
-    nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        nextImage();
-    });
-    
-    // Swipe pentru mobil
-    if (isMobile) {
-        let touchStartX = 0;
-        
-        cylinder.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-        }, { passive: true });
-        
-        cylinder.addEventListener('touchend', (e) => {
-            if (!touchStartX) return;
-            
-            const touchEndX = e.changedTouches[0].clientX;
-            const diffX = touchStartX - touchEndX;
-            
-            if (Math.abs(diffX) > 50) {
-                if (diffX > 0) {
-                    nextImage();
-                } else {
-                    prevImage();
-                }
-            }
-            
-            touchStartX = 0;
-        }, { passive: true });
-    }
+    console.log('DEBUG: Galerie creată. Verifică console pentru rezultate.');
 }
         
 
