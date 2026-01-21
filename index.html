@@ -3440,47 +3440,357 @@
             }
         }
         
-             // ADĂUGAT: Funcție simplificată pentru galeria de coroane
-// VERSIUNE SIMPLĂ PENTRU DEBUG
+                // FUNCȚIE OPTIMIZATĂ PENTRU GALERIA DE COROANE
 function initCoroaneCylinder() {
-    console.log('DEBUG: Încep încărcarea galeriei...');
+    console.log('Initializare galerie coroane optimizată...');
     
     const cylinder = document.getElementById('coroaneCylinder');
-    if (!cylinder) return;
+    const prevBtn = document.getElementById('cylinderPrev');
+    const nextBtn = document.getElementById('cylinderNext');
+    const indicatorsContainer = document.getElementById('cylinderIndicators');
+    const currentIndexSpan = document.getElementById('currentIndex');
+    
+    if (!cylinder) {
+        console.error('Elementul cylinder nu a fost găsit!');
+        return;
+    }
     
     const isMobile = window.innerWidth <= 768;
     
-    // Creează doar 5 carduri pentru test
-    for (let i = 1; i <= 40; i++) {
-        const card = document.createElement('div');
-        card.className = 'coroane-card';
-        card.style.transform = `rotateY(${(i-1) * 72}deg) translateZ(${isMobile ? 250 : 350}px)`;
+    // Numărul total de imagini (ajustează după câte ai)
+    const TOTAL_IMAGES = 40;
+    
+    // Setări pentru performanță
+    const CARDS_TO_SHOW = isMobile ? 3 : 5;
+    const BASE_ANGLE = 360 / CARDS_TO_SHOW;
+    const TRANSLATE_Z = isMobile ? 250 : 350;
+    
+    let currentIndex = 0;
+    let isAnimating = false;
+    const totalImages = TOTAL_IMAGES;
+    
+    // Array pentru a urmări imaginile încărcate
+    const imageStatus = new Array(TOTAL_IMAGES).fill(false);
+    const imageCache = new Array(TOTAL_IMAGES).fill(null);
+    
+    // Funcție pentru încărcarea eficientă a imaginilor
+    function loadImageWithPriority(index) {
+        // Dacă imaginea este deja încărcată sau se încarcă, skip
+        if (imageStatus[index] || imageCache[index]) {
+            return;
+        }
         
-        const img = document.createElement('img');
-        img.className = 'coroane-image';
-        img.alt = `Corona ${i}`;
-        img.style.width = isMobile ? '160px' : '240px';
-        img.style.height = isMobile ? '220px' : '330px';
+        imageStatus[index] = 'loading';
         
-        // Încearcă imaginea reală
-        const testImage = new Image();
-        testImage.onload = function() {
-            console.log(`✅ Imaginea ${i} se încarcă pe desktop`);
-            img.src = testImage.src;
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        
+        img.onload = function() {
+            console.log(`✅ Imaginea ${index + 1} încărcată`);
+            imageCache[index] = img.src;
+            imageStatus[index] = 'loaded';
+            
+            // Actualizează imaginea în galerie dacă este vizibilă
+            updateImageInGallery(index);
+            
+            // După încărcare, încarcă următoarele prioritare
+            scheduleNextLoads();
         };
         
-        testImage.onerror = function() {
-            console.log(`❌ Imaginea ${i} NU se încarcă pe desktop`);
-            img.src = `https://via.placeholder.com/${isMobile ? '160x220' : '240x330'}/333/8b7355?text=Test+${i}`;
+        img.onerror = function() {
+            console.log(`⚠️ Imaginea ${index + 1} nu există, folosesc placeholder`);
+            imageStatus[index] = 'error';
+            scheduleNextLoads();
         };
         
-        testImage.src = `images/Coroana ${i}.png?desktop_test=${Date.now()}`;
-        
-        card.appendChild(img);
-        cylinder.appendChild(card);
+        // Adaugă cache busting pentru desktop
+        const cacheBuster = isMobile ? '' : `?t=${Date.now()}`;
+        img.src = `images/Coroana ${index + 1}.png${cacheBuster}`;
     }
     
-    console.log('DEBUG: Galerie creată. Verifică console pentru rezultate.');
+    // Încarcă imaginile prioritare (cele vizibile și următoarele)
+    function scheduleNextLoads() {
+        const priorityIndices = new Set();
+        
+        // 1. Imaginea curentă și cele din imediata vecinătate (întotdeauna prioritate maximă)
+        priorityIndices.add(currentIndex);
+        priorityIndices.add((currentIndex + 1) % totalImages);
+        priorityIndices.add((currentIndex - 1 + totalImages) % totalImages);
+        
+        // 2. Următoarele 2 în ambele direcții
+        for (let i = 2; i <= 3; i++) {
+            priorityIndices.add((currentIndex + i) % totalImages);
+            priorityIndices.add((currentIndex - i + totalImages) % totalImages);
+        }
+        
+        // 3. Pentru desktop, încarcă mai multe pentru smoothness
+        if (!isMobile) {
+            for (let i = 4; i <= 6; i++) {
+                priorityIndices.add((currentIndex + i) % totalImages);
+                priorityIndices.add((currentIndex - i + totalImages) % totalImages);
+            }
+        }
+        
+        // Convert to array and load first few
+        const priorities = Array.from(priorityIndices);
+        
+        // Limitează încărcările simultane
+        const MAX_CONCURRENT = isMobile ? 4 : 3;
+        let loadingCount = 0;
+        
+        for (const index of priorities) {
+            if (loadingCount >= MAX_CONCURRENT) break;
+            
+            if (!imageStatus[index] || imageStatus[index] === 'loading') {
+                loadImageWithPriority(index);
+                loadingCount++;
+            }
+        }
+    }
+    
+    // Actualizează imaginea în galerie
+    function updateImageInGallery(index) {
+        const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
+        if (!card) return;
+        
+        const imgElement = card.querySelector('img');
+        if (!imgElement) return;
+        
+        if (imageCache[index]) {
+            imgElement.src = imageCache[index];
+            imgElement.style.opacity = '1';
+            imgElement.classList.add('loaded');
+        }
+    }
+    
+    // Creează structura inițială a galeriei
+    function createGalleryStructure() {
+        cylinder.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+        
+        for (let i = 0; i < totalImages; i++) {
+            // Creează cardul
+            const card = document.createElement('div');
+            card.className = 'coroane-card';
+            card.dataset.index = i;
+            
+            const angle = (i * BASE_ANGLE);
+            card.style.transform = `rotateY(${angle}deg) translateZ(${TRANSLATE_Z}px)`;
+            card.style.opacity = '0.7';
+            
+            // Creează imaginea cu placeholder
+            const img = document.createElement('img');
+            img.className = 'coroane-image';
+            img.alt = `Corona funerară ${i + 1}`;
+            
+            // Folosește placeholder mic pentru loading rapid
+            const placeholderSize = isMobile ? '100x140' : '150x210';
+            img.src = `https://via.placeholder.com/${placeholderSize}/2a2a2a/555555?text=Loading...`;
+            img.loading = 'lazy';
+            
+            card.appendChild(img);
+            cylinder.appendChild(card);
+            
+            // Creează indicator
+            const indicator = document.createElement('div');
+            indicator.className = 'cylinder-indicator';
+            indicator.dataset.index = i;
+            if (i === currentIndex) indicator.classList.add('active');
+            
+            indicator.addEventListener('click', () => {
+                if (!isAnimating) goToImage(i);
+            });
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        updateDisplay();
+    }
+    
+    // Actualizează afișarea galeriei
+    function updateDisplay() {
+        // Calculează rotația
+        const targetRotation = -currentIndex * BASE_ANGLE;
+        cylinder.style.transform = `rotateY(${targetRotation}deg)`;
+        
+        // Actualizează cardurile
+        updateCardsVisibility();
+        
+        // Actualizează indicatorii
+        updateIndicators();
+        
+        // Actualizează counter
+        updateCurrentIndex();
+    }
+    
+    // Actualizează vizibilitatea cardurilor
+    function updateCardsVisibility() {
+        const cards = document.querySelectorAll('.coroane-card');
+        if (cards.length === 0) return;
+        
+        cards.forEach((card, i) => {
+            const cardIndex = parseInt(card.dataset.index);
+            let diff = (cardIndex - currentIndex + totalImages) % totalImages;
+            if (diff > totalImages/2) diff -= totalImages;
+            
+            // Activează cardul curent
+            card.classList.toggle('active', diff === 0);
+            
+            // Aplică efecte vizuale bazate pe distanță
+            if (diff === 0) {
+                card.style.opacity = '1';
+                card.style.filter = 'none';
+                card.style.zIndex = '10';
+            } else if (Math.abs(diff) === 1) {
+                card.style.opacity = '0.85';
+                card.style.filter = 'blur(0.5px)';
+                card.style.zIndex = '5';
+            } else if (Math.abs(diff) === 2) {
+                card.style.opacity = '0.7';
+                card.style.filter = 'blur(1px)';
+                card.style.zIndex = '3';
+            } else {
+                card.style.opacity = '0.5';
+                card.style.filter = 'blur(1.5px)';
+                card.style.zIndex = '1';
+            }
+        });
+    }
+    
+    // Actualizează indicatorii
+    function updateIndicators() {
+        const indicators = document.querySelectorAll('.cylinder-indicator');
+        indicators.forEach((indicator) => {
+            const indicatorIndex = parseInt(indicator.dataset.index);
+            indicator.classList.toggle('active', indicatorIndex === currentIndex);
+        });
+    }
+    
+    // Actualizează indexul curent
+    function updateCurrentIndex() {
+        if (currentIndexSpan) {
+            currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
+        }
+    }
+    
+    // Navighează la o imagine specifică
+    function goToImage(index) {
+        if (isAnimating || index === currentIndex) return;
+        
+        isAnimating = true;
+        currentIndex = (index + totalImages) % totalImages;
+        
+        // Aplică animația
+        cylinder.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        updateDisplay();
+        
+        // După animație, încarcă imaginile prioritare pentru noua poziție
+        setTimeout(() => {
+            scheduleNextLoads();
+        }, 200);
+        
+        // Resetează tranziția după animație
+        setTimeout(() => {
+            cylinder.style.transition = '';
+            isAnimating = false;
+        }, 600);
+    }
+    
+    // Navigare următoare/anterior
+    function nextImage() {
+        goToImage(currentIndex + 1);
+    }
+    
+    function prevImage() {
+        goToImage(currentIndex - 1);
+    }
+    
+    // Inițializează galeria
+    function initGallery() {
+        createGalleryStructure();
+        
+        // Începe încărcarea imaginilor după un scurt delay
+        setTimeout(() => {
+            // Încarcă primele imagini (cea curentă și vecinii)
+            loadImageWithPriority(currentIndex);
+            loadImageWithPriority((currentIndex + 1) % totalImages);
+            loadImageWithPriority((currentIndex - 1 + totalImages) % totalImages);
+            
+            // Pentru desktop, încarcă câteva în plus
+            if (!isMobile) {
+                setTimeout(() => {
+                    for (let i = 2; i <= 4; i++) {
+                        loadImageWithPriority((currentIndex + i) % totalImages);
+                        loadImageWithPriority((currentIndex - i + totalImages) % totalImages);
+                    }
+                }, 500);
+            }
+        }, 300);
+    }
+    
+    // Adaugă evenimente pentru butoane
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevImage();
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextImage();
+    });
+    
+    // Swipe pentru mobil
+    if (isMobile) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        cylinder.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        cylinder.addEventListener('touchend', (e) => {
+            if (!touchStartX) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Doar swipe orizontal
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                e.preventDefault();
+                if (diffX > 0) {
+                    nextImage();
+                } else {
+                    prevImage();
+                }
+            }
+            
+            touchStartX = 0;
+            touchStartY = 0;
+        }, { passive: false });
+    }
+    
+    // Reîncarcă imaginile la resize (pentru switch mobile/desktop)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const newIsMobile = window.innerWidth <= 768;
+            if (newIsMobile !== isMobile) {
+                console.log('Redimensionare detectată, reinițializez galeria...');
+                initGallery();
+            }
+        }, 250);
+    });
+    
+    // Start!
+    initGallery();
+    
+    // Debug info
+    console.log(`Galerie inițializată: ${totalImages} imagini, ${isMobile ? 'Mobil' : 'Desktop'}`);
 }
         
 
@@ -3536,4 +3846,3 @@ function initCoroaneCylinder() {
     <!-- END JAVASCRIPT -->
 </body>
 </html>
-
