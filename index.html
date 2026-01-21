@@ -2717,6 +2717,7 @@
                         <ul>
                             <li><a href="./" class="active">Home</a></li>
                             <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane.html">Coroane funerare</a></li>
                             <li><a href="./contact">Contact</a></li>
                         </ul>
                     </nav>
@@ -3477,71 +3478,154 @@ function initCoroaneCylinder() {
     const baseAngle = 360 / cardsToShow;
     
     // Încarcă imaginile
-    function loadImages() {
-        console.log('Încărcare imagini...');
-        cylinder.innerHTML = '';
-        indicatorsContainer.innerHTML = '';
+        function loadImages() {
+    console.log('Încărcare imagini...');
+    cylinder.innerHTML = '';
+    indicatorsContainer.innerHTML = '';
+    
+    const isDesktop = !isMobile;
+    let loadedCount = 0;
+    
+    // Pentru desktop: încarcă doar câteva imagini la început
+    const initialLoadCount = isDesktop ? 8 : totalImages;
+    
+    for (let i = 0; i < totalImages; i++) {
+        const card = document.createElement('div');
+        card.className = 'coroane-card';
+        card.dataset.index = i;
         
-        // Creează cardurile pentru fiecare imagine
-        for (let i = 0; i < totalImages; i++) {
-            // Creează cardul
-            const card = document.createElement('div');
-            card.className = 'coroane-card';
-            card.dataset.index = i;
+        const angle = (i * baseAngle);
+        const translateZ = isMobile ? 250 : 350;
+        card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
+        
+        const img = document.createElement('img');
+        img.className = 'coroane-image';
+        
+        // Folosește placeholder pentru toate imaginile inițial
+        const placeholderSrc = `https://via.placeholder.com/${isMobile ? '170x240' : '250x350'}/2a2a2a/8b7355?text=Coroana+${i+1}`;
+        img.src = placeholderSrc;
+        img.alt = `Corona funerară ${i + 1}`;
+        
+        // IMPORTANT: Pentru desktop, încarcă lazy
+        img.loading = isDesktop && i >= 3 ? 'lazy' : 'eager';
+        
+        // Dacă e desktop și imaginea e dincolo de primele 8, amână încărcarea
+        if (isDesktop && i >= initialLoadCount) {
+            img.dataset.src = `images/Coroana ${i+1}.png`;
+            img.style.opacity = '0.5'; // Indicați că nu e încă încărcată
+        } else {
+            // Încarcă imediat primele imagini
+            const realImage = new Image();
+            realImage.src = `images/Coroana ${i+1}.png`;
             
-            // Calculează poziția - adaptiv pentru mobil
-            const angle = (i * baseAngle);
-            const translateZ = isMobile ? 250 : 350;
-            
-            // Aplică transformarea
-            card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
-            
-            // Adaugă imaginea
-            const img = document.createElement('img');
-            img.className = 'coroane-image';
-            
-            // Încearcă mai multe formate pentru a evita erorile de încărcare
-            const imgSrc = imageList[i] || `https://via.placeholder.com/250x350/333/8b7355?text=Corona+${i+1}`;
-            img.src = imgSrc;
-            img.alt = `Corona funerară ${i + 1}`;
-            img.loading = 'lazy';
-            
-            // Fallback pentru imagini care nu se încarcă
-            img.onerror = function() {
-                console.warn(`Imaginea ${imgSrc} nu s-a încărcat, folosesc placeholder`);
-                this.src = `https://via.placeholder.com/${isMobile ? '170x240' : '250x350'}/333/8b7355?text=Corona+${i+1}`;
-                this.onerror = null; // Previne bucle infinite
+            realImage.onload = function() {
+                img.src = realImage.src;
+                img.style.opacity = '1';
+                loadedCount++;
+                console.log(`Imaginea ${i+1} încărcată`);
+                
+                // Dacă suntem pe desktop, continuă să încarci restul
+                if (isDesktop && loadedCount === initialLoadCount) {
+                    setTimeout(loadRemainingImages, 500);
+                }
             };
             
-            // Optimizări pentru mobil
-            if (isMobile) {
-                card.style.width = '170px';
-                card.style.height = '240px';
-                img.style.maxWidth = '90%';
-                img.style.maxHeight = '90%';
-            }
-            
-            card.appendChild(img);
-            cylinder.appendChild(card);
-            
-            // Adaugă indicator
-            const indicator = document.createElement('div');
-            indicator.className = 'cylinder-indicator';
-            indicator.dataset.index = i;
-            if (i === currentIndex) {
-                indicator.classList.add('active');
-            }
-            
-            indicator.addEventListener('click', () => {
-                if (!isAnimating) goToImage(i);
-            });
-            
-            indicatorsContainer.appendChild(indicator);
+            realImage.onerror = function() {
+                console.warn(`Imaginea Coroana ${i+1}.png nu s-a putut încărca`);
+                loadedCount++;
+            };
         }
         
-        // Aplică starea inițială
-        updateDisplay();
+        card.appendChild(img);
+        cylinder.appendChild(card);
+        
+        // Crează indicatori
+        const indicator = document.createElement('div');
+        indicator.className = 'cylinder-indicator';
+        indicator.dataset.index = i;
+        if (i === currentIndex) indicator.classList.add('active');
+        
+        indicator.addEventListener('click', () => {
+            if (!isAnimating) goToImage(i);
+        });
+        
+        indicatorsContainer.appendChild(indicator);
     }
+    
+    updateDisplay();
+    
+    // Funcție pentru încărcarea imaginilor rămase (pentru desktop)
+    function loadRemainingImages() {
+        console.log('Încep încărcarea restului imaginilor pentru desktop...');
+        
+        const cards = document.querySelectorAll('.coroane-card');
+        cards.forEach((card, index) => {
+            if (index < initialLoadCount) return; // Sari peste cele deja încărcate
+            
+            const img = card.querySelector('img');
+            if (img && img.dataset.src) {
+                const realImage = new Image();
+                realImage.src = img.dataset.src;
+                
+                realImage.onload = function() {
+                    img.src = realImage.src;
+                    img.style.opacity = '1';
+                    loadedCount++;
+                    console.log(`Imaginea ${index+1} încărcată (târzie)`);
+                };
+                
+                realImage.onerror = function() {
+                    console.warn(`Imaginea ${index+1} nu s-a putut încărca`);
+                    loadedCount++;
+                };
+            }
+        });
+    }
+    
+    // Pentru desktop: încarcă imagini când utilizatorul navighează
+    if (isDesktop) {
+        let lastLoadedIndex = initialLoadCount - 1;
+        
+        function preloadNextImages() {
+            const nextIndex = currentIndex + 1;
+            const prevIndex = currentIndex - 1;
+            
+            // Preîncarcă imaginile din jurul celei curente
+            const indicesToPreload = [
+                (nextIndex + totalImages) % totalImages,
+                (prevIndex + totalImages) % totalImages,
+                (nextIndex + 1 + totalImages) % totalImages,
+                (prevIndex - 1 + totalImages) % totalImages
+            ];
+            
+            indicesToPreload.forEach(index => {
+                const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
+                if (card) {
+                    const img = card.querySelector('img');
+                    if (img && img.dataset.src && !img.src.includes('placeholder')) {
+                        const realImage = new Image();
+                        realImage.src = img.dataset.src;
+                        
+                        realImage.onload = function() {
+                            img.src = realImage.src;
+                            img.style.opacity = '1';
+                            console.log(`Preîncărcat imaginea ${parseInt(index)+1}`);
+                        };
+                    }
+                }
+            });
+        }
+        
+        // Preîncarcă când utilizatorul navighează
+        const originalGoToImage = goToImage;
+        goToImage = function(index) {
+            originalGoToImage(index);
+            if (isDesktop) {
+                setTimeout(preloadNextImages, 300);
+            }
+        };
+    }
+}
     
     // Actualizează afișarea
     function updateDisplay() {
