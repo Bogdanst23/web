@@ -802,6 +802,53 @@
             background-color: rgba(139, 115, 85, 0.2);
             color: var(--primary-light);
         }
+        /* ===== OPTIMIZĂRI PENTRU ÎNCĂRCARE IMAGINI COROANE ===== */
+.coroana-image {
+    transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+.coroana-image.loaded {
+    animation: imageFadeIn 0.7s ease-out;
+}
+
+@keyframes imageFadeIn {
+    from { opacity: 0.5; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Optimizare pentru desktop */
+@media (min-width: 769px) {
+    .coroana-image {
+        will-change: transform, opacity;
+    }
+    
+    .coroane-grid {
+        /* Forțează hardware acceleration pentru animații */
+        transform: translateZ(0);
+    }
+}
+
+/* Stil pentru imagini încărcate */
+.coroana-image-container {
+    position: relative;
+}
+
+.coroana-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.1));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.coroana-item:hover .coroana-image-container::after {
+    opacity: 1;
+}
         
         /* ===== FOOTER ===== */
         footer {
@@ -1571,5 +1618,6 @@ function loadCoroane() {
 </body>
 
 </html>
+
 
 
