@@ -802,53 +802,6 @@
             background-color: rgba(139, 115, 85, 0.2);
             color: var(--primary-light);
         }
-        /* ===== OPTIMIZĂRI PENTRU ÎNCĂRCARE IMAGINI COROANE ===== */
-.coroana-image {
-    transition: opacity 0.5s ease, transform 0.3s ease;
-}
-
-.coroana-image.loaded {
-    animation: imageFadeIn 0.7s ease-out;
-}
-
-@keyframes imageFadeIn {
-    from { opacity: 0.5; transform: scale(0.98); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* Optimizare pentru desktop */
-@media (min-width: 769px) {
-    .coroana-image {
-        will-change: transform, opacity;
-    }
-    
-    .coroane-grid {
-        /* Forțează hardware acceleration pentru animații */
-        transform: translateZ(0);
-    }
-}
-
-/* Stil pentru imagini încărcate */
-.coroana-image-container {
-    position: relative;
-}
-
-.coroana-image-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.1));
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.coroana-item:hover .coroana-image-container::after {
-    opacity: 1;
-}
         
         /* ===== FOOTER ===== */
         footer {
@@ -1093,7 +1046,7 @@
                     <h2>Coroane Funerare</h2>
                     <p>Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere. Fiecare coroană este realizată cu grijă și respect, pentru a oferi un ultim omagiu demn.</p>
                     <a href="tel:0752538888" class="btn" id="consultantaBtn">
-                        <i class="fas fa-phone-alt"></i> 0752 538 888
+                        <i class="fas fa-phone-alt"></i> Sună pentru comenzi
                     </a>
                 </div>
             </div>
@@ -1267,7 +1220,7 @@
                     } else {
                         // Pe desktop, arată confirmare
                         e.preventDefault();
-                        if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888?')) {
+                        if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888 pentru consultanță gratuită?')) {
                             window.location.href = 'tel:0752538888';
                         }
                     }
@@ -1435,113 +1388,53 @@
         }
         
         // Funcție pentru încărcarea coroanelor
-           // Funcție optimizată pentru încărcarea coroanelor (funcționează pe desktop și mobil)
-function loadCoroane() {
-    const coroaneGrid = document.getElementById('coroaneGrid');
-    if (!coroaneGrid) return;
-    
-    // Numărul total de coroane (presupunând că ai 40 de imagini)
-    const totalCoroane = 40;
-    const isDesktop = window.innerWidth > 768;
-    
-    // Counter pentru urmărirea imaginilor încărcate
-    let loadedCount = 0;
-    
-        // FUNCȚIE OPTIMIZATĂ - Înlocuiește întreaga funcție loadCoroane() existentă
-function loadCoroane() {
-    const coroaneGrid = document.getElementById('coroaneGrid');
-    if (!coroaneGrid) return;
-    
-    const totalCoroane = 40;
-    const isDesktop = window.innerWidth > 768;
-    
-    console.log(`Încărcare ${totalCoroane} coroane...`);
-    
-    // Pasul 1: Creează toate elementele cu placeholder
-    for (let i = 1; i <= totalCoroane; i++) {
-        const coroanaItem = document.createElement('div');
-        coroanaItem.className = 'coroana-item';
-        coroanaItem.dataset.index = i;
-        coroanaItem.style.animationDelay = `${(i-1) * 0.05}s`;
-        
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'coroana-image-container';
-        
-        const img = document.createElement('img');
-        img.className = 'coroana-image';
-        img.alt = `Corona funerară ${i}`;
-        img.loading = 'lazy';
-        
-        // Placeholder inițial
-        img.src = `https://via.placeholder.com/${isDesktop ? '300x300' : '250x300'}/2a2a2a/555555?text=Corona+${i}`;
-        
-        imageContainer.appendChild(img);
-        
-        const coroanaName = document.createElement('div');
-        coroanaName.className = 'coroana-name';
-        coroanaName.textContent = `Corona ${i}`;
-        
-        coroanaItem.appendChild(imageContainer);
-        coroanaItem.appendChild(coroanaName);
-        coroaneGrid.appendChild(coroanaItem);
-    }
-    
-    // Pasul 2: După 200ms, începe încărcarea imaginilor reale
-    setTimeout(loadRealImages, 200);
-    
-    function loadRealImages() {
-        console.log('Încep încărcarea imaginilor reale...');
-        
-        const items = document.querySelectorAll('.coroana-item');
-        let index = 0;
-        
-        function loadNext() {
-            if (index >= items.length) {
-                console.log('✅ Toate imaginile procesate');
-                return;
-            }
+        function loadCoroane() {
+            const coroaneGrid = document.getElementById('coroaneGrid');
+            if (!coroaneGrid) return;
             
-            const item = items[index];
-            const itemNumber = item.dataset.index;
-            const img = item.querySelector('img');
+            // Numărul total de coroane (presupunând că ai 40 de imagini)
+            const totalCoroane = 40;
             
-            if (img) {
-                const realImage = new Image();
+            for (let i = 1; i <= totalCoroane; i++) {
+                const coroanaItem = document.createElement('div');
+                coroanaItem.className = 'coroana-item';
                 
-                realImage.onload = function() {
-                    // Înlocuiește placeholder-ul cu imaginea reală
-                    img.src = realImage.src;
-                    // ADAUGĂ CLASA 'loaded' PENTRU ANIMAȚIA CSS
-                    img.classList.add('loaded');
-                    console.log(`✅ Imagine ${itemNumber} loaded`);
-                    
-                    index++;
-                    // Pauză între încărcări (mai lungă pentru desktop)
-                    setTimeout(loadNext, isDesktop ? 100 : 30);
+                // Adaugă un delay pentru animație
+                coroanaItem.style.animationDelay = `${(i-1) * 0.1}s`;
+                
+                // Container pentru imagine
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'coroana-image-container';
+                
+                // Imaginea coroanei
+                const img = document.createElement('img');
+                img.className = 'coroana-image';
+                img.src = `images/Coroana ${i}.png`;
+                img.alt = `Corona funerară ${i}`;
+                img.loading = 'lazy';
+                
+                // Fallback pentru imagini care nu se încarcă
+                img.onerror = function() {
+                    console.warn(`Imaginea Coroana ${i}.png nu s-a încărcat, folosesc placeholder`);
+                    const width = isMobileDevice ? '250' : '300';
+                    this.src = `https://via.placeholder.com/${width}x300/333/8b7355?text=Corona+${i}`;
+                    this.onerror = null; // Previne bucle infinite
                 };
                 
-                realImage.onerror = function() {
-                    // Păstrează placeholder-ul
-                    console.log(`❌ Imagine ${itemNumber} not found`);
-                    img.classList.add('loaded'); // Totuși adaugă clasa pentru aspect
-                    
-                    index++;
-                    setTimeout(loadNext, isDesktop ? 50 : 20);
-                };
+                imageContainer.appendChild(img);
                 
-                // Adaugă cache busting pentru desktop
-                const timestamp = isDesktop ? `?t=${Date.now() + index}` : '';
-                realImage.src = `images/Coroana ${itemNumber}.png${timestamp}`;
-            } else {
-                index++;
-                setTimeout(loadNext, 10);
+                // Numele coroanei
+                const coroanaName = document.createElement('div');
+                coroanaName.className = 'coroana-name';
+                coroanaName.textContent = `Corona ${i}`;
+                
+                // Asamblează elementul
+                coroanaItem.appendChild(imageContainer);
+                coroanaItem.appendChild(coroanaName);
+                
+                coroaneGrid.appendChild(coroanaItem);
             }
         }
-        
-        // Începe încărcarea
-        loadNext();
-    }
-}
         
         // Inițializare la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
@@ -1583,9 +1476,4 @@ function loadCoroane() {
     </script>
     <!-- END JAVASCRIPT -->
 </body>
-
 </html>
-
-
-
-
