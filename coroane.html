@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- ADĂUGAT: Meta tag-uri pentru a preveni formatarea automată a numerelor de telefon -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="date=no">
+    
+    <title>Casa Funerară Lupică - Coroane Funerare</title>
+    
+        <!-- ========== FAVICON COMPLET ========== -->
+    <!-- 1. Pentru browsere moderne (SVG - cea mai bună calitate) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- 2. Pentru browsere vechi și Google (ICO) -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- 3. Pentru diferite dimensiuni PNG -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <!-- 4. Pentru Apple (iOS) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- 5. Pentru Android -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+
+    <!-- 6. Culori pentru browser și mobil -->
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="msapplication-TileColor" content="#1a1a1a">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- START CSS -->
+    <style>
+        /* ===== RESET SI VARIABILE CSS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #8b7355;
+            --primary-dark: #6d5c46;
+            --primary-light: #a89070;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f8f8;
+            --gray-color: #666;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold-gradient: linear-gradient(135deg, #8b7355 0%, #c5a880 50%, #8b7355 100%);
+            --header-bg: rgba(26, 26, 26, 0.95);
+        }
+        
+        /* ===== STILURI GENERALE ===== */
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-color);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
+        a[href^="tel"] {
+            color: inherit;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        .phone-number:hover, .phone-number:active {
+            color: var(--primary-color) !important;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+        
+        p, li, span, a, button, label {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* ===== STILURI PENTRU LINK-URI TELEFON ===== */
+        .phone-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none !important;
+            color: inherit !important;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+        
+        .phone-link:hover, .phone-link:active {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .phone-link .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        /* ===== FUNDALURI SI ELEMENTE DECORATIVE ===== */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
+            z-index: -3;
+        }
+        
+        .content-fade {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to bottom, 
+                rgba(30, 30, 30, 0.7) 0%, 
+                rgba(40, 40, 40, 0.9) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .crosses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cross {
+            position: absolute;
+            color: rgba(139, 115, 85, 0.15);
+            font-size: 18px;
+            opacity: 0;
+            animation: crossFloat 20s infinite linear;
+            font-weight: 300;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .dove-header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            animation: doveFlyHeader 8s ease-in-out infinite;
+            z-index: 101;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .gold-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .gold-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: goldTwinkle 4s infinite ease-in-out;
+        }
+        
+        .gold-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.1;
+        }
+        
+        /* ===== HEADER NOU - MAI MARE PE TELEFON, CENTRAT ===== */
+        header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+        
+        /* LOGO MAI MARE PE MOBILE */
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .logo-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+            width: 100%;
+        }
+        
+        /* LOGO MAI MARE PE MOBILE */
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: gentlePulse 4s infinite ease-in-out;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 10px;
+        }
+        
+        /* Logo-ul cu cruce stilizată */
+        .logo-icon::before {
+            content: '†';
+            font-weight: bold;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .logo-text {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text span {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+            font-size: 1.3rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        /* NAVIGAȚIE CENTRATĂ PE MOBILE */
+        .main-nav {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-nav ul li {
+            margin: 0;
+        }
+        
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 15px;
+            font-size: 1rem;
+            display: block;
+            border-radius: 4px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .main-nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(139, 115, 85, 0.1);
+        }
+        
+        .main-nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            animation: lineGrow 0.5s ease-out;
+        }
+        
+        /* CONTACT HEADER MAI MARE ȘI CENTRAT */
+        .contact-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        /* NUMĂR DE TELEFON MAI MARE PE MOBILE */
+        .phone-emergency {
+            background-color: rgba(139, 115, 85, 0.2);
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid rgba(139, 115, 85, 0.5);
+            font-family: 'Raleway', sans-serif;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        
+        .phone-emergency:hover {
+            background-color: rgba(139, 115, 85, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        /* ===== STILURI PENTRU DESKTOP ===== */
+        @media (min-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+            
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+                gap: 20px;
+            }
+            
+            .logo-link {
+                flex-direction: row;
+                justify-content: flex-start;
+                width: auto;
+            }
+            
+            .logo {
+                flex-direction: row;
+                justify-content: flex-start;
+                width: auto;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            
+            .logo-icon::before {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                text-align: left;
+                width: auto;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0;
+            }
+            
+            .logo-text span {
+                font-size: 0.9rem;
+            }
+            
+            .main-nav {
+                width: auto;
+                margin: 0;
+                order: 2;
+            }
+            
+            .main-nav ul {
+                gap: 5px;
+            }
+            
+            .main-nav ul li a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .contact-header {
+                flex-direction: column;
+                align-items: flex-end;
+                width: auto;
+                margin-top: 0;
+                order: 3;
+                gap: 5px;
+            }
+            
+            .phone-emergency {
+                font-size: 0.95rem;
+                padding: 6px 15px;
+            }
+            
+            .contact-item {
+                font-size: 0.85rem;
+            }
+            
+            .contact-item i {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TABLETĂ ===== */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo-link {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .logo-text {
+                text-align: center;
+            }
+            
+            .main-nav {
+                width: 100%;
+                order: 3;
+                margin-top: 15px;
+            }
+            
+            .contact-header {
+                width: auto;
+                order: 2;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TELEFOANE MARI ===== */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .logo-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 3rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text span {
+                font-size: 1.1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.3rem;
+                padding: 10px 20px;
+            }
+            
+            .main-nav ul li a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* ===== STILURI PENTRU TELEFOANE MICI ===== */
+        @media (max-width: 480px) {
+            .logo-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon::before {
+                font-size: 2.4rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-text span {
+                font-size: 1rem;
+            }
+            
+            .phone-emergency {
+                font-size: 1.2rem;
+                padding: 10px 18px;
+            }
+            
+            .main-nav ul {
+                gap: 5px;
+            }
+            
+            .main-nav ul li a {
+                font-size: 0.85rem;
+                padding: 5px 10px;
+            }
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            background-size: cover;
+            background-position: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 40px;
+            overflow: hidden;
+            min-height: 30vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 0 15px;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            line-height: 1.3;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            line-height: 1.5;
+            color: #f0f0f0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* ===== BUTOANE ===== */
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            /* ADĂUGAT: Optimizare pentru butoane pe mobil */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* ===== SECȚIUNEA COROANELOR ===== */
+        .coroane-section {
+            padding: 40px 0 80px;
+            background-color: rgba(30, 30, 30, 0.8);
+            min-height: 60vh;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: #f0f0f0;
+            display: inline-block;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: lineGrow 1s ease-out;
+        }
+        
+        /* Grid pentru coroane */
+        .coroane-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (min-width: 768px) {
+            .coroane-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        /* Stil pentru fiecare coroană */
+        .coroana-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .coroana-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .coroana-image-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: rgba(40, 40, 40, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .coroana-item:hover .coroana-image-container {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .coroana-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+        
+        .coroana-item:hover .coroana-image {
+            transform: scale(1.03);
+        }
+        
+        .coroana-name {
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            padding: 10px 0;
+            width: 100%;
+            background-color: rgba(139, 115, 85, 0.1);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .coroana-item:hover .coroana-name {
+            background-color: rgba(139, 115, 85, 0.2);
+            color: var(--primary-light);
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 50px 0 15px;
+            position: relative;
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+            color: white;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            animation: lineGrow 1s ease-out;
+        }
+        
+        .footer-col p {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.8rem;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* ===== ANIMAȚII CSS ===== */
+        @keyframes crossFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes doveFlyHeader {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-10px) translateY(-5px) rotate(-5deg); }
+            50% { transform: translateX(-20px) translateY(3px) rotate(0deg); }
+            75% { transform: translateX(-10px) translateY(-3px) rotate(5deg); }
+        }
+        
+        @keyframes goldTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ===== MEDIA QUERIES PENTRU RESTUL PAGINII ===== */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+                min-height: 40vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .coroane-section {
+                padding: 60px 0 100px;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ADĂUGAT: Media query pentru a dezactiva animații pe dispozitive cu preferințe de reducere a mișcării */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+    <!-- END CSS -->
+</head>
+
+<body>
+    <!-- START HTML -->
+    <!-- Fundal principal asemănător header-ului -->
+    <div class="page-background"></div>
+    
+    <!-- Porumbel animat în header -->
+    <div class="dove-header">🕊️</div>
+
+    <!-- Container pentru cruciulițe aurii -->
+    <div class="crosses-container" id="crossesContainer"></div>
+    
+    <!-- Container pentru particule aurii -->
+    <div class="gold-decoration" id="goldDecoration"></div>
+    
+    <!-- Container pentru efectul de fade -->
+    <div class="content-fade" id="contentFade">
+        
+        <!-- Header NOU - mai mare pe telefon, centrat -->
+        <header>
+            <div class="container">
+                <div class="header-container">
+                    <!-- LOGO -->
+                    <a href="/" class="logo-link">
+                        <div class="logo">
+                            <div class="logo-icon">
+                                <!-- Logo-ul cu cruce stilizată -->
+                            </div>
+                            <div class="logo-text">
+                                <h1>CASA</h1>
+                                <span>FUNERARĂ LUPICĂ</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- NAVIGAȚIE CENTRATĂ -->
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane.html" class="active">Coroane funerare</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <!-- CONTACT HEADER MAI MARE ȘI CENTRAT -->
+                    <div class="contact-header">
+                        <a href="tel:0752538888" class="phone-emergency phone-link">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="phone-number">0752 538 888</span>
+                        </a>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Non-stop 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section pentru coroane -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Coroane Funerare</h2>
+                    <p>Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere. Fiecare coroană este realizată cu grijă și respect, pentru a oferi un ultim omagiu demn.</p>
+                    <a href="tel:0752538888" class="btn" id="consultantaBtn">
+                        <i class="fas fa-phone-alt"></i> Sună pentru comenzi
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secțiunea Coroanelor -->
+        <section class="coroane-section" id="coroane">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Galerie Coroane</h2>
+                </div>
+                
+                <div class="coroane-grid" id="coroaneGrid">
+                    <!-- Coroanele vor fi adăugate dinamic prin JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>Casa Funerară Lupică</h3>
+                        <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane.html">Coroane funerare</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Servicii</h3>
+                        <ul>
+                            <li><a href="./#servicii-principale">Servicii funerare principale</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./#asistenta-formalitati">Asistență și formalități</a></li>
+                            <li><a href="./#servicii-suplimentare">Servicii suplimentare</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    <!-- END HTML -->
+
+    <!-- START JAVASCRIPT -->
+    <script>
+        // ADĂUGAT: Detectare dispozitiv mobil
+        const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isTabletDevice = /iPad|Android.*Tablet|Tablet/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+        
+        // ADĂUGAT: Funcție pentru a verifica dacă browser-ul suportă animații CSS
+        function supportsCSSAnimations() {
+            return 'animation' in document.documentElement.style || 
+                   'WebkitAnimation' in document.documentElement.style || 
+                   'MozAnimation' in document.documentElement.style;
+        }
+        
+        // Efect de fade pentru conținut la scroll
+        const contentFade = document.getElementById('contentFade');
+        
+        function updateContentFade() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
+            const opacity = 0.7 + (scrollProgress * 0.2);
+            contentFade.style.background = `linear-gradient(to bottom, 
+                rgba(30, 30, 30, ${opacity}) 0%, 
+                rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
+        }
+        
+        updateContentFade();
+        window.addEventListener('scroll', updateContentFade);
+        window.addEventListener('resize', updateContentFade);
+        
+        // Creare cruciulițe aurii - versiune optimizată pentru mobil
+        function createCrosses() {
+            const crossesContainer = document.getElementById('crossesContainer');
+            
+            // Numărul redus de cruci pentru mobil pentru performanță
+            const crossCount = isMobileDevice ? 12 : (isTabletDevice ? 18 : 25);
+            
+            // Dacă browser-ul nu suportă animații CSS, nu creăm cruci
+            if (!supportsCSSAnimations()) {
+                return;
+            }
+            
+            for (let i = 0; i < crossCount; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '†';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobileDevice ? 12 : 20) + (isMobileDevice ? 8 : 12)) + 'px';
+                
+                // ADĂUGAT: Reduce viteza animației pentru mobil
+                if (isMobileDevice) {
+                    cross.style.animationDuration = (Math.random() * 10 + 25) + 's';
+                }
+                
+                crossesContainer.appendChild(cross);
+            }
+        }
+        
+        // Creare particule aurii decorative - versiune optimizată pentru mobil
+        function createGoldParticles() {
+            const goldContainer = document.getElementById('goldDecoration');
+            
+            // Numărul redus de particule pentru mobil pentru performanță
+            const particleCount = isMobileDevice ? 10 : (isTabletDevice ? 20 : 30);
+            
+            // Dacă browser-ul nu suportă animații CSS, nu creăm particule
+            if (!supportsCSSAnimations()) {
+                return;
+            }
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                
+                // ADĂUGAT: Reduce viteza animației pentru mobil
+                if (isMobileDevice) {
+                    particle.style.animationDuration = (Math.random() * 2 + 6) + 's';
+                }
+                
+                goldContainer.appendChild(particle);
+            }
+            
+            const lineCount = isMobileDevice ? 4 : (isTabletDevice ? 8 : 12);
+            for (let i = 0; i < lineCount; i++) {
+                const line = document.createElement('div');
+                line.className = 'gold-line';
+                line.style.top = (i * (isMobileDevice ? 20 : 8)) + '%';
+                line.style.width = Math.random() * (isMobileDevice ? 30 : 50) + (isMobileDevice ? 20 : 30) + '%';
+                line.style.left = Math.random() * (isMobileDevice ? 70 : 50) + '%';
+                line.style.opacity = Math.random() * 0.1 + 0.05;
+                goldContainer.appendChild(line);
+            }
+        }
+        
+        // Funcție pentru apelare telefon - versiune îmbunătățită
+        function initPhoneCalls() {
+            // Pentru butonul din hero
+            const consultantaBtn = document.getElementById('consultantaBtn');
+            
+            if (consultantaBtn) {
+                // ADĂUGAT: Event listener optimizat pentru mobil
+                consultantaBtn.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
+                    if (isMobileDevice) {
+                        e.preventDefault();
+                        // Pe mobil, permite apelul direct fără confirmare pentru o experiență mai bună
+                        window.location.href = 'tel:0752538888';
+                    } else {
+                        // Pe desktop, arată confirmare
+                        e.preventDefault();
+                        if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888 pentru consultanță gratuită?')) {
+                            window.location.href = 'tel:0752538888';
+                        }
+                    }
+                }, { passive: false });
+            }
+            
+            // Pentru link-urile telefon din header și footer
+            const phoneLinks = document.querySelectorAll('a[href^="tel"], .phone-link');
+            
+            phoneLinks.forEach(link => {
+                // ADĂUGAT: Event listener optimizat pentru mobil
+                link.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
+                    // Pe mobil, permite apelul direct
+                    if (isMobileDevice) {
+                        return true;
+                    }
+                    // Pe desktop, pentru link-urile mici din header/footer, permite apelul direct
+                    if (!this.classList.contains('btn') && !this.id.includes('consultanta')) {
+                        return true;
+                    }
+                });
+            });
+        }
+        
+        // Animări la scroll - versiune optimizată pentru mobil
+        function initScrollAnimations() {
+            // ADĂUGAT: Verifică dacă browser-ul suportă Intersection Observer
+            if (!('IntersectionObserver' in window)) {
+                // Fallback pentru browsere vechi - arată toate elementele imediat
+                document.querySelectorAll('.coroana-item').forEach(el => {
+                    el.classList.add('visible');
+                });
+                return;
+            }
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // ADĂUGAT: Opțional, oprește observarea după ce elementul a devenit vizibil
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observă toate coroanele
+            document.querySelectorAll('.coroana-item').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Navigare smooth pentru link-uri interne - versiune optimizată pentru mobil
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // ADĂUGAT: Pentru mobil, folosește scroll instant sau smooth în funcție de suport
+                        if ('scrollBehavior' in document.documentElement.style) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: isMobileDevice ? 'auto' : 'smooth'
+                            });
+                        } else {
+                            // Fallback pentru browsere vechi
+                            window.scrollTo(0, targetElement.offsetTop - 80);
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Adaugă efecte interactive pentru butoane - versiune optimizată pentru mobil
+        function enhanceButtons() {
+            const allButtons = document.querySelectorAll('.btn');
+            
+            allButtons.forEach(button => {
+                // Efect de hover/active optimizat pentru ambele dispozitive
+                const addHoverEffect = function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+                };
+                
+                const removeHoverEffect = function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
+                };
+                
+                const addActiveEffect = function() {
+                    this.style.transform = 'translateY(-1px)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.4)';
+                };
+                
+                // Pentru desktop
+                if (!isMobileDevice) {
+                    button.addEventListener('mouseenter', addHoverEffect);
+                    button.addEventListener('mouseleave', removeHoverEffect);
+                    button.addEventListener('mousedown', addActiveEffect);
+                    button.addEventListener('mouseup', addHoverEffect);
+                }
+                
+                // Pentru mobil (touch events)
+                if (isMobileDevice) {
+                    button.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        addActiveEffect.call(this);
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        removeHoverEffect.call(this);
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchcancel', function(e) {
+                        e.preventDefault();
+                        removeHoverEffect.call(this);
+                    }, { passive: false });
+                }
+            });
+        }
+        
+        // Funcție pentru a preveni formatarea automata a numerelor
+        function preventPhoneNumberStyling() {
+            // Adaugă atribut x-ms-format-detection="none" pentru Internet Explorer/Edge
+            const phoneElements = document.querySelectorAll('[href^="tel"], .phone-number');
+            phoneElements.forEach(el => {
+                el.setAttribute('x-ms-format-detection', 'none');
+            });
+        }
+        
+        // ADĂUGAT: Optimizare pentru animația porumbelului din header pe mobil
+        function optimizeHeaderDove() {
+            const doveHeader = document.querySelector('.dove-header');
+            if (doveHeader && isMobileDevice) {
+                // Reduce viteza animației pentru mobil
+                doveHeader.style.animationDuration = '12s';
+            }
+        }
+        
+        // ADĂUGAT: Dezactivează animațiile pentru dispozitive cu preferințe de reducere a mișcării
+        function checkReducedMotionPreference() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            
+            if (prefersReducedMotion.matches) {
+                // Dezactivează toate animațiile CSS
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.animationPlayState = 'paused';
+                });
+                
+                // Dezactivează animațiile create cu JS
+                const animatedElements = document.querySelectorAll('.cross, .gold-particle, .dove-header');
+                animatedElements.forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+        }
+        
+        // Funcție pentru încărcarea coroanelor
+        function loadCoroane() {
+            const coroaneGrid = document.getElementById('coroaneGrid');
+            if (!coroaneGrid) return;
+            
+            // Numărul total de coroane (presupunând că ai 40 de imagini)
+            const totalCoroane = 40;
+            
+            for (let i = 1; i <= totalCoroane; i++) {
+                const coroanaItem = document.createElement('div');
+                coroanaItem.className = 'coroana-item';
+                
+                // Adaugă un delay pentru animație
+                coroanaItem.style.animationDelay = `${(i-1) * 0.1}s`;
+                
+                // Container pentru imagine
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'coroana-image-container';
+                
+                // Imaginea coroanei
+                const img = document.createElement('img');
+                img.className = 'coroana-image';
+                img.src = `images/Coroana ${i}.png`;
+                img.alt = `Corona funerară ${i}`;
+                img.loading = 'lazy';
+                
+                // Fallback pentru imagini care nu se încarcă
+                img.onerror = function() {
+                    console.warn(`Imaginea Coroana ${i}.png nu s-a încărcat, folosesc placeholder`);
+                    const width = isMobileDevice ? '250' : '300';
+                    this.src = `https://via.placeholder.com/${width}x300/333/8b7355?text=Corona+${i}`;
+                    this.onerror = null; // Previne bucle infinite
+                };
+                
+                imageContainer.appendChild(img);
+                
+                // Numele coroanei
+                const coroanaName = document.createElement('div');
+                coroanaName.className = 'coroana-name';
+                coroanaName.textContent = `Corona ${i}`;
+                
+                // Asamblează elementul
+                coroanaItem.appendChild(imageContainer);
+                coroanaItem.appendChild(coroanaName);
+                
+                coroaneGrid.appendChild(coroanaItem);
+            }
+        }
+        
+        // Inițializare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verifică preferințele de reducere a mișcării
+            checkReducedMotionPreference();
+            
+            preventPhoneNumberStyling();
+            
+            createCrosses();
+            createGoldParticles();
+            loadCoroane();
+            initScrollAnimations();
+            initSmoothScrolling();
+            initPhoneCalls();
+            enhanceButtons();
+            optimizeHeaderDove();
+            
+            // Adaugă event listener pentru redimensionare
+            window.addEventListener('resize', function() {
+                // Debounce pentru a preveni execuții multiple
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(function() {
+                    document.getElementById('crossesContainer').innerHTML = '';
+                    document.getElementById('goldDecoration').innerHTML = '';
+                    createCrosses();
+                    createGoldParticles();
+                }, 250);
+            });
+            
+            // ADĂUGAT: Opțional - Log pentru debugging pe dispozitive mobile
+            if (isMobileDevice) {
+                console.log('Dispozitiv mobil detectat. Animațiile au fost optimizate.');
+            }
+            
+            if (isTabletDevice) {
+                console.log('Tabletă detectată. Animațiile au fost optimizate.');
+            }
+        });
+    </script>
+    <!-- END JAVASCRIPT -->
+</body>
+</html>
