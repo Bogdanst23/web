@@ -3451,7 +3451,7 @@ function initCoroaneCylinder() {
     const isMobile = window.innerWidth <= 768;
     
     // Creează doar 5 carduri pentru test
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 40; i++) {
         const card = document.createElement('div');
         card.className = 'coroane-card';
         card.style.transform = `rotateY(${(i-1) * 72}deg) translateZ(${isMobile ? 250 : 350}px)`;
@@ -3536,3 +3536,4 @@ function initCoroaneCylinder() {
     <!-- END JAVASCRIPT -->
 </body>
 </html>
+
