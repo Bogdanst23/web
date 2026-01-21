@@ -1388,53 +1388,146 @@
         }
         
         // Funcție pentru încărcarea coroanelor
-        function loadCoroane() {
-            const coroaneGrid = document.getElementById('coroaneGrid');
-            if (!coroaneGrid) return;
+           // Funcție optimizată pentru încărcarea coroanelor (funcționează pe desktop și mobil)
+function loadCoroane() {
+    const coroaneGrid = document.getElementById('coroaneGrid');
+    if (!coroaneGrid) return;
+    
+    // Numărul total de coroane (presupunând că ai 40 de imagini)
+    const totalCoroane = 40;
+    const isDesktop = window.innerWidth > 768;
+    
+    // Counter pentru urmărirea imaginilor încărcate
+    let loadedCount = 0;
+    
+    // Funcție pentru încărcarea unei imagini
+    function loadImage(index) {
+        return new Promise((resolve) => {
+            const img = new Image();
             
-            // Numărul total de coroane (presupunând că ai 40 de imagini)
-            const totalCoroane = 40;
+            img.onload = function() {
+                console.log(`✅ Imaginea ${index} încărcată`);
+                loadedCount++;
+                resolve({ index, success: true, src: img.src });
+            };
             
-            for (let i = 1; i <= totalCoroane; i++) {
-                const coroanaItem = document.createElement('div');
-                coroanaItem.className = 'coroana-item';
-                
-                // Adaugă un delay pentru animație
-                coroanaItem.style.animationDelay = `${(i-1) * 0.1}s`;
-                
-                // Container pentru imagine
-                const imageContainer = document.createElement('div');
-                imageContainer.className = 'coroana-image-container';
-                
-                // Imaginea coroanei
-                const img = document.createElement('img');
-                img.className = 'coroana-image';
-                img.src = `images/Coroana ${i}.png`;
-                img.alt = `Corona funerară ${i}`;
-                img.loading = 'lazy';
-                
-                // Fallback pentru imagini care nu se încarcă
-                img.onerror = function() {
-                    console.warn(`Imaginea Coroana ${i}.png nu s-a încărcat, folosesc placeholder`);
-                    const width = isMobileDevice ? '250' : '300';
-                    this.src = `https://via.placeholder.com/${width}x300/333/8b7355?text=Corona+${i}`;
-                    this.onerror = null; // Previne bucle infinite
-                };
-                
-                imageContainer.appendChild(img);
-                
-                // Numele coroanei
-                const coroanaName = document.createElement('div');
-                coroanaName.className = 'coroana-name';
-                coroanaName.textContent = `Corona ${i}`;
-                
-                // Asamblează elementul
-                coroanaItem.appendChild(imageContainer);
-                coroanaItem.appendChild(coroanaName);
-                
-                coroaneGrid.appendChild(coroanaItem);
+            img.onerror = function() {
+                console.log(`❌ Imaginea ${index} nu există, folosesc placeholder`);
+                loadedCount++;
+                resolve({ index, success: false });
+            };
+            
+            // Adaugă cache busting pentru desktop (forțează reîncărcare)
+            const cacheBuster = isDesktop ? `?t=${Date.now()}` : '';
+            img.src = `images/Coroana ${index}.png${cacheBuster}`;
+        });
+    }
+    
+    // Funcție pentru încărcarea în batch-uri (pentru desktop)
+    async function loadImagesInBatches() {
+        const batchSize = isDesktop ? 6 : 10; // Mai puține imagini pe batch pentru desktop
+        const totalBatches = Math.ceil(totalCoroane / batchSize);
+        
+        console.log(`Încărcare ${totalCoroane} imagini în ${totalBatches} batch-uri (${batchSize}/batch)...`);
+        
+        for (let batch = 0; batch < totalBatches; batch++) {
+            const start = batch * batchSize + 1;
+            const end = Math.min((batch + 1) * batchSize, totalCoroane);
+            
+            console.log(`Încarc batch ${batch + 1}: imagini ${start}-${end}`);
+            
+            // Creează elementele HTML pentru acest batch
+            createHTMLForBatch(start, end);
+            
+            // Încarcă imaginile pentru acest batch
+            const promises = [];
+            for (let i = start; i <= end; i++) {
+                promises.push(loadImage(i));
+            }
+            
+            // Așteaptă încărcarea batch-ului curent înainte de următorul
+            await Promise.all(promises);
+            
+            // Pauză între batch-uri pentru desktop (pentru a nu bloca browser-ul)
+            if (isDesktop && batch < totalBatches - 1) {
+                await new Promise(resolve => setTimeout(resolve, 300));
             }
         }
+        
+        console.log(`✅ Toate imaginile încărcate: ${loadedCount}/${totalCoroane}`);
+    }
+    
+    // Funcție pentru crearea HTML-ului pentru un batch de imagini
+    function createHTMLForBatch(start, end) {
+        for (let i = start; i <= end; i++) {
+            const coroanaItem = document.createElement('div');
+            coroanaItem.className = 'coroana-item';
+            coroanaItem.dataset.index = i;
+            
+            // Adaugă un delay pentru animație
+            const delay = ((i - 1) % 10) * 0.1; // Grupează delay-urile
+            coroanaItem.style.animationDelay = `${delay}s`;
+            
+            // Container pentru imagine
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'coroana-image-container';
+            
+            // Imaginea coroanei - inițial cu placeholder
+            const img = document.createElement('img');
+            img.className = 'coroana-image';
+            img.alt = `Corona funerară ${i}`;
+            
+            // Folosește placeholder inițial
+            const placeholderWidth = isDesktop ? '300' : '250';
+            img.src = `https://via.placeholder.com/${placeholderWidth}x300/2a2a2a/555555?text=Se+încarcă...`;
+            img.loading = 'lazy';
+            img.style.opacity = '0.7';
+            
+            // Event pentru încărcarea efectivă a imaginii
+            const loadRealImage = function() {
+                const realImg = new Image();
+                realImg.crossOrigin = "anonymous";
+                
+                realImg.onload = function() {
+                    img.src = realImg.src;
+                    img.style.opacity = '1';
+                    img.classList.add('loaded');
+                    console.log(`🖼️ Imaginea ${i} afișată`);
+                };
+                
+                realImg.onerror = function() {
+                    // Păstrează placeholder-ul
+                    console.log(`⚠️ Folosesc placeholder pentru Coroana ${i}`);
+                    img.src = `https://via.placeholder.com/${placeholderWidth}x300/333/8b7355?text=Corona+${i}`;
+                    img.style.opacity = '1';
+                };
+                
+                // Adaugă cache busting doar pentru desktop
+                const cacheBuster = isDesktop ? `?t=${Date.now() + i}` : '';
+                realImg.src = `images/Coroana ${i}.png${cacheBuster}`;
+            };
+            
+            // Încarcă imaginea reală după un delay
+            setTimeout(loadRealImage, isDesktop ? 500 + (i * 50) : 100 + (i * 20));
+            
+            imageContainer.appendChild(img);
+            
+            // Numele coroanei
+            const coroanaName = document.createElement('div');
+            coroanaName.className = 'coroana-name';
+            coroanaName.textContent = `Corona ${i}`;
+            
+            // Asamblează elementul
+            coroanaItem.appendChild(imageContainer);
+            coroanaItem.appendChild(coroanaName);
+            
+            coroaneGrid.appendChild(coroanaItem);
+        }
+    }
+    
+    // Începe încărcarea
+    loadImagesInBatches();
+}
         
         // Inițializare la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
@@ -1478,4 +1571,5 @@
 </body>
 
 </html>
+
 
