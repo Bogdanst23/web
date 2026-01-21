@@ -3440,9 +3440,7 @@
             }
         }
         
-                // ADĂUGAT: Funcționalitatea pentru secțiunea Coroane - VERSIUNE SIMPLĂ CARE FUNCȚIONEAZĂ
-
-                // ADĂUGAT: Funcționalitatea pentru secțiunea Coroane - VERSIUNE SIMPLĂ CARE FUNCȚIONEAZĂ PE MOBIL
+             // ADĂUGAT: Funcție simplificată pentru galeria de coroane
 function initCoroaneCylinder() {
     console.log('Initializare galerie coroane...');
     
@@ -3457,205 +3455,150 @@ function initCoroaneCylinder() {
         return;
     }
     
-    // Verifică dacă suntem pe un dispozitiv mobil
     const isMobile = window.innerWidth <= 768;
     
-    // LISTA DE IMAGINI - CU PATH-URI CORECTE
-    const imageList = [];
-    for (let i = 1; i <= 40; i++) {
-        // Folosește path-ul relativ corect
-        imageList.push(`images/Coroana ${i}.png`);
-    }
-    
-    console.log('Număr de imagini de încărcat:', imageList.length);
+    // Redu numărul de imagini pentru test
+    const TOTAL_IMAGES = 15; // Începe cu mai puține imagini
     
     let currentIndex = 0;
     let isAnimating = false;
-    const totalImages = imageList.length;
-    
-    // Optimizări pentru mobil
-    const cardsToShow = isMobile ? 3 : 5; // Mai puține carduri vizibile pe mobil
+    const totalImages = TOTAL_IMAGES;
+    const cardsToShow = isMobile ? 3 : 5;
     const baseAngle = 360 / cardsToShow;
     
-    // Încarcă imaginile
-        function loadImages() {
-    console.log('Încărcare imagini...');
-    cylinder.innerHTML = '';
-    indicatorsContainer.innerHTML = '';
+    // Array pentru a urmări imaginile încărcate
+    const loadedImages = new Array(TOTAL_IMAGES).fill(false);
+    let currentlyLoading = 0;
+    const MAX_CONCURRENT_LOADS = isMobile ? 4 : 2; // MAI PUȚINE pe desktop
     
-    const isDesktop = !isMobile;
-    let loadedCount = 0;
-    
-    // Pentru desktop: încarcă doar câteva imagini la început
-    const initialLoadCount = isDesktop ? 8 : totalImages;
-    
-    for (let i = 0; i < totalImages; i++) {
-        const card = document.createElement('div');
-        card.className = 'coroane-card';
-        card.dataset.index = i;
-        
-        const angle = (i * baseAngle);
-        const translateZ = isMobile ? 250 : 350;
-        card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
-        
-        const img = document.createElement('img');
-        img.className = 'coroane-image';
-        
-        // Folosește placeholder pentru toate imaginile inițial
-        const placeholderSrc = `https://via.placeholder.com/${isMobile ? '170x240' : '250x350'}/2a2a2a/8b7355?text=Coroana+${i+1}`;
-        img.src = placeholderSrc;
-        img.alt = `Corona funerară ${i + 1}`;
-        
-        // IMPORTANT: Pentru desktop, încarcă lazy
-        img.loading = isDesktop && i >= 3 ? 'lazy' : 'eager';
-        
-        // Dacă e desktop și imaginea e dincolo de primele 8, amână încărcarea
-        if (isDesktop && i >= initialLoadCount) {
-            img.dataset.src = `images/Coroana ${i+1}.png`;
-            img.style.opacity = '0.5'; // Indicați că nu e încă încărcată
-        } else {
-            // Încarcă imediat primele imagini
-            const realImage = new Image();
-            realImage.src = `images/Coroana ${i+1}.png`;
-            
-            realImage.onload = function() {
-                img.src = realImage.src;
-                img.style.opacity = '1';
-                loadedCount++;
-                console.log(`Imaginea ${i+1} încărcată`);
-                
-                // Dacă suntem pe desktop, continuă să încarci restul
-                if (isDesktop && loadedCount === initialLoadCount) {
-                    setTimeout(loadRemainingImages, 500);
-                }
-            };
-            
-            realImage.onerror = function() {
-                console.warn(`Imaginea Coroana ${i+1}.png nu s-a putut încărca`);
-                loadedCount++;
-            };
+    // Funcție pentru încărcarea unei imagini
+    function loadImage(index) {
+        if (loadedImages[index] || currentlyLoading >= MAX_CONCURRENT_LOADS) {
+            return;
         }
         
-        card.appendChild(img);
-        cylinder.appendChild(card);
+        currentlyLoading++;
+        loadedImages[index] = true;
         
-        // Crează indicatori
-        const indicator = document.createElement('div');
-        indicator.className = 'cylinder-indicator';
-        indicator.dataset.index = i;
-        if (i === currentIndex) indicator.classList.add('active');
-        
-        indicator.addEventListener('click', () => {
-            if (!isAnimating) goToImage(i);
-        });
-        
-        indicatorsContainer.appendChild(indicator);
-    }
-    
-    updateDisplay();
-    
-    // Funcție pentru încărcarea imaginilor rămase (pentru desktop)
-    function loadRemainingImages() {
-        console.log('Încep încărcarea restului imaginilor pentru desktop...');
-        
-        const cards = document.querySelectorAll('.coroane-card');
-        cards.forEach((card, index) => {
-            if (index < initialLoadCount) return; // Sari peste cele deja încărcate
+        const img = new Image();
+        img.onload = function() {
+            console.log(`✅ Imaginea ${index + 1} încărcată`);
             
-            const img = card.querySelector('img');
-            if (img && img.dataset.src) {
-                const realImage = new Image();
-                realImage.src = img.dataset.src;
-                
-                realImage.onload = function() {
-                    img.src = realImage.src;
-                    img.style.opacity = '1';
-                    loadedCount++;
-                    console.log(`Imaginea ${index+1} încărcată (târzie)`);
-                };
-                
-                realImage.onerror = function() {
-                    console.warn(`Imaginea ${index+1} nu s-a putut încărca`);
-                    loadedCount++;
-                };
-            }
-        });
-    }
-    
-    // Pentru desktop: încarcă imagini când utilizatorul navighează
-    if (isDesktop) {
-        let lastLoadedIndex = initialLoadCount - 1;
-        
-        function preloadNextImages() {
-            const nextIndex = currentIndex + 1;
-            const prevIndex = currentIndex - 1;
-            
-            // Preîncarcă imaginile din jurul celei curente
-            const indicesToPreload = [
-                (nextIndex + totalImages) % totalImages,
-                (prevIndex + totalImages) % totalImages,
-                (nextIndex + 1 + totalImages) % totalImages,
-                (prevIndex - 1 + totalImages) % totalImages
-            ];
-            
-            indicesToPreload.forEach(index => {
-                const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
-                if (card) {
-                    const img = card.querySelector('img');
-                    if (img && img.dataset.src && !img.src.includes('placeholder')) {
-                        const realImage = new Image();
-                        realImage.src = img.dataset.src;
-                        
-                        realImage.onload = function() {
-                            img.src = realImage.src;
-                            img.style.opacity = '1';
-                            console.log(`Preîncărcat imaginea ${parseInt(index)+1}`);
-                        };
-                    }
+            // Actualizează imaginea în galerie
+            const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
+            if (card) {
+                const cardImg = card.querySelector('img');
+                if (cardImg) {
+                    cardImg.src = img.src;
+                    cardImg.style.opacity = '1';
+                    cardImg.classList.add('loaded');
                 }
-            });
-        }
-        
-        // Preîncarcă când utilizatorul navighează
-        const originalGoToImage = goToImage;
-        goToImage = function(index) {
-            originalGoToImage(index);
-            if (isDesktop) {
-                setTimeout(preloadNextImages, 300);
             }
+            
+            currentlyLoading--;
+            
+            // Încarcă următoarea imagine
+            loadNextImage();
         };
+        
+        img.onerror = function() {
+            console.log(`❌ Imaginea ${index + 1} nu există, folosesc placeholder`);
+            loadedImages[index] = true; // Marchează ca încercată
+            currentlyLoading--;
+            
+            // Încarcă următoarea imagine
+            loadNextImage();
+        };
+        
+        img.src = `images/Coroana ${index + 1}.png`;
     }
-}
     
-    // Actualizează afișarea
+    // Funcție pentru încărcarea următoarei imagini
+    function loadNextImage() {
+        // Începe cu imaginile din jurul celei curente
+        const priorityIndices = [
+            currentIndex,
+            (currentIndex + 1) % totalImages,
+            (currentIndex - 1 + totalImages) % totalImages,
+            (currentIndex + 2) % totalImages,
+            (currentIndex - 2 + totalImages) % totalImages
+        ];
+        
+        // Caută prima imagine neîncărcată din prioritate
+        for (const index of priorityIndices) {
+            if (!loadedImages[index]) {
+                loadImage(index);
+                return;
+            }
+        }
+        
+        // Dacă toate prioritarele sunt încărcate, caută oricare altă
+        for (let i = 0; i < totalImages; i++) {
+            if (!loadedImages[i]) {
+                loadImage(i);
+                return;
+            }
+        }
+    }
+    
+    // Crează structura inițială cu placeholder
+    function createInitialStructure() {
+        cylinder.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+        
+        for (let i = 0; i < totalImages; i++) {
+            const card = document.createElement('div');
+            card.className = 'coroane-card';
+            card.dataset.index = i;
+            
+            const angle = (i * baseAngle);
+            const translateZ = isMobile ? 250 : 350;
+            card.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
+            
+            const img = document.createElement('img');
+            img.className = 'coroane-image';
+            img.alt = `Corona funerară ${i + 1}`;
+            
+            // Folosește placeholder inițial
+            const placeholderSrc = `https://via.placeholder.com/${isMobile ? '170x240' : '250x350'}/2a2a2a/8b7355?text=Coroana+${i+1}`;
+            img.src = placeholderSrc;
+            img.style.opacity = '0.7';
+            
+            card.appendChild(img);
+            cylinder.appendChild(card);
+            
+            // Indicator
+            const indicator = document.createElement('div');
+            indicator.className = 'cylinder-indicator';
+            indicator.dataset.index = i;
+            if (i === currentIndex) indicator.classList.add('active');
+            
+            indicator.addEventListener('click', () => {
+                if (!isAnimating) goToImage(i);
+            });
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        updateDisplay();
+    }
+    
+    // Restul funcțiilor rămân la fel
     function updateDisplay() {
-        // Calculează rotația
         const targetRotation = -currentIndex * baseAngle;
         cylinder.style.transform = `rotateY(${targetRotation}deg)`;
-        
-        // Actualizează cardurile
         updateCards();
-        
-        // Actualizează indicatorii
         updateIndicators();
-        
-        // Actualizează counter
         updateCurrentIndex();
     }
     
-    // Actualizează cardurile
     function updateCards() {
         const cards = document.querySelectorAll('.coroane-card');
-        if (cards.length === 0) return;
-        
         cards.forEach((card, i) => {
             const cardIndex = parseInt(card.dataset.index);
-            
-            // Calculează diferența
             let diff = (cardIndex - currentIndex + totalImages) % totalImages;
             if (diff > totalImages/2) diff -= totalImages;
             
-            // Aplică efecte
             card.classList.toggle('active', diff === 0);
             
             if (diff === 0) {
@@ -3666,19 +3609,14 @@ function initCoroaneCylinder() {
                 card.style.opacity = '0.8';
                 card.style.filter = 'blur(1px)';
                 card.style.zIndex = '5';
-            } else if (Math.abs(diff) === 2) {
+            } else {
                 card.style.opacity = '0.5';
                 card.style.filter = 'blur(2px)';
                 card.style.zIndex = '2';
-            } else {
-                card.style.opacity = '0.3';
-                card.style.filter = 'blur(3px)';
-                card.style.zIndex = '1';
             }
         });
     }
     
-    // Actualizează indicatorii
     function updateIndicators() {
         const indicators = document.querySelectorAll('.cylinder-indicator');
         indicators.forEach((indicator) => {
@@ -3687,42 +3625,52 @@ function initCoroaneCylinder() {
         });
     }
     
-    // Actualizează indicatorul text
     function updateCurrentIndex() {
         if (currentIndexSpan) {
             currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
         }
     }
     
-    // Navighează la o imagine
     function goToImage(index) {
         if (isAnimating || index === currentIndex) return;
         
         isAnimating = true;
         currentIndex = (index + totalImages) % totalImages;
         
-        // Aplică animația
         cylinder.style.transition = 'transform 0.6s ease-in-out';
         updateDisplay();
         
-        // După animație
+        // Încarcă imaginile din jurul noii poziții
+        setTimeout(() => {
+            loadNextImage();
+        }, 100);
+        
         setTimeout(() => {
             cylinder.style.transition = '';
             isAnimating = false;
         }, 600);
     }
     
-    // Imaginea următoare
     function nextImage() {
         goToImage(currentIndex + 1);
     }
     
-    // Imaginea anterioară
     function prevImage() {
         goToImage(currentIndex - 1);
     }
     
-    // Evenimente pentru butoane
+    // Inițializează
+    createInitialStructure();
+    
+    // Începe încărcarea imaginilor
+    setTimeout(() => {
+        // Încarcă primele imagini
+        for (let i = 0; i < Math.min(3, totalImages); i++) {
+            loadImage(i);
+        }
+    }, 500);
+    
+    // Evenimente butoane
     prevBtn.addEventListener('click', (e) => {
         e.preventDefault();
         prevImage();
@@ -3734,49 +3682,30 @@ function initCoroaneCylinder() {
     });
     
     // Swipe pentru mobil
-    let touchStartX = 0;
-    let touchStartY = 0;
-    
-    cylinder.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    cylinder.addEventListener('touchend', (e) => {
-        if (!touchStartX) return;
+    if (isMobile) {
+        let touchStartX = 0;
         
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
+        cylinder.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
         
-        const diffX = touchStartX - touchEndX;
-        const diffY = touchStartY - touchEndY;
-        
-        // Doar dacă swipe-ul orizontal este mai mare decât cel vertical
-        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-            if (diffX > 0) {
-                nextImage();
-            } else {
-                prevImage();
+        cylinder.addEventListener('touchend', (e) => {
+            if (!touchStartX) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const diffX = touchStartX - touchEndX;
+            
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    nextImage();
+                } else {
+                    prevImage();
+                }
             }
-        }
-        
-        touchStartX = 0;
-        touchStartY = 0;
-    }, { passive: true });
-    
-    // Inițializează
-    loadImages();
-    
-    // Reîncarcă galeria la redimensionare
-    window.addEventListener('resize', function() {
-        const newIsMobile = window.innerWidth <= 768;
-        if (newIsMobile !== isMobile) {
-            // Reîncarcă galeria cu setările adaptate
-            setTimeout(() => {
-                loadImages();
-            }, 100);
-        }
-    });
+            
+            touchStartX = 0;
+        }, { passive: true });
+    }
 }
         
 
