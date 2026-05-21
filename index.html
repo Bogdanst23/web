@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -63,16 +62,36 @@
         /* ===== STILURI GENERALE ===== */
         body {
             font-family: 'Raleway', sans-serif;
-            background-color: var(--dark-color);
+            background-color: #1a1a1a;
             color: #f0f0f0;
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            /* ADĂUGAT: fundalul cu nori și cruce */
+            background-image: url('background-heaven.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             /* ADĂUGAT: Optimizare pentru animații pe mobil */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Efect de fade la scroll - acoperă fundalul treptat */
+        .scroll-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: -1;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
         }
         
         /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
@@ -129,6 +148,8 @@
         }
         
         /* ===== FUNDALURI SI ELEMENTE DECORATIVE ===== */
+        /* Am comentat elementele care se suprapuneau cu fundalul nou */
+        /* 
         .page-background {
             position: fixed;
             top: 0;
@@ -138,18 +159,26 @@
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
             z-index: -3;
         }
+        */
         
+        /* Containerul principal cu efect de fade */
         .content-fade {
             position: relative;
             z-index: 1;
-            background: linear-gradient(to bottom, 
-                rgba(30, 30, 30, 0.7) 0%, 
-                rgba(40, 40, 40, 0.9) 100%);
-            background-attachment: fixed;
             min-height: 100vh;
+            /* Gradient care devine opac pe măsură ce scrollăm */
+            background: linear-gradient(to bottom, 
+                rgba(26, 26, 26, 0) 0%, 
+                rgba(26, 26, 26, 0.1) 30%,
+                rgba(26, 26, 26, 0.5) 60%,
+                rgba(26, 26, 26, 0.9) 100%);
+            background-attachment: fixed;
+            transition: background 0.3s ease;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
         }
         
+        /* Am comentat cruciulițele și particulele pentru a nu se suprapune */
+        /*
         .crosses-container {
             position: fixed;
             top: 0;
@@ -170,6 +199,7 @@
             font-weight: 300;
             font-family: 'Cinzel', serif;
         }
+        */
         
         .dove-header {
             position: absolute;
@@ -182,6 +212,8 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
         
+        /* Am comentat particulele aurii */
+        /*
         .gold-decoration {
             position: fixed;
             top: 0;
@@ -208,6 +240,7 @@
             background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
             opacity: 0.1;
         }
+        */
         
         /* ===== HEADER NOU - MAI MARE PE TELEFON, CENTRAT ===== */
         header {
@@ -253,35 +286,37 @@
             width: 100%;
         }
         
-        /* LOGO MAI MARE PE MOBILE */
+        /* LOGO - NOUA CRUCE AURIE */
         .logo-icon {
             width: 80px;
             height: 80px;
-            background: var(--gold-gradient);
-            border-radius: 50%;
+            background: transparent !important;
+            box-shadow: none !important;
+            animation: none !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 3rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            animation: gentlePulse 4s infinite ease-in-out;
-            position: relative;
-            font-family: 'Arial', sans-serif;
             margin-bottom: 10px;
         }
         
-        /* Logo-ul cu cruce stilizată */
-        .logo-icon::before {
-            content: '†';
-            font-weight: bold;
-            font-size: 3.5rem;
-            line-height: 1;
+        .logo-icon svg {
+            width: 70px;
+            height: 70px;
+            filter: drop-shadow(0 0 15px rgba(139, 115, 85, 0.4));
+            animation: gentlePulse 4s infinite ease-in-out;
         }
         
         @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.9;
+                filter: drop-shadow(0 0 15px rgba(139, 115, 85, 0.4));
+            }
+            50% { 
+                transform: scale(1.08);
+                opacity: 1;
+                filter: drop-shadow(0 0 30px rgba(139, 115, 85, 0.7));
+            }
         }
         
         .logo-text {
@@ -445,13 +480,14 @@
             .logo-icon {
                 width: 50px;
                 height: 50px;
-                font-size: 1.8rem;
                 margin-bottom: 0;
                 margin-right: 10px;
             }
             
-            .logo-icon::before {
-                font-size: 2rem;
+            .logo-icon svg {
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
             }
             
             .logo-text {
@@ -544,11 +580,11 @@
             .logo-icon {
                 width: 70px;
                 height: 70px;
-                font-size: 2.5rem;
             }
             
-            .logo-icon::before {
-                font-size: 3rem;
+            .logo-icon svg {
+                width: 60px;
+                height: 60px;
             }
             
             .logo-text h1 {
@@ -575,11 +611,11 @@
             .logo-icon {
                 width: 65px;
                 height: 65px;
-                font-size: 2.2rem;
             }
             
-            .logo-icon::before {
-                font-size: 2.4rem;
+            .logo-icon svg {
+                width: 55px;
+                height: 55px;
             }
             
             .logo-text h1 {
@@ -2681,16 +2717,20 @@
 <body>
     <!-- START HTML -->
     <!-- Fundal principal asemănător header-ului -->
-    <div class="page-background"></div>
+    <!-- Am comentat elementele care se suprapuneau cu fundalul nou -->
+    <!-- <div class="page-background"></div> -->
+    
+    <!-- Overlay pentru efectul de fade la scroll -->
+    <div class="scroll-overlay" id="scrollOverlay"></div>
     
     <!-- Porumbel animat în header -->
     <div class="dove-header">🕊️</div>
 
-    <!-- Container pentru cruciulițe aurii -->
-    <div class="crosses-container" id="crossesContainer"></div>
+    <!-- Container pentru cruciulițe aurii - comentat pentru a nu se suprapune -->
+    <!-- <div class="crosses-container" id="crossesContainer"></div> -->
     
-    <!-- Container pentru particule aurii -->
-    <div class="gold-decoration" id="goldDecoration"></div>
+    <!-- Container pentru particule aurii - comentat pentru a nu se suprapune -->
+    <!-- <div class="gold-decoration" id="goldDecoration"></div> -->
     
     <!-- Container pentru efectul de fade -->
     <div class="content-fade" id="contentFade">
@@ -2703,7 +2743,12 @@
                     <a href="/" class="logo-link">
                         <div class="logo">
                             <div class="logo-icon">
-                                <!-- Logo-ul cu cruce stilizată -->
+                                <!-- Crucea aurie - SVG -->
+                                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30 0V20M30 40V60M10 30H20M40 30H50" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
+                                    <path d="M10 30H20M40 30H50" stroke="#c5a880" stroke-width="3" stroke-linecap="round"/>
+                                    <path d="M30 0V20M30 40V60" stroke="#c5a880" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
                             </div>
                             <div class="logo-text">
                                 <h1>CASA</h1>
@@ -3109,25 +3154,46 @@
                    'MozAnimation' in document.documentElement.style;
         }
         
-        // Efect de fade pentru conținut la scroll
+        // Efect de fade pentru conținut la scroll - VERSIUNEA NOUĂ
+        const scrollOverlay = document.getElementById('scrollOverlay');
         const contentFade = document.getElementById('contentFade');
-        
+
         function updateContentFade() {
             const scrollPosition = window.scrollY;
             const windowHeight = window.innerHeight;
             
-            const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
-            const opacity = 0.7 + (scrollProgress * 0.2);
-            contentFade.style.background = `linear-gradient(to bottom, 
-                rgba(30, 30, 30, ${opacity}) 0%, 
-                rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
+            // Calculăm progresul scroll-ului (0 la început, 1 la final)
+            const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.8), 1);
+            
+            // Aplicăm opacitate pe overlay-ul negru (0 = vizibil fundalul, 1 = complet negru)
+            if (scrollOverlay) {
+                scrollOverlay.style.opacity = scrollProgress;
+            }
+            
+            // Actualizăm gradientul content-fade pentru o tranziție mai fină
+            if (contentFade) {
+                const opacityStart = 0;
+                const opacityEnd = 0.85;
+                const currentOpacity = opacityStart + (scrollProgress * (opacityEnd - opacityStart));
+                
+                contentFade.style.background = `linear-gradient(to bottom, 
+                    rgba(26, 26, 26, ${currentOpacity * 0.3}) 0%, 
+                    rgba(26, 26, 26, ${currentOpacity * 0.5}) 40%,
+                    rgba(26, 26, 26, ${currentOpacity * 0.8}) 70%,
+                    rgba(26, 26, 26, ${currentOpacity * 0.95}) 100%)`;
+            }
         }
-        
+
+        // Inițializează la încărcare
         updateContentFade();
+
+        // Ascultă evenimentele de scroll și resize
         window.addEventListener('scroll', updateContentFade);
         window.addEventListener('resize', updateContentFade);
         
         // Creare cruciulițe aurii - versiune optimizată pentru mobil
+        // Am comentat această funcție pentru a nu se suprapune cu fundalul nou
+        /*
         function createCrosses() {
             const crossesContainer = document.getElementById('crossesContainer');
             
@@ -3155,8 +3221,11 @@
                 crossesContainer.appendChild(cross);
             }
         }
+        */
         
         // Creare particule aurii decorative - versiune optimizată pentru mobil
+        // Am comentat această funcție pentru a nu se suprapune cu fundalul nou
+        /*
         function createGoldParticles() {
             const goldContainer = document.getElementById('goldDecoration');
             
@@ -3194,6 +3263,7 @@
                 goldContainer.appendChild(line);
             }
         }
+        */
         
         // Funcție pentru apelare telefon - versiune îmbunătățită
         function initPhoneCalls() {
@@ -3802,8 +3872,10 @@ function initCoroaneCylinder() {
             
             preventPhoneNumberStyling();
             
-            createCrosses();
-            createGoldParticles();
+            // Am comentat apelurile pentru elementele care nu mai sunt folosite
+            // createCrosses();
+            // createGoldParticles();
+            
             initScrollAnimations();
             preloadPackageImages();
             initSmoothScrolling();
@@ -3818,10 +3890,11 @@ function initCoroaneCylinder() {
                 // Debounce pentru a preveni execuții multiple
                 clearTimeout(window.resizeTimer);
                 window.resizeTimer = setTimeout(function() {
-                    document.getElementById('crossesContainer').innerHTML = '';
-                    document.getElementById('goldDecoration').innerHTML = '';
-                    createCrosses();
-                    createGoldParticles();
+                    // Am comentat regenerarea elementelor care nu mai sunt folosite
+                    // document.getElementById('crossesContainer').innerHTML = '';
+                    // document.getElementById('goldDecoration').innerHTML = '';
+                    // createCrosses();
+                    // createGoldParticles();
                 }, 250);
             });
             
@@ -3847,5 +3920,3 @@ function initCoroaneCylinder() {
     <!-- END JAVASCRIPT -->
 </body>
 </html>
-
-
