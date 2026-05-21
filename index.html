@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- ADĂUGAT: Meta tag-uri pentru a preveni formatarea automată a numerelor de telefon -->
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="address=no">
     <meta name="format-detection" content="email=no">
@@ -10,24 +13,33 @@
     
     <title>Casa Funerară Lupică - Servicii Funerare</title>
     
+        <!-- ========== FAVICON COMPLET ========== -->
+    <!-- 1. Pentru browsere moderne (SVG - cea mai bună calitate) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- 2. Pentru browsere vechi și Google (ICO) -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- 3. Pentru diferite dimensiuni PNG -->
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <!-- 4. Pentru Apple (iOS) -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- 5. Pentru Android -->
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    
+
+    <!-- 6. Culori pentru browser și mobil -->
     <meta name="theme-color" content="#1a1a1a">
     <meta name="msapplication-TileColor" content="#1a1a1a">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- ============================================ -->
-    <!-- ========== SECȚIUNEA 1: CSS COMPLET ========== -->
-    <!-- ============================================ -->
+    <!-- START CSS -->
     <style>
         /* ===== RESET SI VARIABILE CSS ===== */
         * {
@@ -57,11 +69,13 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             -webkit-tap-highlight-color: transparent;
         }
         
+        /* ADĂUGAT: Previne formatarea automata a numerelor de telefon pe iOS */
         a[href^="tel"] {
             color: inherit;
             text-decoration: none;
@@ -93,6 +107,7 @@
             padding: 0 15px;
         }
         
+        /* ===== STILURI PENTRU LINK-URI TELEFON ===== */
         .phone-link {
             display: flex;
             align-items: center;
@@ -194,7 +209,7 @@
             opacity: 0.1;
         }
         
-        /* ===== HEADER ===== */
+        /* ===== HEADER NOU - MAI MARE PE TELEFON, CENTRAT ===== */
         header {
             background-color: var(--header-bg);
             color: white;
@@ -214,6 +229,7 @@
             gap: 15px;
         }
         
+        /* LOGO MAI MARE PE MOBILE */
         .logo-link {
             text-decoration: none;
             color: inherit;
@@ -237,6 +253,7 @@
             width: 100%;
         }
         
+        /* LOGO MAI MARE PE MOBILE */
         .logo-icon {
             width: 80px;
             height: 80px;
@@ -254,6 +271,7 @@
             margin-bottom: 10px;
         }
         
+        /* Logo-ul cu cruce stilizată */
         .logo-icon::before {
             content: '†';
             font-weight: bold;
@@ -288,6 +306,7 @@
             font-family: 'Cinzel', serif;
         }
         
+        /* NAVIGAȚIE CENTRATĂ PE MOBILE */
         .main-nav {
             width: 100%;
             margin: 10px 0;
@@ -341,6 +360,7 @@
             animation: lineGrow 0.5s ease-out;
         }
         
+        /* CONTACT HEADER MAI MARE ȘI CENTRAT */
         .contact-header {
             display: flex;
             flex-direction: column;
@@ -350,6 +370,7 @@
             margin-top: 5px;
         }
         
+        /* NUMĂR DE TELEFON MAI MARE PE MOBILE */
         .phone-emergency {
             background-color: rgba(139, 115, 85, 0.2);
             padding: 12px 25px;
@@ -485,6 +506,7 @@
             }
         }
         
+        /* ===== STILURI PENTRU TABLETĂ ===== */
         @media (min-width: 768px) and (max-width: 991px) {
             .header-container {
                 flex-wrap: wrap;
@@ -517,6 +539,7 @@
             }
         }
         
+        /* ===== STILURI PENTRU TELEFOANE MARI ===== */
         @media (min-width: 481px) and (max-width: 767px) {
             .logo-icon {
                 width: 70px;
@@ -547,6 +570,7 @@
             }
         }
         
+        /* ===== STILURI PENTRU TELEFOANE MICI ===== */
         @media (max-width: 480px) {
             .logo-icon {
                 width: 65px;
@@ -590,6 +614,7 @@
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1598894597310-b2e5d1b3e3b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            /* ADĂUGAT: Am eliminat background-attachment: fixed pentru mobil - cauza problemelor */
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
             margin-bottom: 40px;
             overflow: hidden;
@@ -701,6 +726,7 @@
             font-family: 'Playfair Display', serif;
             box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
             animation: fadeInUp 1s ease-out 0.6s both;
+            /* ADĂUGAT: Optimizare pentru butoane pe mobil */
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
@@ -725,7 +751,7 @@
             left: 100%;
         }
         
-        /* ===== SERVICII PRINCIPALE ===== */
+        /* ===== SECȚIUNE SERVICII PRINCIPALE ===== */
         .servicii-principale {
             padding: 60px 0;
             background-color: rgba(25, 25, 25, 0.9);
@@ -773,6 +799,7 @@
             transform: translateY(20px);
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
+            /* ADĂUGAT: Optimizare pentru performanță pe mobil */
             will-change: transform, opacity;
         }
         
@@ -792,6 +819,7 @@
             background: linear-gradient(145deg, rgba(40, 40, 40, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%);
         }
         
+        /* ===== ICONIȚE DIMENSIONATE CORECT ===== */
         .serviciu-icon {
             width: 120px;
             height: 120px;
@@ -807,6 +835,7 @@
             transition: var(--transition);
             box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
             overflow: visible;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
             will-change: transform;
         }
         
@@ -817,6 +846,7 @@
             transition: var(--transition);
         }
         
+        /* Pentru cardul cu două iconițe */
         .serviciu-icon .main-icon {
             position: relative;
             z-index: 2;
@@ -839,6 +869,7 @@
             z-index: 3;
             transition: var(--transition);
             border: 3px solid rgba(255, 255, 255, 0.3);
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
             will-change: transform;
         }
         
@@ -926,7 +957,7 @@
             font-size: 1.2rem;
         }
         
-        /* ===== ASISTENȚĂ ȘI FORMALITĂȚI ===== */
+        /* ===== SECȚIUNEA ASISTENȚĂ ȘI FORMALITĂȚI ===== */
         .asistenta-formalitati {
             padding: 60px 0;
             background-color: rgba(35, 35, 35, 0.9);
@@ -958,7 +989,7 @@
             margin: 0;
         }
         
-        /* ===== SERVICII SUPLIMENTARE ===== */
+        /* ===== SECȚIUNEA SERVICII SUPLIMENTARE ===== */
         .servicii-suplimentare {
             padding: 60px 0;
             background-color: rgba(30, 30, 30, 0.9);
@@ -1109,6 +1140,7 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             position: relative;
             overflow: hidden;
+            /* ADĂUGAT: Optimizare pentru butoane pe mobil */
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
@@ -1133,7 +1165,7 @@
             left: 100%;
         }
         
-        /* ===== COROANE SECTION 3D ===== */
+                    /* ===== SECȚIUNEA COROANELE - ANIMAȚIE CILINDRU 3D ===== */
         .coroane-section {
             padding: 80px 0;
             background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
@@ -1164,6 +1196,7 @@
             justify-content: center;
         }
         
+        /* Container pentru cilindru */
         .coroane-cylinder {
             position: relative;
             width: 300px;
@@ -1175,6 +1208,7 @@
             justify-content: center;
         }
         
+        /* Card pentru fiecare imagine */
         .coroane-card {
             position: absolute;
             width: 250px;
@@ -1194,10 +1228,12 @@
             justify-content: center;
             border: 2px solid transparent;
             will-change: transform, opacity, filter;
+            /* Optimizare pentru animații mobile */
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
         
+        /* Efect de iluminare pentru cardul activ */
         .coroane-card.active {
             border-color: var(--primary-color);
             box-shadow: 
@@ -1207,6 +1243,7 @@
             z-index: 10;
         }
         
+        /* Imaginea din interiorul cardului */
         .coroane-image {
             width: 90%;
             height: 90%;
@@ -1221,6 +1258,7 @@
             filter: brightness(1.05);
         }
         
+        /* Săgeți de navigare - direct pe fundal */
         .cylinder-nav {
             position: absolute;
             top: 50%;
@@ -1241,6 +1279,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             opacity: 0.7;
+            /* Optimizare pentru mobil */
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
@@ -1261,6 +1300,7 @@
             right: 20px;
         }
         
+        /* Pentru mobil - butoane mai mari */
         @media (max-width: 768px) {
             .cylinder-nav {
                 width: 50px;
@@ -1277,6 +1317,7 @@
             }
         }
         
+        /* Indicatori pentru poziția curentă */
         .cylinder-indicators {
             position: absolute;
             bottom: 20px;
@@ -1303,6 +1344,7 @@
             box-shadow: 0 0 10px rgba(139, 115, 85, 0.8);
         }
         
+        /* Informații despre imaginea curentă */
         .cylinder-info {
             position: absolute;
             top: 20px;
@@ -1317,6 +1359,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Descriere secțiune */
         .coroane-description {
             text-align: center;
             margin-top: 40px;
@@ -1332,11 +1375,13 @@
             font-family: 'Playfair Display', serif;
         }
         
+        /* Animație pentru schimbarea imaginilor */
         @keyframes cardFocus {
             0% { transform: scale(0.95); opacity: 0.7; }
             100% { transform: scale(1); opacity: 1; }
         }
         
+        /* Efect de reflexie pentru card */
         .coroane-card::after {
             content: '';
             position: absolute;
@@ -1354,6 +1399,7 @@
             opacity: 1;
         }
         
+        /* Efect de umbră pentru card */
         .coroane-card::before {
             content: '';
             position: absolute;
@@ -1374,34 +1420,44 @@
             bottom: -15px;
         }
         
-        @media (max-width: 768px) {
-            .coroane-container {
-                height: 400px;
-                perspective: 1500px;
-            }
-            
-            .coroane-cylinder {
-                width: 250px;
-                height: 320px;
-            }
-            
-            .coroane-card {
-                width: 200px;
-                height: 280px;
-                transform-origin: center center -300px;
-            }
-            
-            .cylinder-info {
-                top: 10px;
-                right: 10px;
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-            
-            .cylinder-indicators {
-                display: none !important;
-            }
-        }
+                    /* Responsive design pentru cilindru */
+@media (max-width: 768px) {
+    .coroane-container {
+        height: 400px;
+        perspective: 1500px;
+    }
+    
+    .coroane-cylinder {
+        width: 250px;
+        height: 320px;
+    }
+    
+    .coroane-card {
+        width: 200px;
+        height: 280px;
+        transform-origin: center center -300px;
+    }
+    
+    .cylinder-info {
+        top: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        /* PĂSTRAT vizibil - doar indicatorul cu buline va fi ascuns */
+    }
+    
+    .cylinder-indicators {
+        bottom: 10px;
+        /* ADĂUGAT: Ascunde doar indicatorul cu buline pe mobil */
+        display: none !important;
+    }
+    
+    .cylinder-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+        
         
         @media (max-width: 480px) {
             .coroane-container {
@@ -1425,6 +1481,7 @@
             }
         }
         
+        /* Animație pentru încărcare */
         @keyframes cylinderLoad {
             0% { opacity: 0; transform: scale(0.8) rotateX(10deg); }
             100% { opacity: 1; transform: scale(1) rotateX(0); }
@@ -1434,6 +1491,7 @@
             animation: cylinderLoad 1s ease-out;
         }
         
+        /* Efect de particule aurii pentru secțiune */
         .coroane-section::before {
             content: '';
             position: absolute;
@@ -1446,6 +1504,7 @@
             z-index: 1;
         }
         
+        /* Adaugă o linie decorativă sub titlu */
         .coroane-section .section-title h2::after {
             content: '';
             position: absolute;
@@ -1457,8 +1516,29 @@
             background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
             border-radius: 2px;
         }
-        
-        /* ===== PACHETE FUNERARE ===== */
+
+            /* ===== FIX-URI PENTRU GALERIA DE COROANE ===== */
+
+.coroane-container {
+    overflow: visible !important;
+}
+
+.coroane-cylinder {
+    transition: transform 0.6s ease-in-out !important;
+}
+
+.coroane-card {
+    transition: opacity 0.3s ease, filter 0.3s ease !important;
+    transform-origin: center center !important;
+}
+
+.coroane-card.active {
+    border-color: #8b7355 !important;
+    box-shadow: 0 0 20px rgba(139, 115, 85, 0.4) !important;
+}
+
+
+        /* ===== SECȚIUNEA PACHETE FUNERARE ===== */
         .pachete-index {
             padding: 60px 0;
             background-color: rgba(30, 30, 30, 0.8);
@@ -1498,6 +1578,7 @@
             position: relative;
         }
         
+        /* Butonul central "Vezi toate pachetele" pentru desktop */
         .all-packages-center {
             position: absolute;
             left: 50%;
@@ -1519,6 +1600,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            /* ADĂUGAT: Optimizare pentru animații pe mobil */
             will-change: transform, opacity;
         }
         
@@ -1533,6 +1615,7 @@
             border-color: rgba(139, 115, 85, 0.5);
         }
         
+        /* HEADER PACHET */
         .pachet-header {
             height: 200px;
             position: relative;
@@ -1680,6 +1763,7 @@
             border-radius: 4px;
         }
         
+        /* Container pentru butonul mobil */
         .more-packages-container {
             text-align: center;
             margin-top: 20px;
@@ -1690,6 +1774,7 @@
             align-items: center;
         }
         
+        /* Stil special pentru butonul mobil */
         .mobile-center-btn {
             display: flex;
             align-items: center;
@@ -1699,7 +1784,7 @@
             margin: 0 auto;
         }
         
-        /* ===== COMERCIALIZARE ===== */
+        /* ===== SECȚIUNEA COMERCIALIZARE ===== */
         .comercializare {
             padding: 60px 0;
             background-color: rgba(30, 30, 30, 0.8);
@@ -1728,6 +1813,7 @@
             border-color: rgba(139, 115, 85, 0.5);
         }
         
+        /* Iconițele mai mici pentru produse */
         .product-icon {
             width: 70px;
             height: 70px;
@@ -1754,7 +1840,7 @@
             font-family: 'Playfair Display', serif;
         }
         
-        /* ===== DESPRE NOI ===== */
+        /* ===== SECȚIUNEA DESPRE NOI ===== */
         .despre-noi {
             padding: 60px 0;
             position: relative;
@@ -1829,7 +1915,7 @@
             opacity: 1;
         }
         
-        /* ===== CONTACT ===== */
+        /* ===== SECȚIUNEA CONTACT ===== */
         .contact {
             padding: 60px 0;
             position: relative;
@@ -2072,6 +2158,11 @@
             75% { transform: translateX(-10px) translateY(-3px) rotate(5deg); }
         }
         
+        @keyframes goldTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+        
         @keyframes doveFloat {
             0%, 100% { transform: translateY(0px) translateX(0px); }
             25% { transform: translateY(-10px) translateX(5px); }
@@ -2082,11 +2173,6 @@
         @keyframes messageFloat {
             0%, 100% { transform: rotate(-5deg) translateY(0px); }
             50% { transform: rotate(-5deg) translateY(-5px); }
-        }
-        
-        @keyframes goldTwinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.2); }
         }
         
         @keyframes candleGlow {
@@ -2141,16 +2227,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* ===== MEDIA QUERIES ===== */
+        /* ===== MEDIA QUERIES PENTRU RESTUL PAGINII ===== */
         @media (min-width: 768px) {
             .hero {
                 padding: 120px 0;
                 min-height: 90vh;
+                /* ADĂUGAT: Reactivăm background-attachment pentru desktop */
                 background-attachment: fixed;
             }
             
@@ -2221,10 +2303,12 @@
                 margin-bottom: 60px;
             }
             
+            /* Arată butonul central la desktop */
             .all-packages-center {
                 display: block;
             }
             
+            /* Ascunde butonul de jos pe desktop */
             .more-packages-container {
                 display: none;
             }
@@ -2292,16 +2376,19 @@
                 gap: 40px;
             }
             
+            /* Servicii principale - 4 pe rând */
             .servicii-principale .servicii-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
             
+            /* Ajustări pentru secțiunile centrate */
             .asistenta-formalitati .serviciu-card,
             .servicii-suplimentare .serviciu-card {
                 flex: 0 1 calc(33.333% - 25px);
                 max-width: 350px;
             }
             
+            /* Iconițe dimensionate pentru desktop */
             .serviciu-icon {
                 width: 140px;
                 height: 140px;
@@ -2324,6 +2411,7 @@
                 right: 20px;
             }
             
+            /* Iconițe pentru produse dimensionate pentru desktop */
             .product-icon {
                 width: 80px;
                 height: 80px;
@@ -2340,6 +2428,7 @@
                 font-size: 3rem;
             }
             
+            /* Ajustări pentru secțiunile centrate pe desktop mare */
             .asistenta-formalitati .serviciu-card,
             .servicii-suplimentare .serviciu-card {
                 flex: 0 1 calc(33.333% - 30px);
@@ -2347,6 +2436,7 @@
             }
         }
         
+        /* ===== OPTIMIZĂRI PENTRU MOBIL ===== */
         @media (max-width: 767px) {
             .hero h2 {
                 font-size: 1.5rem;
@@ -2368,6 +2458,7 @@
                 padding: 25px 20px;
             }
             
+            /* Iconițe pentru mobil */
             .serviciu-icon {
                 width: 110px;
                 height: 110px;
@@ -2390,6 +2481,7 @@
                 right: 12px;
             }
             
+            /* Asigură centrarea perfectă pe mobil pentru secțiunile specificate */
             .asistenta-formalitati .servicii-grid,
             .servicii-suplimentare .servicii-grid {
                 display: flex !important;
@@ -2419,10 +2511,12 @@
                 height: 200px;
             }
             
+            /* Ascunde butonul central pe mobil */
             .all-packages-center {
                 display: none !important;
             }
             
+            /* Arată și centrează butonul pe mobil */
             .more-packages-container {
                 display: flex;
                 justify-content: center;
@@ -2432,6 +2526,7 @@
                 margin-bottom: 30px;
             }
             
+            /* Buton centrat perfect pe mobil */
             .mobile-center-btn {
                 width: 100%;
                 max-width: 280px;
@@ -2474,6 +2569,7 @@
                 font-size: 1.1rem;
             }
             
+            /* Iconițe pentru telefoane mici */
             .serviciu-icon {
                 width: 100px;
                 height: 100px;
@@ -2511,6 +2607,7 @@
                 font-size: 1rem;
             }
             
+            /* Iconițe pentru tabletă */
             .serviciu-icon {
                 width: 120px;
                 height: 120px;
@@ -2533,6 +2630,7 @@
                 right: 15px;
             }
             
+            /* Centrare pentru tabletă */
             .asistenta-formalitati .serviciu-card,
             .servicii-suplimentare .serviciu-card {
                 flex: 0 1 calc(50% - 25px);
@@ -2540,7 +2638,9 @@
             }
         }
         
+        /* Media query pentru desktop mare */
         @media (min-width: 1200px) {
+            /* Iconițe mai mari pentru desktop mare */
             .serviciu-icon {
                 width: 150px;
                 height: 150px;
@@ -2564,6 +2664,7 @@
             }
         }
         
+        /* ADĂUGAT: Media query pentru a dezactiva animații pe dispozitive cu preferințe de reducere a mișcării */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -2574,30 +2675,44 @@
             }
         }
     </style>
+    <!-- END CSS -->
 </head>
+
 <body>
-    <!-- ============================================ -->
-    <!-- ========== SECȚIUNEA 2: HTML COMPLET ========== -->
-    <!-- ============================================ -->
-    
+    <!-- START HTML -->
+    <!-- Fundal principal asemănător header-ului -->
     <div class="page-background"></div>
+    
+    <!-- Porumbel animat în header -->
     <div class="dove-header">🕊️</div>
+
+    <!-- Container pentru cruciulițe aurii -->
     <div class="crosses-container" id="crossesContainer"></div>
+    
+    <!-- Container pentru particule aurii -->
     <div class="gold-decoration" id="goldDecoration"></div>
     
+    <!-- Container pentru efectul de fade -->
     <div class="content-fade" id="contentFade">
+        
+        <!-- Header NOU - mai mare pe telefon, centrat -->
         <header>
             <div class="container">
                 <div class="header-container">
+                    <!-- LOGO -->
                     <a href="/" class="logo-link">
                         <div class="logo">
-                            <div class="logo-icon"></div>
+                            <div class="logo-icon">
+                                <!-- Logo-ul cu cruce stilizată -->
+                            </div>
                             <div class="logo-text">
                                 <h1>CASA</h1>
                                 <span>FUNERARĂ LUPICĂ</span>
                             </div>
                         </div>
                     </a>
+                    
+                    <!-- NAVIGAȚIE CENTRATĂ -->
                     <nav class="main-nav">
                         <ul>
                             <li><a href="./" class="active">Home</a></li>
@@ -2606,6 +2721,8 @@
                             <li><a href="./contact">Contact</a></li>
                         </ul>
                     </nav>
+                    
+                    <!-- CONTACT HEADER MAI MARE ȘI CENTRAT -->
                     <div class="contact-header">
                         <a href="tel:0752538888" class="phone-emergency phone-link">
                             <i class="fas fa-phone-alt"></i>
@@ -2620,8 +2737,10 @@
             </div>
         </header>
 
+        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
+                <!-- Porumbel cu mesaj -->
                 <div class="dove-message-container">
                     <div class="dove-with-message">
                         <div class="dove-body">🕊️</div>
@@ -2630,13 +2749,16 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="hero-content">
                     <h2>Servicii Funerare Non-Stop cu Demnitate și Compasiune</h2>
                     <a href="tel:0752538888" class="btn" id="consultantaBtn">
-                        <i class="fas fa-phone-alt"></i> 0752 538 888
+                    <i class="fas fa-phone-alt"></i> 0752 538 888
                     </a>
                 </div>
             </div>
+            
+            <!-- Lumânare -->
             <div class="candle-container">
                 <div class="candle-shadow"></div>
                 <div class="candle">
@@ -2652,493 +2774,1078 @@
             </div>
         </section>
 
+        <!-- SECȚIUNEA SERVICII FUNERARE PRINCIPALE -->
         <section class="servicii-principale" id="servicii-principale">
             <div class="container">
-                <div class="section-title"><h2>Servicii Funerare Principale</h2></div>
-                <div class="servicii-grid">
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-spa"></i></div><h3>Îmbălsămare, Toaletare, Îmbrăcare și Cosmetizare</h3><p>Servicii profesionale de pregătire a decedatului cu demnitate și respect, folosind tehnici și produse specializate pentru a asigura o prezentare adecvată.</p></div>
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-bed main-icon"></i><i class="fas fa-hands secondary-icon"></i></div><h3>Așezare în Sicriu și Pregătire pentru Depunere</h3><p>Asistență completă pentru așezarea corectă și demnă în sicriu, pregătirea pentru depunerea în capelă, cu atenție la detalii și respect față de ritualurile tradiționale.</p></div>
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-car"></i></div><h3>Transport Funerar Intern și Internațional</h3><p>Transport specializat și discret pentru decedați, atât în țară, cât și la nivel internațional, asigurând toate actele și autorizațiile necesare.</p></div>
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-certificate"></i></div><h3>Asigurarea Sicriului și a Accesoriilor</h3><p>Oferim sicrie complet echipate cu toate accesoriile necesare (căptușeală, pernă, căpătâi, garnitură) în diverse modele și finisaje, conform preferințelor familiei.</p></div>
+                <div class="section-title">
+                    <h2>Servicii Funerare Principale</h2>
                 </div>
-                <div class="serviciu-note"><p><i class="fas fa-info-circle"></i> Toate serviciile sunt realizate cu respect și discreție, asigurând sprijin complet familiilor în momentele dificile.</p></div>
+                
+                <div class="servicii-grid">
+                    <!-- Serviciu 1 - Îmbălsămare -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Îmbălsămare, Toaletare, Îmbrăcare și Cosmetizare</h3>
+                        <p>Servicii profesionale de pregătire a decedatului cu demnitate și respect, folosind tehnici și produse specializate pentru a asigura o prezentare adecvată.</p>
+                    </div>
+                    
+                    <!-- Serviciu 2 - Așezare în Sicriu (cu două iconițe) -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-bed main-icon"></i>
+                            <i class="fas fa-hands secondary-icon"></i>
+                        </div>
+                        <h3>Așezare în Sicriu și Pregătire pentru Depunere</h3>
+                        <p>Asistență completă pentru așezarea corectă și demnă în sicriu, pregătirea pentru depunerea în capelă, cu atenție la detalii și respect față de ritualurile tradiționale.</p>
+                    </div>
+                    
+                    <!-- Serviciu 3 - Transport -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Transport Funerar Intern și Internațional</h3>
+                        <p>Transport specializat și discret pentru decedați, atât în țară, cât și la nivel internațional, asigurând toate actele și autorizațiile necesare.</p>
+                    </div>
+                    
+                    <!-- Serviciu 4 - Asigurarea Sicriului și Accesoriilor -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Asigurarea Sicriului și a Accesoriilor</h3>
+                        <p>Oferim sicrie complet echipate cu toate accesoriile necesare (căptușeală, pernă, căpătâi, garnitură) în diverse modele și finisaje, conform preferințelor familiei.</p>
+                    </div>
+                </div>
+                
+                <!-- Notă despre servicii -->
+                <div class="serviciu-note">
+                    <p><i class="fas fa-info-circle"></i> Toate serviciile sunt realizate cu respect și discreție, asigurând sprijin complet familiilor în momentele dificile.</p>
+                </div>
             </div>
         </section>
 
+
+                        <!-- ===== NOUA SECȚIUNE COROANE - ANIMAȚIE CILINDRU 3D ===== -->
         <section class="coroane-section" id="coroane">
             <div class="container">
-                <div class="section-title"><h2>Coroane Funerare</h2><p class="section-subtitle">Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere</p></div>
-                <div class="coroane-container">
-                    <div class="coroane-cylinder" id="coroaneCylinder"></div>
-                    <button class="cylinder-nav cylinder-prev" id="cylinderPrev" aria-label="Imaginea anterioară"><i class="fas fa-chevron-left"></i></button>
-                    <button class="cylinder-nav cylinder-next" id="cylinderNext" aria-label="Imaginea următoare"><i class="fas fa-chevron-right"></i></button>
-                    <div class="cylinder-indicators" id="cylinderIndicators"></div>
-                    <div class="cylinder-info"><span class="current-index" id="currentIndex">1 / 40</span></div>
+                <div class="section-title">
+                    <h2>Coroane Funerare</h2>
+                    <p class="section-subtitle">Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere</p>
                 </div>
-                <div class="coroane-description"><p>Oferim o gamă variată de coroane și aranjamente funerare, realizate cu grijă și atenție la detalii.</p></div>
+                
+                <div class="coroane-container">
+                    <!-- Container pentru cilindrul de imagini -->
+                    <div class="coroane-cylinder" id="coroaneCylinder">
+                        <!-- Imaginile vor fi adăugate dinamic prin JS -->
+                    </div>
+                    
+                    <!-- Butoane de navigare - săgeți direct pe fundal -->
+                    <button class="cylinder-nav cylinder-prev" id="cylinderPrev" aria-label="Imaginea anterioară">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="cylinder-nav cylinder-next" id="cylinderNext" aria-label="Imaginea următoare">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Indicatori pentru poziția curentă -->
+                    <div class="cylinder-indicators" id="cylinderIndicators">
+                        <!-- Indicatori vor fi adăugati dinamic -->
+                    </div>
+                    
+                    <!-- Informații despre imaginea curentă -->
+                    <div class="cylinder-info">
+                        <span class="current-index" id="currentIndex">1 / 40</span>
+                    </div>
+                </div>
+                
+                <!-- Descriere secțiune -->
+                <div class="coroane-description">
+                    <p>Oferim o gamă variată de coroane și aranjamente funerare, realizate cu grijă și atenție la detalii.</p>
+                </div>
             </div>
         </section>
 
+        <!-- Secțiune Pachete Funerare -->
         <section class="pachete-index">
             <div class="container">
-                <div class="section-title"><h2>Pachete Funerare</h2></div>
-                <div class="pachete-grid">
-                    <div class="all-packages-center"><a href="./pachete" class="btn-more" id="allPackagesBtn"><span>Vezi toate pachetele</span><i class="fas fa-arrow-right"></i></a></div>
-                    <div class="pachet-card"><div class="pachet-header"><div class="image-container"><img src="images/4-Lat.png" alt="Pachet 4-Lat - Sicriu simplu" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+4-Lat'"></div><div class="pachet-badge">Economic</div></div><div class="pachet-content"><h3>Pachet 4-Lat</h3><p>Pachet funerar standard cu sicriu simplu din lemn masiv, ideal pentru ceremoniile tradiționale cu demnitate și respect.</p><ul class="pachet-features"><li><i class="fas fa-check-circle"></i> Capitonaț capacul interior</li><li><i class="fas fa-check-circle"></i> Garnitura completă interior</li><li><i class="fas fa-check-circle"></i> Perna și căpătâi special</li><li><i class="fas fa-check-circle"></i> Finisaj clasic și durabil</li></ul><div class="pachet-price">980 RON</div></div></div>
-                    <div class="pachet-card"><div class="pachet-header"><div class="image-container"><img src="images/prezident alb.png" alt="Pachet Prezident Alb - Sicriu premium" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+Premium'"></div><div class="pachet-badge">Premium</div></div><div class="pachet-content"><h3>Pachet Prezindent Alb</h3><p>Pachet funerar premium cu sicriu Prezident Alb, pentru o ceremonie demnă și elegantă, cu finisaje superioare.</p><ul class="pachet-features"><li><i class="fas fa-check-circle"></i> Capitonaj interior premium satin</li><li><i class="fas fa-check-circle"></i> Garnitură completă și ajustabilă</li><li><i class="fas fa-check-circle"></i> Perna de cap din satin alb</li><li><i class="fas fa-check-circle"></i> Manere și accesorii aurii</li></ul><div class="pachet-price">5.780 RON</div></div></div>
+                <div class="section-title">
+                    <h2>Pachete Funerare</h2>
                 </div>
-                <div class="more-packages-container"><div class="mobile-center-btn"><a href="./pachete" class="btn-more" id="mobileAllPackagesBtn"><span>Vezi toate pachetele</span><i class="fas fa-arrow-right"></i></a></div></div>
+                
+                <div class="pachete-grid">
+                    <!-- Butonul central pentru desktop -->
+                    <div class="all-packages-center">
+                        <a href="./pachete" class="btn-more" id="allPackagesBtn">
+                            <span>Vezi toate pachetele</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- PACHET 1 - 4-LAT -->
+                    <div class="pachet-card">
+                        <div class="pachet-header">
+                            <div class="image-container">
+                                <img src="images/4-Lat.png" alt="Pachet 4-Lat - Sicriu simplu" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+4-Lat'">
+                            </div>
+                            <div class="pachet-badge">Economic</div>
+                        </div>
+                        <div class="pachet-content">
+                            <h3>Pachet 4-Lat</h3>
+                            <p>Pachet funerar standard cu sicriu simplu din lemn masiv, ideal pentru ceremoniile tradiționale cu demnitate și respect.</p>
+                            <ul class="pachet-features">
+                                <li><i class="fas fa-check-circle"></i> Capitonaț capacul interior</li>
+                                <li><i class="fas fa-check-circle"></i> Garnitura completă interior</li>
+                                <li><i class="fas fa-check-circle"></i> Perna și căpătâi special</li>
+                                <li><i class="fas fa-check-circle"></i> Finisaj clasic și durabil</li>
+                            </ul>
+                            <div class="pachet-price">980 RON</div>
+                        </div>
+                    </div>
+                    
+                    <!-- PACHET 2 - PREZIDENT ALB -->
+                    <div class="pachet-card">
+                        <div class="pachet-header">
+                            <div class="image-container">
+                                <img src="images/prezident alb.png" alt="Pachet Prezident Alb - Sicriu premium" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+Premium'">
+                            </div>
+                            <div class="pachet-badge">Premium</div>
+                        </div>
+                        <div class="pachet-content">
+                            <h3>Pachet Prezindent Alb</h3>
+                            <p>Pachet funerar premium cu sicriu Prezident Alb, pentru o ceremonie demnă și elegantă, cu finisaje superioare.</p>
+                            <ul class="pachet-features">
+                                <li><i class="fas fa-check-circle"></i> Capitonaj interior premium satin</li>
+                                <li><i class="fas fa-check-circle"></i> Garnitură completă și ajustabilă</li>
+                                <li><i class="fas fa-check-circle"></i> Perna de cap din satin alb</li>
+                                <li><i class="fas fa-check-circle"></i> Manere și accesorii aurii</li>
+                            </ul>
+                            <div class="pachet-price">5.780 RON</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Butonul "Vezi toate pachetele" pentru mobile - CENTRAT PERFECT -->
+                <div class="more-packages-container">
+                    <div class="mobile-center-btn">
+                        <a href="./pachete" class="btn-more" id="mobileAllPackagesBtn">
+                            <span>Vezi toate pachetele</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Comercializare Produse -->
         <section class="comercializare">
             <div class="container">
-                <div class="section-title"><h2>Comercializare Produse Funerare</h2></div>
+                <div class="section-title">
+                    <h2>Comercializare Produse Funerare</h2>
+                </div>
+                
                 <div class="products-grid">
-                    <div class="product-card"><div class="product-icon"><i class="fas fa-church"></i></div><h3>Sicrie Diverse Modele</h3><p>Gamă variată de sicrie din lemn masiv și placat, în diferite finisaje și culori.</p></div>
-                    <div class="product-card"><div class="product-icon"><i class="fas fa-cross"></i></div><h3>Cruci Funerare</h3><p>Cruci din lemn, piatră sau metal, personalizate după preferințe.</p></div>
-                    <div class="product-card"><div class="product-icon"><i class="fas fa-icicles"></i></div><h3>Capace Frigorifice</h3><p>Capace frigorifice pentru păstrarea temporară a decedaților.</p></div>
-                    <div class="product-card"><div class="product-icon"><i class="fas fa-cubes"></i></div><h3>Accesorii Mortuare</h3><p>Lenjerie mortuară, prosoape, luminări, icoane și alte accesorii necesare.</p></div>
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <h3>Sicrie Diverse Modele</h3>
+                        <p>Gamă variată de sicrie din lemn masiv și placat, în diferite finisaje și culori.</p>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                        <h3>Cruci Funerare</h3>
+                        <p>Cruci din lemn, piatră sau metal, personalizate după preferințe.</p>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-icicles"></i>
+                        </div>
+                        <h3>Capace Frigorifice</h3>
+                        <p>Capace frigorifice pentru păstrarea temporară a decedaților.</p>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <h3>Accesorii Mortuare</h3>
+                        <p>Lenjerie mortuară, prosoape, luminări, icoane și alte accesorii necesare.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- SECȚIUNEA ASISTENȚĂ ȘI FORMALITĂȚI - CARDURI CENTRATE -->
         <section class="asistenta-formalitati" id="asistenta-formalitati">
             <div class="container">
-                <div class="section-title"><h2>Asistență și Formalități</h2></div>
+                <div class="section-title">
+                    <h2>Asistență și Formalități</h2>
+                </div>
+                
                 <div class="servicii-grid">
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-file-contract"></i></div><h3>Întocmirea Documentelor de Deces</h3><p>Asistență completă pentru întocmirea și obținerea tuturor documentelor necesare (certificatul de deces, alte acte oficiale) în conformitate cu legislația în vigoare.</p></div>
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-hand-holding-usd"></i></div><h3>Consultanță pentru Ajutorul de Înmormântare</h3><p>Îndrumare și sprijin în obținerea ajutorului de înmormântare de la stat, completarea formularelor și depunerea dosarului la instituțiile competente.</p></div>
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-church"></i></div><h3>Organizarea Completă a Ceremoniei Religioase</h3><p>Coordonarea întregului proces ceremonial: contactarea preotului, organizarea slujbei religioase, prepararea altarului și asigurarea tuturor elementelor necesare.</p></div>
+                    <!-- Serviciu 1 - Documente de deces -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>Întocmirea Documentelor de Deces</h3>
+                        <p>Asistență completă pentru întocmirea și obținerea tuturor documentelor necesare (certificatul de deces, alte acte oficiale) în conformitate cu legislația în vigoare.</p>
+                    </div>
+                    
+                    <!-- Serviciu 2 - Ajutor de înmormântare -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>Consultanță pentru Ajutorul de Înmormântare</h3>
+                        <p>Îndrumare și sprijin în obținerea ajutorului de înmormântare de la stat, completarea formularelor și depunerea dosarului la instituțiile competente.</p>
+                    </div>
+                    
+                    <!-- Serviciu 3 - Organizare ceremonie religioasă -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <h3>Organizarea Completă a Ceremoniei Religioase</h3>
+                        <p>Coordonarea întregului proces ceremonial: contactarea preotului, organizarea slujbei religioase, prepararea altarului și asigurarea tuturor elementelor necesare.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- SECȚIUNEA SERVICII SUPLIMENTARE - CARDURI CENTRATE -->
         <section class="servicii-suplimentare" id="servicii-suplimentare">
             <div class="container">
-                <div class="section-title"><h2>Servicii Suplimentare</h2></div>
-                <div class="servicii-grid">
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-tree"></i></div><h3>Amenajare și Întreținere Locuri de Veci</h3><p>Servicii profesionale de amenajare, curățenie și întreținere a locurilor de veci, asigurând un aspect demn și respectuos pentru eternul somn al celor plecați.</p></div>
-                    <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-fire"></i></div><h3>Servicii de Incinerare (la cerere)</h3><p>Oferim servicii complete de incinerare, asigurând toate procedurile legale, transportul, organizarea ceremoniei și returnarea cinerarului, conform dorințelor familiei.</p></div>
+                <div class="section-title">
+                    <h2>Servicii Suplimentare</h2>
                 </div>
-                <div class="serviciu-note"><p><i class="fas fa-info-circle"></i> Toate serviciile suplimentare sunt personalizate în funcție de nevoile și preferințele fiecărei familii, cu respect maxim pentru tradiții și credințe.</p></div>
+                
+                <div class="servicii-grid">
+                    <!-- Serviciu 1 - Amenajare locuri de veci -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>Amenajare și Întreținere Locuri de Veci</h3>
+                        <p>Servicii profesionale de amenajare, curățenie și întreținere a locurilor de veci, asigurând un aspect demn și respectuos pentru eternul somn al celor plecați.</p>
+                    </div>
+                    
+                    <!-- Serviciu 2 - Incinerare -->
+                    <div class="serviciu-card">
+                        <div class="serviciu-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Servicii de Incinerare (la cerere)</h3>
+                        <p>Oferim servicii complete de incinerare, asigurând toate procedurile legale, transportul, organizarea ceremoniei și returnarea cinerarului, conform dorințelor familiei.</p>
+                    </div>
+                </div>
+                
+                <!-- Notă informativă -->
+                <div class="serviciu-note">
+                    <p><i class="fas fa-info-circle"></i> Toate serviciile suplimentare sunt personalizate în funcție de nevoile și preferințele fiecărei familii, cu respect maxim pentru tradiții și credințe.</p>
+                </div>
             </div>
         </section>
 
+        <!-- Footer -->
         <footer>
             <div class="container">
                 <div class="footer-container">
-                    <div class="footer-col"><h3>Casa Funerară Lupică</h3><p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p><div class="social-links"><a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a></div></div>
-                    <div class="footer-col"><h3>Link-uri Rapide</h3><ul><li><a href="./">Home</a></li><li><a href="./pachete">Pachete funerare</a></li><li><a href="./coroane">Coroane funerare</a></li><li><a href="./contact">Contact</a></li></ul></div>
-                    <div class="footer-col"><h3>Servicii</h3><ul><li><a href="#servicii-principale">Servicii funerare principale</a></li><li><a href="./pachete">Pachete funerare</a></li><li><a href="#asistenta-formalitati">Asistență și formalități</a></li><li><a href="#servicii-suplimentare">Servicii suplimentare</a></li><li><a href="./pachete">Sicrie și accesorii</a></li></ul></div>
+                    <div class="footer-col">
+                        <h3>Casa Funerară Lupică</h3>
+                        <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane">Coroane funerare</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Servicii</h3>
+                        <ul>
+                            <li><a href="#servicii-principale">Servicii funerare principale</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="#asistenta-formalitati">Asistență și formalități</a></li>
+                            <li><a href="#servicii-suplimentare">Servicii suplimentare</a></li>
+                            <li><a href="./pachete">Sicrie și accesorii</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="copyright"><p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p></div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
+                </div>
             </div>
         </footer>
+        
     </div>
+    <!-- END HTML -->
 
-    <!-- ============================================ -->
-    <!-- ========== SECȚIUNEA 3: JAVASCRIPT COMPLET ========== -->
-    <!-- ============================================ -->
-    
+    <!-- START JAVASCRIPT -->
     <script>
-        (function() {
-            // ===== DETECTARE DISPOZITIVE =====
-            const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isTabletDevice = /iPad|Android.*Tablet|Tablet/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+        // ADĂUGAT: Detectare dispozitiv mobil
+        const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isTabletDevice = /iPad|Android.*Tablet|Tablet/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+        
+        // ADĂUGAT: Funcție pentru a verifica dacă browser-ul suportă animații CSS
+        function supportsCSSAnimations() {
+            return 'animation' in document.documentElement.style || 
+                   'WebkitAnimation' in document.documentElement.style || 
+                   'MozAnimation' in document.documentElement.style;
+        }
+        
+        // Efect de fade pentru conținut la scroll
+        const contentFade = document.getElementById('contentFade');
+        
+        function updateContentFade() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
             
-            function supportsCSSAnimations() {
-                return 'animation' in document.documentElement.style || 
-                       'WebkitAnimation' in document.documentElement.style || 
-                       'MozAnimation' in document.documentElement.style;
+            const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
+            const opacity = 0.7 + (scrollProgress * 0.2);
+            contentFade.style.background = `linear-gradient(to bottom, 
+                rgba(30, 30, 30, ${opacity}) 0%, 
+                rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
+        }
+        
+        updateContentFade();
+        window.addEventListener('scroll', updateContentFade);
+        window.addEventListener('resize', updateContentFade);
+        
+        // Creare cruciulițe aurii - versiune optimizată pentru mobil
+        function createCrosses() {
+            const crossesContainer = document.getElementById('crossesContainer');
+            
+            // Numărul redus de cruci pentru mobil pentru performanță
+            const crossCount = isMobileDevice ? 12 : (isTabletDevice ? 18 : 25);
+            
+            // Dacă browser-ul nu suportă animații CSS, nu creăm cruci
+            if (!supportsCSSAnimations()) {
+                return;
             }
             
-            // ===== EFECT FADE LA SCROLL =====
-            const contentFade = document.getElementById('contentFade');
-            function updateContentFade() {
-                if (!contentFade) return;
-                const scrollPosition = window.scrollY;
-                const windowHeight = window.innerHeight;
-                const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
-                const opacity = 0.7 + (scrollProgress * 0.2);
-                contentFade.style.background = `linear-gradient(to bottom, rgba(30, 30, 30, ${opacity}) 0%, rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
-            }
-            updateContentFade();
-            window.addEventListener('scroll', updateContentFade);
-            window.addEventListener('resize', updateContentFade);
-            
-            // ===== CRUCIULIȚE AURII =====
-            function createCrosses() {
-                const crossesContainer = document.getElementById('crossesContainer');
-                if (!crossesContainer) return;
-                const crossCount = isMobileDevice ? 12 : (isTabletDevice ? 18 : 25);
-                if (!supportsCSSAnimations()) return;
-                crossesContainer.innerHTML = '';
-                for (let i = 0; i < crossCount; i++) {
-                    const cross = document.createElement('div');
-                    cross.className = 'cross';
-                    cross.innerHTML = '†';
-                    cross.style.left = Math.random() * 100 + '%';
-                    cross.style.animationDelay = Math.random() * 20 + 's';
-                    cross.style.fontSize = (Math.random() * (isMobileDevice ? 12 : 20) + (isMobileDevice ? 8 : 12)) + 'px';
-                    if (isMobileDevice) cross.style.animationDuration = (Math.random() * 10 + 25) + 's';
-                    crossesContainer.appendChild(cross);
-                }
-            }
-            
-            // ===== PARTICULE AURII =====
-            function createGoldParticles() {
-                const goldContainer = document.getElementById('goldDecoration');
-                if (!goldContainer) return;
-                const particleCount = isMobileDevice ? 10 : (isTabletDevice ? 20 : 30);
-                if (!supportsCSSAnimations()) return;
-                goldContainer.innerHTML = '';
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'gold-particle';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    particle.style.animationDelay = Math.random() * 4 + 's';
-                    if (isMobileDevice) particle.style.animationDuration = (Math.random() * 2 + 6) + 's';
-                    goldContainer.appendChild(particle);
-                }
-                const lineCount = isMobileDevice ? 4 : (isTabletDevice ? 8 : 12);
-                for (let i = 0; i < lineCount; i++) {
-                    const line = document.createElement('div');
-                    line.className = 'gold-line';
-                    line.style.top = (i * (isMobileDevice ? 20 : 8)) + '%';
-                    line.style.width = Math.random() * (isMobileDevice ? 30 : 50) + (isMobileDevice ? 20 : 30) + '%';
-                    line.style.left = Math.random() * (isMobileDevice ? 70 : 50) + '%';
-                    line.style.opacity = Math.random() * 0.1 + 0.05;
-                    goldContainer.appendChild(line);
-                }
-            }
-            
-            // ===== APELURI TELEFON =====
-            function initPhoneCalls() {
-                const consultantaBtn = document.getElementById('consultantaBtn');
-                if (consultantaBtn) {
-                    consultantaBtn.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
-                        if (isMobileDevice) {
-                            e.preventDefault();
-                            window.location.href = 'tel:0752538888';
-                        } else {
-                            e.preventDefault();
-                            if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888?')) {
-                                window.location.href = 'tel:0752538888';
-                            }
-                        }
-                    }, { passive: false });
+            for (let i = 0; i < crossCount; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '†';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobileDevice ? 12 : 20) + (isMobileDevice ? 8 : 12)) + 'px';
+                
+                // ADĂUGAT: Reduce viteza animației pentru mobil
+                if (isMobileDevice) {
+                    cross.style.animationDuration = (Math.random() * 10 + 25) + 's';
                 }
                 
-                const phoneLinks = document.querySelectorAll('a[href^="tel"], .phone-link');
-                phoneLinks.forEach(link => {
-                    link.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
-                        if (isMobileDevice) return true;
-                        if (!this.classList.contains('btn') && !this.id.includes('consultanta')) return true;
-                    });
-                });
+                crossesContainer.appendChild(cross);
+            }
+        }
+        
+        // Creare particule aurii decorative - versiune optimizată pentru mobil
+        function createGoldParticles() {
+            const goldContainer = document.getElementById('goldDecoration');
+            
+            // Numărul redus de particule pentru mobil pentru performanță
+            const particleCount = isMobileDevice ? 10 : (isTabletDevice ? 20 : 30);
+            
+            // Dacă browser-ul nu suportă animații CSS, nu creăm particule
+            if (!supportsCSSAnimations()) {
+                return;
             }
             
-            // ===== ANIMAȚII LA SCROLL =====
-            function initScrollAnimations() {
-                if (!('IntersectionObserver' in window)) {
-                    document.querySelectorAll('.serviciu-card, .pachet-card, .despre-text, .despre-img, .contact-item, .contact-form').forEach(el => el.classList.add('visible'));
-                    return;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                
+                // ADĂUGAT: Reduce viteza animației pentru mobil
+                if (isMobileDevice) {
+                    particle.style.animationDuration = (Math.random() * 2 + 6) + 's';
                 }
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-                document.querySelectorAll('.serviciu-card, .pachet-card, .despre-text, .despre-img, .contact-item, .contact-form').forEach(el => observer.observe(el));
+                
+                goldContainer.appendChild(particle);
             }
             
-            // ===== SMOOTH SCROLL =====
-            function initSmoothScrolling() {
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href');
-                        if (targetId === '#') return;
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            if ('scrollBehavior' in document.documentElement.style) {
-                                window.scrollTo({ top: targetElement.offsetTop - 80, behavior: isMobileDevice ? 'auto' : 'smooth' });
-                            } else {
-                                window.scrollTo(0, targetElement.offsetTop - 80);
-                            }
-                        }
-                    });
-                });
+            const lineCount = isMobileDevice ? 4 : (isTabletDevice ? 8 : 12);
+            for (let i = 0; i < lineCount; i++) {
+                const line = document.createElement('div');
+                line.className = 'gold-line';
+                line.style.top = (i * (isMobileDevice ? 20 : 8)) + '%';
+                line.style.width = Math.random() * (isMobileDevice ? 30 : 50) + (isMobileDevice ? 20 : 30) + '%';
+                line.style.left = Math.random() * (isMobileDevice ? 70 : 50) + '%';
+                line.style.opacity = Math.random() * 0.1 + 0.05;
+                goldContainer.appendChild(line);
             }
+        }
+        
+        // Funcție pentru apelare telefon - versiune îmbunătățită
+        function initPhoneCalls() {
+            // Pentru butonul din hero
+            const consultantaBtn = document.getElementById('consultantaBtn');
             
-            // ===== EFECTE BUTOANE =====
-            function enhanceButtons() {
-                const allButtons = document.querySelectorAll('.btn-more, .btn');
-                allButtons.forEach(button => {
-                    const addActiveEffect = function() { this.style.transform = 'translateY(-1px)'; this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.4)'; };
-                    const removeActiveEffect = function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)'; };
-                    if (!isMobileDevice) {
-                        button.addEventListener('mouseenter', function() { this.style.transform = 'translateY(-3px)'; this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)'; });
-                        button.addEventListener('mouseleave', function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)'; });
-                        button.addEventListener('mousedown', addActiveEffect);
-                        button.addEventListener('mouseup', function() { this.style.transform = 'translateY(-3px)'; this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)'; });
-                    }
+            if (consultantaBtn) {
+                // ADĂUGAT: Event listener optimizat pentru mobil
+                consultantaBtn.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
                     if (isMobileDevice) {
-                        button.addEventListener('touchstart', function(e) { e.preventDefault(); addActiveEffect.call(this); }, { passive: false });
-                        button.addEventListener('touchend', function(e) { e.preventDefault(); removeActiveEffect.call(this); }, { passive: false });
-                        button.addEventListener('touchcancel', function(e) { e.preventDefault(); removeActiveEffect.call(this); }, { passive: false });
+                        e.preventDefault();
+                        // Pe mobil, permite apelul direct fără confirmare pentru o experiență mai bună
+                        window.location.href = 'tel:0752538888';
+                    } else {
+                        // Pe desktop, arată confirmare
+                        e.preventDefault();
+                        if (confirm('Sunteți sigur că doriți să apelați numărul 0752 538 888?')) {
+                            window.location.href = 'tel:0752538888';
+                        }
+                    }
+                }, { passive: false });
+            }
+            
+            // Pentru link-urile telefon din header și footer
+            const phoneLinks = document.querySelectorAll('a[href^="tel"], .phone-link');
+            
+            phoneLinks.forEach(link => {
+                // ADĂUGAT: Event listener optimizat pentru mobil
+                link.addEventListener(isMobileDevice ? 'touchstart' : 'click', function(e) {
+                    // Pe mobil, permite apelul direct
+                    if (isMobileDevice) {
+                        return true;
+                    }
+                    // Pe desktop, pentru link-urile mici din header/footer, permite apelul direct
+                    if (!this.classList.contains('btn') && !this.id.includes('consultanta')) {
+                        return true;
                     }
                 });
+            });
+        }
+        
+        // Formular de contact
+        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                nume: document.getElementById('nume').value,
+                telefon: document.getElementById('telefon').value,
+                serviciu: document.getElementById('serviciu').value,
+                mesaj: document.getElementById('mesaj').value
+            };
+            
+            // Aici poți adăuga logica pentru trimiterea datelor la server
+            console.log('Formular trimis:', formData);
+            
+            // Mesaj de confirmare
+            alert('Vă mulțumim pentru mesaj! Vă vom contacta în cel mai scurt timp posibil.');
+            
+            // Resetează formularul
+            this.reset();
+        });
+        
+        // Animări la scroll - versiune optimizată pentru mobil
+        function initScrollAnimations() {
+            // ADĂUGAT: Verifică dacă browser-ul suportă Intersection Observer
+            if (!('IntersectionObserver' in window)) {
+                // Fallback pentru browsere vechi - arată toate elementele imediat
+                document.querySelectorAll('.serviciu-card, .pachet-card, .despre-text, .despre-img, .contact-item, .contact-form').forEach(el => {
+                    el.classList.add('visible');
+                });
+                return;
             }
             
-            function preventPhoneNumberStyling() {
-                document.querySelectorAll('[href^="tel"], .phone-number').forEach(el => el.setAttribute('x-ms-format-detection', 'none'));
-            }
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
             
-            function optimizeHeaderDove() {
-                const doveHeader = document.querySelector('.dove-header');
-                if (doveHeader && isMobileDevice) doveHeader.style.animationDuration = '12s';
-            }
-            
-            function optimizeCandleAnimation() {
-                const candleContainer = document.querySelector('.candle-container');
-                if (candleContainer && isMobileDevice) {
-                    const sparks = candleContainer.querySelectorAll('.flame-spark');
-                    if (sparks.length > 1) {
-                        for (let i = 1; i < sparks.length; i++) sparks[i].style.display = 'none';
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // ADĂUGAT: Opțional, oprește observarea după ce elementul a devenit vizibil
+                        observer.unobserve(entry.target);
                     }
-                    const waxDrips = candleContainer.querySelectorAll('.candle-wax');
-                    if (waxDrips.length > 1) {
-                        for (let i = 1; i < waxDrips.length; i++) waxDrips[i].style.display = 'none';
-                    }
-                }
-            }
+                });
+            }, observerOptions);
             
-            function checkReducedMotionPreference() {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                    document.querySelectorAll('*').forEach(el => el.style.animationPlayState = 'paused');
-                    document.querySelectorAll('.cross, .gold-particle, .dove-header, .candle, .flame, .flame-spark, .candle-wax').forEach(el => el.style.animation = 'none');
-                }
-            }
+            // Observă toate cardurile de servicii
+            document.querySelectorAll('.serviciu-card, .pachet-card, .despre-text, .despre-img, .contact-item, .contact-form').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Încărcare imaginilor pentru pachete
+        function preloadPackageImages() {
+            const images = [
+                'images/4-Lat.png',
+                'images/prezident alb.png'
+            ];
             
-            // ===== GALERIE COROANE 3D =====
-            function initCoroaneCylinder() {
-                const cylinder = document.getElementById('coroaneCylinder');
-                const prevBtn = document.getElementById('cylinderPrev');
-                const nextBtn = document.getElementById('cylinderNext');
-                const indicatorsContainer = document.getElementById('cylinderIndicators');
-                const currentIndexSpan = document.getElementById('currentIndex');
-                if (!cylinder) return;
-                
-                const isMobile = window.innerWidth <= 768;
-                const TOTAL_IMAGES = 40;
-                const CARDS_TO_SHOW = isMobile ? 3 : 5;
-                const BASE_ANGLE = 360 / CARDS_TO_SHOW;
-                const TRANSLATE_Z = isMobile ? 250 : 350;
-                
-                let currentIndex = 0;
-                let isAnimating = false;
-                const imageStatus = new Array(TOTAL_IMAGES).fill(false);
-                const imageCache = new Array(TOTAL_IMAGES).fill(null);
-                
-                function loadImageWithPriority(index) {
-                    if (imageStatus[index] || imageCache[index]) return;
-                    imageStatus[index] = 'loading';
-                    const img = new Image();
-                    img.onload = function() { imageCache[index] = img.src; imageStatus[index] = 'loaded'; updateImageInGallery(index); scheduleNextLoads(); };
-                    img.onerror = function() { imageStatus[index] = 'error'; scheduleNextLoads(); };
-                    const cacheBuster = isMobile ? '' : `?t=${Date.now()}`;
-                    img.src = `images/Coroana ${index + 1}.png${cacheBuster}`;
-                }
-                
-                function scheduleNextLoads() {
-                    const priorityIndices = new Set();
-                    priorityIndices.add(currentIndex);
-                    priorityIndices.add((currentIndex + 1) % TOTAL_IMAGES);
-                    priorityIndices.add((currentIndex - 1 + TOTAL_IMAGES) % TOTAL_IMAGES);
-                    for (let i = 2; i <= 3; i++) {
-                        priorityIndices.add((currentIndex + i) % TOTAL_IMAGES);
-                        priorityIndices.add((currentIndex - i + TOTAL_IMAGES) % TOTAL_IMAGES);
-                    }
-                    if (!isMobile) {
-                        for (let i = 4; i <= 6; i++) {
-                            priorityIndices.add((currentIndex + i) % TOTAL_IMAGES);
-                            priorityIndices.add((currentIndex - i + TOTAL_IMAGES) % TOTAL_IMAGES);
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+                img.onload = function() {
+                    console.log(`Imaginea ${src} s-a încărcat cu succes`);
+                };
+                img.onerror = function() {
+                    console.warn(`Imaginea ${src} nu s-a putut încărca`);
+                };
+            });
+        }
+        
+        // Navigare smooth pentru link-uri interne - versiune optimizată pentru mobil
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // ADĂUGAT: Pentru mobil, folosește scroll instant sau smooth în funcție de suport
+                        if ('scrollBehavior' in document.documentElement.style) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: isMobileDevice ? 'auto' : 'smooth'
+                            });
+                        } else {
+                            // Fallback pentru browsere vechi
+                            window.scrollTo(0, targetElement.offsetTop - 80);
                         }
                     }
-                    const MAX_CONCURRENT = isMobile ? 4 : 3;
-                    let loadingCount = 0;
-                    for (const index of priorityIndices) {
-                        if (loadingCount >= MAX_CONCURRENT) break;
-                        if (!imageStatus[index] || imageStatus[index] === 'loading') {
-                            loadImageWithPriority(index);
-                            loadingCount++;
-                        }
-                    }
+                });
+            });
+        }
+        
+        // Adaugă efecte interactive pentru butoane - versiune optimizată pentru mobil
+        function enhanceButtons() {
+            const allButtons = document.querySelectorAll('.btn-more, .btn');
+            
+            allButtons.forEach(button => {
+                // Efect de hover/active optimizat pentru ambele dispozitive
+                const addHoverEffect = function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+                };
+                
+                const removeHoverEffect = function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
+                };
+                
+                const addActiveEffect = function() {
+                    this.style.transform = 'translateY(-1px)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.4)';
+                };
+                
+                // Pentru desktop
+                if (!isMobileDevice) {
+                    button.addEventListener('mouseenter', addHoverEffect);
+                    button.addEventListener('mouseleave', removeHoverEffect);
+                    button.addEventListener('mousedown', addActiveEffect);
+                    button.addEventListener('mouseup', addHoverEffect);
                 }
                 
-                function updateImageInGallery(index) {
-                    const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
-                    const imgElement = card?.querySelector('img');
-                    if (imgElement && imageCache[index]) imgElement.src = imageCache[index];
-                }
-                
-                function createGalleryStructure() {
-                    cylinder.innerHTML = '';
-                    if (indicatorsContainer) indicatorsContainer.innerHTML = '';
-                    for (let i = 0; i < TOTAL_IMAGES; i++) {
-                        const card = document.createElement('div');
-                        card.className = 'coroane-card';
-                        card.dataset.index = i;
-                        const angle = (i * BASE_ANGLE);
-                        card.style.transform = `rotateY(${angle}deg) translateZ(${TRANSLATE_Z}px)`;
-                        card.style.opacity = '0.7';
-                        const img = document.createElement('img');
-                        img.className = 'coroane-image';
-                        img.alt = `Corona funerară ${i + 1}`;
-                        img.src = `https://via.placeholder.com/${isMobile ? '100x140' : '150x210'}/2a2a2a/555555?text=Loading...`;
-                        img.loading = 'lazy';
-                        card.appendChild(img);
-                        cylinder.appendChild(card);
-                        if (indicatorsContainer) {
-                            const indicator = document.createElement('div');
-                            indicator.className = 'cylinder-indicator';
-                            indicator.dataset.index = i;
-                            if (i === currentIndex) indicator.classList.add('active');
-                            indicator.addEventListener('click', () => { if (!isAnimating) goToImage(i); });
-                            indicatorsContainer.appendChild(indicator);
-                        }
-                    }
-                    updateDisplay();
-                }
-                
-                function updateDisplay() {
-                    cylinder.style.transform = `rotateY(${-currentIndex * BASE_ANGLE}deg)`;
-                    updateCardsVisibility();
-                    updateIndicators();
-                    if (currentIndexSpan) currentIndexSpan.textContent = `${currentIndex + 1} / ${TOTAL_IMAGES}`;
-                }
-                
-                function updateCardsVisibility() {
-                    const cards = document.querySelectorAll('.coroane-card');
-                    cards.forEach((card, i) => {
-                        const cardIndex = parseInt(card.dataset.index);
-                        let diff = (cardIndex - currentIndex + TOTAL_IMAGES) % TOTAL_IMAGES;
-                        if (diff > TOTAL_IMAGES/2) diff -= TOTAL_IMAGES;
-                        card.classList.toggle('active', diff === 0);
-                        if (diff === 0) { card.style.opacity = '1'; card.style.filter = 'none'; card.style.zIndex = '10'; }
-                        else if (Math.abs(diff) === 1) { card.style.opacity = '0.85'; card.style.filter = 'blur(0.5px)'; card.style.zIndex = '5'; }
-                        else if (Math.abs(diff) === 2) { card.style.opacity = '0.7'; card.style.filter = 'blur(1px)'; card.style.zIndex = '3'; }
-                        else { card.style.opacity = '0.5'; card.style.filter = 'blur(1.5px)'; card.style.zIndex = '1'; }
-                    });
-                }
-                
-                function updateIndicators() {
-                    if (!indicatorsContainer) return;
-                    const indicators = document.querySelectorAll('.cylinder-indicator');
-                    indicators.forEach(indicator => indicator.classList.toggle('active', parseInt(indicator.dataset.index) === currentIndex));
-                }
-                
-                function goToImage(index) {
-                    if (isAnimating || index === currentIndex) return;
-                    isAnimating = true;
-                    currentIndex = (index + TOTAL_IMAGES) % TOTAL_IMAGES;
-                    cylinder.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                    updateDisplay();
-                    setTimeout(() => scheduleNextLoads(), 200);
-                    setTimeout(() => { cylinder.style.transition = ''; isAnimating = false; }, 600);
-                }
-                
-                function nextImage() { goToImage(currentIndex + 1); }
-                function prevImage() { goToImage(currentIndex - 1); }
-                
-                if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevImage(); });
-                if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextImage(); });
-                
-                if (isMobile && cylinder) {
-                    let touchStartX = 0;
-                    cylinder.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-                    cylinder.addEventListener('touchend', (e) => {
-                        if (!touchStartX) return;
-                        const diffX = touchStartX - e.changedTouches[0].clientX;
-                        if (Math.abs(diffX) > 30) { e.preventDefault(); diffX > 0 ? nextImage() : prevImage(); }
-                        touchStartX = 0;
+                // Pentru mobil (touch events)
+                if (isMobileDevice) {
+                    button.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        addActiveEffect.call(this);
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        removeHoverEffect.call(this);
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchcancel', function(e) {
+                        e.preventDefault();
+                        removeHoverEffect.call(this);
                     }, { passive: false });
                 }
+            });
+        }
+        
+        // Funcție pentru a preveni formatarea automata a numerelor
+        function preventPhoneNumberStyling() {
+            // Adaugă atribut x-ms-format-detection="none" pentru Internet Explorer/Edge
+            const phoneElements = document.querySelectorAll('[href^="tel"], .phone-number');
+            phoneElements.forEach(el => {
+                el.setAttribute('x-ms-format-detection', 'none');
+            });
+        }
+        
+        // ADĂUGAT: Optimizare pentru animația porumbelului din header pe mobil
+        function optimizeHeaderDove() {
+            const doveHeader = document.querySelector('.dove-header');
+            if (doveHeader && isMobileDevice) {
+                // Reduce viteza animației pentru mobil
+                doveHeader.style.animationDuration = '12s';
+            }
+        }
+        
+        // ADĂUGAT: Optimizare pentru animația lumânării pe mobil
+        function optimizeCandleAnimation() {
+            const candleContainer = document.querySelector('.candle-container');
+            if (candleContainer && isMobileDevice) {
+                // Reduce numărul de scântei pentru mobil
+                const sparks = candleContainer.querySelectorAll('.flame-spark');
+                if (sparks.length > 1) {
+                    // Păstrează doar prima scânteie pentru mobil
+                    for (let i = 1; i < sparks.length; i++) {
+                        sparks[i].style.display = 'none';
+                    }
+                }
                 
-                createGalleryStructure();
+                // Reduce numărul de picături de ceară pentru mobil
+                const waxDrips = candleContainer.querySelectorAll('.candle-wax');
+                if (waxDrips.length > 1) {
+                    // Păstrează doar prima picătură pentru mobil
+                    for (let i = 1; i < waxDrips.length; i++) {
+                        waxDrips[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+        
+        // ADĂUGAT: Dezactivează animațiile pentru dispozitive cu preferințe de reducere a mișcării
+        function checkReducedMotionPreference() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            
+            if (prefersReducedMotion.matches) {
+                // Dezactivează toate animațiile CSS
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.animationPlayState = 'paused';
+                });
+                
+                // Dezactivează animațiile create cu JS
+                const animatedElements = document.querySelectorAll('.cross, .gold-particle, .dove-header, .candle, .flame, .flame-spark, .candle-wax');
+                animatedElements.forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+        }
+        
+                // FUNCȚIE OPTIMIZATĂ PENTRU GALERIA DE COROANE
+function initCoroaneCylinder() {
+    console.log('Initializare galerie coroane optimizată...');
+    
+    const cylinder = document.getElementById('coroaneCylinder');
+    const prevBtn = document.getElementById('cylinderPrev');
+    const nextBtn = document.getElementById('cylinderNext');
+    const indicatorsContainer = document.getElementById('cylinderIndicators');
+    const currentIndexSpan = document.getElementById('currentIndex');
+    
+    if (!cylinder) {
+        console.error('Elementul cylinder nu a fost găsit!');
+        return;
+    }
+    
+    const isMobile = window.innerWidth <= 768;
+    
+    // Numărul total de imagini (ajustează după câte ai)
+    const TOTAL_IMAGES = 40;
+    
+    // Setări pentru performanță
+    const CARDS_TO_SHOW = isMobile ? 3 : 5;
+    const BASE_ANGLE = 360 / CARDS_TO_SHOW;
+    const TRANSLATE_Z = isMobile ? 250 : 350;
+    
+    let currentIndex = 0;
+    let isAnimating = false;
+    const totalImages = TOTAL_IMAGES;
+    
+    // Array pentru a urmări imaginile încărcate
+    const imageStatus = new Array(TOTAL_IMAGES).fill(false);
+    const imageCache = new Array(TOTAL_IMAGES).fill(null);
+    
+    // Funcție pentru încărcarea eficientă a imaginilor
+    function loadImageWithPriority(index) {
+        // Dacă imaginea este deja încărcată sau se încarcă, skip
+        if (imageStatus[index] || imageCache[index]) {
+            return;
+        }
+        
+        imageStatus[index] = 'loading';
+        
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        
+        img.onload = function() {
+            console.log(`✅ Imaginea ${index + 1} încărcată`);
+            imageCache[index] = img.src;
+            imageStatus[index] = 'loaded';
+            
+            // Actualizează imaginea în galerie dacă este vizibilă
+            updateImageInGallery(index);
+            
+            // După încărcare, încarcă următoarele prioritare
+            scheduleNextLoads();
+        };
+        
+        img.onerror = function() {
+            console.log(`⚠️ Imaginea ${index + 1} nu există, folosesc placeholder`);
+            imageStatus[index] = 'error';
+            scheduleNextLoads();
+        };
+        
+        // Adaugă cache busting pentru desktop
+        const cacheBuster = isMobile ? '' : `?t=${Date.now()}`;
+        img.src = `images/Coroana ${index + 1}.png${cacheBuster}`;
+    }
+    
+    // Încarcă imaginile prioritare (cele vizibile și următoarele)
+    function scheduleNextLoads() {
+        const priorityIndices = new Set();
+        
+        // 1. Imaginea curentă și cele din imediata vecinătate (întotdeauna prioritate maximă)
+        priorityIndices.add(currentIndex);
+        priorityIndices.add((currentIndex + 1) % totalImages);
+        priorityIndices.add((currentIndex - 1 + totalImages) % totalImages);
+        
+        // 2. Următoarele 2 în ambele direcții
+        for (let i = 2; i <= 3; i++) {
+            priorityIndices.add((currentIndex + i) % totalImages);
+            priorityIndices.add((currentIndex - i + totalImages) % totalImages);
+        }
+        
+        // 3. Pentru desktop, încarcă mai multe pentru smoothness
+        if (!isMobile) {
+            for (let i = 4; i <= 6; i++) {
+                priorityIndices.add((currentIndex + i) % totalImages);
+                priorityIndices.add((currentIndex - i + totalImages) % totalImages);
+            }
+        }
+        
+        // Convert to array and load first few
+        const priorities = Array.from(priorityIndices);
+        
+        // Limitează încărcările simultane
+        const MAX_CONCURRENT = isMobile ? 4 : 3;
+        let loadingCount = 0;
+        
+        for (const index of priorities) {
+            if (loadingCount >= MAX_CONCURRENT) break;
+            
+            if (!imageStatus[index] || imageStatus[index] === 'loading') {
+                loadImageWithPriority(index);
+                loadingCount++;
+            }
+        }
+    }
+    
+    // Actualizează imaginea în galerie
+    function updateImageInGallery(index) {
+        const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
+        if (!card) return;
+        
+        const imgElement = card.querySelector('img');
+        if (!imgElement) return;
+        
+        if (imageCache[index]) {
+            imgElement.src = imageCache[index];
+            imgElement.style.opacity = '1';
+            imgElement.classList.add('loaded');
+        }
+    }
+    
+    // Creează structura inițială a galeriei
+    function createGalleryStructure() {
+        cylinder.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+        
+        for (let i = 0; i < totalImages; i++) {
+            // Creează cardul
+            const card = document.createElement('div');
+            card.className = 'coroane-card';
+            card.dataset.index = i;
+            
+            const angle = (i * BASE_ANGLE);
+            card.style.transform = `rotateY(${angle}deg) translateZ(${TRANSLATE_Z}px)`;
+            card.style.opacity = '0.7';
+            
+            // Creează imaginea cu placeholder
+            const img = document.createElement('img');
+            img.className = 'coroane-image';
+            img.alt = `Corona funerară ${i + 1}`;
+            
+            // Folosește placeholder mic pentru loading rapid
+            const placeholderSize = isMobile ? '100x140' : '150x210';
+            img.src = `https://via.placeholder.com/${placeholderSize}/2a2a2a/555555?text=Loading...`;
+            img.loading = 'lazy';
+            
+            card.appendChild(img);
+            cylinder.appendChild(card);
+            
+            // Creează indicator
+            const indicator = document.createElement('div');
+            indicator.className = 'cylinder-indicator';
+            indicator.dataset.index = i;
+            if (i === currentIndex) indicator.classList.add('active');
+            
+            indicator.addEventListener('click', () => {
+                if (!isAnimating) goToImage(i);
+            });
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        updateDisplay();
+    }
+    
+    // Actualizează afișarea galeriei
+    function updateDisplay() {
+        // Calculează rotația
+        const targetRotation = -currentIndex * BASE_ANGLE;
+        cylinder.style.transform = `rotateY(${targetRotation}deg)`;
+        
+        // Actualizează cardurile
+        updateCardsVisibility();
+        
+        // Actualizează indicatorii
+        updateIndicators();
+        
+        // Actualizează counter
+        updateCurrentIndex();
+    }
+    
+    // Actualizează vizibilitatea cardurilor
+    function updateCardsVisibility() {
+        const cards = document.querySelectorAll('.coroane-card');
+        if (cards.length === 0) return;
+        
+        cards.forEach((card, i) => {
+            const cardIndex = parseInt(card.dataset.index);
+            let diff = (cardIndex - currentIndex + totalImages) % totalImages;
+            if (diff > totalImages/2) diff -= totalImages;
+            
+            // Activează cardul curent
+            card.classList.toggle('active', diff === 0);
+            
+            // Aplică efecte vizuale bazate pe distanță
+            if (diff === 0) {
+                card.style.opacity = '1';
+                card.style.filter = 'none';
+                card.style.zIndex = '10';
+            } else if (Math.abs(diff) === 1) {
+                card.style.opacity = '0.85';
+                card.style.filter = 'blur(0.5px)';
+                card.style.zIndex = '5';
+            } else if (Math.abs(diff) === 2) {
+                card.style.opacity = '0.7';
+                card.style.filter = 'blur(1px)';
+                card.style.zIndex = '3';
+            } else {
+                card.style.opacity = '0.5';
+                card.style.filter = 'blur(1.5px)';
+                card.style.zIndex = '1';
+            }
+        });
+    }
+    
+    // Actualizează indicatorii
+    function updateIndicators() {
+        const indicators = document.querySelectorAll('.cylinder-indicator');
+        indicators.forEach((indicator) => {
+            const indicatorIndex = parseInt(indicator.dataset.index);
+            indicator.classList.toggle('active', indicatorIndex === currentIndex);
+        });
+    }
+    
+    // Actualizează indexul curent
+    function updateCurrentIndex() {
+        if (currentIndexSpan) {
+            currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
+        }
+    }
+    
+    // Navighează la o imagine specifică
+    function goToImage(index) {
+        if (isAnimating || index === currentIndex) return;
+        
+        isAnimating = true;
+        currentIndex = (index + totalImages) % totalImages;
+        
+        // Aplică animația
+        cylinder.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        updateDisplay();
+        
+        // După animație, încarcă imaginile prioritare pentru noua poziție
+        setTimeout(() => {
+            scheduleNextLoads();
+        }, 200);
+        
+        // Resetează tranziția după animație
+        setTimeout(() => {
+            cylinder.style.transition = '';
+            isAnimating = false;
+        }, 600);
+    }
+    
+    // Navigare următoare/anterior
+    function nextImage() {
+        goToImage(currentIndex + 1);
+    }
+    
+    function prevImage() {
+        goToImage(currentIndex - 1);
+    }
+    
+    // Inițializează galeria
+    function initGallery() {
+        createGalleryStructure();
+        
+        // Începe încărcarea imaginilor după un scurt delay
+        setTimeout(() => {
+            // Încarcă primele imagini (cea curentă și vecinii)
+            loadImageWithPriority(currentIndex);
+            loadImageWithPriority((currentIndex + 1) % totalImages);
+            loadImageWithPriority((currentIndex - 1 + totalImages) % totalImages);
+            
+            // Pentru desktop, încarcă câteva în plus
+            if (!isMobile) {
                 setTimeout(() => {
-                    loadImageWithPriority(currentIndex);
-                    loadImageWithPriority((currentIndex + 1) % TOTAL_IMAGES);
-                    loadImageWithPriority((currentIndex - 1 + TOTAL_IMAGES) % TOTAL_IMAGES);
-                    if (!isMobile) setTimeout(() => {
-                        for (let i = 2; i <= 4; i++) {
-                            loadImageWithPriority((currentIndex + i) % TOTAL_IMAGES);
-                            loadImageWithPriority((currentIndex - i + TOTAL_IMAGES) % TOTAL_IMAGES);
-                        }
-                    }, 500);
-                }, 300);
+                    for (let i = 2; i <= 4; i++) {
+                        loadImageWithPriority((currentIndex + i) % totalImages);
+                        loadImageWithPriority((currentIndex - i + totalImages) % totalImages);
+                    }
+                }, 500);
+            }
+        }, 300);
+    }
+    
+    // Adaugă evenimente pentru butoane
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevImage();
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextImage();
+    });
+    
+    // Swipe pentru mobil
+    if (isMobile) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        cylinder.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        cylinder.addEventListener('touchend', (e) => {
+            if (!touchStartX) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Doar swipe orizontal
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                e.preventDefault();
+                if (diffX > 0) {
+                    nextImage();
+                } else {
+                    prevImage();
+                }
             }
             
-            // ===== PREÎNCĂRCARE IMAGINI =====
-            function preloadPackageImages() {
-                ['images/4-Lat.png', 'images/prezident alb.png'].forEach(src => { const img = new Image(); img.src = src; });
+            touchStartX = 0;
+            touchStartY = 0;
+        }, { passive: false });
+    }
+    
+    // Reîncarcă imaginile la resize (pentru switch mobile/desktop)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const newIsMobile = window.innerWidth <= 768;
+            if (newIsMobile !== isMobile) {
+                console.log('Redimensionare detectată, reinițializez galeria...');
+                initGallery();
             }
+        }, 250);
+    });
+    
+    // Start!
+    initGallery();
+    
+    // Debug info
+    console.log(`Galerie inițializată: ${totalImages} imagini, ${isMobile ? 'Mobil' : 'Desktop'}`);
+}
+        
+
+        // Inițializare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verifică preferințele de reducere a mișcării
+            checkReducedMotionPreference();
             
-            // ===== RESIZE HANDLER =====
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    if (document.getElementById('crossesContainer')) document.getElementById('crossesContainer').innerHTML = '';
-                    if (document.getElementById('goldDecoration')) document.getElementById('goldDecoration').innerHTML = '';
+            preventPhoneNumberStyling();
+            
+            createCrosses();
+            createGoldParticles();
+            initScrollAnimations();
+            preloadPackageImages();
+            initSmoothScrolling();
+            initPhoneCalls();
+            enhanceButtons();
+            optimizeHeaderDove();
+            optimizeCandleAnimation();
+            initCoroaneCylinder(); // ADĂUGAT: Inițializează cilindrul de coroane
+            
+            // Adaugă event listener pentru redimensionare
+            window.addEventListener('resize', function() {
+                // Debounce pentru a preveni execuții multiple
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(function() {
+                    document.getElementById('crossesContainer').innerHTML = '';
+                    document.getElementById('goldDecoration').innerHTML = '';
                     createCrosses();
                     createGoldParticles();
                 }, 250);
             });
             
-            // ===== FORMULAR CONTACT =====
-            document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = {
-                    nume: document.getElementById('nume').value,
-                    telefon: document.getElementById('telefon').value,
-                    serviciu: document.getElementById('serviciu').value,
-                    mesaj: document.getElementById('mesaj').value
-                };
-                console.log('Formular trimis:', formData);
-                alert('Vă mulțumim pentru mesaj! Vă vom contacta în cel mai scurt timp posibil.');
-                this.reset();
+            // Adaugă tracking pentru butoanele "Vezi toate pachetele"
+            const allPackagesBtns = document.querySelectorAll('#allPackagesBtn, #mobileAllPackagesBtn');
+            allPackagesBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    console.log('Utilizatorul a accesat "Vezi toate pachetele"');
+                    // Aici poți adăuga tracking analytics dacă e necesar
+                });
             });
             
-            // ===== INITIALIZARE =====
-            document.addEventListener('DOMContentLoaded', function() {
-                checkReducedMotionPreference();
-                preventPhoneNumberStyling();
-                createCrosses();
-                createGoldParticles();
-                initScrollAnimations();
-                preloadPackageImages();
-                initSmoothScrolling();
-                initPhoneCalls();
-                enhanceButtons();
-                optimizeHeaderDove();
-                optimizeCandleAnimation();
-                initCoroaneCylinder();
-                
-                document.querySelectorAll('#allPackagesBtn, #mobileAllPackagesBtn').forEach(btn => {
-                    btn.addEventListener('click', () => console.log('Utilizatorul a accesat "Vezi toate pachetele"'));
-                });
-                
-                if (isMobileDevice) console.log('Dispozitiv mobil detectat. Animațiile au fost optimizate.');
-                if (isTabletDevice) console.log('Tabletă detectată. Animațiile au fost optimizate.');
-            });
-        })();
+            // ADĂUGAT: Opțional - Log pentru debugging pe dispozitive mobile
+            if (isMobileDevice) {
+                console.log('Dispozitiv mobil detectat. Animațiile au fost optimizate.');
+            }
+            
+            if (isTabletDevice) {
+                console.log('Tabletă detectată. Animațiile au fost optimizate.');
+            }
+        });
     </script>
+    <!-- END JAVASCRIPT -->
 </body>
 </html>
+
+
