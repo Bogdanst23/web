@@ -3,254 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="format-detection" content="address=no">
-    <meta name="format-detection" content="email=no">
-    <meta name="format-detection" content="date=no">
-    
     <title>Pachete Funerare – Casa Funerară Lupică</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    
-    <meta name="theme-color" content="#1a1a1a">
-    <meta name="msapplication-TileColor" content="#1a1a1a">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <!-- CSS COMUN -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- CSS SPECIFIC PAGINII -->
+
+    <!-- STYLE SPECIFIC SECTIUNII DE SICRIE ȘI DETALII -->
     <style>
-        .dove-header {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            animation: doveFlyHeader 8s ease-in-out infinite;
-            z-index: 101;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
+        .page-title { text-align: center; color: var(--primary-color); margin: 40px 0 50px; font-weight: 300; font-size: 2.2rem; }
+        .coffins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; perspective: 1000px; margin-bottom: 80px; }
+        .coffin-item { position: relative; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; cursor: pointer; transition: transform 0.5s ease; margin-bottom: 20px; }
+        .coffin-image { width: 100%; height: 280px; display: flex; align-items: center; justify-content: center; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); z-index: 2; }
+        .coffin-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
         
-        @keyframes doveFlyHeader {
-            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-            25% { transform: translateX(-10px) translateY(-5px) rotate(-5deg); }
-            50% { transform: translateX(-20px) translateY(3px) rotate(0deg); }
-            75% { transform: translateX(-10px) translateY(-3px) rotate(5deg); }
-        }
+        .coffin-item .coffin-image { animation: floatCoffin 6s ease-in-out infinite; }
+        .coffin-info { text-align: center; padding: 20px 15px; background: rgba(26, 26, 26, 0.6); border-radius: 10px; margin-top: 25px; width: 100%; backdrop-filter: blur(8px); border: 1px solid rgba(139,115,85,0.2); min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 1; }
         
-        .page-title {
-            text-align: center;
-            color: var(--primary-color);
-            margin: 40px 0 50px;
-            font-weight: 300;
-            font-size: 2.2rem;
-            padding: 0 15px;
+        .coffin-item:hover .coffin-info { background: rgba(26, 26, 26, 0.3); transform: translateY(-10px); border-color: rgba(139,115,85,0.5); }
+        .coffin-item:hover .coffin-image { transform: translateY(-30px) scale(1.1); filter: drop-shadow(0 20px 30px rgba(139,115,85,0.6)); }
+        .coffin-info h3 { color: var(--primary-color); margin: 0 0 10px; font-size: 1.4rem; font-family: 'Cinzel', serif; }
+        .price { color: #d2b48c; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px; }
+        .detail-btn { display: inline-block; background: var(--primary-color); color: white; padding: 10px 20px; border-radius: 4px; border: none; cursor: pointer; transition: all 0.3s; }
+        .detail-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* Pagina Detalii */
+        .package-detail { display: none; margin-top: 40px; animation: fadeIn 0.5s ease-out; }
+        .package-detail.active { display: block; }
+        .detail-container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+        .detail-image { flex: 1; min-width: 300px; text-align: center; }
+        .detail-image img { max-width: 100%; max-height: 500px; object-fit: contain; animation: floatCoffin 6s ease-in-out infinite; }
+        .detail-info { flex: 1; min-width: 300px; background: rgba(26, 26, 26, 0.7); padding: 30px; border-radius: 10px; border: 1px solid rgba(139,115,85,0.3); backdrop-filter: blur(8px); }
+        .detail-info h2 { color: var(--primary-color); font-size: 2rem; border-bottom: 1px solid rgba(139,115,85,0.3); padding-bottom: 15px; margin-top: 0; }
+        .detail-price { color: #d2b48c; font-weight: bold; font-size: 1.8rem; margin: 20px 0; }
+        .detail-features h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem; }
+        .detail-features ul { padding-left: 20px; }
+        .detail-features li { margin-bottom: 10px; color: var(--text-light); }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); padding: 10px 20px; border-radius: 4px; cursor: pointer; transition: all 0.3s; margin-bottom: 20px; }
+        .back-btn:hover { background: var(--primary-color); color: white; }
+        .contact-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 4px; font-size: 1.1rem; text-decoration: none; transition: all 0.3s; }
+
+        @media (max-width: 767px) {
+            .detail-container { flex-direction: column; }
+            .detail-image, .detail-info { min-width: 100%; }
+            .coffin-item { height: 380px; max-width: 320px; margin: 0 auto 20px; }
         }
+        @keyframes floatCoffin { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 
-<body>
-    <div class="main-wrapper">
-        <!-- Porumbel animat în header -->
-        <div class="dove-header">🕊️</div>
-        
-        <!-- Container pentru cruciulițe aurii -->
-        <div class="crosses-container" id="crossesContainer"></div>
-        
-        <!-- Container pentru particule aurii -->
-        <div class="gold-decoration" id="goldDecoration"></div>
-        
-        <!-- Header -->
-        <header>
-            <div class="container">
-                <div class="header-container">
-                    <a href="/" class="logo-link">
-                        <div class="logo">
-                            <div class="logo-icon"></div>
-                            <div class="logo-text">
-                                <h1>CASA</h1>
-                                <span>FUNERARĂ LUPICĂ</span>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <nav class="main-nav">
-                        <ul>
-                            <li><a href="./">Home</a></li>
-                            <li><a href="./pachete" class="active">Pachete funerare</a></li>
-                            <li><a href="./coroane">Coroane funerare</a></li>
-                            <li><a href="./contact">Contact</a></li>
-                        </ul>
-                    </nav>
-                    
-                    <div class="contact-header">
-                        <a href="tel:0752538888" class="phone-emergency phone-link">
-                            <i class="fas fa-phone-alt"></i>
-                            <span class="phone-number">0752 538 888</span>
-                        </a>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Non-stop 24/7</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
+<body data-page="pachete">
+    <div class="content-fade" id="contentFade">
         <h1 class="page-title">Pachete funerare</h1>
-
         <div class="container">
+            <!-- Grid Principal Produse -->
             <div class="coffins-grid" id="packages-grid">
-                <!-- PACHET 1 -->
+                <!-- Pachet 1 -->
                 <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/4-Lat.png" alt="Pachet 4-Lat">
-                    </div>
+                    <div class="coffin-image"><img src="images/4-Lat.png" alt="Pachet 4-Lat"></div>
                     <div class="coffin-info">
                         <h3>Pachet 4-Lat</h3>
                         <div class="price">980 RON</div>
                         <button class="detail-btn" data-package="4lat">Detalii</button>
                     </div>
                 </div>
-                
-                <!-- PACHET 2 -->
+                <!-- Pachet 2 -->
                 <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/plop tri.png" alt="Pachet Tri">
-                    </div>
+                    <div class="coffin-image"><img src="images/plop tri.png" alt="Pachet Plop Tri"></div>
                     <div class="coffin-info">
                         <h3>Pachet Tri</h3>
                         <div class="price">1.280 RON</div>
                         <button class="detail-btn" data-package="ploptri">Detalii</button>
                     </div>
                 </div>
-
-                <!-- PACHET 3 -->
+                <!-- Pachet 3 -->
                 <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/Brad tri 180cm.png" alt="Pachet Brad Tri 180cm">
-                    </div>
+                    <div class="coffin-image"><img src="images/Brad tri 180cm.png" alt="Pachet Brad Tri 180cm"></div>
                     <div class="coffin-info">
                         <h3>Pachet Brad Tri 180cm</h3>
                         <div class="price">1.580 RON</div>
                         <button class="detail-btn" data-package="bradtri180">Detalii</button>
                     </div>
                 </div>
-
-                <!-- PACHET 4 -->
+                <!-- Pachet 4 -->
                 <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/stejar rustic.png" alt="Pachet Stejar Rustic">
-                    </div>
+                    <div class="coffin-image"><img src="images/stejar rustic.png" alt="Pachet Stejar Rustic"></div>
                     <div class="coffin-info">
                         <h3>Pachet Stejar Rustic</h3>
                         <div class="price">1.890 RON</div>
                         <button class="detail-btn" data-package="stejarrustic">Detalii</button>
                     </div>
                 </div>
-
-                <!-- PACHET 5 -->
-                <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/fag imprimat.png" alt="Pachet Fag Imprimat">
-                    </div>
-                    <div class="coffin-info">
-                        <h3>Pachet Fag Imprimat</h3>
-                        <div class="price">2.180 RON</div>
-                        <button class="detail-btn" data-package="fagimprimat">Detalii</button>
-                    </div>
-                </div>
-
-                <!-- PACHET 6 -->
-                <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/brad tri.png" alt="Pachet Brad Tri">
-                    </div>
-                    <div class="coffin-info">
-                        <h3>Pachet Brad Tri</h3>
-                        <div class="price">2.180 RON</div>
-                        <button class="detail-btn" data-package="bradtri">Detalii</button>
-                    </div>
-                </div>
-
-                <!-- PACHET 7 -->
-                <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/prezident imitatie.png" alt="Pachet Prezident Imitație">
-                    </div>
-                    <div class="coffin-info">
-                        <h3>Pachet Prezident Imitație</h3>
-                        <div class="price">4.980 RON</div>
-                        <button class="detail-btn" data-package="prezidentimitatie">Detalii</button>
-                    </div>
-                </div>
-
-                <!-- PACHET 8 -->
-                <div class="coffin-item">
-                    <div class="coffin-image">
-                        <img src="images/prezident alb.png" alt="Pachet Prezident Alb">
-                    </div>
-                    <div class="coffin-info">
-                        <h3>Pachet Prezident Alb</h3>
-                        <div class="price">5.780 RON</div>
-                        <button class="detail-btn" data-package="prezidentalb">Detalii</button>
-                    </div>
-                </div>
             </div>
 
+            <!-- Zona Populatã Dinamic la click pe Detalii -->
             <div class="package-detail" id="package-detail"></div>
         </div>
-
-        <footer>
-            <div class="container">
-                <div class="footer-container">
-                    <div class="footer-col">
-                        <h3>Casa Funerară Lupică</h3>
-                        <p>Oferim servicii funerare complete cu demnitate și compasiune.</p>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="footer-col">
-                        <h3>Link-uri Rapide</h3>
-                        <ul>
-                            <li><a href="./">Home</a></li>
-                            <li><a href="./pachete">Pachete funerare</a></li>
-                            <li><a href="./coroane">Coroane funerare</a></li>
-                            <li><a href="./contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h3>Servicii</h3>
-                        <ul>
-                            <li><a href="./contact">Organizare înmormântare</a></li>
-                            <li><a href="./contact">Transport funerar</a></li>
-                            <li><a href="">Sicrie și accesorii</a></li>
-                            <li><a href="./contact">Consultanță funerară</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="copyright">
-                    <p>&copy; 2025 Casa Funerară Lupică. Toate drepturile rezervate.</p>
-                </div>
-            </div>
-        </footer>
     </div>
 
-    <!-- JS COMUN -->
-    <script src="script.js"></script>
+    <!-- LOGIC MANAGEMENT -->
+    <script src="global.js"></script>
+    <script>
+        const packageData = {
+            "4lat": { title: "Pachet 4-Lat", price: "980 RON", image: "images/4-Lat.png", features: ["Sicriu simplu din lemn masiv", "Capitonajul capacului", "Garnitura pentru interiorul sicriului", "Perna pentru decedat", "Voal față"] },
+            "ploptri": { title: "Pachet Tri", price: "1.280 RON", image: "images/plop tri.png", features: ["Capitonaj interior premium", "Garnitură completă pentru interior", "Orar mare ornamentat", "Perna de cap din satin", "Voal față"] },
+            "bradtri180": { title: "Pachet Brad Tri 180cm", price: "1.580 RON", image: "images/Brad tri 180cm.png", features: ["Sicriu din brad triplu 180cm", "Capitonaj capac și interior", "Garnitură completă premium", "Perna din satin", "Voal față"] },
+            "stejarrustic": { title: "Pachet Stejar Rustic", price: "1.890 RON", image: "images/stejar rustic.png", features: ["Sicriu din stejar rustic", "Capitonaj interior premium", "Garnitură completă", "Orar mare ornamentat", "Voal din dantelă"] }
+        };
+
+        function showDetails(id) {
+            const pack = packageData[id];
+            if (!pack) return;
+            const detailSection = document.getElementById('package-detail');
+            const gridSection = document.getElementById('packages-grid');
+            
+            gridSection.style.display = 'none';
+            detailSection.classList.add('active');
+            detailSection.innerHTML = `
+                <button class="back-btn" id="back-btn"><i class="fas fa-arrow-left"></i> Înapoi la pachete</button>
+                <div class="detail-container">
+                    <div class="detail-image"><img src="${pack.image}" alt="${pack.title}"></div>
+                    <div class="detail-info">
+                        <h2>${pack.title}</h2>
+                        <div class="detail-price">${pack.price}</div>
+                        <div class="detail-features">
+                            <h3>Servicii incluse:</h3>
+                            <ul>${pack.features.map(f => `<li>${f}</li>`).join('')}</ul>
+                        </div>
+                        <a href="tel:0752538888" class="contact-btn"><i class="fas fa-phone"></i> Sună acum: 0752 538 888</a>
+                    </div>
+                </div>`;
+            
+            document.getElementById('back-btn').addEventListener('click', () => {
+                detailSection.classList.remove('active');
+                gridSection.style.display = 'grid';
+            });
+        }
+
+        document.querySelectorAll('.detail-btn').forEach(btn => {
+            btn.addEventListener('click', function() { showDetails(this.dataset.package); });
+        });
+    </script>
 </body>
 </html>
