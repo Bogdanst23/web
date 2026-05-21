@@ -4,20 +4,435 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="format-detection" content="telephone=no">
-    <title>Casa Funerară Lupică - Servicii Funerare</title>
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="date=no">
     
-    <!-- FAVICON -->
+    <title>Casa Funerară Lupică - Servicii Funerare</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="msapplication-TileColor" content="#1a1a1a">
     
-    <!-- ASSETS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- START CSS SPECIFIC PAGINII INTERNE -->
+    
     <style>
-        /* ===== HERO SECTION ===== */
+        /* ===== RESET SI VARIABILE CSS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #8b7355;
+            --primary-dark: #6d5c46;
+            --primary-light: #a89070;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f8f8;
+            --gray-color: #666;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold-gradient: linear-gradient(135deg, #8b7355 0%, #c5a880 50%, #8b7355 100%);
+            --header-bg: rgba(26, 26, 26, 0.95);
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-color);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        a[href^="tel"] {
+            color: inherit;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .phone-number {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        .phone-number:hover, .phone-number:active {
+            color: var(--primary-color) !important;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+        
+        p, li, span, a, button, label {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .phone-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none !important;
+            color: inherit !important;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+        
+        .phone-link:hover, .phone-link:active {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
+            z-index: -3;
+        }
+        
+        .content-fade {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to bottom, 
+                rgba(30, 30, 30, 0.7) 0%, 
+                rgba(40, 40, 40, 0.9) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .crosses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cross {
+            position: absolute;
+            color: rgba(139, 115, 85, 0.15);
+            font-size: 18px;
+            opacity: 0;
+            animation: crossFloat 20s infinite linear;
+            font-weight: 300;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .dove-header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            animation: doveFlyHeader 8s ease-in-out infinite;
+            z-index: 101;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .gold-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .gold-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: goldTwinkle 4s infinite ease-in-out;
+        }
+        
+        .gold-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.1;
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+        
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            flex-direction: column;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .logo-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+            width: 100%;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: gentlePulse 4s infinite ease-in-out;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 10px;
+        }
+        
+        .logo-icon::before {
+            content: '†';
+            font-weight: bold;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .logo-text {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text span {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+            font-size: 1.3rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .main-nav {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-nav ul li {
+            margin: 0;
+        }
+        
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 15px;
+            font-size: 1rem;
+            display: block;
+            border-radius: 4px;
+            font-family: 'Raleway', sans-serif;
+            cursor: pointer;
+        }
+        
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .main-nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(139, 115, 85, 0.1);
+        }
+        
+        .main-nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            animation: lineGrow 0.5s ease-out;
+        }
+        
+        .contact-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        .phone-emergency {
+            background-color: rgba(139, 115, 85, 0.2);
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid rgba(139, 115, 85, 0.5);
+            font-family: 'Raleway', sans-serif;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        
+        .phone-emergency:hover {
+            background-color: rgba(139, 115, 85, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @media (min-width: 768px) {
+            header { padding: 10px 0; }
+            .header-container { flex-direction: row; justify-content: space-between; text-align: left; gap: 20px; }
+            .logo-link { flex-direction: row; width: auto; }
+            .logo { flex-direction: row; width: auto; }
+            .logo-icon { width: 50px; height: 50px; font-size: 1.8rem; margin-bottom: 0; margin-right: 10px; }
+            .logo-icon::before { font-size: 2rem; }
+            .logo-text { text-align: left; width: auto; }
+            .logo-text h1 { font-size: 1.4rem; margin-bottom: 0; }
+            .logo-text span { font-size: 0.9rem; }
+            .main-nav { width: auto; margin: 0; order: 2; }
+            .main-nav ul { gap: 5px; }
+            .main-nav ul li a { padding: 6px 12px; font-size: 0.85rem; }
+            .contact-header { flex-direction: column; align-items: flex-end; width: auto; margin-top: 0; order: 3; gap: 5px; }
+            .phone-emergency { font-size: 0.95rem; padding: 6px 15px; }
+            .contact-item { font-size: 0.85rem; }
+            .contact-item i { font-size: 0.9rem; }
+        }
+        
+        @media (min-width: 768px) and (max-width: 991px) {
+            .header-container { flex-wrap: wrap; justify-content: center; }
+            .logo-link { width: 100%; justify-content: center; margin-bottom: 15px; }
+            .logo { justify-content: center; }
+            .logo-text { text-align: center; }
+            .main-nav { width: 100%; order: 3; margin-top: 15px; }
+            .contact-header { width: auto; order: 2; }
+        }
+        
+        @media (min-width: 481px) and (max-width: 767px) {
+            .logo-icon { width: 70px; height: 70px; font-size: 2.5rem; }
+            .logo-icon::before { font-size: 3rem; }
+            .logo-text h1 { font-size: 1.8rem; }
+            .logo-text span { font-size: 1.1rem; }
+            .phone-emergency { font-size: 1.3rem; padding: 10px 20px; }
+            .main-nav ul li a { font-size: 0.9rem; padding: 6px 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-icon { width: 65px; height: 65px; font-size: 2.2rem; }
+            .logo-icon::before { font-size: 2.4rem; }
+            .logo-text h1 { font-size: 1.6rem; }
+            .logo-text span { font-size: 1rem; }
+            .phone-emergency { font-size: 1.2rem; padding: 10px 18px; }
+            .main-nav ul { gap: 5px; }
+            .main-nav ul li a { font-size: 0.85rem; padding: 5px 10px; }
+        }
+        
         .hero {
             position: relative;
             color: white;
@@ -33,380 +448,1397 @@
             display: flex;
             align-items: center;
         }
-        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; padding: 0 15px; }
-        .dove-message-container { position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 30px; width: 100%; }
-        .dove-with-message { position: relative; width: 140px; height: 140px; animation: doveFloat 15s ease-in-out infinite; }
-        .dove-with-message .dove-body { font-size: 3rem; color: white; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); position: relative; z-index: 2; }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 0 15px;
+        }
+        
+        .dove-message-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .dove-with-message {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            animation: doveFloat 15s ease-in-out infinite;
+        }
+        
+        .dove-with-message .dove-body {
+            font-size: 3rem;
+            color: white;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+            position: relative;
+            z-index: 2;
+        }
+        
         .message-ribbon {
-            position: absolute; top: 30px; left: 60px; background: rgba(139, 115, 85, 0.9); color: white; padding: 10px 15px;
-            border-radius: 8px; font-size: 0.75rem; width: 140px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1; transform: rotate(-5deg); font-family: 'Playfair Display', serif; line-height: 1.3;
-            border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); animation: messageFloat 8s ease-in-out infinite;
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            background: rgba(139, 115, 85, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            width: 140px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1;
+            transform: rotate(-5deg);
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            animation: messageFloat 8s ease-in-out infinite;
         }
-        .message-ribbon::after { content: ''; position: absolute; top: 15px; left: -10px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 10px solid rgba(139, 115, 85, 0.9); }
-        .hero h2 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 300; animation: fadeInUp 1s ease-out 0.2s both; text-shadow: 0 2px 8px rgba(0,0,0,0.7); line-height: 1.3; }
-        .hero p { font-size: 1rem; margin: 0 auto 30px; animation: fadeInUp 1s ease-out 0.4s both; text-shadow: 0 1px 4px rgba(0,0,0,0.5); line-height: 1.5; color: #f0f0f0; }
-
-        /* ===== SECȚIUNI GRID SERVICII ===== */
-        .servicii-principale { padding: 60px 0; background-color: rgba(25, 25, 25, 0.9); position: relative; overflow: hidden; }
-        .servicii-grid { display: grid; grid-template-columns: 1fr; gap: 25px; margin-top: 40px; }
+        
+        .message-ribbon::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 10px solid rgba(139, 115, 85, 0.9);
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            line-height: 1.3;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            line-height: 1.5;
+            color: #f0f0f0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .servicii-principale {
+            padding: 60px 0;
+            background-color: rgba(25, 25, 25, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .servicii-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        @media (min-width: 768px) {
+            .servicii-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        }
+        
+        @media (min-width: 992px) {
+            .servicii-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        
         .serviciu-card {
-            background: linear-gradient(145deg, rgba(35, 35, 35, 0.9) 0%, rgba(30, 30, 30, 0.95) 100%); border-radius: 8px; padding: 30px 25px; text-align: center;
-            transition: var(--transition); border: 1px solid rgba(139, 115, 85, 0.15); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); transform: translateY(20px); opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards; will-change: transform, opacity;
+            background: linear-gradient(145deg, rgba(35, 35, 35, 0.9) 0%, rgba(30, 30, 30, 0.95) 100%);
+            border-radius: 8px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(139, 115, 85, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            will-change: transform, opacity;
         }
-        .serviciu-card.visible { opacity: 1; transform: translateY(0); }
+        
+        .serviciu-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .serviciu-card:nth-child(2) { animation-delay: 0.2s; }
         .serviciu-card:nth-child(3) { animation-delay: 0.4s; }
         .serviciu-card:nth-child(4) { animation-delay: 0.6s; }
-        .serviciu-card:hover { transform: translateY(-10px); border-color: rgba(139, 115, 85, 0.4); background: linear-gradient(145deg, rgba(40, 40, 40, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%); }
-        .serviciu-icon { width: 120px; height: 120px; margin: 0 auto 20px; background: var(--gold-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3.5rem; transition: var(--transition); box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3); }
-        .serviciu-icon i, .serviciu-icon .main-icon { font-size: 3.5rem; }
-        .serviciu-icon .secondary-icon { position: absolute; bottom: 15px; right: 15px; font-size: 1.8rem; color: rgba(255, 255, 255, 0.9); background: rgba(139, 115, 85, 0.8); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; transition: var(--transition); border: 3px solid rgba(255, 255, 255, 0.3); }
-        .serviciu-card:hover .serviciu-icon .secondary-icon { transform: scale(1.15) rotate(15deg); background: var(--primary-color); }
-        .serviciu-card:hover .serviciu-icon { transform: rotateY(180deg) scale(1.1); }
-        .serviciu-card h3 { font-size: 1.2rem; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
-        .serviciu-card h3::after { content: ''; position: absolute; width: 40px; height: 2px; background: var(--gold-gradient); bottom: 0; left: 50%; transform: translateX(-50%); transition: var(--transition); }
-        .serviciu-card:hover h3::after { width: 60px; }
-        .serviciu-note { text-align: center; margin-top: 40px; padding: 20px; background: rgba(139, 115, 85, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-color); }
-        .serviciu-note p { font-style: italic; margin: 0; }
-        .serviciu-note i { color: var(--primary-color); margin-right: 10px; }
-
-        /* ===== ADAPTARE COMPONENTE PACHETE & CILINDRU 3D ===== */
-        .pachete-index, .comercializare, .asistenta-formalitati, .servicii-suplimentare { padding: 60px 0; background-color: rgba(30, 30, 30, 0.9); position: relative; }
-        .asistenta-formalitati, .servicii-suplimentare { background-color: rgba(35, 35, 35, 0.9); }
-        .pachete-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; position: relative; }
-        .pachet-card { background-color: rgba(40, 40, 40, 0.9); border-radius: 8px; overflow: hidden; border: 1px solid rgba(139, 115, 85, 0.2); transform: translateY(30px); opacity: 0; transition: var(--transition); display: flex; flex-direction: column; }
-        .pachet-card.visible { transform: translateY(0); opacity: 1; }
-        .pachet-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
-        .pachet-header { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; background-color: rgba(20, 20, 20, 0.7); padding: 15px; }
-        .pachet-image { max-width: 100%; max-height: 100%; object-fit: contain; transition: var(--transition); }
-        .pachet-badge { position: absolute; top: 15px; right: 15px; background: var(--gold-gradient); padding: 8px 15px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; font-family: 'Cinzel', serif; }
-        .pachet-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .pachet-content h3 { font-size: 1.4rem; margin-bottom: 12px; text-align: center; position: relative; padding-bottom: 10px; }
-        .pachet-content h3::after { content: ''; position: absolute; width: 60px; height: 2px; background: var(--gold-gradient); bottom: 0; left: 50%; transform: translateX(-50%); }
-        .pachet-features { list-style: none; margin: 15px 0; }
-        .pachet-features li { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9rem; padding: 5px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .pachet-features i { color: var(--primary-color); margin-right: 10px; }
-        .pachet-price { font-size: 1.5rem; font-weight: 600; color: var(--primary-color); margin: 15px 0; text-align: center; padding: 12px 0; background: rgba(139, 115, 85, 0.1); border-radius: 4px; font-family: 'Cinzel', serif; }
         
-        .all-packages-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; display: none; }
-        .more-packages-container { text-align: center; margin-top: 20px; display: flex; justify-content: center; }
-
-        /* Cilindru 3D */
-        .coroane-section { padding: 80px 0; background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%); position: relative; overflow: hidden; }
-        .coroane-container { position: relative; width: 100%; height: 500px; margin: 40px auto; perspective: 2000px; display: flex; align-items: center; justify-content: center; overflow: visible !important; }
-        .coroane-cylinder { position: relative; width: 300px; height: 400px; transform-style: preserve-3d; transition: transform 0.6s ease-in-out !important; display: flex; align-items: center; justify-content: center; animation: cylinderLoad 1s ease-out; }
-        .coroane-card { position: absolute; width: 250px; height: 350px; background: linear-gradient(145deg, rgba(45, 45, 45, 0.95) 0%, rgba(35, 35, 35, 0.98) 100%); border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); transform-origin: center center !important; transition: opacity 0.3s ease, filter 0.3s ease !important; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 2px solid transparent; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-        .coroane-card.active { border-color: var(--primary-color) !important; box-shadow: 0 0 20px rgba(139, 115, 85, 0.4) !important; z-index: 10; }
-        .coroane-image { width: 90%; height: 90%; object-fit: cover; border-radius: 8px; transition: transform 0.5s; }
+        .serviciu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(139, 115, 85, 0.4);
+        }
         
-        .cylinder-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 60px; height: 60px; background: rgba(139, 115, 85, 0.2); border: 2px solid rgba(139, 115, 85, 0.5); border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.4s; backdrop-filter: blur(10px); opacity: 0.7; }
-        .cylinder-nav:hover { background: rgba(139, 115, 85, 0.4); border-color: var(--primary-color); opacity: 1; }
-        .cylinder-prev { left: 20px; } .cylinder-next { right: 20px; }
-        .cylinder-indicators { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
-        .cylinder-indicator { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); cursor: pointer; transition: all 0.3s; }
-        .cylinder-indicator.active { background: var(--primary-color); transform: scale(1.2); }
-        .cylinder-info { position: absolute; top: 20px; right: 20px; background: rgba(0, 0, 0, 0.6); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; z-index: 100; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); }
-
-        /* Comercializare */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .product-card { background-color: rgba(40, 40, 40, 0.9); border-radius: 8px; padding: 20px; text-align: center; border: 1px solid rgba(139, 115, 85, 0.2); transition: var(--transition); }
-        .product-card:hover { transform: translateY(-5px); border-color: rgba(139, 115, 85, 0.5); }
-        .product-icon { width: 70px; height: 70px; margin: 0 auto 15px; background: var(--gold-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
-
-        /* Despre Noi */
-        .despre-noi { padding: 60px 0; }
-        .despre-content { display: flex; flex-direction: column; align-items: center; gap: 30px; }
-        .despre-text { transform: translateX(-30px); opacity: 0; transition: var(--transition); width: 100%; }
-        .despre-text.visible { transform: translateX(0); opacity: 1; }
-        .despre-img { flex: 1; height: 250px; width: 100%; border-radius: 8px; background-image: url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center; transform: translateX(30px); opacity: 0; transition: var(--transition); }
-        .despre-img.visible { transform: translateX(0); opacity: 1; }
-
-        /* Lumânare */
-        .candle-container { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 100px; height: 120px; z-index: 5; }
-        .candle { width: 35px; height: 90px; background: linear-gradient(to right, #b8860b, #daa520, #b8860b, #ffd700); margin: 0 auto; border-radius: 10px 10px 0 0; position: relative; animation: candleGlow 2s infinite ease-in-out alternate; }
-        .flame { width: 20px; height: 35px; background: linear-gradient(to bottom, #ffff00, #ff9900, #ff3300); border-radius: 50% 50% 20% 20%; margin: 0 auto; position: relative; top: -18px; animation: flameFlicker 0.3s infinite ease-in-out alternate; }
-        .flame-spark { position: absolute; width: 3px; height: 3px; background-color: #ff9900; border-radius: 50%; opacity: 0; animation: sparkFloat 1.5s infinite ease-out; }
-        .spark-1 { top: -5px; left: 25%; } .spark-2 { top: -10px; left: 50%; animation-delay: 0.5s; }
-        .candle-wax { position: absolute; width: 8px; height: 15px; background: linear-gradient(to bottom, #daa520, #b8860b); border-radius: 0 0 4px 4px; top: 70px; animation: waxDrip 10s infinite ease-in-out; }
-        .wax-1 { left: 25%; }
-
-        /* ===== RESPONSIVE MEDIA FILTERS INDEX ===== */
+        .serviciu-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3.5rem;
+            position: relative;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
+            will-change: transform;
+        }
+        
+        .serviciu-icon i {
+            position: relative;
+            z-index: 2;
+            font-size: 3.5rem;
+            transition: var(--transition);
+        }
+        
+        .serviciu-icon .secondary-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(139, 115, 85, 0.8);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            transition: var(--transition);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            will-change: transform;
+        }
+        
+        .serviciu-card:hover .serviciu-icon .secondary-icon {
+            transform: scale(1.15) rotate(15deg);
+            background: var(--primary-color);
+            box-shadow: 0 0 12px rgba(139, 115, 85, 0.6);
+        }
+        
+        .serviciu-card:hover .serviciu-icon {
+            transform: rotateY(180deg) scale(1.1);
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.5);
+        }
+        
+        .serviciu-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+            font-family: 'Cinzel', serif;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .serviciu-card h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--gold-gradient);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: var(--transition);
+        }
+        
+        .serviciu-card:hover h3::after {
+            width: 60px;
+        }
+        
+        .serviciu-card p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .serviciu-note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(139, 115, 85, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .asistenta-formalitati, .servicii-suplimentare {
+            padding: 60px 0;
+            background-color: rgba(35, 35, 35, 0.9);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: #f0f0f0;
+            display: inline-block;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: lineGrow 1s ease-out;
+        }
+        
+        .pachete-index {
+            padding: 60px 0;
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+        
+        .pachete-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .all-packages-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: none;
+        }
+        
+        .pachet-card {
+            background-color: rgba(40, 40, 40, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 115, 85, 0.2);
+            transform: translateY(30px);
+            opacity: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            will-change: transform, opacity;
+        }
+        
+        .pachet-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .pachet-header {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(20, 20, 20, 0.7);
+            padding: 15px;
+        }
+        
+        .pachet-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: var(--transition);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            background-color: #1a1a1a;
+            padding: 5px;
+        }
+        
+        .pachet-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            font-family: 'Cinzel', serif;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .pachet-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pachet-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #f0f0f0;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .pachet-content h3::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: var(--gold-gradient);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .pachet-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 15px 0;
+            text-align: center;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Cinzel', serif;
+            background: rgba(139, 115, 85, 0.1);
+            border-radius: 4px;
+        }
+        
+        .btn-more {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--gold-gradient);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        .more-packages-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .comercializare {
+            padding: 60px 0;
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background-color: rgba(40, 40, 40, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 115, 85, 0.2);
+        }
+        
+        .product-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .despre-noi {
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .despre-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .despre-text {
+            flex: 1;
+            transform: translateX(-30px);
+            opacity: 0;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .despre-text.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .despre-img {
+            flex: 1;
+            height: 250px;
+            width: 100%;
+            background-color: #333;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: translateX(30px);
+            opacity: 0;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+        }
+        
+        .contact {
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .contact-item.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .contact-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            font-size: 1rem;
+        }
+        
+        .contact-form {
+            background-color: rgba(40, 40, 40, 0.9);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(139, 115, 85, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background-color: rgba(30, 30, 30, 0.8);
+            color: #f0f0f0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        footer {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 50px 0 15px;
+            position: relative;
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(139, 115, 85, 0.3);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
         @media (min-width: 768px) {
-            .servicii-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-            .pachete-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .footer-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+            .hero { padding: 120px 0; min-height: 90vh; background-attachment: fixed; }
+            .hero h2 { font-size: 2.5rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .pachete-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; margin-bottom: 60px; }
             .all-packages-center { display: block; }
             .more-packages-container { display: none; }
             .despre-content { flex-direction: row; gap: 50px; }
             .despre-img { height: 400px; }
-        }
-        @media (min-width: 992px) {
-            .servicii-grid { grid-template-columns: repeat(4, 1fr); }
-            .hero h2 { font-size: 2.5rem; }
-        }
-        @media (max-width: 767px) {
-            .asistenta-formalitati .servicii-grid, .servicii-suplimentare .servicii-grid { display: flex !important; flex-direction: column; align-items: center; }
-            .asistenta-formalitati .serviciu-card, .servicii-suplimentare .serviciu-card { max-width: 320px !important; }
-            .cylinder-indicators { display: none !important; }
+            .contact-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
+            .serviciu-icon { width: 140px; height: 140px; font-size: 4rem; }
         }
         
-        @keyframes doveFloat { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(5px) translateX(-5px); } }
-        @keyframes messageFloat { 0%, 100% { transform: rotate(-5deg) translateY(0); } 50% { transform: rotate(-5deg) translateY(-5px); } }
-        @keyframes candleGlow { 0% { box-shadow: 0 0 25px rgba(218, 165, 32, 0.7); } 100% { box-shadow: 0 0 40px rgba(218, 165, 32, 1); } }
-        @keyframes flameFlicker { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.9) scaleX(1.1); } }
-        @keyframes sparkFloat { 0% { transform: translateY(0); opacity: 0.8; } 100% { transform: translateY(-30px); opacity: 0; } }
-        @keyframes waxDrip { 0%, 100% { height: 15px; } 50% { height: 30px; } }
+        @media (max-width: 767px) {
+            .all-packages-center { display: none !important; }
+            .more-packages-container { display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px; margin-bottom: 30px; }
+            .serviciu-icon { width: 110px; height: 110px; font-size: 3.2rem; }
+        }
+        
+        @keyframes crossFloat {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100px) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+        
+        @keyframes doveFlyHeader {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-10px) translateY(-5px) rotate(-5deg); }
+            50% { transform: translateX(-20px) translateY(3px) rotate(0deg); }
+            75% { transform: translateX(-10px) translateY(-3px) rotate(5deg); }
+        }
+        
+        @keyframes goldTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+        
+        @keyframes doveFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-10px) translateX(5px); }
+            50% { transform: translateY(5px) translateX(-5px); }
+            75% { transform: translateY(-5px) translateX(3px); }
+        }
+        
+        @keyframes messageFloat {
+            0%, 100% { transform: rotate(-5deg) translateY(0px); }
+            50% { transform: rotate(-5deg) translateY(-5px); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Stiluri pentru conținutul dinamic */
+        .page-content {
+            min-height: 60vh;
+        }
+        
+        .page-content > * {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Stiluri pentru pachete în pagina dinamică */
+        .coffins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .coffin-item {
+            position: relative;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+            margin-bottom: 20px;
+        }
+        
+        .coffin-image {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .coffin-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: all 0.5s ease;
+        }
+        
+        .coffin-info {
+            text-align: center;
+            padding: 20px 15px;
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 10px;
+            margin-top: 25px;
+            width: 100%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(139,115,85,0.2);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .coffin-info h3 {
+            color: var(--primary-color);
+            margin: 0 0 10px;
+            font-size: 1.4rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .price {
+            color: #d2b48c;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .detail-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .package-detail {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .package-detail.active {
+            display: block;
+        }
+        
+        .detail-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .detail-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .detail-image img {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        
+        .detail-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(139,115,85,0.3);
+            backdrop-filter: blur(8px);
+        }
+        
+        .detail-info h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+            padding-bottom: 15px;
+        }
+        
+        .detail-price {
+            color: #d2b48c;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin: 20px 0;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* Stiluri pentru coroane în pagina dinamică */
+        .coroane-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (min-width: 768px) {
+            .coroane-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
+        }
+        
+        .coroana-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .coroana-image-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: rgba(40, 40, 40, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        
+        .coroana-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+        
+        .coroana-name {
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            padding: 10px 0;
+            width: 100%;
+            background-color: rgba(139, 115, 85, 0.1);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .map-container {
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(139,115,85,0.3);
+            height: 500px;
+            position: relative;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(30%) sepia(10%);
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(139,115,85,0.3);
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .success-message {
+            display: none;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            color: #28a745;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 
-<body data-page="home">
+<body>
     <div class="page-background"></div>
     <div class="dove-header">🕊️</div>
     <div class="crosses-container" id="crossesContainer"></div>
     <div class="gold-decoration" id="goldDecoration"></div>
     
     <div class="content-fade" id="contentFade">
-        <!-- Structura de Header și Footer va fi preluată de scriptul global automat -->
-        
-        <!-- Hero Section -->
-        <section class="hero">
+        <header>
             <div class="container">
-                <div class="dove-message-container">
-                    <div class="dove-with-message">
-                        <div class="dove-body">🕊️</div>
-                        <div class="message-ribbon">Oferim suport și îndrumare în momentele dificile, cu profesionalism și respect.</div>
-                    </div>
-                </div>
-                <div class="hero-content">
-                    <h2>Servicii Funerare Non-Stop cu Demnitate și Compasiune</h2>
-                    <button class="btn" id="consultantaBtn"><i class="fas fa-phone-alt"></i> 0752 538 888</button>
-                </div>
-            </div>
-            
-            <div class="candle-container">
-                <div class="candle">
-                    <div class="flame">
-                        <div class="flame-spark spark-1"></div>
-                        <div class="flame-spark spark-2"></div>
-                    </div>
-                    <div class="candle-wax wax-1"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Servicii Principale -->
-        <section class="servicii-principale" id="servicii-principale">
-            <div class="container">
-                <div class="section-title"><h2>Servicii Funerare Principale</h2></div>
-                <div class="servicii-grid">
-                    <div class="serviciu-card">
-                        <div class="serviciu-icon"><i class="fas fa-spa"></i></div>
-                        <h3>Îmbălsămare, Toaletare, Îmbrăcare și Cosmetizare</h3>
-                        <p>Servicii profesionale de pregătire a decedatului cu demnitate și respect.</p>
-                    </div>
-                    <div class="serviciu-card">
-                        <div class="serviciu-icon">
-                            <i class="fas fa-bed main-icon"></i>
-                            <i class="fas fa-hands secondary-icon"></i>
-                        </div>
-                        <h3>Așezare în Sicriu și Pregătire pentru Depunere</h3>
-                        <p>Asistență completă pentru așezarea corectă și demnă în sicriu conform datinilor.</p>
-                    </div>
-                    <div class="serviciu-card">
-                        <div class="serviciu-icon"><i class="fas fa-car"></i></div>
-                        <h3>Transport Funerar Intern și Internațional</h3>
-                        <p>Transport specializat și discret realizat cu flote auto autorizate.</p>
-                    </div>
-                    <div class="serviciu-card">
-                        <div class="serviciu-icon"><i class="fas fa-certificate"></i></div>
-                        <h3>Asigurarea Sicriului și a Accesoriilor</h3>
-                        <p>Oferim sicrie complet echipate într-o gamă largă de modele și esențe.</p>
-                    </div>
-                </div>
-                <div class="serviciu-note">
-                    <p><i class="fas fa-info-circle"></i> Toate serviciile sunt realizate cu respect și discreție maximă.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Galerie Coroane Cilindru 3D -->
-        <section class="coroane-section" id="coroane">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Coroane Funerare</h2>
-                    <p class="section-subtitle">Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere</p>
-                </div>
-                <div class="coroane-container">
-                    <div class="coroane-cylinder" id="coroaneCylinder"></div>
-                    <button class="cylinder-nav cylinder-prev" id="cylinderPrev"><i class="fas fa-chevron-left"></i></button>
-                    <button class="cylinder-nav cylinder-next" id="cylinderNext"><i class="fas fa-chevron-right"></i></button>
-                    <div class="cylinder-indicators" id="cylinderIndicators"></div>
-                    <div class="cylinder-info"><span class="current-index" id="currentIndex">1 / 40</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pachete Preview Index -->
-        <section class="pachete-index">
-            <div class="container">
-                <div class="section-title"><h2>Pachete Funerare</h2></div>
-                <div class="pachete-grid">
-                    <div class="all-packages-center">
-                        <a href="./pachete" class="btn-more"><span>Vezi toate pachetele</span> <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="pachet-card">
-                        <div class="pachet-header">
-                            <img src="images/4-Lat.png" alt="Pachet 4-Lat" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+4-Lat'">
-                            <div class="pachet-badge">Economic</div>
-                        </div>
-                        <div class="pachet-content">
-                            <h3>Pachet 4-Lat</h3>
-                            <div class="pachet-price">980 RON</div>
+                <div class="header-container">
+                    <div class="logo-link" data-page="home">
+                        <div class="logo">
+                            <div class="logo-icon"></div>
+                            <div class="logo-text">
+                                <h1>CASA</h1>
+                                <span>FUNERARĂ LUPICĂ</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="pachet-card">
-                        <div class="pachet-header">
-                            <img src="images/prezident alb.png" alt="Pachet Premium" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+Premium'">
-                            <div class="pachet-badge">Premium</div>
-                        </div>
-                        <div class="pachet-content">
-                            <h3>Pachet Prezindent Alb</h3>
-                            <div class="pachet-price">5.780 RON</div>
+                    
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a data-page="home" class="active">Home</a></li>
+                            <li><a data-page="pachete">Pachete Funerare</a></li>
+                            <li><a data-page="coroane">Coroane</a></li>
+                            <li><a data-page="contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="contact-header">
+                        <a href="tel:0752538888" class="phone-emergency phone-link">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="phone-number">0752 538 888</span>
+                        </a>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Non-stop 24/7</span>
                         </div>
                     </div>
                 </div>
-                <div class="more-packages-container">
-                    <a href="./pachete" class="btn-more"><span>Vezi toate pachetele</span> <i class="fas fa-arrow-right"></i></a>
-                </div>
             </div>
-        </section>
+        </header>
 
-        <!-- Comercializare Produse -->
-        <section class="comercializare">
-            <div class="container">
-                <div class="section-title"><h2>Comercializare Produse Funerare</h2></div>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-icon"><i class="fas fa-church"></i></div>
-                        <h3>Sicrie Diverse Modele</h3>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-icon"><i class="fas fa-cross"></i></div>
-                        <h3>Cruci Funerare</h3>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-icon"><i class="fas fa-icicles"></i></div>
-                        <h3>Capace Frigorifice</h3>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-icon"><i class="fas fa-cubes"></i></div>
-                        <h3>Accesorii Mortuare</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <main class="page-content" id="pageContent">
+            <!-- Conținutul paginii curente va fi încărcat aici -->
+        </main>
 
-        <!-- Despre Noi -->
-        <section class="despre-noi">
+        <footer>
             <div class="container">
-                <div class="despre-content">
-                    <div class="despre-text">
-                        <h2>Despre Noi</h2>
-                        <p>Oferim servicii complete bazate pe respect profund, discreție și profesionalism absolut în momentele cele mai grele.</p>
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>Casa Funerară Lupică</h3>
+                        <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1AAbdNsqdw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="despre-img"></div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a data-page="home" class="footer-link">Home</a></li>
+                            <li><a data-page="pachete" class="footer-link">Pachete funerare</a></li>
+                            <li><a data-page="coroane" class="footer-link">Coroane funerare</a></li>
+                            <li><a data-page="contact" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Servicii</h3>
+                        <ul>
+                            <li><a data-page="home" data-section="servicii-principale">Servicii funerare principale</a></li>
+                            <li><a data-page="pachete" class="footer-link">Pachete funerare</a></li>
+                            <li><a data-page="home" data-section="asistenta-formalitati">Asistență și formalități</a></li>
+                            <li><a data-page="home" data-section="servicii-suplimentare">Servicii suplimentare</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
                 </div>
             </div>
-        </section>
+        </footer>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="global.js"></script>
     <script>
-        // Script specific pentru funcționarea Cilindrului 3D din Index
-        function initCoroaneCylinder() {
-            const cylinder = document.getElementById('coroaneCylinder');
-            const prevBtn = document.getElementById('cylinderPrev');
-            const nextBtn = document.getElementById('cylinderNext');
-            const indicatorsContainer = document.getElementById('cylinderIndicators');
-            const currentIndexSpan = document.getElementById('currentIndex');
-            if (!cylinder) return;
+        // Configurare pagini
+        const pageTemplates = {
+            home: `<!-- Secțiunea Home -->
+<section class="hero">
+    <div class="container">
+        <div class="dove-message-container">
+            <div class="dove-with-message">
+                <div class="dove-body">🕊️</div>
+                <div class="message-ribbon">
+                    Oferim suport și îndrumare în momentele dificile, cu profesionalism și respect.
+                </div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h2>Servicii Funerare Non-Stop cu Demnitate și Compasiune</h2>
+            <a href="tel:0752538888" class="btn"> <i class="fas fa-phone-alt"></i> 0752 538 888</a>
+        </div>
+    </div>
+</section>
 
-            const isMobile = window.innerWidth <= 768;
-            const TOTAL_IMAGES = 40;
-            const CARDS_TO_SHOW = isMobile ? 3 : 5;
-            const BASE_ANGLE = 360 / CARDS_TO_SHOW;
-            const TRANSLATE_Z = isMobile ? 250 : 350;
+<section class="servicii-principale" id="servicii-principale">
+    <div class="container">
+        <div class="section-title"><h2>Servicii Funerare Principale</h2></div>
+        <div class="servicii-grid">
+            <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-spa"></i></div><h3>Îmbălsămare, Toaletare, Îmbrăcare și Cosmetizare</h3><p>Servicii profesionale de pregătire a decedatului cu demnitate și respect.</p></div>
+            <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-bed main-icon"></i><i class="fas fa-hands secondary-icon"></i></div><h3>Așezare în Sicriu și Pregătire pentru Depunere</h3><p>Asistență completă pentru așezarea corectă și demnă în sicriu.</p></div>
+            <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-car"></i></div><h3>Transport Funerar Intern și Internațional</h3><p>Transport specializat și discret pentru decedați.</p></div>
+            <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-certificate"></i></div><h3>Asigurarea Sicriului și a Accesoriilor</h3><p>Oferim sicrie complet echipate cu toate accesoriile necesare.</p></div>
+        </div>
+        <div class="serviciu-note"><p><i class="fas fa-info-circle"></i> Toate serviciile sunt realizate cu respect și discreție.</p></div>
+    </div>
+</section>
+
+<section class="pachete-index">
+    <div class="container">
+        <div class="section-title"><h2>Pachete Funerare</h2></div>
+        <div class="pachete-grid">
+            <div class="all-packages-center"><button class="btn-more" data-page="pachete"><span>Vezi toate pachetele</span><i class="fas fa-arrow-right"></i></button></div>
+            <div class="pachet-card"><div class="pachet-header"><img src="images/4-Lat.png" alt="Pachet 4-Lat" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+4-Lat'"><div class="pachet-badge">Economic</div></div><div class="pachet-content"><h3>Pachet 4-Lat</h3><p>Pachet funerar standard cu sicriu simplu din lemn masiv.</p><div class="pachet-price">980 RON</div></div></div>
+            <div class="pachet-card"><div class="pachet-header"><img src="images/prezident alb.png" alt="Pachet Prezident Alb" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/333/8b7355?text=Pachet+Premium'"><div class="pachet-badge">Premium</div></div><div class="pachet-content"><h3>Pachet Prezindent Alb</h3><p>Pachet funerar premium cu sicriu Prezident Alb.</p><div class="pachet-price">5.780 RON</div></div></div>
+        </div>
+        <div class="more-packages-container"><div class="mobile-center-btn"><button class="btn-more" data-page="pachete"><span>Vezi toate pachetele</span><i class="fas fa-arrow-right"></i></button></div></div>
+    </div>
+</section>
+
+<section class="comercializare">
+    <div class="container"><div class="section-title"><h2>Comercializare Produse Funerare</h2></div>
+    <div class="products-grid">
+        <div class="product-card"><div class="product-icon"><i class="fas fa-church"></i></div><h3>Sicrie Diverse Modele</h3><p>Gamă variată de sicrie din lemn masiv și placat.</p></div>
+        <div class="product-card"><div class="product-icon"><i class="fas fa-cross"></i></div><h3>Cruci Funerare</h3><p>Cruci din lemn, piatră sau metal, personalizate.</p></div>
+        <div class="product-card"><div class="product-icon"><i class="fas fa-icicles"></i></div><h3>Capace Frigorifice</h3><p>Capace frigorifice pentru păstrarea temporară.</p></div>
+        <div class="product-card"><div class="product-icon"><i class="fas fa-cubes"></i></div><h3>Accesorii Mortuare</h3><p>Lenjerie mortuară, prosoape, luminări, icoane.</p></div>
+    </div></div>
+</section>
+
+<section class="asistenta-formalitati" id="asistenta-formalitati">
+    <div class="container"><div class="section-title"><h2>Asistență și Formalități</h2></div>
+    <div class="servicii-grid">
+        <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-file-contract"></i></div><h3>Întocmirea Documentelor de Deces</h3><p>Asistență completă pentru întocmirea documentelor necesare.</p></div>
+        <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-hand-holding-usd"></i></div><h3>Consultanță pentru Ajutorul de Înmormântare</h3><p>Îndrumare și sprijin în obținerea ajutorului de înmormântare.</p></div>
+        <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-church"></i></div><h3>Organizarea Completă a Ceremoniei Religioase</h3><p>Coordonarea întregului proces ceremonial.</p></div>
+    </div></div>
+</section>
+
+<section class="servicii-suplimentare" id="servicii-suplimentare">
+    <div class="container"><div class="section-title"><h2>Servicii Suplimentare</h2></div>
+    <div class="servicii-grid">
+        <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-tree"></i></div><h3>Amenajare și Întreținere Locuri de Veci</h3><p>Servicii profesionale de amenajare, curățenie și întreținere.</p></div>
+        <div class="serviciu-card"><div class="serviciu-icon"><i class="fas fa-fire"></i></div><h3>Servicii de Incinerare (la cerere)</h3><p>Oferim servicii complete de incinerare.</p></div>
+    </div>
+    <div class="serviciu-note"><p><i class="fas fa-info-circle"></i> Toate serviciile suplimentare sunt personalizate.</p></div></div>
+</section>`,
             
-            let currentIndex = 0;
-            let isAnimating = false;
-            const imageCache = new Array(TOTAL_IMAGES).fill(null);
-
-            function createStructure() {
-                cylinder.innerHTML = '';
-                if(indicatorsContainer) indicatorsContainer.innerHTML = '';
-                for (let i = 0; i < TOTAL_IMAGES; i++) {
-                    const card = document.createElement('div');
-                    card.className = 'coroane-card';
-                    card.dataset.index = i;
-                    card.style.transform = `rotateY(${i * BASE_ANGLE}deg) translateZ(${TRANSLATE_Z}px)`;
-                    
-                    const img = document.createElement('img');
-                    img.className = 'coroane-image';
-                    img.src = `https://via.placeholder.com/150x210/2a2a2a/555555?text=Corona+${i+1}`;
-                    
-                    card.appendChild(img);
-                    cylinder.appendChild(card);
-
-                    if (indicatorsContainer) {
-                        const ind = document.createElement('div');
-                        ind.className = 'cylinder-indicator';
-                        ind.addEventListener('click', () => { if (!isAnimating) goToImage(i); });
-                        indicatorsContainer.appendChild(ind);
-                    }
+            pachete: `<!-- Secțiunea Pachete -->
+<section class="pachete-index">
+    <div class="container">
+        <div class="section-title"><h2>Pachete Funerare</h2></div>
+        <div class="coffins-grid" id="packages-grid">
+            <div class="coffin-item"><div class="coffin-image"><img src="images/4-Lat.png" alt="Pachet 4-Lat"></div><div class="coffin-info"><h3>Pachet 4-Lat</h3><div class="price">980 RON</div><button class="detail-btn" data-package="4lat">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/plop tri.png" alt="Pachet Plop Tri"></div><div class="coffin-info"><h3>Pachet Tri</h3><div class="price">1.280 RON</div><button class="detail-btn" data-package="ploptri">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/Brad tri 180cm.png" alt="Pachet Brad Tri 180cm"></div><div class="coffin-info"><h3>Pachet Brad Tri 180cm</h3><div class="price">1.580 RON</div><button class="detail-btn" data-package="bradtri180">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/stejar rustic.png" alt="Pachet Stejar Rustic"></div><div class="coffin-info"><h3>Pachet Stejar Rustic</h3><div class="price">1.890 RON</div><button class="detail-btn" data-package="stejarrustic">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/fag imprimat.png" alt="Pachet Fag Imprimat"></div><div class="coffin-info"><h3>Pachet Fag Imprimat</h3><div class="price">2.180 RON</div><button class="detail-btn" data-package="fagimprimat">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/brad tri.png" alt="Pachet Brad Tri"></div><div class="coffin-info"><h3>Pachet Brad Tri</h3><div class="price">2.180 RON</div><button class="detail-btn" data-package="bradtri">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/prezident imitatie.png" alt="Pachet Prezident Imitație"></div><div class="coffin-info"><h3>Pachet Prezident Imitație</h3><div class="price">4.980 RON</div><button class="detail-btn" data-package="prezidentimitatie">Detalii</button></div></div>
+            <div class="coffin-item"><div class="coffin-image"><img src="images/prezident alb.png" alt="Pachet Prezident Alb"></div><div class="coffin-info"><h3>Pachet Prezident Alb</h3><div class="price">5.780 RON</div><button class="detail-btn" data-package="prezidentalb">Detalii</button></div></div>
+        </div>
+        <div class="package-detail" id="package-detail"></div>
+    </div>
+</section>`,
+            
+            coroane: `<!-- Secțiunea Coroane -->
+<section class="coroane-section">
+    <div class="container">
+        <div class="section-title"><h2>Galerie Coroane</h2></div>
+        <div class="coroane-grid" id="coroaneGrid"></div>
+    </div>
+</section>`,
+            
+            contact: `<!-- Secțiunea Contact -->
+<section class="contact">
+    <div class="container">
+        <div class="section-title"><h2>Contact</h2></div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h3>Adresă</h3><p>Strada Principală, Oituz</p></div></div>
+                <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div><h3>Telefon</h3><p class="phone-number">0752 538 888</p></div></div>
+                <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h3>Email</h3><p>contact@casafuneraralupica.ro</p></div></div>
+                <div class="contact-item"><div class="contact-icon"><i class="fas fa-clock"></i></div><div><h3>Program</h3><p>Non-stop 24/7</p></div></div>
+            </div>
+            <div class="contact-form">
+                <h2>Trimiteți un mesaj</h2>
+                <form id="messageForm">
+                    <div class="form-group"><label for="name">Nume și prenume</label><input type="text" id="name" class="form-control" required></div>
+                    <div class="form-group"><label for="phone">Telefon</label><input type="tel" id="phone" class="form-control" required></div>
+                    <div class="form-group"><label for="message">Mesaj</label><textarea id="message" class="form-control" placeholder="Scrieți mesajul dvs. aici..." required></textarea></div>
+                    <button type="submit" class="btn btn-block"><i class="fas fa-paper-plane"></i> Trimite mesaj</button>
+                    <div id="successMessage" class="success-message"><i class="fas fa-check-circle"></i> Mesajul a fost trimis cu succes!</div>
+                </form>
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4779.870349674047!2d26.613562954381955!3d46.20611680040304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b5030657bcebe7%3A0x2fe1a961c9cc6c17!2sCasa%20Funerar%C4%83%20Lupic%C4%83!5e0!3m2!1sen!2sro!4v1764947435250!5m2!1sen!2sro" class="map-frame" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-overlay"><h3><i class="fas fa-map-marker-alt"></i> Casa Funerară Lupică</h3><p><i class="fas fa-map-pin"></i> Strada Principală, Oituz</p><p><i class="fas fa-phone"></i> <span class="phone-number">0752 538 888</span></p><p><i class="fas fa-clock"></i> Non-stop 24/7</p></div>
+        </div>
+    </div>
+</section>`
+        };
+        
+        const packageDetails = {
+            "4lat": { title: "Pachet 4-Lat", price: "980 RON", image: "images/4-Lat.png", features: ["Sicriu simplu din lemn masiv", "Capitonajul capacului", "Garnitura pentru interiorul sicriului", "Orarul mare", "Perna pentru decedat", "Voal față"] },
+            "ploptri": { title: "Pachet Tri", price: "1.280 RON", image: "images/plop tri.png", features: ["Capitonaj interior premium", "Garnitură completă pentru interior", "Orar mare ornamentat", "Perna de cap din satin", "Voal față transparent"] },
+            "bradtri180": { title: "Pachet Brad Tri 180cm", price: "1.580 RON", image: "images/Brad tri 180cm.png", features: ["Sicriu din brad triplu 180cm", "Capitonaj capac și interior", "Garnitură completă premium", "Orar mare ornamentat", "Perna de cap din satin", "Voal față transparent"] },
+            "stejarrustic": { title: "Pachet Stejar Rustic", price: "1.890 RON", image: "images/stejar rustic.png", features: ["Sicriu din stejar rustic", "Capitonaj interior premium", "Garnitură completă pentru interior", "Orar mare ornamentat", "Perna de cap din satin", "Voal față transparent"] },
+            "fagimprimat": { title: "Pachet Fag Imprimat", price: "2.180 RON", image: "images/fag imprimat.png", features: ["Sicriu din fag imprimat", "Capitonaj interior premium", "Garnitură completă pentru interior", "Orar mare ornamentat", "Perna de cap din satin", "Voal față transparent"] },
+            "bradtri": { title: "Pachet Brad Tri", price: "2.180 RON", image: "images/brad tri.png", features: ["Sicriu din brad triplu", "Capitonaj interior premium", "Garnitură completă pentru interior", "Orar mare ornamentat", "Perna de cap din satin", "Voal față transparent"] },
+            "prezidentimitatie": { title: "Pachet Prezident Imitație", price: "4.980 RON", image: "images/prezident imitatie.png", features: ["Sicriu Prezident imitație premium", "Capitonaj interior de lux", "Garnitură completă premium", "Orar mare ornamentat", "Perna de cap din satin premium", "Voal față transparent de calitate"] },
+            "prezidentalb": { title: "Pachet Prezident Alb", price: "5.780 RON", image: "images/prezident alb.png", features: ["Sicriu Prezident alb premium", "Capitonaj interior de lux", "Garnitură completă premium", "Orar mare ornamentat", "Perna de cap din satin premium", "Voal față transparent de calitate"] }
+        };
+        
+        let currentPage = 'home';
+        
+        function loadPage(page, scrollToSection = null) {
+            currentPage = page;
+            const content = pageTemplates[page];
+            if (content) {
+                document.getElementById('pageContent').innerHTML = content;
+                document.title = `Casa Funerară Lupică - ${page === 'home' ? 'Acasă' : page === 'pachete' ? 'Pachete Funerare' : page === 'coroane' ? 'Coroane' : 'Contact'}`;
+                updateActiveNav(page);
+                attachPageSpecificEvents(page);
+                if (scrollToSection) {
+                    setTimeout(() => {
+                        const element = document.getElementById(scrollToSection);
+                        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
                 }
-                updateDisplay();
-                loadImages();
             }
-
-            function loadImages() {
-                const activeIndices = [currentIndex, (currentIndex+1)%TOTAL_IMAGES, (currentIndex-1+TOTAL_IMAGES)%TOTAL_IMAGES];
-                activeIndices.forEach(idx => {
-                    if (!imageCache[idx]) {
-                        imageCache[idx] = `images/Coroana ${idx + 1}.png`;
-                        const card = cylinder.querySelector(`[data-index="${idx}"] img`);
-                        if(card) card.src = imageCache[idx];
-                    }
-                });
-            }
-
-            function updateDisplay() {
-                cylinder.style.transform = `rotateY(${-currentIndex * BASE_ANGLE}deg)`;
-                const cards = cylinder.querySelectorAll('.coroane-card');
-                cards.forEach((card, i) => {
-                    card.classList.toggle('active', i === currentIndex);
-                });
-                if(currentIndexSpan) currentIndexSpan.textContent = `${currentIndex + 1} / ${TOTAL_IMAGES}`;
-                if(indicatorsContainer && indicatorsContainer.children[currentIndex]) {
-                    Array.from(indicatorsContainer.children).forEach((c, idx) => c.classList.toggle('active', idx === currentIndex));
-                }
-            }
-
-            function goToImage(index) {
-                if (isAnimating) return;
-                isAnimating = true;
-                currentIndex = (index + TOTAL_IMAGES) % TOTAL_IMAGES;
-                loadImages();
-                updateDisplay();
-                setTimeout(() => { isAnimating = false; }, 600);
-            }
-
-            prevBtn.addEventListener('click', () => goToImage(currentIndex - 1));
-            nextBtn.addEventListener('click', () => goToImage(currentIndex + 1));
-            createStructure();
         }
-        document.addEventListener('DOMContentLoaded', initCoroaneCylinder);
+        
+        function updateActiveNav(page) {
+            document.querySelectorAll('.main-nav ul li a, .footer-link').forEach(link => {
+                if (link.getAttribute('data-page') === page) link.classList.add('active');
+                else link.classList.remove('active');
+            });
+        }
+        
+        function attachPageSpecificEvents(page) {
+            if (page === 'pachete') {
+                setTimeout(() => {
+                    document.querySelectorAll('.detail-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const packageId = btn.getAttribute('data-package');
+                            showPackageDetails(packageId);
+                        });
+                    });
+                    const backBtn = document.getElementById('back-btn');
+                    if (backBtn) backBtn.addEventListener('click', () => {
+                        document.getElementById('package-detail').classList.remove('active');
+                        document.getElementById('packages-grid').style.display = 'grid';
+                    });
+                }, 50);
+            }
+            
+            if (page === 'coroane') {
+                setTimeout(() => loadCoroaneImages(), 100);
+            }
+            
+            if (page === 'contact') {
+                setTimeout(() => {
+                    const form = document.getElementById('messageForm');
+                    if (form) {
+                        form.addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            const name = document.getElementById('name').value;
+                            const phone = document.getElementById('phone').value;
+                            const message = document.getElementById('message').value;
+                            const smsMessage = `Mesaj de pe site:%0A%0ANume: ${name}%0ATelefon: ${phone}%0A%0AMesaj:%0A${message}`;
+                            window.location.href = `sms:0752538888?body=${smsMessage}`;
+                            document.getElementById('successMessage').style.display = 'block';
+                            form.reset();
+                            setTimeout(() => { document.getElementById('successMessage').style.display = 'none'; }, 5000);
+                        });
+                    }
+                }, 50);
+            }
+            
+            if (page === 'home') {
+                setTimeout(() => {
+                    document.querySelectorAll('.btn-more[data-page]').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const targetPage = btn.getAttribute('data-page');
+                            if (targetPage) loadPage(targetPage);
+                        });
+                    });
+                }, 50);
+            }
+            
+            setTimeout(() => {
+                document.querySelectorAll('.phone-link, a[href^="tel"]').forEach(link => {
+                    link.setAttribute('x-ms-format-detection', 'none');
+                });
+            }, 50);
+        }
+        
+        function showPackageDetails(packageId) {
+            const pkg = packageDetails[packageId];
+            if (!pkg) return;
+            const detailSection = document.getElementById('package-detail');
+            const gridSection = document.getElementById('packages-grid');
+            if (!detailSection || !gridSection) return;
+            gridSection.style.display = 'none';
+            detailSection.classList.add('active');
+            detailSection.innerHTML = `
+                <button class="back-btn" id="back-btn"><i class="fas fa-arrow-left"></i> Înapoi la toate pachetele</button>
+                <div class="detail-container">
+                    <div class="detail-image"><img src="${pkg.image}" alt="${pkg.title}"></div>
+                    <div class="detail-info">
+                        <h2>${pkg.title}</h2>
+                        <div class="detail-price">${pkg.price}</div>
+                        <div class="detail-features"><h3>Servicii incluse:</h3><ul>${pkg.features.map(f => `<li>${f}</li>`).join('')}</ul></div>
+                        <a href="tel:0752538888" class="contact-btn btn"><i class="fas fa-phone"></i> Sună pentru ofertă: 0752 538 888</a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('back-btn').addEventListener('click', () => {
+                detailSection.classList.remove('active');
+                gridSection.style.display = 'grid';
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function loadCoroaneImages() {
+            const grid = document.getElementById('coroaneGrid');
+            if (!grid) return;
+            const total = 40;
+            grid.innerHTML = '';
+            for (let i = 1; i <= total; i++) {
+                const item = document.createElement('div');
+                item.className = 'coroana-item';
+                item.style.animationDelay = `${((i-1) % 10) * 0.1}s`;
+                item.innerHTML = `
+                    <div class="coroana-image-container">
+                        <img class="coroana-image" src="https://via.placeholder.com/300x300/2a2a2a/555555?text=Se+încarcă..." alt="Corona funerară ${i}" loading="lazy">
+                    </div>
+                    <div class="coroana-name">Corona ${i}</div>
+                `;
+                grid.appendChild(item);
+                const img = item.querySelector('img');
+                const realImg = new Image();
+                realImg.onload = () => { img.src = realImg.src; img.style.opacity = '1'; };
+                realImg.onerror = () => { img.src = `https://via.placeholder.com/300x300/333/8b7355?text=Corona+${i}`; img.style.opacity = '1'; };
+                setTimeout(() => { realImg.src = `images/Coroana ${i}.png`; }, 100 + (i * 50));
+            }
+        }
+        
+        function initDecorations() {
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const crossesContainer = document.getElementById('crossesContainer');
+            const goldContainer = document.getElementById('goldDecoration');
+            const crossCount = isMobile ? 12 : 25;
+            for (let i = 0; i < crossCount; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '†';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
+                crossesContainer.appendChild(cross);
+            }
+            const particleCount = isMobile ? 10 : 30;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                goldContainer.appendChild(particle);
+            }
+        }
+        
+        function initEventListeners() {
+            document.querySelectorAll('.main-nav ul li a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    if (page) loadPage(page);
+                });
+            });
+            document.querySelectorAll('.footer-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    if (page) loadPage(page);
+                });
+            });
+            document.querySelector('.logo-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                loadPage('home');
+            });
+            document.querySelectorAll('[data-page][data-section]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    const section = link.getAttribute('data-section');
+                    if (page && section) loadPage(page, section);
+                    else if (page) loadPage(page);
+                });
+            });
+        }
+        
+        function initPhoneCalls() {
+            document.querySelectorAll('.phone-link, a[href^="tel"]').forEach(link => {
+                link.setAttribute('x-ms-format-detection', 'none');
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initDecorations();
+            initEventListeners();
+            initPhoneCalls();
+            loadPage('home');
+            
+            const contentFade = document.getElementById('contentFade');
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const scrollProgress = Math.min(scrollPosition / (windowHeight * 0.5), 1);
+                const opacity = 0.7 + (scrollProgress * 0.2);
+                contentFade.style.background = `linear-gradient(to bottom, rgba(30, 30, 30, ${opacity}) 0%, rgba(40, 40, 40, ${Math.min(opacity + 0.1, 0.9)}) 100%)`;
+            });
+        });
     </script>
 </body>
 </html>
