@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <title>Casa Funerară Lupică - Coroane Funerare</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- ========== START CSS ========== -->
+    <style>
+        :root {
+            --primary-color: #8b7355;
+            --primary-dark: #6d5c46;
+            --dark-color: #1a1a1a;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold-gradient: linear-gradient(135deg, #8b7355 0%, #c5a880 50%, #8b7355 100%);
+            --header-bg: rgba(26, 26, 26, 0.95);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-color);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        a[href^="tel"] { color: inherit; text-decoration: none; }
+        .phone-number { color: inherit !important; text-decoration: none !important; }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(40,40,40,0.95) 100%);
+            z-index: -3;
+        }
+        
+        .content-fade {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to bottom, rgba(30,30,30,0.7) 0%, rgba(40,40,40,0.9) 100%);
+            min-height: 100vh;
+        }
+        
+        .crosses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cross {
+            position: absolute;
+            color: rgba(139,115,85,0.15);
+            animation: crossFloat 20s infinite linear;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .dove-header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            animation: doveFlyHeader 8s ease-in-out infinite;
+            z-index: 101;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--header-bg);
+            padding: 15px 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+        
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-icon::before { content: '†'; font-size: 3.5rem; font-weight: bold; }
+        
+        .logo-text h1 { font-size: 2rem; font-weight: 400; }
+        .logo-text span { font-weight: 600; color: var(--primary-color); font-size: 1.3rem; }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+        
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(139,115,85,0.1);
+        }
+        
+        .contact-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phone-emergency {
+            background-color: rgba(139,115,85,0.2);
+            padding: 12px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(139,115,85,0.5);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .header-container { flex-direction: row; justify-content: space-between; text-align: left; }
+            .logo-link { flex-direction: row; }
+            .logo-icon { width: 50px; height: 50px; margin-bottom: 0; margin-right: 10px; }
+            .logo-icon::before { font-size: 2rem; }
+            .logo-text h1 { font-size: 1.4rem; }
+            .logo-text span { font-size: 0.9rem; }
+            .main-nav ul li a { padding: 6px 12px; font-size: 0.85rem; }
+            .contact-header { align-items: flex-end; }
+            .phone-emergency { font-size: 0.95rem; padding: 6px 15px; }
+        }
+        
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .hero h2 { font-size: 1.8rem; margin-bottom: 20px; }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .btn:hover { transform: translateY(-3px); }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: #f0f0f0;
+            display: inline-block;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .coroane-section {
+            padding: 40px 0 80px;
+            min-height: 60vh;
+        }
+        
+        .coroane-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .coroane-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
+        }
+        
+        .coroana-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition);
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .coroana-item.visible { opacity: 1; transform: translateY(0); }
+        
+        .coroana-image-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            background-color: rgba(40,40,40,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        
+        .coroana-item:hover .coroana-image-container {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        
+        .coroana-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .coroana-name {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            background-color: rgba(139,115,85,0.1);
+            border-radius: 4px;
+        }
+        
+        footer {
+            background-color: var(--header-bg);
+            padding: 50px 0 15px;
+            border-top: 1px solid rgba(139,115,85,0.3);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul { list-style: none; }
+        .footer-col ul li a { color: #bbb; text-decoration: none; font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: var(--primary-color); }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.8rem;
+        }
+        
+        @keyframes crossFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes doveFlyHeader {
+            0%,100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(-20px) translateY(3px); }
+            75% { transform: translateX(-10px) translateY(-3px); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 767px) {
+            .hero h2 { font-size: 1.5rem; }
+            .section-title h2 { font-size: 1.5rem; }
+        }
+    </style>
+    <!-- ========== END CSS ========== -->
+</head>
+<body>
+    <!-- ========== START HTML ========== -->
+    <div class="page-background"></div>
+    <div class="dove-header">🕊️</div>
+    <div class="crosses-container" id="crossesContainer"></div>
+    <div class="content-fade">
+        
+        <header>
+            <div class="container">
+                <div class="header-container">
+                    <a href="/" class="logo-link">
+                        <div class="logo">
+                            <div class="logo-icon"></div>
+                            <div class="logo-text">
+                                <h1>CASA</h1>
+                                <span>FUNERARĂ LUPICĂ</span>
+                            </div>
+                        </div>
+                    </a>
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane" class="active">Coroane funerare</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <div class="contact-header">
+                        <a href="tel:0752538888" class="phone-emergency phone-link">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="phone-number">0752 538 888</span>
+                        </a>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Non-stop 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Coroane Funerare</h2>
+                    <a href="tel:0752538888" class="btn" id="consultantaBtn">
+                        <i class="fas fa-phone-alt"></i> 0752 538 888
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="coroane-section">
+            <div class="container">
+                <div class="section-title"><h2>Galerie Coroane</h2></div>
+                <div class="coroane-grid" id="coroaneGrid"></div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>Casa Funerară Lupică</h3>
+                        <p>Oferim servicii funerare complete cu demnitate și compasiune.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane">Coroane funerare</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- ========== END HTML ========== -->
+
+    <!-- ========== START JAVASCRIPT ========== -->
+    <script>
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        function createCrosses() {
+            const container = document.getElementById('crossesContainer');
+            const count = isMobile ? 12 : 25;
+            for (let i = 0; i < count; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '†';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
+                container.appendChild(cross);
+            }
+        }
+        
+        function loadCoroane() {
+            const grid = document.getElementById('coroaneGrid');
+            const total = 40;
+            const isDesktop = window.innerWidth > 768;
+            
+            for (let i = 1; i <= total; i++) {
+                const item = document.createElement('div');
+                item.className = 'coroana-item';
+                item.style.animationDelay = `${((i-1) % 10) * 0.1}s`;
+                
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'coroana-image-container';
+                
+                const img = document.createElement('img');
+                img.className = 'coroana-image';
+                img.alt = `Corona funerară ${i}`;
+                img.loading = 'lazy';
+                
+                const placeholderSize = isDesktop ? '300' : '250';
+                img.src = `https://via.placeholder.com/${placeholderSize}x300/2a2a2a/555555?text=Se+încarcă...`;
+                
+                const realImg = new Image();
+                realImg.onload = () => { img.src = realImg.src; };
+                realImg.onerror = () => { img.src = `https://via.placeholder.com/${placeholderSize}x300/333/8b7355?text=Corona+${i}`; };
+                realImg.src = `images/Coroana ${i}.png`;
+                
+                imgContainer.appendChild(img);
+                
+                const name = document.createElement('div');
+                name.className = 'coroana-name';
+                name.textContent = `Corona ${i}`;
+                
+                item.appendChild(imgContainer);
+                item.appendChild(name);
+                grid.appendChild(item);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createCrosses();
+            loadCoroane();
+        });
+    </script>
+    <!-- ========== END JAVASCRIPT ========== -->
+</body>
+</html>
