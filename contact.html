@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <title>Contact – Casa Funerară Lupică</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- ========== START CSS ========== -->
+    <style>
+        :root {
+            --primary-color: #8b7355;
+            --primary-dark: #6d5c46;
+            --dark-color: #1a1a1a;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold-gradient: linear-gradient(135deg, #8b7355 0%, #c5a880 50%, #8b7355 100%);
+            --header-bg: rgba(26, 26, 26, 0.95);
+            --text-light: #aaa;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-color);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        a[href^="tel"] { color: inherit; text-decoration: none; }
+        .phone-number { color: inherit !important; text-decoration: none !important; }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(40,40,40,0.95) 100%);
+            z-index: -3;
+        }
+        
+        .content-fade {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to bottom, rgba(30,30,30,0.7) 0%, rgba(40,40,40,0.9) 100%);
+            min-height: 100vh;
+        }
+        
+        .crosses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cross {
+            position: absolute;
+            color: rgba(139,115,85,0.15);
+            animation: crossFloat 20s infinite linear;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .dove-header {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            animation: doveFlyHeader 8s ease-in-out infinite;
+            z-index: 101;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--header-bg);
+            padding: 15px 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+        
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-icon::before { content: '†'; font-size: 3.5rem; font-weight: bold; }
+        
+        .logo-text h1 { font-size: 2rem; font-weight: 400; }
+        .logo-text span { font-weight: 600; color: var(--primary-color); font-size: 1.3rem; }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+        
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(139,115,85,0.1);
+        }
+        
+        .contact-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phone-emergency {
+            background-color: rgba(139,115,85,0.2);
+            padding: 12px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(139,115,85,0.5);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .header-container { flex-direction: row; justify-content: space-between; text-align: left; }
+            .logo-link { flex-direction: row; }
+            .logo-icon { width: 50px; height: 50px; margin-bottom: 0; margin-right: 10px; }
+            .logo-icon::before { font-size: 2rem; }
+            .logo-text h1 { font-size: 1.4rem; }
+            .logo-text span { font-size: 0.9rem; }
+            .main-nav ul li a { padding: 6px 12px; font-size: 0.85rem; }
+            .contact-header { align-items: flex-end; }
+            .phone-emergency { font-size: 0.95rem; padding: 6px 15px; }
+        }
+        
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin: 40px 0 50px;
+            font-size: 2.2rem;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(26,26,26,0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(139,115,85,0.3);
+            backdrop-filter: blur(8px);
+        }
+        
+        .contact-info h2, .contact-form h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(139,115,85,0.3);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .contact-details { margin: 25px 0; }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 20px;
+        }
+        
+        .contact-text h3 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        .contact-text p { color: #ccc; }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(40,40,40,0.8);
+            border: 1px solid rgba(139,115,85,0.3);
+            border-radius: 4px;
+            color: #f0f0f0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        textarea.form-control { min-height: 150px; resize: vertical; }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn:hover { transform: translateY(-3px); }
+        .btn-block { display: block; width: 100%; }
+        
+        .map-container {
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(139,115,85,0.3);
+            height: 500px;
+            position: relative;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(26,26,26,0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(139,115,85,0.3);
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .map-overlay h3 { color: var(--primary-color); margin-bottom: 8px; }
+        .map-overlay p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 5px; }
+        .map-overlay i { color: var(--primary-color); margin-right: 8px; }
+        
+        .success-message {
+            display: none;
+            background: rgba(40,167,69,0.2);
+            border: 1px solid rgba(40,167,69,0.5);
+            color: #28a745;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        footer {
+            background-color: var(--header-bg);
+            padding: 50px 0 15px;
+            border-top: 1px solid rgba(139,115,85,0.3);
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul { list-style: none; }
+        .footer-col ul li a { color: #bbb; text-decoration: none; font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: var(--primary-color); }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.8rem;
+        }
+        
+        @keyframes crossFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes doveFlyHeader {
+            0%,100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(-20px) translateY(3px); }
+            75% { transform: translateX(-10px) translateY(-3px); }
+        }
+        
+        @media (max-width: 767px) {
+            .page-title { font-size: 1.8rem; }
+            .contact-container { flex-direction: column; }
+            .map-container { height: 400px; }
+            .map-overlay { position: relative; top: 0; right: 0; margin: 20px auto; max-width: 100%; }
+        }
+    </style>
+    <!-- ========== END CSS ========== -->
+</head>
+<body>
+    <!-- ========== START HTML ========== -->
+    <div class="page-background"></div>
+    <div class="dove-header">🕊️</div>
+    <div class="crosses-container" id="crossesContainer"></div>
+    <div class="content-fade">
+        
+        <header>
+            <div class="container">
+                <div class="header-container">
+                    <a href="/" class="logo-link">
+                        <div class="logo">
+                            <div class="logo-icon"></div>
+                            <div class="logo-text">
+                                <h1>CASA</h1>
+                                <span>FUNERARĂ LUPICĂ</span>
+                            </div>
+                        </div>
+                    </a>
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane">Coroane</a></li>
+                            <li><a href="./contact" class="active">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <div class="contact-header">
+                        <a href="tel:0752538888" class="phone-emergency phone-link">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="phone-number">0752 538 888</span>
+                        </a>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Non-stop 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <h1 class="page-title">Contact</h1>
+
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Informații de contact</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">
+                                <h3>Adresă</h3>
+                                <p>Strada Principală, Oituz</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-text">
+                                <h3>Telefon</h3>
+                                <p class="phone-number">0752 538 888</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <p>contact@casafuneraralupica.ro</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div class="contact-text">
+                                <h3>Program</h3>
+                                <p>Non-stop 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Trimiteți un mesaj</h2>
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label for="name">Nume și prenume</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mesaj</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-block">Trimite mesaj</button>
+                        <div id="successMessage" class="success-message">
+                            <i class="fas fa-check-circle"></i> Mesajul a fost trimis cu succes!
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4779.870349674047!2d26.613562954381955!3d46.20611680040304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b5030657bcebe7%3A0x2fe1a961c9cc6c17!2sCasa%20Funerar%C4%83%20Lupic%C4%83!5e0!3m2!1sen!2sro!4v1764947435250!5m2!1sen!2sro" 
+                    class="map-frame"
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+                <div class="map-overlay">
+                    <h3><i class="fas fa-map-marker-alt"></i> Casa Funerară Lupică</h3>
+                    <p><i class="fas fa-map-pin"></i> Strada Principală, Oituz</p>
+                    <p><i class="fas fa-phone"></i> <span class="phone-number">0752 538 888</span></p>
+                    <p><i class="fas fa-clock"></i> Non-stop 24/7</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>Casa Funerară Lupică</h3>
+                        <p>Oferim servicii funerare complete cu demnitate și compasiune.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Link-uri Rapide</h3>
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./pachete">Pachete funerare</a></li>
+                            <li><a href="./coroane">Coroane funerare</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Casa Funerară Lupica. Toate drepturile rezervate.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- ========== END HTML ========== -->
+
+    <!-- ========== START JAVASCRIPT ========== -->
+    <script>
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        function createCrosses() {
+            const container = document.getElementById('crossesContainer');
+            const count = isMobile ? 15 : 25;
+            for (let i = 0; i < count; i++) {
+                const cross = document.createElement('div');
+                cross.className = 'cross';
+                cross.innerHTML = '†';
+                cross.style.left = Math.random() * 100 + '%';
+                cross.style.animationDelay = Math.random() * 20 + 's';
+                cross.style.fontSize = (Math.random() * (isMobile ? 12 : 20) + (isMobile ? 8 : 12)) + 'px';
+                container.appendChild(cross);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createCrosses();
+            
+            const form = document.getElementById('messageForm');
+            const successMsg = document.getElementById('successMessage');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
+                const smsMessage = `Mesaj de pe site:%0A%0ANume: ${name}%0ATelefon: ${phone}%0A%0AMesaj:%0A${message}`;
+                window.location.href = `sms:0752538888?body=${smsMessage}`;
+                successMsg.style.display = 'block';
+                form.reset();
+                setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+            });
+        });
+    </script>
+    <!-- ========== END JAVASCRIPT ========== -->
+</body>
+</html>
