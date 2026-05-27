@@ -992,7 +992,19 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                }
+            .parallax-wrapper {
+                background-attachment: scroll !important; /* Elimină bug-ul de zoom uriaș de pe telefoane */
+                background-position: top center !important; /* Centrează imaginea pe zona cea mai importantă din partea de sus */
+                }
+    
+            /* Ajustăm și razele / lumina soarelui pentru a nu fi prea intense pe un ecran mic */
+            .sun-glow {
+                height: 60vh;
+                background: radial-gradient(circle at 50% 5%, rgba(255, 245, 210, 0.6) 0%, rgba(255, 220, 150, 0.2) 30%, transparent 70%);
+                }
             }
+            
             .logo img { height: 110px; }
             header.scrolled .logo img { height: 65px; }
 
