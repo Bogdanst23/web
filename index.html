@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicii Funerare Complete | Respect și Profesionalism</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Variabile de culoare */
+        :root {
+            --primary-bg: #111111;
+            --secondary-bg: #1a1a1a;
+            --text-light: #f5f5f5;
+            --text-muted: #cccccc;
+            --gold: #D4AF37;
+            --dark-overlay: rgba(10, 10, 10, 0.55); 
+            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Reset și setări de bază */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Utilitați de Animație */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header / Navigare */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.4s ease, padding 0.4s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(17, 17, 17, 0.95);
+            padding: 0.8rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo img {
+            height: 165px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            transition: height 0.4s ease;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -5px;
+            font-weight: 600;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+            transition: font-size 0.4s ease, margin-top 0.4s ease;
+        }
+
+        header.scrolled .logo img {
+            height: 75px;
+        }
+
+        header.scrolled .logo-text {
+            font-size: 0.8rem;
+            margin-top: -2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        .btn-call {
+            border: 1px solid var(--gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 3px;
+            color: var(--gold) !important;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-shadow: none !important;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .btn-call:hover {
+            background-color: var(--gold);
+            color: var(--primary-bg) !important;
+        }
+
+        .mobile-nav-controls {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        /* --- WRAPPER FUNDAL PARALLAX EXTINS --- */
+        .parallax-wrapper {
+            position: relative;
+            background-image: linear-gradient(var(--dark-overlay), var(--dark-overlay)), url('2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .parallax-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom, rgba(26, 26, 26, 0) 0%, #0a0a0a 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sun-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 5%, rgba(255, 245, 210, 0.85) 0%, rgba(255, 220, 150, 0.3) 25%, transparent 65%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 1;
+            animation: glowFade 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowFade {
+            0% { opacity: 0.4; filter: brightness(0.9) blur(5px); transform: scale(0.95); }
+            100% { opacity: 1; filter: brightness(1.2) blur(15px); transform: scale(1.05); }
+        }
+
+        .rays-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
+            overflow: hidden;
+            filter: blur(8px);
+        }
+
+        .ray {
+            position: absolute;
+            top: -5%;
+            left: 50%;
+            width: 25vw;
+            height: 120vh;
+            margin-left: -12.5vw;
+            background: linear-gradient(to bottom, rgba(255, 240, 180, 0.45) 0%, rgba(255, 230, 150, 0.1) 60%, transparent 100%);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transform-origin: top center;
+            opacity: 0;
+            animation: individualRayFade infinite alternate ease-in-out;
+        }
+
+        .ray-1 { transform: rotate(-55deg); animation-duration: 4.5s; animation-delay: 0.2s; width: 15vw; margin-left: -7.5vw;}
+        .ray-2 { transform: rotate(-35deg); animation-duration: 6s; animation-delay: 1.5s; }
+        .ray-3 { transform: rotate(-15deg); animation-duration: 3.8s; animation-delay: 0.5s; width: 30vw; margin-left: -15vw;}
+        .ray-4 { transform: rotate(5deg); animation-duration: 5.2s; animation-delay: 2.1s; }
+        .ray-5 { transform: rotate(25deg); animation-duration: 4s; animation-delay: 0.8s; width: 20vw; margin-left: -10vw;}
+        .ray-6 { transform: rotate(45deg); animation-duration: 5.8s; animation-delay: 3s; }
+        .ray-7 { transform: rotate(65deg); animation-duration: 4.2s; animation-delay: 1.1s; width: 18vw; margin-left: -9vw;}
+
+        @keyframes individualRayFade {
+            0% { opacity: 0.05; filter: brightness(0.8); }
+            100% { opacity: 0.85; filter: brightness(1.3); }
+        }
+
+        /* --- ANIMAȚIE PORUMBEL FUNDAL --- */
+        .dove-bg {
+            position: fixed;
+            top: 25%;
+            left: -10%;
+            font-size: 3rem;
+            color: var(--gold);
+            z-index: 1; /* În spatele conținutului, dar deasupra background-ului */
+            opacity: 0.6; /* Subtil, pentru a nu deranja textul */
+            pointer-events: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            animation: doveFlySlow 40s linear infinite;
+        }
+
+        @keyframes doveFlySlow {
+            0% { 
+                /* rotateY(180deg) îl face să privească spre dreapta */
+                transform: translateX(0vw) translateY(0) rotateY(180deg) rotateZ(0deg); 
+            }
+            25% { 
+                transform: translateX(35vw) translateY(-30px) rotateY(180deg) rotateZ(-5deg); 
+            }
+            50% { 
+                transform: translateX(65vw) translateY(20px) rotateY(180deg) rotateZ(5deg); 
+            }
+            75% { 
+                transform: translateX(95vw) translateY(-15px) rotateY(180deg) rotateZ(-3deg); 
+            }
+            100% { 
+                /* Iese complet din ecran la 120vw */
+                transform: translateX(120vw) translateY(0) rotateY(180deg) rotateZ(0deg); 
+            }
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 180px 20px 0;
+            z-index: 3;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.35;
+            margin-bottom: 1.2rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.8rem 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--primary-bg);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        .btn-secondary {
+            background-color: rgba(0,0,0,0.4);
+            color: var(--text-light);
+            border: 1px solid var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background-color: transparent;
+        }
+
+        /* Secțiuni Generale */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+            z-index: 3;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--gold);
+            margin: 15px auto 0;
+        }
+
+        /* Servicii Section */
+        #servicii {
+            background-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card .service-icon.fa-cross {
+            font-size: 3.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- PACHETE FUNERARE --- */
+        .pachete-index {
+            background-color: transparent;
+            padding-bottom: 6rem;
+        }
+
+        .pachete-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .all-packages-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .all-packages-center {
+                display: block;
+            }
+        }
+
+        .pachet-card {
+            background-color: rgba(26, 26, 26, 0.85);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(4px);
+        }
+
+        .pachet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+            border-color: var(--gold);
+        }
+
+        .pachet-header {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 15px;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .pachet-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: var(--transition);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .pachet-card:hover .pachet-image {
+            transform: scale(1.05);
+        }
+
+        .pachet-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: var(--primary-bg);
+            padding: 5px 15px;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pachet-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pachet-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .pachet-content h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pachet-content p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .pachet-features {
+            margin: 15px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .pachet-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #ddd;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pachet-features i {
+            color: var(--gold);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .pachet-price {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin: 15px 0;
+            text-align: center;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Playfair Display', serif;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .btn-more {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--gold);
+            color: var(--primary-bg);
+            border: 1px solid var(--gold);
+            padding: 12px 30px;
+            border-radius: 2px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .btn-more:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .more-packages-container {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (min-width: 992px) {
+            .more-packages-container {
+                display: none;
+            }
+        }
+
+        /* --- COROANE FUNERARE 3D --- */
+        .coroane-section {
+            background-color: transparent; /* Actualizat pentru fundal extins */
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: -15px;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .coroane-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 40px auto;
+            perspective: 2000px;
+            overflow: visible !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coroane-cylinder {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: cylinderLoad 1s ease-out;
+        }
+
+        .coroane-card {
+            position: absolute;
+            width: 250px;
+            height: 350px;
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            transform-origin: center center !important;
+            transition: all 0.3s ease, filter 0.3s ease !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .coroane-card.active {
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3) !important;
+            z-index: 10;
+        }
+
+        .coroane-image {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: brightness(0.95);
+        }
+
+        .coroane-card:hover .coroane-image {
+            transform: scale(1.05);
+            filter: brightness(1.05);
+        }
+
+        .cylinder-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .cylinder-nav:hover {
+            background: var(--gold);
+            color: var(--primary-bg);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .cylinder-prev { left: 5%; }
+        .cylinder-next { right: 5%; }
+
+        .cylinder-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .cylinder-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cylinder-indicator.active {
+            background: var(--gold);
+            transform: scale(1.3);
+        }
+
+        .cylinder-info {
+            position: absolute;
+            top: 20px;
+            right: 5%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            z-index: 100;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .coroane-description {
+            text-align: center;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        @keyframes cylinderLoad {
+            0% { opacity: 0; transform: scale(0.8) rotateX(10deg); }
+            100% { opacity: 1; transform: scale(1) rotateX(0); }
+        }
+
+        /* Despre Noi Section */
+        #despre {
+            background-color: transparent; /* Actualizat pentru fundal extins */
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content .highlight {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            margin-top: 2rem;
+            display: block;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: transparent; /* Actualizat pentru fundal extins */
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-right: 1.5rem;
+            margin-top: 5px;
+        }
+
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item p {
+            color: var(--text-muted);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(17, 17, 17, 0.8);
+            border: 1px solid #333;
+            color: var(--text-light);
+            font-family: 'Lora', serif;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--gold);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button[type="submit"] {
+            cursor: pointer;
+            width: max-content;
+        }
+
+        /* Mesaj de succes formular */
+        .success-message {
+            display: none;
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            color: #4dd865;
+            padding: 15px;
+            border-radius: 2px;
+            text-align: center;
+            font-family: 'Lora', serif;
+            margin-top: 10px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid #222;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--gold);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-col p {
+            color: #999;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #999;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 900px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .contact-container { flex-direction: column; }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 5%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .logo img { height: 110px; }
+            header.scrolled .logo img { height: 65px; }
+
+            .mobile-nav-controls {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-left: auto;
+                z-index: 1002;
+            }
+
+            .mobile-phone-link {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                border: 1px solid var(--gold);
+                padding: 0.4rem 0.6rem;
+                border-radius: 4px;
+                color: var(--gold);
+                font-weight: 600;
+                font-size: 0.9rem;
+                background-color: rgba(0,0,0,0.4);
+            }
+
+            .mobile-phone-link:hover {
+                background-color: var(--gold);
+                color: var(--primary-bg);
+            }
+
+            .menu-toggle { display: block; }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(26, 26, 26, 0.98); 
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+                border-top: 1px solid #333;
+            }
+            nav ul.active { max-height: 500px; }
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+                border-bottom: 1px solid #333;
+            }
+            
+            #hero { min-height: 100vh; padding-top: 220px; }
+            .hero-content h1 { font-size: 1.85rem; line-height: 1.3; }
+
+            /* Responsive Cylinder */
+            .coroane-container { height: 400px; perspective: 1500px; }
+            .coroane-cylinder { width: 220px; height: 300px; }
+            .coroane-card { width: 180px; height: 260px; transform-origin: center center -250px !important; }
+            .cylinder-info { top: 10px; right: 10px; font-size: 0.8rem; }
+            .cylinder-indicators { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="logo">
+            <a href="#hero">
+                <img src="1.png" alt="Logo Servicii Funerare">
+                <span class="logo-text">Casa Funerară Lupică</span>
+            </a>
+        </div>
+        
+        <nav>
+            <ul id="nav-list">
+                <li><a href="#hero">Acasă</a></li>
+                <li><a href="#servicii">Servicii</a></li>
+                <li><a href="#pachete">Pachete</a></li>
+                <li><a href="#coroane">Coroane</a></li>
+                <li><a href="#despre">Despre Noi</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:+40752538888" class="btn-call"><i class="fas fa-phone-alt"></i> 0752 538 888</a></li>
+            </ul>
+        </nav>
+        
+        <div class="mobile-nav-controls">
+            <a href="tel:+40752538888" class="mobile-phone-link">
+                <i class="fas fa-phone-alt"></i> 0752 538 888
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="parallax-wrapper">
+        
+        <div class="sun-glow"></div>
+
+        <div class="rays-container">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+            <div class="ray ray-4"></div>
+            <div class="ray ray-5"></div>
+            <div class="ray ray-6"></div>
+            <div class="ray ray-7"></div>
+        </div>
+
+        <div class="dove-bg">🕊️</div>
+
+        <section id="hero">
+            <div class="hero-content fade-in">
+                <h1>Servicii Funerare Complete cu Respect și Profesionalism</h1>
+                <p>Disponibili 24/7 pentru sprijin, consiliere și organizare completă în cele mai grele momente.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Contactează-ne</a>
+                    <a href="#servicii" class="btn-secondary">Vezi Serviciile</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicii">
+            <h2 class="section-title fade-in">Serviciile Noastre</h2>
+            <div class="services-grid">
+                
+                <div class="service-card fade-in">
+                    <i class="fas fa-cross service-icon"></i>
+                    <h3>Organizare Înmormântări</h3>
+                    <p>Preluăm în totalitate responsabilitățile organizatorice, oferindu-vă timpul necesar pentru a fi alături de familie și a vă lua rămas-bun.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-hand-holding-heart service-icon"></i>
+                    <h3>Îmbălsămare, Toaletare, Îmbrăcare și Cosmetizare</h3>
+                    <p>Servicii profesionale de pregătire a decedatului cu demnitate și respect, folosind tehnici și produse specializate pentru a asigura o prezentare adecvată.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-car-side service-icon"></i>
+                    <h3>Transport Funerar</h3>
+                    <p>Asigurăm transport funerar intern și internațional cu autoutilitare moderne, autorizate și adaptate standardelor de igienă și siguranță.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-box-open service-icon"></i>
+                    <h3>Sicrie și Accesorii</h3>
+                    <p>Vă punem la dispoziție o gamă variată de sicrie din diferite esențe de lemn, complet echipate, alături de cruci, coroane și alte accesorii.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-church service-icon"></i>
+                    <h3>Parastase și Pomeniri</h3>
+                    <p>Oferim sprijin complet în organizarea parastaselor, asigurând pachete alimentare, colivă, colaci și servicii de catering personalizate.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-file-signature service-icon"></i>
+                    <h3>Consultanță Completă</h3>
+                    <p>Vă ghidăm pas cu pas în obținerea certificatului de deces, a ajutorului de înmormântare și rezolvarea tuturor formalităților legale.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="pachete" class="pachete-index fade-in">
+            <h2 class="section-title">Pachete Funerare</h2>
+            <div class="pachete-grid">
+                <div class="all-packages-center">
+                    <a href="#contact" class="btn-more">
+                        <span>Vezi toate pachetele</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="pachet-card">
+                    <div class="pachet-header">
+                        <div class="image-container">
+                            <img src="images/4-Lat.png" alt="Pachet 4-Lat - Sicriu simplu" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/1a1a1a/D4AF37?text=Pachet+4-Lat'">
+                        </div>
+                        <div class="pachet-badge">Economic</div>
+                    </div>
+                    <div class="pachet-content">
+                        <h3>Pachet 4-Lat</h3>
+                        <p>Pachet funerar standard cu sicriu simplu din lemn masiv, ideal pentru ceremoniile tradiționale cu demnitate și respect.</p>
+                        <ul class="pachet-features">
+                            <li><i class="fas fa-check-circle"></i> Capitonaj capacul interior</li>
+                            <li><i class="fas fa-check-circle"></i> Garnitura completă interior</li>
+                            <li><i class="fas fa-check-circle"></i> Perna și căpătâi special</li>
+                            <li><i class="fas fa-check-circle"></i> Finisaj clasic și durabil</li>
+                        </ul>
+                        <div class="pachet-price">980 RON</div>
+                    </div>
+                </div>
+                
+                <div class="pachet-card">
+                    <div class="pachet-header">
+                        <div class="image-container">
+                            <img src="images/prezident alb.png" alt="Pachet Prezident Alb - Sicriu premium" class="pachet-image" onerror="this.src='https://via.placeholder.com/300x200/1a1a1a/D4AF37?text=Pachet+Premium'">
+                        </div>
+                        <div class="pachet-badge">Premium</div>
+                    </div>
+                    <div class="pachet-content">
+                        <h3>Pachet Prezident Alb</h3>
+                        <p>Pachet funerar premium cu sicriu Prezident Alb, pentru o ceremonie demnă și elegantă, cu finisaje superioare.</p>
+                        <ul class="pachet-features">
+                            <li><i class="fas fa-check-circle"></i> Capitonaj interior premium satin</li>
+                            <li><i class="fas fa-check-circle"></i> Garnitură completă și ajustabilă</li>
+                            <li><i class="fas fa-check-circle"></i> Perna de cap din satin alb</li>
+                            <li><i class="fas fa-check-circle"></i> Manere și accesorii aurii</li>
+                        </ul>
+                        <div class="pachet-price">5.780 RON</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="more-packages-container">
+                <a href="#contact" class="btn-more">
+                    <span>Vezi toate pachetele</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="coroane" class="coroane-section fade-in">
+            <h2 class="section-title">Coroane Funerare</h2>
+            <p class="section-subtitle">Colecția noastră de coroane și aranjamente florale pentru o ultimă omagiere</p>
+            
+            <div class="coroane-container">
+                <div class="coroane-cylinder" id="coroaneCylinder">
+                    </div>
+                
+                <button class="cylinder-nav cylinder-prev" id="cylinderPrev" aria-label="Imaginea anterioară">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="cylinder-nav cylinder-next" id="cylinderNext" aria-label="Imaginea următoare">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="cylinder-indicators" id="cylinderIndicators">
+                    </div>
+                
+                <div class="cylinder-info">
+                    <span class="current-index" id="currentIndex">1 / 40</span>
+                </div>
+            </div>
+            
+            <div class="coroane-description">
+                <p>Oferim o gamă variată de coroane și aranjamente funerare, realizate cu grijă și atenție la detalii. Imaginile au rol de prezentare.</p>
+            </div>
+        </section>
+
+        <section id="despre">
+            <div class="about-content fade-in">
+                <h2 class="section-title">Despre Noi</h2>
+                <p>Înțelegem pe deplin durerea și confuzia care însoțesc pierderea unei persoane dragi. Misiunea noastră este de a vă oferi nu doar un serviciu, ci un sprijin real, discret și profesionist.</p>
+                <p>Cu o experiență vastă în domeniul serviciilor funerare, abordăm fiecare familie cu empatie și respect maxim. Suntem prezenți non-stop pentru a prelua povara organizării, asigurându-ne că fiecare detaliu este tratat cu demnitatea cuvenită.</p>
+                <span class="highlight">"Suntem aici pentru dumneavoastră, atunci când aveți cea mai mare nevoie."</span>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title fade-in">Contactează-ne</h2>
+            <div class="contact-container">
+                
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Telefon - Non Stop</h4>
+                            <p><a href="tel:+40752538888">0752 538 888</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:contact@casafuneraralupica.ro">contact@casafuneraralupica.ro</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Adresă</h4>
+                            <p>Strada Principală<br>Oituz</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-in">
+                    <form id="messageForm">
+                        <input type="text" id="name" placeholder="Numele dumneavoastră" required>
+                        <input type="tel" id="phone" placeholder="Număr de telefon" required>
+                        <textarea id="message" placeholder="Cu ce vă putem ajuta?" required></textarea>
+                        <button type="submit" class="btn-primary">Trimite Mesajul</button>
+                        <div id="successMessage" class="success-message">
+                            <i class="fas fa-check-circle"></i> Mesajul a fost pregătit pentru trimitere via SMS!
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+        
+    </div> <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Casa Funerară Lupică</h3>
+                <p>Oferim servicii funerare complete cu demnitate și compasiune, asigurând sprijin și consolare familiilor în doliu.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Link-uri Rapide</h3>
+                <ul>
+                    <li><a href="#hero">Acasă</a></li>
+                    <li><a href="#pachete">Pachete funerare</a></li>
+                    <li><a href="#coroane">Coroane funerare</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Servicii</h3>
+                <ul>
+                    <li><a href="#servicii">Servicii funerare principale</a></li>
+                    <li><a href="#pachete">Pachete funerare</a></li>
+                    <li><a href="#servicii">Asistență și formalități</a></li>
+                    <li><a href="#pachete">Sicrie și accesorii</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Casa Funerară Lupică. Toate drepturile rezervate. | Design realizat cu respect.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Setare variabilă globală pentru dispozitive mobile, folosită la slider
+        const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // 1. Schimbare background Header la scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Meniu de mobil Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#nav-list li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+            });
+        });
+
+        // 3. Efect de Fade-In la Scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+
+        // 4. Funcționalitate Formular Contact
+        const form = document.getElementById('messageForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
+                
+                // Creăm mesajul pentru SMS
+                const smsMessage = `Mesaj de pe site:%0A%0ANume: ${name}%0ATelefon: ${phone}%0A%0AMesaj:%0A${message}`;
+                const phoneNumber = "0752538888"; 
+                const smsLink = `sms:${phoneNumber}?body=${smsMessage}`;
+                
+                // Deschidem aplicația de mesagerie
+                window.location.href = smsLink;
+                
+                // Afișăm mesajul de succes
+                successMessage.style.display = 'block';
+                form.reset();
+                
+                // Ascundem mesajul de succes după 5 secunde
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            });
+        }
+
+        // 5. SLIDER 3D COROANE 
+        function initCoroaneCylinder() {
+            const cylinder = document.getElementById('coroaneCylinder');
+            const prevBtn = document.getElementById('cylinderPrev');
+            const nextBtn = document.getElementById('cylinderNext');
+            const indicatorsContainer = document.getElementById('cylinderIndicators');
+            const currentIndexSpan = document.getElementById('currentIndex');
+            
+            if (!cylinder) return;
+            
+            const isMobile = window.innerWidth <= 768;
+            const TOTAL_IMAGES = 40;
+            const CARDS_TO_SHOW = isMobile ? 3 : 5;
+            const BASE_ANGLE = 360 / CARDS_TO_SHOW;
+            const TRANSLATE_Z = isMobile ? 250 : 350;
+            
+            let currentIndex = 0;
+            let isAnimating = false;
+            const totalImages = TOTAL_IMAGES;
+            
+            const imageStatus = new Array(TOTAL_IMAGES).fill(false);
+            const imageCache = new Array(TOTAL_IMAGES).fill(null);
+            
+            function loadImageWithPriority(index) {
+                if (imageStatus[index] || imageCache[index]) return;
+                
+                imageStatus[index] = 'loading';
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                
+                img.onload = function() {
+                    imageCache[index] = img.src;
+                    imageStatus[index] = 'loaded';
+                    updateImageInGallery(index);
+                    scheduleNextLoads();
+                };
+                
+                img.onerror = function() {
+                    imageStatus[index] = 'error';
+                    scheduleNextLoads();
+                };
+                
+                const cacheBuster = isMobile ? '' : `?t=${Date.now()}`;
+                img.src = `images/Coroana ${index + 1}.png${cacheBuster}`;
+            }
+            
+            function scheduleNextLoads() {
+                const priorityIndices = new Set();
+                priorityIndices.add(currentIndex);
+                priorityIndices.add((currentIndex + 1) % totalImages);
+                priorityIndices.add((currentIndex - 1 + totalImages) % totalImages);
+                
+                for (let i = 2; i <= 3; i++) {
+                    priorityIndices.add((currentIndex + i) % totalImages);
+                    priorityIndices.add((currentIndex - i + totalImages) % totalImages);
+                }
+                
+                if (!isMobile) {
+                    for (let i = 4; i <= 6; i++) {
+                        priorityIndices.add((currentIndex + i) % totalImages);
+                        priorityIndices.add((currentIndex - i + totalImages) % totalImages);
+                    }
+                }
+                
+                const priorities = Array.from(priorityIndices);
+                const MAX_CONCURRENT = isMobile ? 4 : 3;
+                let loadingCount = 0;
+                
+                for (const index of priorities) {
+                    if (loadingCount >= MAX_CONCURRENT) break;
+                    if (!imageStatus[index] || imageStatus[index] === 'loading') {
+                        loadImageWithPriority(index);
+                        loadingCount++;
+                    }
+                }
+            }
+            
+            function updateImageInGallery(index) {
+                const card = document.querySelector(`.coroane-card[data-index="${index}"]`);
+                if (!card) return;
+                const imgElement = card.querySelector('img');
+                if (!imgElement) return;
+                if (imageCache[index]) {
+                    imgElement.src = imageCache[index];
+                    imgElement.style.opacity = '1';
+                }
+            }
+            
+            function createGalleryStructure() {
+                cylinder.innerHTML = '';
+                indicatorsContainer.innerHTML = '';
+                
+                for (let i = 0; i < totalImages; i++) {
+                    const card = document.createElement('div');
+                    card.className = 'coroane-card';
+                    card.dataset.index = i;
+                    
+                    const angle = (i * BASE_ANGLE);
+                    card.style.transform = `rotateY(${angle}deg) translateZ(${TRANSLATE_Z}px)`;
+                    card.style.opacity = '0.7';
+                    
+                    const img = document.createElement('img');
+                    img.className = 'coroane-image';
+                    img.alt = `Corona funerară ${i + 1}`;
+                    
+                    const placeholderSize = isMobile ? '100x140' : '150x210';
+                    img.src = `https://via.placeholder.com/${placeholderSize}/1a1a1a/D4AF37?text=Loading...`;
+                    img.loading = 'lazy';
+                    
+                    card.appendChild(img);
+                    cylinder.appendChild(card);
+                    
+                    const indicator = document.createElement('div');
+                    indicator.className = 'cylinder-indicator';
+                    indicator.dataset.index = i;
+                    if (i === currentIndex) indicator.classList.add('active');
+                    
+                    indicator.addEventListener('click', () => {
+                        if (!isAnimating) goToImage(i);
+                    });
+                    
+                    indicatorsContainer.appendChild(indicator);
+                }
+                updateDisplay();
+            }
+            
+            function updateDisplay() {
+                const targetRotation = -currentIndex * BASE_ANGLE;
+                cylinder.style.transform = `rotateY(${targetRotation}deg)`;
+                
+                const cards = document.querySelectorAll('.coroane-card');
+                if (cards.length > 0) {
+                    cards.forEach((card) => {
+                        const cardIndex = parseInt(card.dataset.index);
+                        let diff = (cardIndex - currentIndex + totalImages) % totalImages;
+                        if (diff > totalImages/2) diff -= totalImages;
+                        
+                        card.classList.toggle('active', diff === 0);
+                        
+                        if (diff === 0) {
+                            card.style.opacity = '1'; card.style.filter = 'none'; card.style.zIndex = '10';
+                        } else if (Math.abs(diff) === 1) {
+                            card.style.opacity = '0.85'; card.style.filter = 'blur(0.5px)'; card.style.zIndex = '5';
+                        } else if (Math.abs(diff) === 2) {
+                            card.style.opacity = '0.7'; card.style.filter = 'blur(1px)'; card.style.zIndex = '3';
+                        } else {
+                            card.style.opacity = '0.5'; card.style.filter = 'blur(1.5px)'; card.style.zIndex = '1';
+                        }
+                    });
+                }
+                
+                const indicators = document.querySelectorAll('.cylinder-indicator');
+                indicators.forEach((indicator) => {
+                    const indicatorIndex = parseInt(indicator.dataset.index);
+                    indicator.classList.toggle('active', indicatorIndex === currentIndex);
+                });
+                
+                if (currentIndexSpan) {
+                    currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
+                }
+            }
+            
+            function goToImage(index) {
+                if (isAnimating || index === currentIndex) return;
+                isAnimating = true;
+                currentIndex = (index + totalImages) % totalImages;
+                
+                cylinder.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                updateDisplay();
+                
+                setTimeout(() => { scheduleNextLoads(); }, 200);
+                setTimeout(() => { cylinder.style.transition = ''; isAnimating = false; }, 600);
+            }
+            
+            function nextImage() { goToImage(currentIndex + 1); }
+            function prevImage() { goToImage(currentIndex - 1); }
+            
+            function initGallery() {
+                createGalleryStructure();
+                setTimeout(() => {
+                    loadImageWithPriority(currentIndex);
+                    loadImageWithPriority((currentIndex + 1) % totalImages);
+                    loadImageWithPriority((currentIndex - 1 + totalImages) % totalImages);
+                    if (!isMobile) {
+                        setTimeout(() => {
+                            for (let i = 2; i <= 4; i++) {
+                                loadImageWithPriority((currentIndex + i) % totalImages);
+                                loadImageWithPriority((currentIndex - i + totalImages) % totalImages);
+                            }
+                        }, 500);
+                    }
+                }, 300);
+            }
+            
+            prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevImage(); });
+            nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextImage(); });
+            
+            if (isMobile) {
+                let touchStartX = 0; let touchStartY = 0;
+                cylinder.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+                cylinder.addEventListener('touchend', (e) => {
+                    if (!touchStartX) return;
+                    const diffX = touchStartX - e.changedTouches[0].clientX;
+                    const diffY = touchStartY - e.changedTouches[0].clientY;
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                        e.preventDefault();
+                        if (diffX > 0) nextImage(); else prevImage();
+                    }
+                    touchStartX = 0; touchStartY = 0;
+                }, { passive: false });
+            }
+            
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    const newIsMobile = window.innerWidth <= 768;
+                    if (newIsMobile !== isMobile) initGallery();
+                }, 250);
+            });
+            
+            initGallery();
+        }
+
+        // Initializează componentele la final
+        document.addEventListener('DOMContentLoaded', () => {
+            initCoroaneCylinder();
+        });
+
+    </script>
+</body>
+</html>
