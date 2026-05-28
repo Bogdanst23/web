@@ -263,31 +263,19 @@
             left: -10%;
             font-size: 3rem;
             color: var(--gold);
-            z-index: 1; /* În spatele conținutului, dar deasupra background-ului */
-            opacity: 0.6; /* Subtil, pentru a nu deranja textul */
+            z-index: 1; 
+            opacity: 0.6; 
             pointer-events: none;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
             animation: doveFlySlow 40s linear infinite;
         }
 
         @keyframes doveFlySlow {
-            0% { 
-                /* rotateY(180deg) îl face să privească spre dreapta */
-                transform: translateX(0vw) translateY(0) rotateY(180deg) rotateZ(0deg); 
-            }
-            25% { 
-                transform: translateX(35vw) translateY(-30px) rotateY(180deg) rotateZ(-5deg); 
-            }
-            50% { 
-                transform: translateX(65vw) translateY(20px) rotateY(180deg) rotateZ(5deg); 
-            }
-            75% { 
-                transform: translateX(95vw) translateY(-15px) rotateY(180deg) rotateZ(-3deg); 
-            }
-            100% { 
-                /* Iese complet din ecran la 120vw */
-                transform: translateX(120vw) translateY(0) rotateY(180deg) rotateZ(0deg); 
-            }
+            0% { transform: translateX(0vw) translateY(0) rotateY(180deg) rotateZ(0deg); }
+            25% { transform: translateX(35vw) translateY(-30px) rotateY(180deg) rotateZ(-5deg); }
+            50% { transform: translateX(65vw) translateY(20px) rotateY(180deg) rotateZ(5deg); }
+            75% { transform: translateX(95vw) translateY(-15px) rotateY(180deg) rotateZ(-3deg); }
+            100% { transform: translateX(120vw) translateY(0) rotateY(180deg) rotateZ(0deg); }
         }
 
         /* Hero Section */
@@ -647,7 +635,7 @@
 
         /* --- COROANE FUNERARE 3D --- */
         .coroane-section {
-            background-color: transparent; /* Actualizat pentru fundal extins */
+            background-color: transparent;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -663,10 +651,10 @@
         .coroane-container {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 450px;
             margin: 40px auto;
             perspective: 2000px;
-            overflow: visible !important;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -674,14 +662,12 @@
 
         .coroane-cylinder {
             position: relative;
-            width: 300px;
-            height: 400px;
+            width: 100%;
+            height: 100%;
             transform-style: preserve-3d;
-            transition: transform 0.6s ease-in-out !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: cylinderLoad 1s ease-out;
         }
 
         .coroane-card {
@@ -692,8 +678,12 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-            transform-origin: center center !important;
-            transition: all 0.3s ease, filter 0.3s ease !important;
+            /* Transformarea elementelor individuale pentru tranzitie lina Coverflow */
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        opacity 0.5s ease, 
+                        filter 0.5s ease,
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease !important;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -701,12 +691,12 @@
             border: 1px solid #333;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+            transform-origin: center center;
         }
 
         .coroane-card.active {
             border-color: var(--gold) !important;
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.3) !important;
-            z-index: 10;
         }
 
         .coroane-image {
@@ -715,12 +705,10 @@
             object-fit: cover;
             border-radius: 4px;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: brightness(0.95);
         }
 
         .coroane-card:hover .coroane-image {
             transform: scale(1.05);
-            filter: brightness(1.05);
         }
 
         .cylinder-nav {
@@ -795,14 +783,9 @@
             padding: 0 20px;
         }
 
-        @keyframes cylinderLoad {
-            0% { opacity: 0; transform: scale(0.8) rotateX(10deg); }
-            100% { opacity: 1; transform: scale(1) rotateX(0); }
-        }
-
         /* Despre Noi Section */
         #despre {
-            background-color: transparent; /* Actualizat pentru fundal extins */
+            background-color: transparent;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -829,7 +812,7 @@
 
         /* Contact Section */
         #contact {
-            background-color: transparent; /* Actualizat pentru fundal extins */
+            background-color: transparent; 
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -1048,17 +1031,18 @@
             #hero { min-height: 100vh; padding-top: 220px; }
             .hero-content h1 { font-size: 1.85rem; line-height: 1.3; }
 
-            /* Responsive Cylinder */
+            /* Responsive Cylinder - Corectat pentru bug-ul de mobile */
             .coroane-container { height: 400px; perspective: 1500px; }
-            .coroane-cylinder { width: 220px; height: 300px; }
-            .coroane-card { width: 180px; height: 260px; transform-origin: center center -250px !important; }
+            
+            /* S-a șters transform-origin eronat (care conținea -250px pe axa Z și strica randarea JS) */
+            .coroane-card { width: 170px; height: 250px; }
+            
             .cylinder-info { top: 10px; right: 10px; font-size: 0.8rem; }
             .cylinder-indicators { display: none !important; }
 
             /* --- FIX PARALLAX EXCLUSIV PENTRU MOBIL --- */
-            /* Acest cod se aplică doar pe ecrane mici, protejând complet aspectul de pe desktop */
             .parallax-wrapper {
-                background-image: none !important; /* Ascundem imaginea defectuoasă doar pe mobil */
+                background-image: none !important; 
             }
 
             .parallax-wrapper::before {
@@ -1070,9 +1054,9 @@
                 height: 100%;
                 background-image: linear-gradient(var(--dark-overlay), var(--dark-overlay)), url('images/heaven.png');
                 background-size: cover;
-                background-position: top center; /* Obligă imaginea să înceapă exact de sus pe telefon */
+                background-position: top center; 
                 background-repeat: no-repeat;
-                z-index: 0; /* Îl ține în spatele tuturor textelor și cardurilor */
+                z-index: 0; 
                 pointer-events: none;
             }
         }
@@ -1353,7 +1337,7 @@
 
     <script>
         // Setare variabilă globală pentru dispozitive mobile, folosită la slider
-        const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        let isMobileDevice = window.innerWidth <= 768;
 
         // 1. Schimbare background Header la scroll
         const header = document.getElementById('header');
@@ -1414,26 +1398,22 @@
                 const phone = document.getElementById('phone').value;
                 const message = document.getElementById('message').value;
                 
-                // Creăm mesajul pentru SMS
                 const smsMessage = `Mesaj de pe site:%0A%0ANume: ${name}%0ATelefon: ${phone}%0A%0AMesaj:%0A${message}`;
                 const phoneNumber = "0752538888"; 
                 const smsLink = `sms:${phoneNumber}?body=${smsMessage}`;
                 
-                // Deschidem aplicația de mesagerie
                 window.location.href = smsLink;
                 
-                // Afișăm mesajul de succes
                 successMessage.style.display = 'block';
                 form.reset();
                 
-                // Ascundem mesajul de succes după 5 secunde
                 setTimeout(function() {
                     successMessage.style.display = 'none';
                 }, 5000);
             });
         }
 
-        // 5. SLIDER 3D COROANE 
+        // 5. SLIDER 3D COROANE - Re-scris pe logică Coverflow 
         function initCoroaneCylinder() {
             const cylinder = document.getElementById('coroaneCylinder');
             const prevBtn = document.getElementById('cylinderPrev');
@@ -1443,15 +1423,9 @@
             
             if (!cylinder) return;
             
-            const isMobile = window.innerWidth <= 768;
             const TOTAL_IMAGES = 40;
-            const CARDS_TO_SHOW = isMobile ? 3 : 5;
-            const BASE_ANGLE = 360 / CARDS_TO_SHOW;
-            const TRANSLATE_Z = isMobile ? 250 : 350;
-            
             let currentIndex = 0;
             let isAnimating = false;
-            const totalImages = TOTAL_IMAGES;
             
             const imageStatus = new Array(TOTAL_IMAGES).fill(false);
             const imageCache = new Array(TOTAL_IMAGES).fill(null);
@@ -1475,30 +1449,23 @@
                     scheduleNextLoads();
                 };
                 
-                const cacheBuster = isMobile ? '' : `?t=${Date.now()}`;
+                const cacheBuster = isMobileDevice ? '' : `?t=${Date.now()}`;
                 img.src = `images/Coroana ${index + 1}.png${cacheBuster}`;
             }
             
             function scheduleNextLoads() {
                 const priorityIndices = new Set();
                 priorityIndices.add(currentIndex);
-                priorityIndices.add((currentIndex + 1) % totalImages);
-                priorityIndices.add((currentIndex - 1 + totalImages) % totalImages);
+                priorityIndices.add((currentIndex + 1) % TOTAL_IMAGES);
+                priorityIndices.add((currentIndex - 1 + TOTAL_IMAGES) % TOTAL_IMAGES);
                 
                 for (let i = 2; i <= 3; i++) {
-                    priorityIndices.add((currentIndex + i) % totalImages);
-                    priorityIndices.add((currentIndex - i + totalImages) % totalImages);
-                }
-                
-                if (!isMobile) {
-                    for (let i = 4; i <= 6; i++) {
-                        priorityIndices.add((currentIndex + i) % totalImages);
-                        priorityIndices.add((currentIndex - i + totalImages) % totalImages);
-                    }
+                    priorityIndices.add((currentIndex + i) % TOTAL_IMAGES);
+                    priorityIndices.add((currentIndex - i + TOTAL_IMAGES) % TOTAL_IMAGES);
                 }
                 
                 const priorities = Array.from(priorityIndices);
-                const MAX_CONCURRENT = isMobile ? 4 : 3;
+                const MAX_CONCURRENT = isMobileDevice ? 4 : 3;
                 let loadingCount = 0;
                 
                 for (const index of priorities) {
@@ -1517,7 +1484,6 @@
                 if (!imgElement) return;
                 if (imageCache[index]) {
                     imgElement.src = imageCache[index];
-                    imgElement.style.opacity = '1';
                 }
             }
             
@@ -1525,20 +1491,16 @@
                 cylinder.innerHTML = '';
                 indicatorsContainer.innerHTML = '';
                 
-                for (let i = 0; i < totalImages; i++) {
+                for (let i = 0; i < TOTAL_IMAGES; i++) {
                     const card = document.createElement('div');
                     card.className = 'coroane-card';
                     card.dataset.index = i;
-                    
-                    const angle = (i * BASE_ANGLE);
-                    card.style.transform = `rotateY(${angle}deg) translateZ(${TRANSLATE_Z}px)`;
-                    card.style.opacity = '0.7';
                     
                     const img = document.createElement('img');
                     img.className = 'coroane-image';
                     img.alt = `Corona funerară ${i + 1}`;
                     
-                    const placeholderSize = isMobile ? '100x140' : '150x210';
+                    const placeholderSize = isMobileDevice ? '100x140' : '150x210';
                     img.src = `https://via.placeholder.com/${placeholderSize}/1a1a1a/D4AF37?text=Loading...`;
                     img.loading = 'lazy';
                     
@@ -1560,27 +1522,62 @@
             }
             
             function updateDisplay() {
-                const targetRotation = -currentIndex * BASE_ANGLE;
-                cylinder.style.transform = `rotateY(${targetRotation}deg)`;
-                
                 const cards = document.querySelectorAll('.coroane-card');
+                
                 if (cards.length > 0) {
                     cards.forEach((card) => {
                         const cardIndex = parseInt(card.dataset.index);
-                        let diff = (cardIndex - currentIndex + totalImages) % totalImages;
-                        if (diff > totalImages/2) diff -= totalImages;
+                        let diff = (cardIndex - currentIndex + TOTAL_IMAGES) % TOTAL_IMAGES;
+                        if (diff > TOTAL_IMAGES / 2) diff -= TOTAL_IMAGES;
                         
                         card.classList.toggle('active', diff === 0);
                         
+                        let translateX = 0, translateZ = 0, rotateY = 0;
+                        let opacity = 0, visibility = 'hidden', zIndex = 1, filter = 'none';
+                        
+                        // Logica Coverflow adaptivă
                         if (diff === 0) {
-                            card.style.opacity = '1'; card.style.filter = 'none'; card.style.zIndex = '10';
+                            translateX = 0;
+                            translateZ = isMobileDevice ? 80 : 100;
+                            rotateY = 0;
+                            opacity = 1; 
+                            visibility = 'visible'; 
+                            zIndex = 10;
+                            card.style.pointerEvents = 'auto';
                         } else if (Math.abs(diff) === 1) {
-                            card.style.opacity = '0.85'; card.style.filter = 'blur(0.5px)'; card.style.zIndex = '5';
-                        } else if (Math.abs(diff) === 2) {
-                            card.style.opacity = '0.7'; card.style.filter = 'blur(1px)'; card.style.zIndex = '3';
+                            translateX = diff * (isMobileDevice ? 120 : 200);
+                            translateZ = 0;
+                            rotateY = diff * -45;
+                            opacity = 0.85; 
+                            visibility = 'visible'; 
+                            zIndex = 5;
+                            filter = 'blur(1px)';
+                            card.style.pointerEvents = 'none';
+                        } else if (Math.abs(diff) === 2 && !isMobileDevice) {
+                            translateX = diff * 350;
+                            translateZ = -100;
+                            rotateY = diff * -60;
+                            opacity = 0.6; 
+                            visibility = 'visible'; 
+                            zIndex = 3;
+                            filter = 'blur(2px)';
+                            card.style.pointerEvents = 'none';
                         } else {
-                            card.style.opacity = '0.5'; card.style.filter = 'blur(1.5px)'; card.style.zIndex = '1';
+                            translateX = diff > 0 ? (isMobileDevice ? 220 : 500) : (isMobileDevice ? -220 : -500);
+                            translateZ = -200;
+                            rotateY = diff > 0 ? -75 : 75;
+                            opacity = 0; 
+                            visibility = 'hidden'; 
+                            zIndex = 1;
+                            filter = 'blur(4px)';
+                            card.style.pointerEvents = 'none';
                         }
+                        
+                        card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                        card.style.opacity = opacity;
+                        card.style.visibility = visibility;
+                        card.style.zIndex = zIndex;
+                        card.style.filter = filter;
                     });
                 }
                 
@@ -1591,20 +1588,19 @@
                 });
                 
                 if (currentIndexSpan) {
-                    currentIndexSpan.textContent = `${currentIndex + 1} / ${totalImages}`;
+                    currentIndexSpan.textContent = `${currentIndex + 1} / ${TOTAL_IMAGES}`;
                 }
             }
             
             function goToImage(index) {
                 if (isAnimating || index === currentIndex) return;
                 isAnimating = true;
-                currentIndex = (index + totalImages) % totalImages;
+                currentIndex = (index + TOTAL_IMAGES) % TOTAL_IMAGES;
                 
-                cylinder.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
                 updateDisplay();
                 
                 setTimeout(() => { scheduleNextLoads(); }, 200);
-                setTimeout(() => { cylinder.style.transition = ''; isAnimating = false; }, 600);
+                setTimeout(() => { isAnimating = false; }, 500);
             }
             
             function nextImage() { goToImage(currentIndex + 1); }
@@ -1614,13 +1610,13 @@
                 createGalleryStructure();
                 setTimeout(() => {
                     loadImageWithPriority(currentIndex);
-                    loadImageWithPriority((currentIndex + 1) % totalImages);
-                    loadImageWithPriority((currentIndex - 1 + totalImages) % totalImages);
-                    if (!isMobile) {
+                    loadImageWithPriority((currentIndex + 1) % TOTAL_IMAGES);
+                    loadImageWithPriority((currentIndex - 1 + TOTAL_IMAGES) % TOTAL_IMAGES);
+                    if (!isMobileDevice) {
                         setTimeout(() => {
                             for (let i = 2; i <= 4; i++) {
-                                loadImageWithPriority((currentIndex + i) % totalImages);
-                                loadImageWithPriority((currentIndex - i + totalImages) % totalImages);
+                                loadImageWithPriority((currentIndex + i) % TOTAL_IMAGES);
+                                loadImageWithPriority((currentIndex - i + TOTAL_IMAGES) % TOTAL_IMAGES);
                             }
                         }, 500);
                     }
@@ -1630,36 +1626,37 @@
             prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevImage(); });
             nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextImage(); });
             
-            if (isMobile) {
-                let touchStartX = 0; let touchStartY = 0;
-                cylinder.addEventListener('touchstart', (e) => {
-                    touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
-                }, { passive: true });
-                cylinder.addEventListener('touchend', (e) => {
-                    if (!touchStartX) return;
-                    const diffX = touchStartX - e.changedTouches[0].clientX;
-                    const diffY = touchStartY - e.changedTouches[0].clientY;
-                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
-                        e.preventDefault();
-                        if (diffX > 0) nextImage(); else prevImage();
-                    }
-                    touchStartX = 0; touchStartY = 0;
-                }, { passive: false });
-            }
+            // Touch Swipe optimizat și sigur
+            let touchStartX = 0; let touchStartY = 0;
+            cylinder.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            cylinder.addEventListener('touchend', (e) => {
+                if (!touchStartX) return;
+                const diffX = touchStartX - e.changedTouches[0].clientX;
+                const diffY = touchStartY - e.changedTouches[0].clientY;
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                    if (diffX > 0) nextImage(); else prevImage();
+                }
+                touchStartX = 0; touchStartY = 0;
+            }, { passive: true });
             
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
                     const newIsMobile = window.innerWidth <= 768;
-                    if (newIsMobile !== isMobile) initGallery();
+                    if (newIsMobile !== isMobileDevice) {
+                        isMobileDevice = newIsMobile;
+                        updateDisplay(); 
+                    }
                 }, 250);
             });
             
             initGallery();
         }
 
-        // Initializează componentele la final
         document.addEventListener('DOMContentLoaded', () => {
             initCoroaneCylinder();
         });
