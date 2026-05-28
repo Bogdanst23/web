@@ -179,7 +179,7 @@
             padding: 5px;
         }
 
-        /* --- WRAPPER FUNDAL PARALLAX EXTINS (din index.html) --- */
+        /* --- WRAPPER FUNDAL PARALLAX EXTINS --- */
         .parallax-wrapper {
             position: relative;
             background-image: linear-gradient(var(--dark-overlay), var(--dark-overlay)), url('images/heaven.png');
@@ -199,7 +199,7 @@
             height: 300px;
             background: linear-gradient(to bottom, rgba(26, 26, 26, 0) 0%, #0a0a0a 100%);
             pointer-events: none;
-            z-index: 0; /* z-index adaptat pentru a permite hover-ul in grilă */
+            z-index: 0;
         }
 
         .sun-glow {
@@ -361,7 +361,8 @@
         }
 
         .pachete-detaliat-wrapper {
-            padding-top: 180px; /* Ca sa fie sub header-ul fix */
+            /* Spatiu adaugat pentru a se detasa de headerul mare */
+            padding-top: 250px; 
             padding-bottom: 80px;
             position: relative;
             z-index: 3;
@@ -742,7 +743,8 @@
                 border-bottom: 1px solid #333;
             }
 
-            .pachete-detaliat-wrapper { padding-top: 140px; }
+            /* Spatiu ajustat si pentru varianta de mobil */
+            .pachete-detaliat-wrapper { padding-top: 180px; }
             
             /* --- FIX PARALLAX EXCLUSIV PENTRU MOBIL --- */
             .parallax-wrapper { background-image: none !important; }
