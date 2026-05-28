@@ -1060,13 +1060,35 @@
                 pointer-events: none;
             }
         }
+        /* Stil pentru tot rândul (copyright + textul "Design realizat de") */
+            .credit-design {
+              font-family: Arial, sans-serif;
+              color: #888888; /* Un gri elegant, care nu iese prea tare în evidență */
+              font-size: 13px;
+              text-align: center; /* Aliniază textul pe centru, arată bine în subsolul paginii */
+            }
+
+            /* Stil pentru numele tău */
+            .nume-designer {
+              font-family: 'Georgia', serif; /* Un font elegant, clasic */
+              font-style: italic; /* Scris înclinat pentru un plus de finețe */
+              color: #D4AF37; /* Un auriu subtil (sau poți pune pur și simplu alb: #FFFFFF) */
+              text-decoration: none; 
+              transition: color 0.3s ease;
+                }
+
+            /* Efect la trecerea cu mouse-ul peste numele tău */
+                .nume-designer:hover {
+                  color: #FFFFFF; /* Se transformă în alb la trecerea mouse-ului */
+                  text-decoration: underline;
+                    }
     </style>
 </head>
 <body>
 
     <header id="header">
         <div class="logo">
-            <a href="#hero">
+            <a href="/">
                 <img src="images/logo.png" alt="Logo Servicii Funerare">
                 <span class="logo-text">Casa Funerară Lupică</span>
             </a>
@@ -1074,9 +1096,9 @@
         
         <nav>
             <ul id="nav-list">
-                <li><a href="#hero">Acasă</a></li>
+                <li><a href="./">Home</a></li>
                 <li><a href="#servicii">Servicii</a></li>
-                <li><a href="pachete.html">Pachete</a></li>
+                <li><a href="./pachete">Pachete</a></li>
                 <li><a href="#coroane">Coroane</a></li>
                 <li><a href="#despre">Despre Noi</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1331,7 +1353,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 Casa Funerară Lupică. Toate drepturile rezervate. | Design realizat cu respect.</p>
+                <p>&copy; 2026 Casa Funerară Lupică. Toate drepturile rezervate. | Design realizat de <a href="https://www.linkedin.com/in/bstoica23" target="_blank" class="nume-designer">Bogdan</a></p>
         </div>
     </footer>
 
