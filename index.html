@@ -1313,11 +1313,10 @@
                 <div class="contact-form fade-in">
                     <form id="messageForm">
                         <input type="text" id="name" placeholder="Numele dumneavoastră" required>
-                        <input type="tel" id="phone" placeholder="Număr de telefon" required>
                         <textarea id="message" placeholder="Cu ce vă putem ajuta?" required></textarea>
                         <button type="submit" class="btn-primary">Trimite Mesajul</button>
                         <div id="successMessage" class="success-message">
-                            <i class="fas fa-check-circle"></i> Mesajul a fost pregătit pentru trimitere via SMS!
+                            <i class="fas fa-check-circle"></i> Mesajul a fost pregătit pentru trimitere!
                         </div>
                     </form>
                 </div>
@@ -1408,7 +1407,7 @@
             appearOnScroll.observe(element);
         });
 
-        // 4. Funcționalitate Formular Contact
+        // 4. Funcționalitate Formular Contact - ACTUALIZATĂ PENTRU A DESCHIDE SMS FĂRĂ CÂMP DE TELEFON
         const form = document.getElementById('messageForm');
         const successMessage = document.getElementById('successMessage');
         
@@ -1417,13 +1416,16 @@
                 e.preventDefault();
                 
                 const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
                 const message = document.getElementById('message').value;
                 
-                const smsMessage = `Mesaj de pe site:%0A%0ANume: ${name}%0ATelefon: ${phone}%0A%0AMesaj:%0A${message}`;
-                const phoneNumber = "0756838352"; 
-                const smsLink = `sms:${phoneNumber}?body=${smsMessage}`;
+                // Formatează corect și curat mesajul pentru aplicația SMS
+                const smsMessage = encodeURIComponent(`Mesaj nou de pe site:\nNume: ${name}\n\nMesaj:\n${message}`);
                 
+                // Numărul asociat către care se trimite SMS-ul
+                const phoneNumber = "0756838352"; 
+                
+                // Deschide aplicația nativă de SMS a utilizatorului
+                const smsLink = `sms:${phoneNumber}?body=${smsMessage}`;
                 window.location.href = smsLink;
                 
                 successMessage.style.display = 'block';
