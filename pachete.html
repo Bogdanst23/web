@@ -358,9 +358,11 @@
         }
 
         .legal-badges img {
-            height: 45px;
-            border-radius: 6px;
+            max-width: 250px;
+            width: 100%;
+            height: auto;
             object-fit: contain;
+            border-radius: 6px;
         }
 
         .legal-links {
@@ -735,8 +737,8 @@
                 justify-content: space-between;
                 align-items: center;
             }
-            .logo img { height: 85px; } /* Corectat dimensiunea sa fie la fel ca in index.html */
-            header.scrolled .logo img { height: 55px; } /* Corectat dimensiunea sa fie la fel ca in index.html */
+            .logo img { height: 85px; } 
+            header.scrolled .logo img { height: 55px; } 
 
             .mobile-nav-controls {
                 display: flex;
@@ -813,6 +815,12 @@
 
             .coffin-item:active .coffin-image { transform: translateY(-15px) scale(1.05); }
             .coffin-item:active .coffin-info { background: rgba(26, 26, 26, 0.85); transform: translateY(-5px); }
+
+            .legal-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -996,11 +1004,11 @@
 
             <div class="legal-section">
                 <div class="legal-badges">
-                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow">
-                        <img src="https://wp.anpc.ro/wp-content/uploads/2022/07/ANPC-SAL.png" alt="ANPC - Soluționarea Alternativă a Litigiilor">
+                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/anpc-sal.png" alt="ANPC SAL - Soluționarea Alternativă a Litigiilor">
                     </a>
-                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow">
-                        <img src="https://wp.anpc.ro/wp-content/uploads/2022/07/ANPC-SOL.png" alt="Soluționarea Online a Litigiilor">
+                    <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" rel="noopener noreferrer">
+                        <img src="images/anpc-sol.png" alt="SOL - Soluționarea Online a Litigiilor">
                     </a>
                 </div>
                 <div class="legal-links">
@@ -1011,7 +1019,7 @@
                     <a href="#">Retur</a> <span>|</span>
                     <a href="#">GDPR</a> <span>|</span>
                     <a href="https://anpc.ro/" target="_blank" rel="nofollow">ANPC</a> <span>|</span>
-                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow">SOL</a> <span>|</span>
+                    <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" rel="nofollow">SOL</a> <span>|</span>
                     <a href="https://www.dataprotection.ro/" target="_blank" rel="nofollow">ANSPDCP</a> <span>|</span>
                     <a href="#contact">Contact</a>
                 </div>
