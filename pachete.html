@@ -70,7 +70,7 @@
             color: inherit;
         }
 
-        /* ===== HEADER / NAVIGARE (din index.html) ===== */
+        /* ===== HEADER / NAVIGARE ===== */
         header {
             position: fixed;
             top: 0;
@@ -341,10 +341,57 @@
             padding-left: 5px;
         }
 
-        .copyright {
+        /* SECȚIUNE LEGALĂ ANPC/LINKS */
+        .legal-section {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid #222;
+            margin-top: 2rem;
+        }
+
+        .legal-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .legal-badges img {
+            height: 45px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-family: Arial, sans-serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-links a {
+            color: #D4AF37; 
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .legal-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .legal-links span {
+            color: #666;
+            margin: 0 3px;
+        }
+
+        .copyright {
+            text-align: center;
             color: #666;
             font-size: 0.9rem;
         }
@@ -361,7 +408,6 @@
         }
 
         .pachete-detaliat-wrapper {
-            /* Spatiu crescut semnificativ pentru a evita suprapunerea cu headerul (Desktop) */
             padding-top: 300px; 
             padding-bottom: 80px;
             position: relative;
@@ -428,7 +474,6 @@
             transition: all 0.5s ease;
         }
         
-        /* Animații pentru fiecare sicriu */
         .coffin-item:nth-child(1) .coffin-image { animation: floatCoffin 6s ease-in-out infinite; }
         .coffin-item:nth-child(2) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 0.5s; }
         .coffin-item:nth-child(3) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 1s; }
@@ -609,7 +654,7 @@
         }
 
         .detail-features li::before {
-            content: '\f058'; /* fa-check-circle */
+            content: '\f058'; 
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: var(--gold);
@@ -666,7 +711,6 @@
             transform: translateY(-2px);
         }
         
-        /* ANIMAȚII */
         @keyframes floatCoffin {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -691,8 +735,8 @@
                 justify-content: space-between;
                 align-items: center;
             }
-            .logo img { height: 110px; }
-            header.scrolled .logo img { height: 65px; }
+            .logo img { height: 85px; } /* Corectat dimensiunea sa fie la fel ca in index.html */
+            header.scrolled .logo img { height: 55px; } /* Corectat dimensiunea sa fie la fel ca in index.html */
 
             .mobile-nav-controls {
                 display: flex;
@@ -743,10 +787,8 @@
                 border-bottom: 1px solid #333;
             }
 
-            /* Spatiu crescut si pentru varianta de mobil / tableta */
             .pachete-detaliat-wrapper { padding-top: 220px; }
             
-            /* --- FIX PARALLAX EXCLUSIV PENTRU MOBIL --- */
             .parallax-wrapper { background-image: none !important; }
             .parallax-wrapper::before {
                 content: '';
@@ -769,7 +811,6 @@
             .coffin-item { height: 400px; }
             .coffin-image { height: 230px; }
 
-            /* Touch hover states for mobile */
             .coffin-item:active .coffin-image { transform: translateY(-15px) scale(1.05); }
             .coffin-item:active .coffin-info { background: rgba(26, 26, 26, 0.85); transform: translateY(-5px); }
         }
@@ -952,6 +993,30 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="legal-section">
+                <div class="legal-badges">
+                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow">
+                        <img src="https://wp.anpc.ro/wp-content/uploads/2022/07/ANPC-SAL.png" alt="ANPC - Soluționarea Alternativă a Litigiilor">
+                    </a>
+                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow">
+                        <img src="https://wp.anpc.ro/wp-content/uploads/2022/07/ANPC-SOL.png" alt="Soluționarea Online a Litigiilor">
+                    </a>
+                </div>
+                <div class="legal-links">
+                    <a href="#">Cookies</a> <span>|</span>
+                    <a href="#">TOS</a> <span>|</span>
+                    <a href="#">Metode Plata</a> <span>|</span>
+                    <a href="#">Livrare</a> <span>|</span>
+                    <a href="#">Retur</a> <span>|</span>
+                    <a href="#">GDPR</a> <span>|</span>
+                    <a href="https://anpc.ro/" target="_blank" rel="nofollow">ANPC</a> <span>|</span>
+                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow">SOL</a> <span>|</span>
+                    <a href="https://www.dataprotection.ro/" target="_blank" rel="nofollow">ANSPDCP</a> <span>|</span>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+
             <div class="copyright">
                 <p>&copy; 2026 Casa Funerară Lupică. Toate drepturile rezervate. | Design realizat cu respect.</p>
             </div>
@@ -959,7 +1024,6 @@
     </div>
 
     <script>
-        // --- 1. HEADER SCROLL & MOBILE MENU (din index.html) ---
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -981,7 +1045,6 @@
             });
         });
 
-        // --- 2. EFECT DE FADE IN LA SCROLL ---
         const fadeElements = document.querySelectorAll('.fade-in');
         const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
         const appearOnScroll = new IntersectionObserver(function(entries, observer) {
@@ -997,7 +1060,6 @@
             appearOnScroll.observe(element);
         });
 
-        // --- 3. DATELE PACHETELOR FUNERARE ---
         const packageDetails = {
             "4lat": {
                 title: "Pachet 4-Lat",
@@ -1104,7 +1166,6 @@
             }
         };
 
-        // Funcția pentru afișarea detaliilor pachetului
         function showPackageDetails(packageId) {
             const pkg = packageDetails[packageId];
             if (!pkg) return;
@@ -1112,11 +1173,9 @@
             const detailSection = document.getElementById('package-detail');
             const gridSection = document.getElementById('packages-grid');
             
-            // Ascundem grila și afișăm detaliile
             gridSection.style.display = 'none';
             detailSection.classList.add('active');
             
-            // Populăm conținutul detaliilor
             detailSection.innerHTML = `
                 <button class="back-btn" id="back-btn">
                     <i class="fas fa-arrow-left"></i> Înapoi la toate pachetele
@@ -1143,13 +1202,11 @@
                 </div>
             `;
             
-            // Event listener pentru butonul de înapoi
             document.getElementById('back-btn').addEventListener('click', function() {
                 detailSection.classList.remove('active');
                 gridSection.style.display = 'grid';
             });
             
-            // Scrollăm în sus pentru a vedea detaliile
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1160,7 +1217,6 @@
             });
         }
 
-        // Inițializare scripturi pentru pagina de pachete
         document.addEventListener('DOMContentLoaded', function() {
             preventPhoneNumberStyling();
             
@@ -1172,7 +1228,6 @@
                     showPackageDetails(packageId);
                 });
                 
-                // Efect de pulse manual
                 button.addEventListener('mouseenter', function() {
                     this.style.animation = 'pulse 0.5s ease';
                 });
@@ -1181,7 +1236,6 @@
                 });
             });
             
-            // Efect de umbră colorată la hover pe sicrie
             const coffinItems = document.querySelectorAll('.coffin-item');
             coffinItems.forEach(item => {
                 item.addEventListener('mouseenter', function() {
@@ -1192,7 +1246,6 @@
                 });
             });
             
-            // Optimizare pentru dispozitive mobile (dezactivare animații dacă userul preferă reduced motion)
             const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
             if (mediaQuery.matches) {
                 coffinItems.forEach(item => {
@@ -1201,7 +1254,6 @@
                 });
             }
             
-            // Touch support pe mobil
             if ('ontouchstart' in window) {
                 coffinItems.forEach(item => {
                     item.addEventListener('touchstart', function() {
