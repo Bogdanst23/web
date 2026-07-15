@@ -484,6 +484,9 @@
         .coffin-item:nth-child(6) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 2.5s; }
         .coffin-item:nth-child(7) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 3s; }
         .coffin-item:nth-child(8) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 3.5s; }
+        /* Adăugare pentru cardurile 9 și 10 (sic1 și sic2) */
+        .coffin-item:nth-child(9) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 4s; }
+        .coffin-item:nth-child(10) .coffin-image { animation: floatCoffin 6s ease-in-out infinite 4.5s; }
         
         .coffin-info {
             text-align: center;
@@ -968,6 +971,30 @@
                             <button class="detail-btn" data-package="prezidentalb">Detalii</button>
                         </div>
                     </div>
+                    
+                    <!-- Adăugare Sicriu 1 (Lemn Clasic) -->
+                    <div class="coffin-item">
+                        <div class="coffin-image">
+                            <img src="images/sic1.png" alt="Model Sicriu 1" onerror="this.src='https://via.placeholder.com/300x200/1a1a1a/D4AF37?text=Sicriu+1'">
+                        </div>
+                        <div class="coffin-info">
+                            <h3>Pachet Model 1</h3>
+                            <div class="price">La cerere</div>
+                            <button class="detail-btn" data-package="sicriu1">Detalii</button>
+                        </div>
+                    </div>
+
+                    <!-- Adăugare Sicriu 2 (Lemn Negru) -->
+                    <div class="coffin-item">
+                        <div class="coffin-image">
+                            <img src="images/sic2.png" alt="Model Sicriu 2" onerror="this.src='https://via.placeholder.com/300x200/1a1a1a/D4AF37?text=Sicriu+2'">
+                        </div>
+                        <div class="coffin-info">
+                            <h3>Pachet Model 2</h3>
+                            <div class="price">La cerere</div>
+                            <button class="detail-btn" data-package="sicriu2">Detalii</button>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -1167,6 +1194,34 @@
                     "Sicriu Prezident alb premium",
                     "Capitonaj interior de lux",
                     "Garnitură completă premium",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin premium",
+                    "Voal față transparent de calitate"
+                ]
+            },
+            // Adăugare pachet sicriu 1 (sic1)
+            "sicriu1": {
+                title: "Pachet Model 1",
+                price: "La cerere",
+                image: "images/sic1.png",
+                features: [
+                    "Sicriu din lemn masiv cu finisaj natural",
+                    "Capitonaj interior de înaltă calitate",
+                    "Garnitură completă pentru interior",
+                    "Orar mare ornamentat",
+                    "Perna de cap din satin",
+                    "Voal față transparent de calitate"
+                ]
+            },
+            // Adăugare pachet sicriu 2 (sic2)
+            "sicriu2": {
+                title: "Pachet Model 2",
+                price: "La cerere",
+                image: "images/sic2.png",
+                features: [
+                    "Sicriu din lemn masiv cu finisaj negru lucios",
+                    "Capitonaj interior de lux",
+                    "Garnitură completă pentru interior",
                     "Orar mare ornamentat",
                     "Perna de cap din satin premium",
                     "Voal față transparent de calitate"
